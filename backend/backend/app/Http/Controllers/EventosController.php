@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\eventos;
+use App\Models\eventos as Evento;
 use Illuminate\Http\Request;
 
 class EventosController extends Controller
@@ -14,7 +14,11 @@ class EventosController extends Controller
      */
     public function index()
     {
-        //
+        $eventos = Evento::orderBy('fecha', 'asc')->get();
+        $esAdmin = session('rol') === 'cofradia'; // Verifica el rol desde la sesión
+
+	return view('/agenda', ['eventos' => $eventos, 'esAdmin' => $esAdmin]);
+
     }
 
     /**
@@ -82,4 +86,4 @@ class EventosController extends Controller
     {
         //
     }
-}
+    }

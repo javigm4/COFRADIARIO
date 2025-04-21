@@ -15,7 +15,7 @@ class CreateInfoCofradesTable extends Migration
     {
         Schema::create('info_cofrades', function (Blueprint $table) {
             $table->id();
-            $table->int('id_cofradia'); //esto es la id de la cofradia a la que pertenece
+            $table->integer('id_cofradia'); //esto es la id de la cofradia a la que pertenece
             $table->string('foto1'); //esto es la foto del primer titular
             $table->string('foto2')->nullable; //esto es la foto del segundo titular
             $table->string('foto3')->nullable(); //esto es la foto del tercer titular

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Evento;
+use App\Models\Cofradias;
 
-use App\Models\eventos as Evento;
 use Illuminate\Http\Request;
 
 class EventosController extends Controller
@@ -15,9 +16,10 @@ class EventosController extends Controller
     public function index()
     {
         $eventos = Evento::orderBy('fecha', 'asc')->get();
+        $cofradias = Cofradias::all();
         $esAdmin = session('rol') === 'cofradia'; // Verifica el rol desde la sesión
 
-	return view('/agenda', ['eventos' => $eventos, 'esAdmin' => $esAdmin]);
+	return view('agenda', ['eventos' => $eventos, 'cofradias'=> $cofradias, 'esAdmin' => $esAdmin]);
 
     }
 
@@ -48,7 +50,7 @@ class EventosController extends Controller
      * @param  \App\Models\eventos  $eventos
      * @return \Illuminate\Http\Response
      */
-    public function show(eventos $eventos)
+    public function show(Evento $eventos)
     {
         //
     }
@@ -59,7 +61,7 @@ class EventosController extends Controller
      * @param  \App\Models\eventos  $eventos
      * @return \Illuminate\Http\Response
      */
-    public function edit(eventos $eventos)
+    public function edit(Evento $eventos)
     {
         //
     }
@@ -71,7 +73,7 @@ class EventosController extends Controller
      * @param  \App\Models\eventos  $eventos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, eventos $eventos)
+    public function update(Request $request, Evento $eventos)
     {
         //
     }
@@ -82,7 +84,7 @@ class EventosController extends Controller
      * @param  \App\Models\eventos  $eventos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(eventos $eventos)
+    public function destroy(Evento $eventos)
     {
         //
     }

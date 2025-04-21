@@ -20,7 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['cors']], function (){
 
-
     Route::post('/login', 'AuthController@login');
     Route::post('/register', 'AuthController@register');
     Route::post('/regenerate/code', 'AuthController@regenerateCode');
@@ -28,7 +27,6 @@ Route::group(['middleware' => ['cors']], function (){
 
     Route::get('/eventos', 'EventosController@index');
     Route::get('cofradias','CofradiasController@index');
-
 
     Route::post('/articulos', 'ArticuloController@store');
     Route::get('/articulos', 'ArticuloController@index');
@@ -70,8 +68,4 @@ Route::group(['middleware' => ['cors']], function (){
         Route::post('/roles/{role}', 'RoleController@update')->middleware('role:admin'); // Actualizar rol
         Route::delete('/roles/{role}', 'RoleController@destroy')->middleware('role:admin'); // Eliminar rol
 });
-
-
-
-
 });

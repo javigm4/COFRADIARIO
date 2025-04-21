@@ -16,7 +16,7 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->int('cofradia'); //esto es la id de la cofradia a la que pertenece
+            $table->integer('cofradia'); //esto es la id de la cofradia a la que pertenece
             $table->dateTime('fecha'); //esto es la fecha y hora del evento
             $table->timestamps();
         });

@@ -15,8 +15,8 @@ class CreateFavoritosTable extends Migration
     {
         Schema::create('favoritos', function (Blueprint $table) {
             $table->id();
-            $table->int('id_usuario'); //id del usuario que ha marcado el favorito
-            $table->int('id_evento'); //esto es la id del evento que ha marcado como favorito
+            $table->integer('id_usuario'); //id del usuario que ha marcado el favorito
+            $table->integer('id_evento'); //esto es la id del evento que ha marcado como favorito
             $table->timestamps();
         });
     }

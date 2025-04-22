@@ -11,15 +11,15 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
+            'email' => 'required',
             'password' => 'required',
             'codigo' => 'nullable|string',
         ]);
 
-        $usuario = Usuario::where('nombre', $request->nombre)->first();
+        $usuario = Usuario::where('email', $request->email)->first();
 
         if (!$usuario || !Hash::check($request->password, $usuario->password)) {
-            return back()->withErrors(['nombre' => 'Credenciales incorrectas']);
+            return back()->withErrors(['email' => 'Credenciales incorrectas']);
         }
 
         // Si el código fue ingresado, validarlo contra el del usuario
@@ -35,7 +35,7 @@ class AuthController extends Controller
 
         Auth::login($usuario);
 
-        return redirect('/index');
+        return redirect()->route('agenda');
     }
 
 

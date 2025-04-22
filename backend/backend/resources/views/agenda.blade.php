@@ -21,8 +21,39 @@
                         	<td>{{ $cofradia->nombre }}</td>
                         @endif
                     @endforeach
+                    @if($esCofradia == true)
+                    <td>
+                        <form method="POST" action="{{ route('eliminarEvento', $evento->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Eliminar</button> <!-- sera sustituido por una x-->
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('editarEvento', $evento->id) }}">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit">Editar</button> <!-- sera sustituido por un LÁPIZ-->
+                        </form>
+                    </td>
+                    @endif
             	</tr>
-        	@endforeach
+                @endforeach
+                @if($esCofradia == true)
+                	<tr>
+                    	<td>
+                            <form>
+                                 @csrf
+                                <label for="nombreEvento"></label>Nombre del evento:</label>
+                                	<input type="text" name="nombreEvento" value="{{ $evento->nombre }}">
+                                	<input type="number" name="cofradia_id" value="{{ $cofradia->id }}">
+                                    <input type="date" name="fechaEvento" value="{{ $evento->fecha }}">
+                                    <button type="submit">Añadir Evento</button>
+                            </form>
+                        </td>
+                	</tr>
+                @endif
+
     	</tbody>
 	</table>
 </body>

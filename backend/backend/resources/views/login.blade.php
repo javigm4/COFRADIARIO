@@ -21,7 +21,10 @@
         <p>Si no tienes un código de cofradía, puedes dejarlo en blanco.</p>
         <input type="text" id="codigo" name="codigo">
         <br>
-
+            @if ($errors->has('codigo'))
+            <p style="color: red;">{{ $errors->first('codigo') }}</p>
+        @endif
+    <br>
         <button type="submit">Iniciar sesión</button>
         <br>
     </form>

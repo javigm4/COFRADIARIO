@@ -18,8 +18,9 @@ class EventosController extends Controller
         $eventos = Evento::orderBy('fecha', 'asc')->get();
         $cofradias = Cofradias::all();
         $esCofradia = session('rol') === 'cofradia';
+        $esUsuario = session('rol') === 'usuario';
 
-	return view('agenda', ['eventos' => $eventos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia]);
+	return view('agenda', ['eventos' => $eventos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario]);
 
     }
 }

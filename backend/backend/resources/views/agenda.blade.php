@@ -36,6 +36,13 @@
                             <button type="submit">Editar</button> <!-- sera sustituido por un LÁPIZ-->
                         </form>
                     </td>
+                    @elseif($esUsuario == true)
+                    <td>
+                        <form method="POST" action="">
+                            @csrf
+                            <button type="submit">Añadir a favorito<!-- poner un corazon aqui en vez del texto--></button> <!-- sera sustituido por un +-->
+                        </form>
+                    </td>
                     @endif
             	</tr>
                 @endforeach

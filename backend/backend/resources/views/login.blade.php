@@ -27,6 +27,8 @@
     <br>
         <button type="submit">Iniciar sesión</button>
         <br>
+
+        <a href="{{ route('register') }}">Regístrate <b>aquí.</b></a>
     </form>
 </body>
 </html>

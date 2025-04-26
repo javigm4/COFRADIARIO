@@ -32,6 +32,12 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+//para quer funcione el registro
+
+
+
+
 Route::delete('/evento/dummy/{id}', function ($id) {
     // Por ahora no se implementa la eliminación de eventos,
     // por lo que se redirige de vuelta o se muestra un mensaje temporal.
@@ -43,3 +49,9 @@ Route::patch('/evento/dummy/{id}', function ($id) {
     // por lo que se redirige de vuelta o se muestra un mensaje temporal.
     return back()->with('status', 'Funcionalidad de eliminación no implementada.');
 })->name('editarEvento');
+
+
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register'); // muestra la vista del registro

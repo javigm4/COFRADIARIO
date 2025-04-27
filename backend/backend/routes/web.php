@@ -35,6 +35,7 @@ Route::get('/login', function () {
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 //para quer funcione el registro
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 

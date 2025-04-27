@@ -3,6 +3,17 @@
 	<title>Eventos</title>
 </head>
 <body>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">Cerrar sesión</button>
+    </form>
+    <p>
+        @if($usuario)
+           <p>Usuario registrado como: {{ $usuario->name }}</p>
+        @else
+        <p>Usuario no registrado</p>
+        @endif
+    </p>
 	<table border="1">
     	<thead>
         	<tr>

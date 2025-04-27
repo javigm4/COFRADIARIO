@@ -5,6 +5,7 @@ use App\Models\Evento;
 use App\Models\Cofradias;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventosController extends Controller
 {
@@ -19,8 +20,8 @@ class EventosController extends Controller
         $cofradias = Cofradias::all();
         $esCofradia = session('rol') === 'cofradia';
         $esUsuario = session('rol') === 'usuario';
-
-	return view('agenda', ['eventos' => $eventos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario]);
+        $usuario = Auth::user();
+	return view('agenda', ['eventos' => $eventos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario, 'usuario' => $usuario]);
 
     }
 }

@@ -39,11 +39,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
-Route::delete('/evento/dummy/{id}', function ($id) {
-    // Por ahora no se implementa la eliminación de eventos,
-    // por lo que se redirige de vuelta o se muestra un mensaje temporal.
-    return back()->with('status', 'Funcionalidad de eliminación no implementada.');
-})->name('eliminarEvento');
+Route::delete('/eventos/{id}', [EventosController::class, 'destroy'])->name('eliminarEvento');
+
+Route::post('/eventos/create', [EventosController::class, 'store'])->name('crearEvento');
+
+
+
+
 
 Route::patch('/evento/dummy/{id}', function ($id) {
     // Por ahora no se implementa la eliminación de eventos,
@@ -56,3 +58,5 @@ Route::patch('/evento/dummy/{id}', function ($id) {
 Route::get('/register', function () {
     return view('register');
 })->name('register'); // muestra la vista del registro
+
+

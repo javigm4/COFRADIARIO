@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,21 +52,8 @@ Route::group(['middleware' => ['cors']], function (){
         Route::delete('/eventos/{evento}', 'EventoController@destroy')->middleware('role:cofradia'); // Eliminar evento
     });
 
-    //ROL ADMINISTRADOR
-    Route::middleware(['auth:sanctum'])->group(function () {
-        // Administrar eventos (solo para COFRADÍAS)
-        Route::post('/eventos', 'EventoController@store')->middleware('role:cofradia'); // Crear evento
-        Route::patch('/eventos/{evento}', 'EventoController@update')->middleware('role:cofradia'); // Actualizar evento
-        Route::delete('/eventos/{evento}', 'EventoController@destroy')->middleware('role:cofradia'); // Eliminar evento
 
-        Route::post('/cofradias', 'CofradiasController@store')->middleware('role:admin'); // Crear cofradia ç
-        Route::post('/cofradias/{cofradia}', 'CofradiasController@update')->middleware('role:admin'); // Actualizar cofradia
-        Route::delete('/cofradias/{cofradia}', 'CofradiasController@destroy')->middleware('role:admin'); // Eliminar cofradia
-        Route::post('/usuarios', 'UsuarioController@store')->middleware('role:admin'); // Crear usuario
-        Route::post('/usuarios/{usuario}', 'UsuarioController@update')->middleware('role:admin'); // Actualizar usuario
-        Route::delete('/usuarios/{usuario}', 'UsuarioController@destroy')->middleware('role:admin'); // Eliminar usuario
-        Route::post('/roles', 'RoleController@store')->middleware('role:admin'); // Crear rol
-        Route::post('/roles/{role}', 'RoleController@update')->middleware('role:admin'); // Actualizar rol
-        Route::delete('/roles/{role}', 'RoleController@destroy')->middleware('role:admin'); // Eliminar rol
-});
+
+    // BORRAR EVENTO
+    Route::delete('/eventos/{id}', [EventosController::class, 'destroy'])->name('destroy');
 });

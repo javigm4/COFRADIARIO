@@ -24,6 +24,38 @@ class EventosController extends Controller
 	return view('agenda', ['eventos' => $eventos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario, 'usuario' => $usuario]);
 
     }
+
+
+    public function destroy($id)
+    {
+        $evento = Evento::find($id);
+
+        if ($evento) {
+            $evento->delete();
+            return redirect()->route('agenda');
+        } else {
+            return redirect()->route('agenda');
+        }
+    }
+
+
+
+    public function store(Request $request)
+{
+    // Validar los datos enviados desde el formulario
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'cofradia' => 'required|integer|exists:cofradias,id', // Verifica que la Cofradía exista
+        'fecha' => 'required|date',
+    ]);
+
+    // Crear el evento en la base de datos
+    Evento::create($request->all());
+
+    // Redirigir después de crear el evento
+    return redirect()->route('agenda')->with('status', 'Evento creado con éxito');
+}
+
 }
 
 

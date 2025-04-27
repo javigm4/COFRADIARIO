@@ -11,6 +11,8 @@ class Evento extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nombre', 'cofradia', 'fecha'];
+
     public function cofradia()
     {
         return $this->belongsTo(Cofradias::class, 'cofradia');

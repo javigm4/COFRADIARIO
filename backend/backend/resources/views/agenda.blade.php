@@ -37,7 +37,8 @@
                         <form method="POST" action="{{ route('eliminarEvento', $evento->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Eliminar</button> <!-- sera sustituido por una x-->
+                            <input type="hidden" name="id" value="{{ $evento->id }}">
+                            <button type="submit">X</button> <!-- sera sustituido por una x-->
                         </form>
                     </td>
                     <td>
@@ -60,20 +61,44 @@
                 @if($esCofradia == true)
                 	<tr>
                     	<td>
-                            <form>
-                                 @csrf
-                                <label for="nombreEvento"></label>Nombre del evento:</label>
-                                	<input type="text" name="nombreEvento" value="{{ $evento->nombre }}">
-                                	<input type="number" name="cofradia_id" value="{{ $cofradia->id }}">
-                                    <input type="date" name="fechaEvento" value="{{ $evento->fecha }}">
-                                    <button type="submit">Añadir Evento</button>
-                            </form>
+                            <form method="POST" action="{{ route('crearEvento') }}">
+                            @csrf
+                            <label for="nombreEvento">Nombre del evento:</label>
+                            <input type="text" id="nombreEvento" name="nombre" required>
+                            <br>
+
+                            <label for="cofradia_id">Cofradía:</label>
+                            <input type="number" id="cofradia" name="cofradia" required>
+                            <br>
+
+                            <label for="fechaEvento">Fecha:</label>
+                            <input type="date" id="fechaEvento" name="fecha" required>
+                            <br>
+
+                            <button type="submit">Añadir Evento</button>
+                        </form>
                         </td>
                 	</tr>
                 @endif
 
-    	</tbody>
+        </tbody>
 	</table>
+    <table>
+        <thead>
+            <tr>
+                <th>Cofradia</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($cofradias as $cofradia)
+                <tr>
+                    <td>{{ $cofradia->nombre }}</td>
+                    <td>{{ $cofradia->id }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>
 

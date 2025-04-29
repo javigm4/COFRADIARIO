@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoritosController;
-
+use App\Http\Controllers\ArticulosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +26,7 @@ Route::get('/', function () {
 
 
 Route::get('/agenda', [EventosController::class, 'index'])->name('agenda');
+Route::get('/diario', [ArticulosController::class, 'index'])->name('diario');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/login', function () {

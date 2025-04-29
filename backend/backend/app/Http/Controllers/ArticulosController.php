@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\articulos;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ArticulosController extends Controller
@@ -14,7 +15,9 @@ class ArticulosController extends Controller
      */
     public function index()
     {
-        //
+        $articulos = Articulos::all();
+        $usuarios = User::all();
+        return view('diario', ['articulos' => $articulos, 'usuarios'=> $usuarios]); // lo enviamos a diario.blade.php
     }
 
     /**

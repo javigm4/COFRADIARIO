@@ -16,7 +16,7 @@ class CreateArticulosTable extends Migration
         Schema::create('articulos', function (Blueprint $table) {
             $table->id();
             $table->string('titular'); //esto es el titular del articulo
-            $table->string('autor')->nullable(); //esto es el subtitular del articulo (puede ser anonimo)
+            $table->unsignedBigInteger('id_autor'); // Cambiamos el nombre y tipo
             $table->text('cuerpo'); //esto es el contenido del articulo
             $table->timestamps();
         });

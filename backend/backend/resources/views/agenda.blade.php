@@ -50,9 +50,11 @@
                     </td>
                     @elseif($esUsuario == true)
                     <td>
-                        <form method="POST" action="">
+                        <form method="POST" action=" {{ route('agregarFavorito') }}">
                             @csrf
-                            <button type="submit">Añadir a favorito<!-- poner un corazon aqui en vez del texto--></button> <!-- sera sustituido por un +-->
+                            <input type="hidden" name="id_usuario" value="{{ auth()->user()->id }}">
+                            <input type="hidden" name="id_evento" value="{{ $evento->id }}"> <!-- enviamos los datos para crearlo-->
+                            <button type="submit">Añadir a favorito<!-- poner un corazon aqui en vez del texto--></button>
                         </form>
                     </td>
                     @endif
@@ -99,6 +101,45 @@
             @endforeach
         </tbody>
     </table>
+
+    @if($esUsuario == true)
+    <h2>Eventos Favoritos</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Cofradia</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($favoritos as $favorito)
+                @if ($favorito->id_usuario == auth()->user()->id)
+                    <tr>
+                        @foreach ($eventos as $evento)
+                            @if ($evento->id == $favorito->id_evento)
+                                <td>{{ $evento->nombre }}</td>
+                                <td>{{ $evento->fecha }}</td>
+                                @foreach ($cofradias as $cofradia)
+                                    @if ($cofradia->id == $evento->cofradia)
+                                        <td>{{ $cofradia->nombre }}</td>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+
+                        <td>
+                            <form method="POST" action="{{ route('eliminarFavorito', $favorito->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Eliminar Favorito</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+        </tbody>
+    @endif
 </body>
 </html>
 

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\FavoritosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +43,9 @@ Route::delete('/eventos/{id}', [EventosController::class, 'destroy'])->name('eli
 
 Route::post('/eventos/create', [EventosController::class, 'store'])->name('crearEvento');
 
+Route::post('/favoritos', [FavoritosController::class, 'store'])->name('agregarFavorito');
 
+Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy'])->name('eliminarFavorito');
 
 
 

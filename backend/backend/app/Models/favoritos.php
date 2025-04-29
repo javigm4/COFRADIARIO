@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class favoritos extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['id_usuario', 'id_evento'];
+    public function evento()
+    {
+        return $this->belongsTo(Evento::class, 'id_evento');
+    }
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
 }

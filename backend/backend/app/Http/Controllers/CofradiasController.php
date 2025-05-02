@@ -14,8 +14,33 @@ class CofradiasController extends Controller
      */
     public function index()
     {
-        //
+        $cofradias = Cofradias::all();
+	return view('seleccionCofradia', ['cofradias'=> $cofradias]);
     }
+
+
+
+    public function mostrar($nombre)
+        {
+    $carpeta = storage_path("cofradiasDatos/{$nombre}");
+
+    if (!is_dir($carpeta)) {
+        abort(404, 'Cofradía no encontrada');
+    }
+
+    $texto = file_exists("$carpeta/info.txt") ? file_get_contents("$carpeta/info.txt") : 'Información no disponible.';
+
+    $imagenes = array_filter(scandir($carpeta), function ($archivo) {
+        return preg_match('/\\.(jpg|jpeg|png|gif)$/i', $archivo);
+    });
+
+    return view('infoCofradias', [
+        'nombre' => $nombre,
+        'texto' => $texto,
+        'imagenes' => $imagenes
+    ]);
+}
+
 
     /**
      * Show the form for creating a new resource.

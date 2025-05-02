@@ -5,6 +5,7 @@ use App\Http\Controllers\EventosController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\ArticulosController;
+use App\Http\Controllers\CofradiasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +50,8 @@ Route::post('/favoritos', [FavoritosController::class, 'store'])->name('agregarF
 Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy'])->name('eliminarFavorito');
 
 
+Route::get('/cofradia/{nombre}', [App\Http\Controllers\CofradiasController::class, 'mostrar']);
+
 
 Route::patch('/evento/dummy/{id}', function ($id) {
     // Por ahora no se implementa la eliminación de eventos,
@@ -63,3 +66,19 @@ Route::get('/register', function () {
 })->name('register'); // muestra la vista del registro
 
 
+
+Route::get('/seleccionCofradia', function () {
+    return view('seleccionCofradia');
+})->name('seleccionCofradia'); // muestra la vista de seleccion de cofradia
+
+Route::get('/seleccionCofradia', [CofradiasController::class, 'index'])->name('seleccionCofradia');
+
+Route::get('/cofradia/{nombre}', function ($nombre) {
+    $rutaTxt = storage_path("app/public/cofradiasDatos/{$nombre}/info.txt");
+    $texto = file_exists($rutaTxt) ? file_get_contents($rutaTxt) : 'Información no disponible.';
+
+    return view('infoCofradias', [
+        'nombre' => $nombre,
+        'texto' => $texto
+    ]);
+});

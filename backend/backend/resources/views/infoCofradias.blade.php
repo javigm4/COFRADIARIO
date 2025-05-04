@@ -12,7 +12,5 @@
     <h2>Imagen principal</h2>
     <img src="{{ asset('storage/cofradiasDatos/' . $nombre . '/cristo.jpg') }}" alt="Imagen de {{ $nombre }}">
     <img src="{{ asset('storage/cofradiasDatos/' . $nombre . '/virgen.jpg') }}" alt="Imagen de {{ $nombre }}">
-
-    <!-- acordarme de hacer el php artisan storage:link -->
 </body>
 </html>

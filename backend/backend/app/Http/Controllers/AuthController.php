@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User as Usuario;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\RegisterNotification;
+
+
 class AuthController extends Controller
 {
    public function login(Request $request)
@@ -43,18 +47,29 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6'
-            ]);
+        ]);
+
+        // Crear un nuevo usuario
         $usuario = new Usuario();
         $usuario->email = $request->email;
         $usuario->name = $request->name;
         $usuario->password = Hash::make($request->password);
+
+        // Generar un código aleatorio único
         do {
             $codigoAleatorio = rand(1111, 9999);
         } while (Usuario::where('codigo', $codigoAleatorio)->exists());
+
         $usuario->codigo = $codigoAleatorio;
         $usuario->save();
+
+        // Enviar la notificación a tu correo personal
+        Notification::route('mail', 'javierguerreromontero1@gmail.com')
+        ->notify(new RegisterNotification($usuario));
+
         return redirect()->route('login');
     }
+
 
     public function logout(Request $request)
     {

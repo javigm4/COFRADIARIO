@@ -11,5 +11,6 @@
         <a href="{{ route('register') }}">Registrarse</a>
         <a href="{{ route('agenda') }}">Agenda</a>
         <a href="{{ route('diario') }}">Diario</a>
-    </body>
+        <a href="{{ route('seleccionCofradia') }}">Cofradías</a>
+        </body>
 </html>

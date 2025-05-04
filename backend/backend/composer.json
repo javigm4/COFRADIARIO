@@ -10,7 +10,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.15",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "sendgrid/sendgrid": "^8.1",
+        "symfony/mailer": "^6.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

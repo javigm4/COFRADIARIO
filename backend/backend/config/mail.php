@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'sendgrid'),
 
     /*
     |--------------------------------------------------------------------------
@@ -77,6 +77,9 @@ return [
                 'smtp',
                 'log',
             ],
+        ],
+        'sendgrid' => [
+            'transport' => 'sendgrid',
         ],
     ],
 

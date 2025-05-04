@@ -45,6 +45,17 @@ Route::delete('/eventos/{id}', [EventosController::class, 'destroy'])->name('eli
 
 Route::post('/eventos/create', [EventosController::class, 'store'])->name('crearEvento');
 
+// ------ EDITAR EVENTO ------
+
+Route::get('/evento/{id}/edit', [EventosController::class, 'edit'])->name('actualizarEvento');
+
+// Ruta para actualizar el evento (PUT)
+Route::put('/evento/{id}', [EventosController::class, 'update'])->name('editarEvento');
+
+
+
+// ---- favoritos ----
+
 Route::post('/favoritos', [FavoritosController::class, 'store'])->name('agregarFavorito');
 
 Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy'])->name('eliminarFavorito');
@@ -53,11 +64,8 @@ Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy'])->name(
 Route::get('/cofradia/{nombre}', [App\Http\Controllers\CofradiasController::class, 'mostrar']);
 
 
-Route::patch('/evento/dummy/{id}', function ($id) {
-    // Por ahora no se implementa la eliminación de eventos,
-    // por lo que se redirige de vuelta o se muestra un mensaje temporal.
-    return back()->with('status', 'Funcionalidad de eliminación no implementada.');
-})->name('editarEvento');
+
+
 
 
 

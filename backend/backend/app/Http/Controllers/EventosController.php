@@ -47,16 +47,54 @@ class EventosController extends Controller
     // Validar los datos enviados desde el formulario
     $request->validate([
         'nombre' => 'required|string|max:255',
-        'cofradia' => 'required|integer|exists:cofradias,id', // Verifica que la Cofradía exista
+        'cofradia' => 'required|integer|exists:cofradias,id',
         'fecha' => 'required|date',
+        'hora' => 'required|date_format:H:i', // Asegura que la hora esté en formato HH:MM
     ]);
 
+    $fechaCompleta = $request->fecha . ' ' . $request->hora;
+
     // Crear el evento en la base de datos
-    Evento::create($request->all());
+    Evento::create([
+        'nombre' => $request->nombre,
+        'cofradia' => $request->cofradia,
+        'fecha' => $fechaCompleta, // Guardamos la fecha con la hora
+    ]);
 
     // Redirigir después de crear el evento
     return redirect()->route('agenda')->with('status', 'Evento creado con éxito');
 }
+
+        public function update(Request $request, $id)
+        {
+            $evento = Evento::findOrFail($id); // Obtener el evento a actualizar
+
+            // Validación de los datos del formulario
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'fecha_hora' => 'required|date',
+                'cofradia' => 'required|string',
+            ]);
+
+            // Actualizar los datos del evento
+            $evento->nombre = $request->nombre;
+            $evento->fecha = $request->fecha_hora; // Asignamos el valor combinado de fecha y hora
+            $evento->cofradia = $request->cofradia;
+            $evento->save();
+
+            return redirect()->route('agenda')->with('success', 'Evento actualizado exitosamente');
+        }
+
+
+
+        // ------ EDITAR EVENTO ------
+        // Ruta para mostrar la vista de editar evento (GET)
+        public function edit($id)
+        {
+            $evento = Evento::findOrFail($id);
+            return view('editar', ['evento' => $evento]);
+        }
+
 
 }
 

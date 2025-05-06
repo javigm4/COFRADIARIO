@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+.text-brown {
+  color: #5b420d;
+}
+
+.btn-brown {
+  background-color: #5b420d;
+  border-radius: 5px;
+}
+
+.btn-brown:hover {
+  background-color: #3f2f08;
+}
+
+.bg-brown {
+  background-color: #5b420d;
+  border-radius: 15px;
+}
+
+.input-group input::placeholder {
+  color: #ccc;
+}
+
+.input-group-text i {
+  color: white;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #b88c24, #523e10); /* Degradado */
+  background-clip: text; /* Propiedad estándar */
+  color: transparent; /* Hace el texto transparente para mostrar el degradado */
+  display: inline-block; /* Para que el fondo se ajuste al tamaño del texto */
+}
+
+
+h1 {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+#divNav {
+  display: flex;
+  gap: 0.75rem;            /* separación uniforme */
+  justify-content: center; /* centrado horizontal */
+  align-items: center;     /* centrado vertical dentro del nav */
+  margin: 0.5rem auto;     /* margen superior/inferior y centrado */
+  padding: 0.5rem;         /* espacio interior para respirar */
+  max-width: 90%;          /* que no ocupe más del 90% del contenedor */
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;          /* más proporcionado */
+  font-size: 1.5rem;                 /* tamaño legible */
+  font-weight: 500;                /* peso medio */
+  border-radius: 0.5rem;           /* esquinas suaves */
+  text-transform: uppercase;       /* uniforme en mayúsculas */
+  letter-spacing: 0.5px;           /* un pelín de espacio entre letras */
+  transition: transform 0.2s ease, /* animación suave */
+              box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* ligera sombra */
+}
+
+.btn:hover {
+  transform: translateY(-5px);                     /* levanta el botón */
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);         /* sombra más intensa */
+}

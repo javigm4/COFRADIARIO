@@ -1,0 +1,108 @@
+
+
+/* Botón marrón */
+.btn-brown {
+  background-color: #5b420d; /* Marrón */
+  color: #fff; /* Blanco */
+  border: none;
+  padding: 0.75rem 1.5rem;  /* Más espacio */
+  font-size: 1.5rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-brown:hover {
+  background-color: #3f2f08; /* Marrón oscuro */
+  transform: translateY(-5px);  /* Levanta el botón */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Espacio entre el título y el logo */
+  align-items: center; /* Centra verticalmente */
+  background-color: #fff; /* Blanco */
+  border-bottom: 2px solid #5e4310; /* Marrón */
+  padding: 0.8rem 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Añadir sombra suave */
+}
+
+/* Logo */
+.navbar img {
+  width: 70px; /* Tamaño del logo */
+  margin-right: 1rem; /* Espacio entre el logo y el título */
+  display: inline-block; /* Asegura que el logo se comporte como bloque */
+  vertical-align: middle; /* Alinea verticalmente con el h1 */
+
+}
+
+/* Título */
+/* Título */
+.navbar h1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  display: inline-block; /* El título se comporta como bloque en línea */
+  vertical-align: middle; /* Alinea verticalmente con la imagen */
+  background: linear-gradient(to right, #af8207, #49330c); /* Degradado de dorado a marrón */
+  -webkit-background-clip: text; /* Para asegurar que el fondo se aplique al texto */
+  background-clip: text; /* Asegura la compatibilidad */
+  color: transparent; /* Hace el texto transparente para mostrar el degradado */
+}
+
+
+/* Espaciado y orden */
+#divNav {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  max-width: 90%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar h1 {
+    font-size: 1.4rem;
+  }
+
+  #divNav {
+    justify-content: flex-start;
+  }
+}
+
+
+
+/* Otras clases */
+.text-brown {
+  color: #5b420d; /* Marrón */
+}
+
+.bg-brown {
+  background-color: #5b420d; /* Marrón */
+  border-radius: 15px;
+}
+
+.input-group input::placeholder {
+  color: #ccc;
+}
+
+.input-group-text i {
+  color: #fff; /* Blanco */
+}
+
+
+a {
+  text-decoration: none; /* Sin subrayado */
+  color: #5e4310; /* Marrón */
+  font-weight: bold;
+  transition: color 0.3s ease;
+}

@@ -1,0 +1,10 @@
+<div class="card mb-4 mx-2">
+  <div class="card-body p-3">
+    <h5 class="card-title mb-2">{{ dia.date }}</h5>
+    <img [src]="dia.icono" class="weather-icon mb-2" alt="Icono clima">
+    <div id="detalles">
+      <p class="temp mb-1"><strong>{{ dia.temperatura }}°C</strong></p>
+      <p class="precip mb-0">{{ dia.precipitacion }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+/* ==== asegúrate de que #detalles y .weather-icon sigan inline === */
+.card-body {
+  /* sólo para que detalles e imagen sigan en línea */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  padding:20px;
+}
+
+.card {
+  display: inline-block;
+}
+.weather-icon {
+  margin-right: 10px;
+}
+
+/* ==== detalles apilados y centrados ==== */
+#detalles {
+  display: inline-block;
+  text-align: left;
+}
+
+/* ==== temperatura ==== */
+.temp {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== precipitación: color contrastado y bloque separado ==== */
+.precip {
+  font-size: 0.9rem;
+  color: #007bff;       /* azul para que contraste */
+  display: block;       /* fuerza nueva línea debajo de la temperatura */
+  margin-top: 4px;      /* un pequeño espacio */
+}
+
+.card-body {
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  padding:10px;
+  width: 243px;
+}
+
+h5{
+  margin: 0 auto;
+  font-weight: bold;
+  ;
+}
+
+
+/* ==== Animación del icono al cargar ==== */
+@keyframes icon-pop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.weather-icon {
+  animation: icon-pop 0.6s ease-out both;
+}
+
+/* ==== Pulso suave en la precipitación ==== */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+.precip {
+  transition: color 0.3s;
+}
+.precip:hover {
+  animation: pulse 1.2s infinite;
+  color: #ff5722;
+}
+
+/* ==== Destello del título al aparecer ==== */
+@keyframes title-flash {
+  0%, 100% { text-shadow: none; }
+  50%      { text-shadow: 0 0 8px rgba(255,255,255,0.8); }
+}
+h5 {
+  animation: title-flash 2s ease-in-out infinite;
+}
+
+/* ==== Transición de la temperatura ==== */
+.temp {
+  transition: color 0.4s, transform 0.4s;
+}
+.temp:hover {
+  color: #ff9800;
+  transform: translateY(-2px);
+}
+

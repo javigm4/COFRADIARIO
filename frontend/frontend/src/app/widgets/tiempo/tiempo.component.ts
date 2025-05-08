@@ -11,7 +11,7 @@ import { Input } from '@angular/core'; // Importar Input para recibir datos desd
 export class TiempoComponent {
 
   @Input()
-  public dias: TiempoDia[] = []; // Array de libros
+  public dias: TiempoDia[] = [];
 
 
 }

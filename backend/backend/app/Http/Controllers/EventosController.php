@@ -23,7 +23,7 @@ class EventosController extends Controller
         $esCofradia = session('rol') === 'cofradia';
         $esUsuario = session('rol') === 'usuario';
         $usuario = Auth::user();
-	return view('agenda', ['eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario, 'usuario' => $usuario]);
+	return response()->json(['eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario, 'usuario' => $usuario]);
 
     }
 

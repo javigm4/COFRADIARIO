@@ -1,0 +1,94 @@
+/*------------------------ MAIN ---------------------------------*/
+
+.fotomain {
+  margin: -2px;
+  padding: 0px;
+  height: 800px;
+  display: inline-block;
+  background-size: cover; /* Asegúrate de que la imagen cubra el área */
+  background-position: center;
+  /*---*/
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* Asegura que el contenido extra no se desborde */
+  position: relative;
+}
+
+.fotomain:hover {
+  transform: scale(1.1); /* Escala al pasar el ratón */
+  z-index: 10; /* Asegura que quede por encima de los demás */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Añade sombra */
+}
+
+.fotomain::before {
+  content: ""; /* Capa de oscurecimiento */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Transparente por defecto */
+  transition: background-color 0.3s ease;
+  z-index: 1; /* Detrás del texto */
+}
+
+.fotomain:hover::before {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Oscurece la imagen al pasar el ratón */
+}
+
+.fotomain::after {
+  /* Texto que aparece al pasar el ratón */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0; /* Oculto por defecto */
+  transition: opacity 0.3s ease;
+  z-index: 2; /* Encima de la capa oscura */
+}
+
+#ar1::after {
+  content: "Santísimo Cristo de la Sagrada Cena";
+}
+#ar2::after {
+  content: "Nuestra Señora de la Soledad Coronada";
+}
+#ar3::after {
+  content: "Santísimo Cristo de los Milagros";
+}
+
+.fotomain:hover::after {
+  opacity: 1; /* Muestra el texto al pasar el ratón */
+}
+
+/*-------------------------------------*/
+section {
+  display: flex;
+  width: 100vw;
+}
+#ar1 {
+  background-image: url(../../../../public/images/imagenes/fotocristocena.jpg);
+  width: 20%;
+}
+#ar2 {
+  background-image: url(../../../../public/images/imagenes/soledaddemenamanos.jpg);
+  width: 65%;
+}
+#ar3 {
+  background-image: url(../../../../public/images/imagenes/zamarrillanico.jpg);
+  /*zamarrillanico*/
+  width: 290px;
+}
+
+
+

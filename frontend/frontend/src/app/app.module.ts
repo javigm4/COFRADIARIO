@@ -15,8 +15,11 @@ import { DiarioComponent } from './pages/diario/diario.component';
 import { ListaArticulosComponent } from './pages/diario/lista-articulos/lista-articulos.component';
 import { ArticuloComponent } from './pages/diario/articulo/articulo.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
-import { CofradiaComponent } from './pages/agenda/cofradias/cofradia/cofradia.component';
-import { ListaCofradiasComponent } from './pages/agenda/cofradias/lista-cofradias/lista-cofradias.component'; // Importar HttpClientModule
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { FavoritoComponent } from './pages/agenda/favoritos/favorito/favorito.component';
+import { ListafavoritosComponent } from './pages/agenda/favoritos/listafavoritos/listafavoritos.component';
+
 
 @NgModule({
   declarations: [
@@ -31,8 +34,11 @@ import { ListaCofradiasComponent } from './pages/agenda/cofradias/lista-cofradia
     ListaArticulosComponent,
     ArticuloComponent,
     InicioComponent,
-    CofradiaComponent,
-    ListaCofradiasComponent
+    LoginComponent,
+    RegisterComponent,
+    FavoritoComponent,
+    ListafavoritosComponent
+
   ],
   imports: [
     BrowserModule,

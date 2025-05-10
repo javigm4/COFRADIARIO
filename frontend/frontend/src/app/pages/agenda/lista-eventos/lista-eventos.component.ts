@@ -9,6 +9,6 @@ import { Input } from '@angular/core'; // Importar Input desde Angular core
 })
 export class ListaEventosComponent {
   @Input()
-  public eventos: Evento[] = []; // Array de libros
+  public eventos: Evento[] = []; // Array de favoritos
 
 }

@@ -1,1 +1,9 @@
 <app-lista-eventos [eventos]="eventos"></app-lista-eventos>
+
+
+@if (esUsuario == true) {
+<app-listafavoritos [favoritos]="favoritos"
+  [eventos]="eventos"
+  [cofradias]="cofradias"></app-listafavoritos>
+}
+

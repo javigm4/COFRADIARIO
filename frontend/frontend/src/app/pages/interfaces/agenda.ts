@@ -15,3 +15,13 @@ export interface Cofradia {
   parroquia: string;
 }
 
+export interface Favorito {
+  id: number;
+  nombre: string;
+  cofradia: number;
+  fecha: string;
+  id_usuario: number;
+  id_evento: number;
+
+
+}

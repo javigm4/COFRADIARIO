@@ -15,4 +15,10 @@ export class EventosService {
   }
 
 
+
+  // Método para eliminar un evento
+  eliminarEvento(eventoId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${eventoId}`);
+  }
+
 }

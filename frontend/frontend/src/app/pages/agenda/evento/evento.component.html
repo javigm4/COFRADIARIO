@@ -3,5 +3,12 @@
     <h2 class="card-title text-primary">{{ evento.nombre }}</h2>
     <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
     <p class="card-text"><strong>Cofradía:</strong> {{ cofradiaNombre }}</p>
+
+<!--@if (esCofradia && usuario && cofradiaNombre === usuario.name) {    -->
+    <div class="acciones">
+        <button class="btn btn-danger" (click)="eliminarEvento(evento.id)">X</button>
+        <!--<button class="btn btn-primary" (click)="editarEvento(evento.id)">Editar</button>-->
+      </div>
+
   </div>
 </div>

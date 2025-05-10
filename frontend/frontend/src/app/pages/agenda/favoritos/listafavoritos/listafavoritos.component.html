@@ -1,0 +1,6 @@
+<h2> Lista de favoritos: </h2>
+<div>
+  @for (favorito of favoritos; track favorito.id) {
+    <app-favorito  [favorito]="favorito" [eventos]="eventos" [cofradias]="cofradias" (eliminarFavorito)="onEliminar(favorito.id)" ></app-favorito>
+  }
+</div>

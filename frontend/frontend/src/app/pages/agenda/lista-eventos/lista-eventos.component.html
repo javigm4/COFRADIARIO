@@ -3,9 +3,16 @@
 
   <div class="row">
     @for (evento of eventos; track evento.id) {
-      <div class="col-md-6 col-lg-4">
-        <app-evento [evento]="evento"></app-evento> <!-- Componente evento -->
-      </div>
+    <div class="col-md-6 col-lg-4">
+      <app-evento
+        [evento]="evento"
+        [usuario]="usuario"
+        [esCofradia]="esCofradia"
+        [cofradias]="cofradias"
+        ></app-evento
+      >
+      <!-- Componente evento -->
+    </div>
     }
   </div>
 </div>

@@ -8,7 +8,9 @@ import { Input } from '@angular/core'; // Importar Input desde Angular core
   styleUrl: './lista-eventos.component.css'
 })
 export class ListaEventosComponent {
-  @Input()
-  public eventos: Evento[] = []; // Array de favoritos
+@Input() eventos: Evento[] = [];
+@Input() esCofradia: boolean = false;
+@Input() usuario: any = null;  // ✅ Inicializar como `null`, no `{}`.
+  @Input() cofradias: any[] = []; // Recibe la lista de cofradías
 
 }

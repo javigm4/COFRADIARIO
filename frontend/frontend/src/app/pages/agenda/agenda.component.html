@@ -1,9 +1,33 @@
-<app-lista-eventos [eventos]="eventos"></app-lista-eventos>
-
+<app-lista-eventos
+  [eventos]="eventos"
+  [esCofradia]="esCofradia"
+  [usuario]="usuario"
+  [cofradias]="cofradias">
+</app-lista-eventos>
 
 @if (esUsuario == true) {
-<app-listafavoritos [favoritos]="favoritos"
-  [eventos]="eventos"
-  [cofradias]="cofradias"></app-listafavoritos>
+  <app-listafavoritos [favoritos]="favoritos"
+    [eventos]="eventos"
+    [cofradias]="cofradias">
+  </app-listafavoritos>
 }
 
+@if (esCofradia) {
+  <table>
+    <tr>
+      <td>
+        <input type="text" id="nombre" placeholder="Nombre del evento" required>
+      </td>
+      <td>
+        <input type="date" id="fecha" required>
+      </td>
+      <td>
+        <input type="time" id="hora" required>
+      </td>
+      <td></td>
+      <td colspan="2">
+        <button (click)="crearEvento()">Añadir Evento</button>
+      </td>
+    </tr>
+  </table>
+}

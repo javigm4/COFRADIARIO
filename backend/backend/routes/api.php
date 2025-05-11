@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventosController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-
+// RUTAS DE LA API PARA EL FRONTEND (GETTERS)
 Route::get('/eventos', [EventosController::class, 'index']);
+Route::get('/eventos/{id}', [EventosController::class, 'show']); //obtener un evento por su id
+
+
+
+
+
+
+// RUTAS DE LA API PARA EL BACKEND (CRUD)
+Route::delete('/eventos/{id}', [EventosController::class, 'destroy']); // Ruta para eliminar evento
+Route::put('/eventos/{id}', [EventosController::class, 'update']); // Ruta para actualizar eventos
+Route::post('/eventos', [EventosController::class, 'store']); // Ruta para crear evento
+
 

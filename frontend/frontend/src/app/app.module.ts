@@ -19,7 +19,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { FavoritoComponent } from './pages/agenda/favoritos/favorito/favorito.component';
 import { ListafavoritosComponent } from './pages/agenda/favoritos/listafavoritos/listafavoritos.component';
-
+import { EditarEventoComponent } from './pages/agenda/evento/editar-evento/editar-evento.component';
+import { FormsModule } from '@angular/forms'; // ✅ IMPORTA FormsModule AQUÍ
 
 @NgModule({
   declarations: [
@@ -37,13 +38,15 @@ import { ListafavoritosComponent } from './pages/agenda/favoritos/listafavoritos
     LoginComponent,
     RegisterComponent,
     FavoritoComponent,
-    ListafavoritosComponent
+    ListafavoritosComponent,
+    EditarEventoComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule // Importar HttpClientModule para realizar peticiones HTTP
+    HttpClientModule, // Importar HttpClientModule para realizar peticiones HTTP
+    FormsModule  // ✅ AGREGA FormsModule AQUÍ
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

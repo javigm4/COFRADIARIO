@@ -1,0 +1,20 @@
+<form>
+  <!-- Nombre del evento (editable) -->
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre del evento:</label>
+    <input id="nombre" type="text" class="form-control" [(ngModel)]="evento.nombre" name="nombre">  <!-- ✅ Agregamos 'name' -->
+  </div>
+
+  <!-- Fecha del evento (editable) -->
+  <div class="mb-3">
+    <label for="fecha" class="form-label">Fecha del evento:</label>
+    <input id="fecha" type="datetime-local" class="form-control" [(ngModel)]="evento.fecha" name="fecha">  <!-- ✅ Agregamos 'name' -->
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Cofradía:</label>
+    <p class="form-control-plaintext">{{ evento.cofradia }}</p>
+  </div>
+
+  <button class="btn btn-success" (click)="guardarCambios()">Guardar cambios</button>
+</form>

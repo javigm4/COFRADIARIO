@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Evento;
 use App\Models\Cofradias;
 use App\Models\Favoritos;
@@ -23,8 +24,7 @@ class EventosController extends Controller
         $esCofradia = session('rol') === 'cofradia';
         $esUsuario = session('rol') === 'usuario';
         $usuario = Auth::user();
-	return response()->json(['eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias'=> $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario, 'usuario' => $usuario]);
-
+        return response()->json(['eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario, 'usuario' => $usuario]);
     }
 
 
@@ -32,86 +32,90 @@ class EventosController extends Controller
     {
         $evento = Evento::find($id);
 
-        if ($evento) {
-            $evento->delete();
-            return redirect()->route('agenda');
-        } else {
-            return redirect()->route('agenda');
+        if (!$evento) {
+            return response()->json(['message' => 'Evento no encontrado'], 404);
         }
+
+        $evento->delete();
+
+        return response()->json(['message' => 'Evento eliminado correctamente'], 200);
     }
 
 
 
+
     public function store(Request $request)
-{
-    // Validar los datos enviados desde el formulario
-    $request->validate([
-        'nombre' => 'required|string|max:255',
-        'cofradia' => 'required|integer|exists:cofradias,id',
-        'fecha' => 'required|date',
-        'hora' => 'required|date_format:H:i', // Asegura que la hora esté en formato HH:MM
-    ]);
+    {
 
-    $fechaCompleta = $request->fecha . ' ' . $request->hora;
+        // Validar los datos enviados desde el formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'cofradia' => 'required|integer|exists:cofradias,id',
+            'fecha' => 'required|date',
+            'hora' => 'required|date_format:H:i', // Asegura que la hora e  sté en formato HH:MM
+        ]);
 
-    // Crear el evento en la base de datos
-    Evento::create([
-        'nombre' => $request->nombre,
-        'cofradia' => $request->cofradia,
-        'fecha' => $fechaCompleta, // Guardamos la fecha con la hora
-    ]);
+        $fechaCompleta = $request->fecha . ' ' . $request->hora;
 
-    // Redirigir después de crear el evento
-    return redirect()->route('agenda')->with('status', 'Evento creado con éxito');
-}
+        // Crear el evento en la base de datos
+       $evento = Evento::create([
+            'nombre' => $request->nombre,
+            'cofradia' => $request->cofradia,
+            'fecha' => $fechaCompleta, // Guardamos la fecha con la hora
+        ]);
 
-        public function update(Request $request, $id)
-        {
-            $evento = Evento::findOrFail($id); // Obtener el evento a actualizar
+                // Retornar respuesta JSON con código 201
+        return response()->json([
+            'message' => 'Evento creado con éxito',
+            'evento'  => $evento
+        ], 201);
+    }
 
-            // Validación de los datos del formulario
-            $request->validate([
-                'nombre' => 'required|string|max:255',
-                'fecha_hora' => 'required|date',
-                'cofradia' => 'required|string',
-            ]);
+    public function update(Request $request, $id)
+    {
+        //encontramos el evento por su id
+        $evento = Evento::find($id);
 
-            // Actualizar los datos del evento
-            $evento->nombre = $request->nombre;
-            $evento->fecha = $request->fecha_hora; // Asignamos el valor combinado de fecha y hora
-            $evento->cofradia = $request->cofradia;
-            $evento->save();
-
-            return redirect()->route('agenda')->with('success', 'Evento actualizado exitosamente');
+        if (!$evento) {
+            return response()->json(['message' => 'Evento no encontrado'], 404);
         }
 
+        // Validar los datos recibidos
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'cofradia' => 'required|integer|exists:cofradias,id',
+            'fecha' => 'required|date',
+        ]);
+
+        // Actualizar los datos del evento
+        $evento->update([
+            'nombre' => $request->nombre,
+            'cofradia' => $request->cofradia,
+            'fecha' => $request->fecha,
+        ]);
+
+        return response()->json(['message' => 'Evento actualizado correctamente', 'evento' => $evento], 200);
+    }
 
 
-        // ------ EDITAR EVENTO ------
-        // Ruta para mostrar la vista de editar evento (GET)
-        public function edit($id)
-        {
-            $evento = Evento::findOrFail($id);
-            return view('editar', ['evento' => $evento]);
+
+    // ------ EDITAR EVENTO ------
+    // Ruta para mostrar la vista de editar evento (GET)
+    public function edit($id)
+    {
+        $evento = Evento::findOrFail($id);
+        return view('editar', ['evento' => $evento]);
+    }
+
+
+
+    // ------ OBTENER UN EVENTO POR SU ID ------
+    public function show($id)
+    {
+        $evento = Evento::find($id);
+        if (!$evento) {
+            return response()->json(['message' => 'Evento no encontrado'], 404);
         }
-
-
+        return response()->json($evento, 200);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

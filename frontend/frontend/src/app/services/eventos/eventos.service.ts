@@ -13,12 +13,31 @@ export class EventosService {
   getEventos(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
-
+//para obtener solo un evento (para el boton editar)
+obtenerEvento(eventoId: number): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/${eventoId}`);
+}
 
 
   // Método para eliminar un evento
   eliminarEvento(eventoId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${eventoId}`);
+  }
+
+  // Método para editar un evento
+  editarEvento(eventoId: number, eventoData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${eventoId}`, eventoData);
+}
+
+
+// Método para crear un nuevo evento
+  crearEvento(eventoData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, eventoData);
+  }
+
+  // Método para obtener eventos por cofradía
+  getEventosPorCofradia(cofradiaId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/cofradia/${cofradiaId}`);
   }
 
 }

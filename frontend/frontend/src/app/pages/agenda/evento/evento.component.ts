@@ -1,63 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Evento } from '../../interfaces/agenda';
-import { Input } from '@angular/core'; // Importar Input desde Angular core
-import { EventosService } from '../../../services/eventos/eventos.service'; // Importar el servicio de eventos
-import { Usuario } from '../../interfaces/usuario'; // Importar la interfaz de usuario
+import { EventosService } from '../../../services/eventos/eventos.service';
+import { Usuario } from '../../interfaces/usuario';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-evento',
   standalone: false,
   templateUrl: './evento.component.html',
-  styleUrl: './evento.component.css'
+  styleUrls: ['./evento.component.css']
 })
-export class EventoComponent {
-  @Input()
-  public evento !: Evento;
+export class EventoComponent implements OnInit, OnChanges {
+  @Input() public evento!: Evento;
+  @Input() public esUsuario!: boolean;
+  @Input() public esCofradia!: boolean;
+  @Input() public usuario!: Usuario;
+  @Input() public cofradias: any[] = [];  // ✅ Recibido desde el padre
 
+  cofradiaNombre: string = '';
 
-
-  cofradiaNombre: string = ''; // Almacena el nombre de la cofradía
-  cofradias: any[] = []; // Lista de cofradías
-
-
-  public esUsuario !: boolean; // Variable para verificar si el usuario es un usuario
-  public esCofradia !: boolean; // Variable para verificar si el usuario es una cofradía
-  public usuario !: Usuario;
-
-
-
-
-  constructor(private eventosService: EventosService) {}
+  constructor(private eventosService: EventosService, private router: Router) {}
 
   ngOnInit(): void {
-    this.eventosService.getEventos().subscribe(
-      (response) => {
-        this.cofradias = response.cofradias; // Guardamos las cofradías
-        this.cofradiaNombre = this.obtenerCofradiaNombre(this.evento.cofradia);
-        this.usuario = response.usuario; // Guardamos el usuario
-      },
-      (error) => {
-        console.error('Error al obtener las cofradías:', error);
-      }
-    );
+    this.calculaCofradiaNombre();  // ✅ Ahora calculamos el nombre inmediatamente
   }
 
-  obtenerCofradiaNombre(cofradiaId: number): string {
-    const cofradia = this.cofradias.find(c => c.id === cofradiaId);
-    return cofradia ? cofradia.nombre : 'Desconocida'; // Retorna el nombre o 'Desconocida' si no se encuentra
-  }// Inicializa la propiedad eventos como un arreglo vacío
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['cofradias'] || changes['evento'] || changes['usuario']) {
+        this.calculaCofradiaNombre();
+    }
+}
+  calculaCofradiaNombre(): void {
+    if (this.cofradias && this.evento) {
+        const cofradia = this.cofradias.find(c => c.id === this.evento.cofradia);
+        this.cofradiaNombre = cofradia ? cofradia.nombre : 'Desconocida';
 
+        console.log('Cofradia Nombre:', this.cofradiaNombre);
+        console.log('Usuario:', this.usuario?.name ?? 'Usuario no definido');  // ✅ Verificar si usuario existe.
+    }
+}
 
-   eliminarEvento(eventoId: number): void {
+  eliminarEvento(eventoId: number): void {
     this.eventosService.eliminarEvento(eventoId).subscribe(() => {
       console.log(`Evento ${eventoId} eliminado`);
-      window.location.reload(); // 🔄 Recarga la página después de eliminar
+      window.location.reload();
     });
   }
-/*
+
   editarEvento(eventoId: number): void {
-    this.router.navigate(['/editar', eventoId]); // Redirige a la página de edición
+    this.router.navigate(['/editar', eventoId]);
   }
-*/
-
-
 }

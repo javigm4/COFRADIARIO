@@ -19,8 +19,8 @@ export class EventoComponent implements OnInit, OnChanges {
   constructor(private eventosService: EventosService, private router: Router, private authService : AuthService) {}
 
   ngOnInit(): void {
-    this.calculaCofradiaNombre();  // ✅ Ahora calculamos el nombre inmediatamente
-    const usuario = this.authService.getUsuarioData(); // 📌 Obtener el usuario desde `localStorage`
+    this.calculaCofradiaNombre();  //  Ahora calculamos el nombre inmediatamente
+    const usuario = this.authService.getUsuarioData(); //  Obtener el usuario desde `localStorage`
     this.role = usuario.role;
     this.nombreUsuario = usuario.name;
   }

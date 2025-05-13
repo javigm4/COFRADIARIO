@@ -49,22 +49,6 @@ class AuthController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function register(Request $request)
     {
         $request->validate([
@@ -89,8 +73,6 @@ class AuthController extends Controller
         // Enviar la notificación a tu correo personal
         Notification::route('mail', 'javierguerreromontero1@gmail.com')
             ->notify(new RegisterNotification($usuario));
-
-        return redirect()->route('login');
     }
 
 

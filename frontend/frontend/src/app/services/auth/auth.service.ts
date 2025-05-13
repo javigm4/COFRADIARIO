@@ -7,38 +7,45 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/api/login'; // 🔹 URL de tu backend
-
+  private apiUrl = 'http://127.0.0.1:8000/api/login';
+  private apiUrlRegister = 'http://127.0.0.1:8000/api/register';
   constructor(private http: HttpClient) {}
 
+  // auth metodos
   login(formData: FormData): Observable<any> {
     return this.http.post<any>(this.apiUrl, formData, {
       withCredentials: true,
     }); //hacemos que postee el formdata al login del backend
   }
 
+  register(formData: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrlRegister, formData, {
+      withCredentials: true,
+    });
+  }
+
+
+  // get usuario
   getUsuario(): any {
-    const token = localStorage.getItem('token'); // 📌 Obtiene el token almacenado
+    const token = localStorage.getItem('token'); // cojo el token almacenado
     if (token) {
-      return token; // 📌 Devuelve directamente el token sin parsearlo
+      return token; // devovler token
     }
     return null;
   }
 
+  getUsuarioData(): any {
+    const userData = localStorage.getItem('user'); // obtener el usuario del token
 
-  getUsuarioData() : any {
-    const userData = localStorage.getItem('user'); // 📌 Obtiene los datos del usuario almacenados
-
-  if (userData) {
-    try {
-      console.log(userData);
-      return JSON.parse(userData); // 📌 Convierte el JSON en objeto y lo retorna
-    } catch (error) {
-      console.error('Error al parsear los datos del usuario:', error);
-      return null;
+    if (userData) {
+      try {
+        console.log(userData);
+        return JSON.parse(userData); //convertimos a json y retornamos
+      } catch (error) {
+        console.error('Error al parsear los datos del usuario:', error);
+        return null;
+      }
     }
-  }
-
-  return null;
+    return null;
   }
 }

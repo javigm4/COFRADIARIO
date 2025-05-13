@@ -1,0 +1,108 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding:50px;
+  gap: 100px;
+}
+
+.fotologin {
+  width: 500px; /* Ajusta el tamaño de las imágenes */
+  height: 750px ;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.fotologin:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.fotologin::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+}
+
+.fotologin:hover::before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.fotologin::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#ar1::after {
+  content: "Nuestro Padre Jesús de la Pasión";
+}
+
+#ar2::after {
+  content: "María Santísima del Mayor Dolor";
+}
+
+.fotologin:hover::after {
+  opacity: 1;
+}
+
+
+#ar2 {
+  background-image: url(../../../../public/images/imagenes/mayordolor.jpg);
+}
+
+#ar1 {
+  background-image: url(../../../../public/images/imagenes/pasionhd.jpg);
+}
+
+.form-container {
+  width: 1000px;
+  background-color: #5b420d; /* Marrón */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.card-body {
+  background: transparent;
+}
+
+.btn {
+    background-color: #5b420d; /* Marrón */
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+    width: 300px;
+}
+
+input {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+label {
+  padding:10px;
+  font-weight: bold;
+}
+
+h2 {
+   font-weight: bold;
+}

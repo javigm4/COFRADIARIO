@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Evento } from '../../interfaces/agenda';
 import { EventosService } from '../../../services/eventos/eventos.service';
-import { Usuario } from '../../interfaces/usuario';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-evento',
@@ -12,17 +12,17 @@ import { Router } from '@angular/router';
 })
 export class EventoComponent implements OnInit, OnChanges {
   @Input() public evento!: Evento;
-  @Input() public esUsuario!: boolean;
-  @Input() public esCofradia!: boolean;
-  @Input() public usuario!: Usuario;
   @Input() public cofradias: any[] = [];  // ✅ Recibido desde el padre
-
+  role : string = '';
   cofradiaNombre: string = '';
-
-  constructor(private eventosService: EventosService, private router: Router) {}
+  nombreUsuario : string ='';
+  constructor(private eventosService: EventosService, private router: Router, private authService : AuthService) {}
 
   ngOnInit(): void {
     this.calculaCofradiaNombre();  // ✅ Ahora calculamos el nombre inmediatamente
+    const usuario = this.authService.getUsuarioData(); // 📌 Obtener el usuario desde `localStorage`
+    this.role = usuario.role;
+    this.nombreUsuario = usuario.name;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,8 +35,6 @@ export class EventoComponent implements OnInit, OnChanges {
         const cofradia = this.cofradias.find(c => c.id === this.evento.cofradia);
         this.cofradiaNombre = cofradia ? cofradia.nombre : 'Desconocida';
 
-        console.log('Cofradia Nombre:', this.cofradiaNombre);
-        console.log('Usuario:', this.usuario?.name ?? 'Usuario no definido');  // ✅ Verificar si usuario existe.
     }
 }
 

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Favorito } from './../../pages/interfaces/agenda'; // Importar el modelo de Favorito
-import { map } from 'rxjs/operators'; // Importar el operador map para transformar la respuesta
+
 
 @Injectable({
   providedIn: 'root'

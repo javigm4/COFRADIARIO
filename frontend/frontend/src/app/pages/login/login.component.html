@@ -1,0 +1,56 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Iniciar sesión</h2>
+          <form (ngSubmit)="onSubmit()">
+            <!-- Campo de email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                [(ngModel)]="email"
+                name="email"
+                required
+                placeholder="Introduce tu email"
+              />
+            </div>
+
+            <!-- Campo de contraseña -->
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                [(ngModel)]="password"
+                name="password"
+                required
+                placeholder="Introduce tu contraseña"
+              />
+            </div>
+
+            <!-- Campo de código (opcional) -->
+            <div class="form-group">
+              <label for="codigo">Código (opcional)</label>
+              <input
+                type="text"
+                id="codigo"
+                class="form-control"
+                [(ngModel)]="codigo"
+                name="codigo"
+                placeholder="Introduce tu código"
+              />
+            </div>
+
+            <!-- Botón de submit -->
+            <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

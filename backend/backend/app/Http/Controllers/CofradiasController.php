@@ -15,7 +15,7 @@ class CofradiasController extends Controller
     public function index()
     {
         $cofradias = Cofradias::all();
-	return view('seleccionCofradia', ['cofradias'=> $cofradias]);
+	    return view('seleccionCofradia', ['cofradias'=> $cofradias]);
     }
 
 

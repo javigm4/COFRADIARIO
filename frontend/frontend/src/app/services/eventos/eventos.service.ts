@@ -11,7 +11,7 @@ export class EventosService {
 
   // Método para obtener eventos desde la API
   getEventos(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  return this.http.get<any>(this.apiUrl, { withCredentials: true });
   }
 //para obtener solo un evento (para el boton editar)
 obtenerEvento(eventoId: number): Observable<any> {
@@ -39,5 +39,4 @@ obtenerEvento(eventoId: number): Observable<any> {
   getEventosPorCofradia(cofradiaId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/cofradia/${cofradiaId}`);
   }
-
 }

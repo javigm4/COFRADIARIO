@@ -37,3 +37,7 @@ Route::put('/eventos/{id}', [EventosController::class, 'update']); // Ruta para 
 Route::post('/eventos', [EventosController::class, 'store']); // Ruta para crear evento
 
 
+// RUTAS DE AUTENTICACION
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+

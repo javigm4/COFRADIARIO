@@ -1,7 +1,6 @@
 <app-lista-eventos
   [eventos]="eventos"
-  [esCofradia]="esCofradia"
-  [usuario]="usuario"
+
   [cofradias]="cofradias">
 </app-lista-eventos>
 
@@ -12,7 +11,7 @@
   </app-listafavoritos>
 }
 
-@if (esCofradia) {
+@if (esCofradia == true) {
   <table>
     <tr>
       <td>

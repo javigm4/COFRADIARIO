@@ -21,10 +21,8 @@ class EventosController extends Controller
         $eventos = Evento::orderBy('fecha', 'asc')->get();
         $cofradias = Cofradias::all();
         $favoritos = Favoritos::all();
-        $esCofradia = session('rol') === 'cofradia';
-        $esUsuario = session('rol') === 'usuario';
         $usuario = Auth::user();
-        return response()->json(['eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'esCofradia' => $esCofradia, 'esUsuario' => $esUsuario, 'usuario' => $usuario]);
+        return response()->json(['eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
     }
 
 

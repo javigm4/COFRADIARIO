@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { EditarEventoComponent } from './pages/agenda/evento/editar-evento/editar-evento.component';
+import { LoginComponent } from './pages/login/login.component'; // Importa el componente de login
 
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent}, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
-  {path: '', redirectTo: '/inicio', pathMatch: 'full' }, // Redirección al inicio al abrir la app (cuando la URL está vacía)
   {path: 'agenda', component: AgendaComponent}, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
   {path: 'editar/:id', component: EditarEventoComponent },  // Nueva página de edición
+  {path: 'login', component: LoginComponent },  // Ruta del login
+  {path: '**', redirectTo: '/inicio' }, // Redirección a la página de inicio si la ruta no existe
+  {path: '', redirectTo: '/inicio', pathMatch: 'full' }, // Redirección al inicio al abrir la app (cuando la URL está vacía)
+
 
 
 
@@ -20,6 +24,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
-
 
 }

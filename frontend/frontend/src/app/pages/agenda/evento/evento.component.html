@@ -4,7 +4,7 @@
     <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
     <p class="card-text"><strong>Cofradía:</strong> {{ cofradiaNombre }}</p>
 
-    @if (esCofradia && cofradiaNombre === usuario.name) {
+    @if (role == 'cofradia' && nombreUsuario == cofradiaNombre) {
       <div class="acciones">
         <button class="btn btn-danger" (click)="eliminarEvento(evento.id)">X</button>
         <button class="btn btn-primary" (click)="editarEvento(evento.id)">Editar</button>

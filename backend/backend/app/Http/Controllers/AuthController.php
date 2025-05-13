@@ -12,35 +12,58 @@ use App\Notifications\RegisterNotification;
 
 class AuthController extends Controller
 {
-   public function login(Request $request)
+    public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-            'codigo' => 'nullable|string',
-        ]);
 
-        $usuario = Usuario::where('email', $request->email)->first();
+        $user = Usuario::where('email', $request->email)->first();
 
-        if (!$usuario || !Hash::check($request->password, $usuario->password)) {
-            return back()->withErrors(['email' => 'Credenciales incorrectas']);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['error' => 'Credenciales inválidas'], 401);
         }
-
-        // Validación condicional del código
-        if (!empty($request->codigo)) { // Usa `!empty()` para asegurar que no sea nulo o vacío
-            if ($usuario->codigo === $request->codigo) {
-                session(['rol' => 'cofradia']);
-            } else {
-                return back()->withErrors(['codigo' => 'Código incorrecto']);
-            }
+        // 📌 Asignar correctamente el rol basado en el código ingresado
+        if (!empty($request->codigo) && $request->codigo === $user->codigo) {
+            $rol = 'cofradia'; // Si el código ingresado coincide con el del usuario, es cofradía
         } else {
-            session(['rol' => 'usuario']);
+            $rol = 'usuario'; // Si no ingresó código o el código es incorrecto, es usuario
         }
+        $token = $user->createToken('authToken')->plainTextToken;
 
-        Auth::login($usuario);
-
-        return redirect()->route('agenda');
+        return response()->json([
+            'data' => [
+                'accessToken' => $token,
+                'toke_type' => 'Bearer',
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'codigo' => $user->codigo,
+                    'role' => $rol,
+                    'created_at' => $user->created_at,
+                    'updated_at' => $user->updated_at
+                ]
+            ]
+        ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function register(Request $request)
     {
@@ -65,7 +88,7 @@ class AuthController extends Controller
 
         // Enviar la notificación a tu correo personal
         Notification::route('mail', 'javierguerreromontero1@gmail.com')
-        ->notify(new RegisterNotification($usuario));
+            ->notify(new RegisterNotification($usuario));
 
         return redirect()->route('login');
     }
@@ -77,5 +100,4 @@ class AuthController extends Controller
         session()->flush();
         return redirect()->route('login');
     }
-
 }

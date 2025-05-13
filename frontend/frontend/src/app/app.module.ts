@@ -21,6 +21,7 @@ import { FavoritoComponent } from './pages/agenda/favoritos/favorito/favorito.co
 import { ListafavoritosComponent } from './pages/agenda/favoritos/listafavoritos/listafavoritos.component';
 import { EditarEventoComponent } from './pages/agenda/evento/editar-evento/editar-evento.component';
 import { FormsModule } from '@angular/forms'; // ✅ IMPORTA FormsModule AQUÍ
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { FormsModule } from '@angular/forms'; // ✅ IMPORTA FormsModule AQUÍ
     HttpClientModule, // Importar HttpClientModule para realizar peticiones HTTP
     FormsModule  // ✅ AGREGA FormsModule AQUÍ
   ],
-  providers: [WeatherService],
+  providers: [WeatherService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,36 @@
+.contenedor-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  margin: 2px auto; /* Ajustamos márgenes para mejor distribución */
+  gap: 12px; /* Menos separación para mayor cohesión */
+}
+
+/* Lista de Eventos (Más grande y protagonista en la izquierda) */
+.contenedor-eventos {
+  flex: 4.5; /* Aumentamos su tamaño */
+  background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+
+.contenedor-eventos:hover {
+  transform: scale(1.01);
+}
+
+/* Lista de Favoritos (Más compacta y fija a la derecha) */
+.contenedor-favoritos {
+  flex: 1.2; /* Reducimos un poco su tamaño */
+  background: linear-gradient(135deg, #8b5a2b, #ad7e3f);
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 10px;
+  min-width: 300px;
+}

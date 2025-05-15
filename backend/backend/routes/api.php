@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\FavoritosController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,13 +28,12 @@ Route::get('/eventos/{id}', [EventosController::class, 'show']); //obtener un ev
 
 
 
-
-
-
 // RUTAS DE LA API PARA EL BACKEND (CRUD)
 Route::delete('/eventos/{id}', [EventosController::class, 'destroy']); // Ruta para eliminar evento
 Route::put('/eventos/{id}', [EventosController::class, 'update']); // Ruta para actualizar eventos
 Route::post('/eventos', [EventosController::class, 'store']); // Ruta para crear evento
+Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy']);
+Route::post('/favoritos', [FavoritosController::class, 'store']);
 
 
 // RUTAS DE AUTENTICACION

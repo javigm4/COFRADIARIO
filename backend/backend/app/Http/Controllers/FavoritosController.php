@@ -31,8 +31,8 @@ class FavoritosController extends Controller
             'id_evento' => 'required|integer|exists:eventos,id', // Verifica que el evento exista
         ]);
         Favoritos::create($request->all());
-            return redirect()->route('agenda')->with('status', 'Evento añadido a favoritos con éxito');
-    }
+            return response()->json(['message' => 'Favorito añadido correctamente'], 200);
+        }
 
 
     public function destroy($id)
@@ -41,9 +41,9 @@ class FavoritosController extends Controller
 
         if ($favorito) {
             $favorito->delete();
-            return redirect()->route('agenda');
+            return response()->json(['message' => 'Favorito eliminado correctamente'], 200);
         } else {
-            return redirect()->route('agenda');
+        return response()->json(['message' => 'Favorito no encontrado'], 404);
         }
     }
 }

@@ -1,0 +1,126 @@
+.evento-card {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.evento-card:hover {
+  transform: scale(1.02);
+}
+
+.divider {
+  border: 0;
+  height: 2px;
+  background: #d4af37; /* Dorado */
+  margin: 15px 0;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #5b420d;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #333;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-danger,
+.btn-primary {
+  padding: 8px 15px;
+  border-radius: 8px;
+}
+
+.btn-favorito {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50px;
+  background: #d4af37;
+  color: white;
+  border: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-favorito:hover {
+  background: #b8912c;
+  transform: scale(1.05);
+}
+
+.favorito-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.error-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+}
+
+.fecha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+  background: linear-gradient(135deg, #003366, #005599); /* Azul elegante */
+  padding: 18px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 3px solid #d4af37; /* Bordes dorados */
+}
+
+.fecha-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.fecha-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.fecha-icon i {
+  font-size: 40px;
+  color: #d4af37; /* Icono dorado */
+}
+
+.fecha-text {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.fecha {
+  font-size: 26px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

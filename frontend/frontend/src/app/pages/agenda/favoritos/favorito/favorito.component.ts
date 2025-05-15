@@ -10,7 +10,7 @@ import { Favorito, Cofradia, Evento } from '../../../interfaces/agenda';
   styleUrl: './favorito.component.css'
 })
 export class FavoritoComponent {
-   @Input() favorito!: Favorito;
+  @Input() favorito!: Favorito;
   @Input() eventos: Evento[] = []; // Para obtener el nombre del evento
   @Input() cofradias: Cofradia[] = []; // Para obtener el nombre de la cofradía
 
@@ -35,6 +35,14 @@ getCofradiaNombre(): string {
     return cofradia ? cofradia.nombre : 'Cofradía desconocida';
   }
   return 'Cofradía desconocida';
+}
+
+getFecha(): string {
+  const evento = this.eventos.find(e => e.id === this.favorito.id_evento);
+  if (evento) {
+    return evento.fecha;
+  }
+  return " Fecha no encontrada";
 }
 
 onEliminar(): void {

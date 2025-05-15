@@ -1,0 +1,43 @@
+.favoritos-container {
+  width: 90%;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.favoritos-container:hover {
+  transform: scale(1.02);
+}
+
+.favoritos-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #d4af37;
+}
+
+.favoritos-title i {
+  margin-right: 10px;
+}
+
+.favoritos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+app-favorito {
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+app-favorito:hover {
+  transform: scale(1.03);
+}

@@ -15,21 +15,20 @@ export class AgendaComponent implements OnInit {
   favoritos: any[] = [];
   esUsuario: boolean = false;
   esCofradia: boolean = false;
-  usuario : any ;
-
+  usuario: any;
 
   constructor(
-    private eventosService: EventosService, private authService: AuthService
+    private eventosService: EventosService,
+    private authService: AuthService,
+    private favoritosService: FavoritosService
   ) {}
 
   ngOnInit(): void {
-    const usuario = this.authService.getUsuarioData(); // 📌 Obtener el usuario desde `localStorage`
-
+    const usuario = this.authService.getUsuarioData(); //  Obtener el usuario desde `localStorage`
     if (usuario) {
-      this.esUsuario = usuario.rol === 'usuario';
-      this.esCofradia = usuario.rol === 'cofradia';
+      this.esUsuario = usuario.role === 'usuario';
+      this.esCofradia = usuario.role === 'cofradia';
     }
-    console.log(usuario);
     this.cargarDatos();
   }
 
@@ -39,6 +38,14 @@ export class AgendaComponent implements OnInit {
         this.eventos = response.eventos ?? [];
         this.cofradias = response.cofradias ?? [];
         this.favoritos = response.favoritos ?? [];
+        console.log(
+          '------------------------------------------------------------------------------------'
+        );
+        console.log(response);
+        console.log(
+          '------------------------------------------------------------------------------------'
+        );
+        console.log(this.favoritos);
       },
       (error) => {
         console.error('Error al obtener eventos:', error);
@@ -46,16 +53,19 @@ export class AgendaComponent implements OnInit {
     );
   }
 
- // ----- C R E A R   E V E N T O -----
+  // ----- C R E A R   E V E N T O -----
   crearEvento(): void {
     if (!this.esCofradia) {
       console.error('Solo una cofradía puede crear eventos.');
       return;
     }
 
-    const cofradiaId = this.cofradias.find((c) => c.nombre === this.usuario.nombre)?.id || 0;
-    const fechaInput = (document.getElementById('fecha') as HTMLInputElement).value;
-    const horaInput = (document.getElementById('hora') as HTMLInputElement).value;
+    const cofradiaId =
+      this.cofradias.find((c) => c.nombre === this.usuario.nombre)?.id || 0;
+    const fechaInput = (document.getElementById('fecha') as HTMLInputElement)
+      .value;
+    const horaInput = (document.getElementById('hora') as HTMLInputElement)
+      .value;
 
     const eventoData = {
       nombre: (document.getElementById('nombre') as HTMLInputElement).value,
@@ -74,4 +84,19 @@ export class AgendaComponent implements OnInit {
       }
     );
   }
+
+  // ----- E L I M I N A R   F A V O R I TO -----
+ onEliminar(favoritoId: number): void {
+  console.log('Eliminar favorito con ID:', favoritoId);
+  this.favoritosService.eliminarFavorito(favoritoId).subscribe(
+    () => {
+      console.log('Favorito eliminado correctamente');
+      // Elimina el favorito del array localmente después de la respuesta exitosa de la API
+      this.favoritos = this.favoritos.filter((f) => f.id !== favoritoId);
+    },
+    (error) => {
+      console.error('Error al eliminar el favorito:', error);
+    }
+  );
+}
 }

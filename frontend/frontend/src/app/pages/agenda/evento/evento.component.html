@@ -1,14 +1,40 @@
-<div class="card mb-3 shadow-sm">
+<div class="card evento-card">
   <div class="card-body">
-    <h2 class="card-title text-primary">{{ evento.nombre }}</h2>
-    <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
-    <p class="card-text"><strong>Cofradía:</strong> {{ cofradiaNombre }}</p>
+    <h2 class="card-title">{{ evento.nombre }}</h2>
+    <hr class="divider" />
+
+    <!-- Fecha destacada -->
+    <div class="fecha-container">
+      <div class="fecha-content">
+        <div class="fecha-icon">
+          <i class="bi bi-calendar-event"></i>
+        </div>
+        <div class="fecha-text">
+          <span class="fecha">{{ evento.fecha }}</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="card-text">
+      <i class="bi bi-people"></i> <strong>Cofradía:</strong>
+      {{ cofradiaNombre }}
+    </p>
 
     @if (role == 'cofradia' && nombreUsuario == cofradiaNombre) {
-      <div class="acciones">
-        <button class="btn btn-danger" (click)="eliminarEvento(evento.id)">X</button>
-        <button class="btn btn-primary" (click)="editarEvento(evento.id)">Editar</button>
-      </div>
+    <div class="acciones">
+      <button class="btn btn-danger btn-sm" (click)="eliminarEvento(evento.id)">
+        <i class="bi bi-trash-fill"></i> Eliminar
+      </button>
+      <button class="btn btn-primary btn-sm" (click)="editarEvento(evento.id)">
+        <i class="bi bi-pencil-fill"></i> Editar
+      </button>
+    </div>
+    } @else if (role == 'usuario') {
+    <div class="favorito-container">
+      <button (click)="anadirFavorito(evento.id)" class="btn btn-favorito">
+        <i class="bi bi-star-fill"></i> Añadir a Favoritos
+      </button>
+    </div>
     }
   </div>
 </div>

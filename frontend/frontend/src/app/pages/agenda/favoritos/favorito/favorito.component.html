@@ -1,9 +1,19 @@
-<div class="card mb-3">
-  <div class="card-body">
-    <h5 class="card-title">{{ getEventoNombre() }}</h5>
-    <p class="card-text">
-      <strong>Cofradía:</strong> {{ getCofradiaNombre() }}<br>
+<div class="favorito-card">
+  <div class="favorito-header">
+    <h5 class="favorito-title"><i class="bi bi-star-fill"></i> {{ getEventoNombre() }}</h5>
+  </div>
+
+  <div class="favorito-body">
+    <p class="favorito-text">
+      <i class="bi bi-people"></i> <strong> {{ getCofradiaNombre() }} </strong>
     </p>
-    <!--<button class="btn btn-danger btn-sm" (click)="onEliminar()">Eliminar</button>-->
+
+    <p class="favorito-text">
+            <i class="bi bi-calendar-event  "></i> <strong> {{ getFecha() }} </strong>
+    </p>
+
+    <button class="btn btn-eliminar" (click)="onEliminar()">
+      <i class="bi bi-trash-fill"></i> Eliminar
+    </button>
   </div>
 </div>

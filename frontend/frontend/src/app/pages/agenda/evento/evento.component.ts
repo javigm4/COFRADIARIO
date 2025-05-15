@@ -3,6 +3,7 @@ import { Evento } from '../../interfaces/agenda';
 import { EventosService } from '../../../services/eventos/eventos.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { FavoritosService } from '../../../services/favoritos/favoritos.service';
 
 @Component({
   selector: 'app-evento',
@@ -16,7 +17,7 @@ export class EventoComponent implements OnInit, OnChanges {
   role : string = '';
   cofradiaNombre: string = '';
   nombreUsuario : string ='';
-  constructor(private eventosService: EventosService, private router: Router, private authService : AuthService) {}
+  constructor(private eventosService: EventosService, private router: Router, private authService : AuthService, private favoritosService : FavoritosService) {}
 
   ngOnInit(): void {
     this.calculaCofradiaNombre();  //  Ahora calculamos el nombre inmediatamente
@@ -34,7 +35,6 @@ export class EventoComponent implements OnInit, OnChanges {
     if (this.cofradias && this.evento) {
         const cofradia = this.cofradias.find(c => c.id === this.evento.cofradia);
         this.cofradiaNombre = cofradia ? cofradia.nombre : 'Desconocida';
-
     }
 }
 
@@ -47,5 +47,31 @@ export class EventoComponent implements OnInit, OnChanges {
 
   editarEvento(eventoId: number): void {
     this.router.navigate(['/editar', eventoId]);
+  }
+
+   anadirFavorito(eventoId: number): void {
+    // Obtener el usuario actual de localStorage a través de AuthService
+    const usuario = this.authService.getUsuarioData();
+    if (!usuario) {
+      console.error('No se encontró el usuario.');
+      return;
+    }
+
+    // Creamos el objeto con el id del usuario y del evento que se desea añadir a favoritos
+    const favoritoData = {
+      id_usuario: usuario.id,
+      id_evento: eventoId
+    };
+
+    // Realizamos la petición al backend para añadir el favorito
+    this.favoritosService.anadirFavorito(favoritoData).subscribe(
+      (response) => {
+        console.log('Evento añadido a favoritos:', response);
+        alert('Evento añadido a favoritos con éxito.');
+      },
+      (error) => {
+        console.error('Error al añadir a favoritos:', error);
+      }
+    );
   }
 }

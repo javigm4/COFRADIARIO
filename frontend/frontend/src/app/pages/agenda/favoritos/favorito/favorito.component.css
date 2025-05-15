@@ -1,0 +1,55 @@
+.favorito-card {
+  width: 100%;
+  max-width: 350px;
+  margin: 20px auto;
+  background: linear-gradient(135deg, #003366, #005599);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.favorito-card:hover {
+  transform: scale(1.03);
+}
+
+.favorito-header {
+  background: #d4af37; /* Dorado */
+  padding: 8px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.favorito-title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.favorito-text {
+  font-size: 16px;
+  color: white;
+  margin: 10px 0;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.btn-eliminar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #ff4444;
+  color: white;
+  font-size: 16px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.btn-eliminar:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}

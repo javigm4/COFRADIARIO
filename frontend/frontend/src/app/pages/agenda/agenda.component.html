@@ -1,32 +1,36 @@
-<app-lista-eventos
-  [eventos]="eventos"
+<div class="contenedor-principal">
+  <!-- Lista de Eventos (Grande y a la Izquierda) -->
+  <div class="contenedor-eventos">
+    <app-lista-eventos [eventos]="eventos" [cofradias]="cofradias"></app-lista-eventos>
+  </div>
 
-  [cofradias]="cofradias">
-</app-lista-eventos>
+  <!-- Lista de Favoritos (Más Pequeño y a la Derecha) -->
+  <div class="contenedor-favoritos">
+    @if(esUsuario == true) {
+      <app-listafavoritos
+        [favoritos]="favoritos"
+        [eventos]="eventos"
+        [cofradias]="cofradias"
+        [usuario]="usuario"
+        (eliminarFavorito)="onEliminar($event)">
+      </app-listafavoritos>
+    }
+  </div>
+</div>
 
-@if (esUsuario == true) {
-  <app-listafavoritos [favoritos]="favoritos"
-    [eventos]="eventos"
-    [cofradias]="cofradias">
-  </app-listafavoritos>
-}
-
-@if (esCofradia == true) {
-  <table>
-    <tr>
-      <td>
-        <input type="text" id="nombre" placeholder="Nombre del evento" required>
-      </td>
-      <td>
-        <input type="date" id="fecha" required>
-      </td>
-      <td>
-        <input type="time" id="hora" required>
-      </td>
-      <td></td>
-      <td colspan="2">
-        <button (click)="crearEvento()">Añadir Evento</button>
-      </td>
-    </tr>
-  </table>
+<!-- Sección para Cofradías -->
+@if(esCofradia == true) {
+  <div class="crear-evento-container">
+    <table>
+      <tr>
+        <td><input type="text" id="nombre" placeholder="Nombre del evento" required></td>
+        <td><input type="date" id="fecha" required></td>
+        <td><input type="time" id="hora" required></td>
+        <td></td>
+        <td colspan="2">
+          <button class="btn btn-crear-evento" (click)="crearEvento()">Añadir Evento</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 }

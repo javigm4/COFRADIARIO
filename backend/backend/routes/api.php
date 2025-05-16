@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\ArticulosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoritosController;
+use App\Http\Controllers\ArticulosController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,11 +32,14 @@ Route::get('/articulos', [ArticulosController::class, 'index']);
 
 
 // RUTAS DE LA API PARA EL BACKEND (CRUD)
-Route::delete('/eventos/{id}', [EventosController::class, 'destroy']); // Ruta para eliminar evento
+Route::delete('/eventos/{id}', [EventosController::class, 'destroy']); // Ruta para     eliminar evento
 Route::put('/eventos/{id}', [EventosController::class, 'update']); // Ruta para actualizar eventos
 Route::post('/eventos', [EventosController::class, 'store']); // Ruta para crear evento
 Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy']);
 Route::post('/favoritos', [FavoritosController::class, 'store']);
+Route::get('/articulos/{id}', [ArticulosController::class, 'show']);
+Route::put('/articulos/{id}', [ArticulosController::class, 'update']);
+
 
 
 // RUTAS DE AUTENTICACION

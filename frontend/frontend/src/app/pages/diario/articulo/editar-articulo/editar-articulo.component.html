@@ -1,0 +1,29 @@
+<form>
+  <!-- Nombre del evento (editable) -->
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Título:</label>
+    <input
+      id="titulo"
+      type="text"
+      class="form-control"
+      [(ngModel)]="articulo.titular"
+      name="titulo"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="fecha" class="form-label">Cuerpo:</label>
+    <input
+      id="cuerpo"
+      type="text"
+      class="form-control"
+      [(ngModel)]="articulo.cuerpo"
+      name="cuerpo"
+    />
+  </div>
+
+
+  <button class="btn btn-success" (click)="guardarCambios()">
+    Guardar cambios
+  </button>
+</form>

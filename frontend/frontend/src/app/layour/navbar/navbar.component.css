@@ -26,7 +26,6 @@
   display: flex;
   justify-content: space-between; /* Espacio entre el título y el logo */
   align-items: center; /* Centra verticalmente */
-  background-color: #fff; /* Blanco */
   border-bottom: 2px solid #5e4310; /* Marrón */
   padding: 0.8rem 2rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Añadir sombra suave */

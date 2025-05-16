@@ -6,11 +6,14 @@ import { EditarEventoComponent } from './pages/agenda/evento/editar-evento/edita
 import { LoginComponent } from './pages/login/login.component'; // Importa el componente de login
 import { RegisterComponent } from './pages/register/register.component';
 import { DiarioComponent } from './pages/diario/diario.component';
+import { EditarArticuloComponent } from './pages/diario/articulo/editar-articulo/editar-articulo.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent }, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
   { path: 'agenda', component: AgendaComponent }, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
   { path: 'editar/:id', component: EditarEventoComponent }, // Nueva página de edición
+    { path: 'editarArticulo/:id', component: EditarArticuloComponent }, // Nueva página de edición de articulo
+
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent }, // Ruta del login
   { path: 'diario', component: DiarioComponent }, // Ruta del diario

@@ -3,4 +3,15 @@
   <hr class="divider">
   <h5 class="autor text-muted text-end fst-italic">Por: {{ nombreAutor }}</h5>
   <p class="cuerpo-articulo text-justify">{{ articulo.cuerpo }}</p>
+
+  @if(nombreUsuario == nombreAutor){
+    <div class="acciones">
+        <button class="btn btn-danger btn-sm" (click)="eliminarArticulo(articulo.id)">
+          <i class="bi bi-trash-fill"></i> Eliminar
+        </button>
+        <button class="btn btn-primary btn-sm" (click)="editarArticulo(articulo.id)">
+          <i class="bi bi-pencil-fill"></i> Editar
+        </button>
+    </div>
+  }
 </div>

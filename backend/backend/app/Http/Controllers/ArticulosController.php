@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Articulo;
@@ -17,7 +18,6 @@ class ArticulosController extends Controller
         $articulos = Articulo::all();
         $usuarios = User::all();
         return response()->json(['articulos' => $articulos, 'usuarios' => $usuarios]);
-
     }
 
     /**
@@ -47,9 +47,15 @@ class ArticulosController extends Controller
      * @param  \App\Models\articulos  $articulos
      * @return \Illuminate\Http\Response
      */
-    public function show(Articulo $articulos)
+    public function show($id)
     {
-        //
+        $articulo = Articulo::find($id);
+
+        if (!$articulo) {
+            return response()->json(['message' => 'Artículo no encontrado'], 404);
+        }
+
+        return response()->json($articulo);
     }
 
     /**
@@ -70,10 +76,26 @@ class ArticulosController extends Controller
      * @param  \App\Models\articulos  $articulos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Articulo $articulos)
+
+
+    public function update(Request $request, $id)
     {
-        //
+        $articulo = Articulo::find($id);
+
+        if (!$articulo) {
+            return response()->json(['message' => 'Artículo no encontrado'], 404);
+        }
+
+        // Asegúrate de usar los nombres correctos de columnas
+        $articulo->titular = $request->input('titular'); // Antes ponías 'titulo'
+        $articulo->cuerpo = $request->input('cuerpo');
+
+        $articulo->save(); // Esto actualizará `updated_at` automáticamente
+
+        return response()->json(['message' => 'Artículo actualizado correctamente']);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -81,8 +103,16 @@ class ArticulosController extends Controller
      * @param  \App\Models\articulos  $articulos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articulo $articulos)
+    public function destroy($id)
     {
-        //
+        $evento = Articulo::find($id);
+
+        if (!$evento) {
+            return response()->json(['message' => 'Articulo no encontrado'], 404);
+        }
+
+        $evento->delete();
+
+        return response()->json(['message' => 'Articulo eliminado correctamente'], 200);
     }
 }

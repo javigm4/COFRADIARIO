@@ -1,0 +1,33 @@
+.articulo-card {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-articulo {
+  font-family: 'Times New Roman', serif;
+  font-size: 24px;
+  color: #333;
+}
+
+.autor {
+  font-size: 16px;
+  color: #777;
+}
+
+.divider {
+  border-top: 2px solid #bbb;
+  margin: 10px 0;
+}
+
+.cuerpo-articulo {
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: justify;
+  color: #444;
+}

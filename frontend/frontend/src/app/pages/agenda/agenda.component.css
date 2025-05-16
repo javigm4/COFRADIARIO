@@ -1,17 +1,19 @@
 .contenedor-principal {
+    padding:20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   max-width: 1400px;
   margin: 2px auto; /* Ajustamos márgenes para mejor distribución */
+  margin-top: 0;
   gap: 12px; /* Menos separación para mayor cohesión */
 }
 
 /* Lista de Eventos (Más grande y protagonista en la izquierda) */
 .contenedor-eventos {
   flex: 4.5; /* Aumentamos su tamaño */
-  background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+  background: linear-gradient(135deg, #a38e14, #e2d1c3);
   padding: 18px;
   border-radius: 10px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);

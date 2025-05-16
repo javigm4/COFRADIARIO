@@ -76,10 +76,15 @@ class AuthController extends Controller
     }
 
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        session()->flush();
-        return redirect()->route('login');
+   public function logout(Request $request)
+{
+    if ($request->user()) {
+        $request->user()->currentAccessToken()->delete(); // Revoca el token actual
+        return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
+    } else {
+        return response()->json(['error' => 'Usuario no autenticado'], 401);
     }
+}
+
+
 }

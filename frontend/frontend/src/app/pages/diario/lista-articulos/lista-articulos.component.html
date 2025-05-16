@@ -1,1 +1,11 @@
-<p>lista-articulos works!</p>
+<div class="lista-articulos container">
+  <h1 class="titulo-seccion text-center fw-bold">Últimos Artículos</h1>
+  <hr class="divider">
+  <div class="row">
+    @for (articulo of articulos; track articulo.id) {
+      <div class="col-md-6 mb-4">
+        <app-articulo [articulo]="articulo" [usuarios]="usuarios"></app-articulo>
+      </div>
+    }
+  </div>
+</div>

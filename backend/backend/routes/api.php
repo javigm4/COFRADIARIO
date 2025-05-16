@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticulosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventosController;
@@ -25,6 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // RUTAS DE LA API PARA EL FRONTEND (GETTERS)
 Route::get('/eventos', [EventosController::class, 'index']);
 Route::get('/eventos/{id}', [EventosController::class, 'show']); //obtener un evento por su id
+Route::get('/articulos', [ArticulosController::class, 'index']);
+
 
 
 
@@ -39,4 +42,6 @@ Route::post('/favoritos', [FavoritosController::class, 'store']);
 // RUTAS DE AUTENTICACION
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});

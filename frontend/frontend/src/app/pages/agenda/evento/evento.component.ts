@@ -20,11 +20,18 @@ export class EventoComponent implements OnInit, OnChanges {
   constructor(private eventosService: EventosService, private router: Router, private authService : AuthService, private favoritosService : FavoritosService) {}
 
   ngOnInit(): void {
-    this.calculaCofradiaNombre();  //  Ahora calculamos el nombre inmediatamente
-    const usuario = this.authService.getUsuarioData(); //  Obtener el usuario desde `localStorage`
+  this.calculaCofradiaNombre();  // Calcula el nombre de la cofradía
+  const usuario = this.authService.getUsuarioData(); // Obtiene el usuario desde localStorage
+  if (usuario) {
     this.role = usuario.role;
     this.nombreUsuario = usuario.name;
+  } else {
+    // Si no hay usuario, asigna valores por defecto para que los botones no se muestren
+    this.role = '';  // o cualquier valor que tu lógica interprete como "sin usuario"
+    this.nombreUsuario = '';
   }
+}
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['cofradias'] || changes['evento'] || changes['usuario']) {
@@ -67,8 +74,8 @@ export class EventoComponent implements OnInit, OnChanges {
     this.favoritosService.anadirFavorito(favoritoData).subscribe(
       (response) => {
         console.log('Evento añadido a favoritos:', response);
-        alert('Evento añadido a favoritos con éxito.');
-      },
+      window.location.reload();
+        },
       (error) => {
         console.error('Error al añadir a favoritos:', error);
       }

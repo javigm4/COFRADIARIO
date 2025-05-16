@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\articulos;
+use App\Models\Articulo;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,9 +14,10 @@ class ArticulosController extends Controller
      */
     public function index()
     {
-        $articulos = Articulos::all();
+        $articulos = Articulo::all();
         $usuarios = User::all();
-        return view('diario', ['articulos' => $articulos, 'usuarios'=> $usuarios]); // lo enviamos a diario.blade.php
+        return response()->json(['articulos' => $articulos, 'usuarios' => $usuarios]);
+
     }
 
     /**
@@ -47,7 +47,7 @@ class ArticulosController extends Controller
      * @param  \App\Models\articulos  $articulos
      * @return \Illuminate\Http\Response
      */
-    public function show(articulos $articulos)
+    public function show(Articulo $articulos)
     {
         //
     }
@@ -58,7 +58,7 @@ class ArticulosController extends Controller
      * @param  \App\Models\articulos  $articulos
      * @return \Illuminate\Http\Response
      */
-    public function edit(articulos $articulos)
+    public function edit(Articulo $articulos)
     {
         //
     }
@@ -70,7 +70,7 @@ class ArticulosController extends Controller
      * @param  \App\Models\articulos  $articulos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, articulos $articulos)
+    public function update(Request $request, Articulo $articulos)
     {
         //
     }
@@ -81,7 +81,7 @@ class ArticulosController extends Controller
      * @param  \App\Models\articulos  $articulos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(articulos $articulos)
+    public function destroy(Articulo $articulos)
     {
         //
     }

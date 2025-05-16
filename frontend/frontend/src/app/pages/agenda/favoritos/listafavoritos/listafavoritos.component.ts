@@ -51,8 +51,5 @@ export class ListafavoritosComponent {
     this.eliminarFavorito.emit(favoritoId); // Emite solo el ID del favorito
   }
 
-  // Si deseas emplear trackBy en el template, añade esta función
-  trackByFavorito(index: number, favorito: Favorito): number {
-    return favorito.id;
-  }
+
 }

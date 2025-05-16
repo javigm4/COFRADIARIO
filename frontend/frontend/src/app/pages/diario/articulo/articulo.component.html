@@ -1,1 +1,6 @@
-<p>articulo works!</p>
+<div class="articulo-card container border rounded shadow p-4 bg-light">
+  <h2 class="titulo-articulo text-center fw-bold">{{ articulo.titular }}</h2>
+  <hr class="divider">
+  <h5 class="autor text-muted text-end fst-italic">Por: {{ nombreAutor }}</h5>
+  <p class="cuerpo-articulo text-justify">{{ articulo.cuerpo }}</p>
+</div>

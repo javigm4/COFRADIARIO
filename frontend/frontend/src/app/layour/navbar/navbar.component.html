@@ -2,7 +2,7 @@
   <a id="logo" class="d-flex align-items-center me-auto" routerLink="/inicio">
   <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" width="80" class="me-2" />
   <h1 class="text-uppercase">PASSIONKOFRADE</h1>
-</a>
+  </a>
 
   <div class="d-flex flex-wrap gap-2" id="divNav">
     <a class="btn btn-brown text-white" routerLink="/login">INICIAR SESIÓN / REGISTRARSE</a>
@@ -10,5 +10,6 @@
     <a class="btn btn-brown text-white" routerLink="/diario">DIARIO</a>
     <a class="btn btn-brown text-white" routerLink="/seleccionCofradia">COFRADÍAS</a>
     <a class="btn btn-brown text-white" routerLink="/contacto">CONTACTA CON NOSOTROS</a>
+    <a class="btn btn-brown text-white" (click)="cerrarSesion()">Deslogearse</a>
   </div>
 </nav>

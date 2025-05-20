@@ -1,14 +1,13 @@
-/* Fondo oscuro y centrado */
+/* Estilos generales */
 body {
   background-color: #121212; /* Fondo oscuro */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa toda la pantalla */
+  height: 100vh; /* Hace que el contenido ocupe toda la pantalla */
   margin: 0;
-}
+  }
 
-/* Estilos del formulario */
 form {
   background: rgba(50, 50, 50, 0.9); /* Fondo oscuro con transparencia */
   padding: 20px;
@@ -16,8 +15,10 @@ form {
   width: 100%;
   max-width: 500px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-  margin: 0 auto;
+  margin:0 auto;
+
 }
+
 
 /* Etiquetas */
 .form-label {
@@ -27,19 +28,13 @@ form {
 }
 
 /* Inputs */
-input, textarea {
+input {
   background: #282828; /* Fondo más oscuro */
   border: 1px solid #f5d547; /* Borde dorado */
   color: #ffffff; /* Texto blanco */
   padding: 10px;
   border-radius: 5px;
   width: 100%;
-}
-
-/* Ajuste en textarea para cuerpo más amplio */
-textarea {
-  height: 150px; /* Espacio para escribir más texto */
-  resize: vertical; /* Permite ajustar tamaño */
 }
 
 /* Botón elegante */

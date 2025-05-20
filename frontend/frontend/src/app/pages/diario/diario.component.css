@@ -1,3 +1,4 @@
+/* Contenedor general */
 #contenedor {
   padding: 20px;
   position: relative;
@@ -7,6 +8,7 @@
   z-index: 0;
 }
 
+/* Video de fondo */
 #video-fondo {
   position: fixed; /* Mantiene el video sin desplazarse */
   top: 0;
@@ -17,3 +19,32 @@
   z-index: -1; /* Lo coloca detrás del contenido */
 }
 
+/* Crear Artículo - Posición sticky y diseño elegante */
+#crearArticulo {
+  position: absolute; /* Lo hace independiente del flujo del documento */
+  top: 50px; /* Ajuste desde el borde superior */
+  left: 20px; /* Pegado a la izquierda */
+  z-index: 10; /* Asegura que esté encima del contenido */
+  background: rgba(50, 50, 50, 0.9); /* Fondo oscuro con transparencia */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo del botón */
+#crearArticulo a {
+  display: block;
+  padding: 10px 15px;
+  text-align: center;
+  background: linear-gradient(135deg, #f5d547, #a88532); /* Degradado dorado */
+  color: #000; /* Texto oscuro */
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#crearArticulo a:hover {
+  background: linear-gradient(135deg, #e6c03b, #90722a);
+  transform: scale(1.05);
+}

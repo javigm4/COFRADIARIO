@@ -36,10 +36,26 @@ class ArticulosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function store(Request $request)
+{
+    // Validar los datos antes de guardarlos
+    $request->validate([
+        'titular' => 'required|string|max:255',
+        'cuerpo' => 'required|string',
+        'id_autor' => 'required|exists:users,id', // Asegura que el autor existe
+    ]);
+
+    // Crear el artículo con los datos recibidos
+    $articulo = Articulo::create([
+        'titular' => $request->input('titular'),
+        'cuerpo' => $request->input('cuerpo'),
+        'id_autor' => $request->input('id_autor'),
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return response()->json(['message' => 'Artículo creado con éxito', 'articulo' => $articulo], 201);
+}
 
     /**
      * Display the specified resource.

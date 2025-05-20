@@ -39,7 +39,8 @@ Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy']);
 Route::post('/favoritos', [FavoritosController::class, 'store']);
 Route::get('/articulos/{id}', [ArticulosController::class, 'show']);
 Route::put('/articulos/{id}', [ArticulosController::class, 'update']);
-
+Route::post('/articulos', [ArticulosController::class, 'store']);
+Route::delete('/articulos/{id}', [ArticulosController::class, 'destroy']);
 
 
 // RUTAS DE AUTENTICACION

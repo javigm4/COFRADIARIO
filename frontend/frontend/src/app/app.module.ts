@@ -23,6 +23,7 @@ import { EditarEventoComponent } from './pages/agenda/evento/editar-evento/edita
 import { FormsModule } from '@angular/forms'; // ✅ IMPORTA FormsModule AQUÍ
 import { CookieService } from 'ngx-cookie-service';
 import { EditarArticuloComponent } from './pages/diario/articulo/editar-articulo/editar-articulo.component';
+import { CrearArticuloComponent } from './pages/diario/articulo/crear-articulo/crear-articulo.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { EditarArticuloComponent } from './pages/diario/articulo/editar-articulo
     FavoritoComponent,
     ListafavoritosComponent,
     EditarEventoComponent,
-    EditarArticuloComponent
+    EditarArticuloComponent,
+    CrearArticuloComponent
 
   ],
   imports: [

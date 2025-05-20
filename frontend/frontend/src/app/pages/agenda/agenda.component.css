@@ -1,38 +1,87 @@
+.crear-evento-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 100%; /* Ocupará todo el ancho */
+  background: rgba(50, 50, 50, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  margin: auto; /* Centra el bloque */
+}
+
+
+/* Inputs del formulario */
+.crear-evento-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #f5d547;
+  border-radius: 5px;
+  background: #282828;
+  color: #ffffff;
+}
+
+/* Botón de "Crear Evento" */
+.btn-crear-evento {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #f5d547, #a88532);
+  color: #000;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn-crear-evento:hover {
+  background: linear-gradient(135deg, #e6c03b, #90722a);
+  transform: scale(1.05);
+}
+
+/* Contenedor principal */
 .contenedor-principal {
-    padding:20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   max-width: 1400px;
-  margin: 2px auto; /* Ajustamos márgenes para mejor distribución */
-  margin-top: 0;
-  gap: 12px; /* Menos separación para mayor cohesión */
+  margin: auto;
+  gap: 12px;
 }
 
-/* Lista de Eventos (Más grande y protagonista en la izquierda) */
+/* Lista de eventos */
 .contenedor-eventos {
-  flex: 4.5; /* Aumentamos su tamaño */
+  flex: 4.5;
   background: linear-gradient(135deg, #a38e14, #e2d1c3);
   padding: 18px;
   border-radius: 10px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
-  width: 100%;
 }
 
-.contenedor-eventos:hover {
-  transform: scale(1.01);
-}
-
-/* Lista de Favoritos (Más compacta y fija a la derecha) */
+/* Lista de favoritos (Oculta si es Cofradía) */
 .contenedor-favoritos {
-  flex: 1.2; /* Reducimos un poco su tamaño */
+  flex: 1.2;
   background: linear-gradient(135deg, #8b5a2b, #ad7e3f);
   padding: 14px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  position: sticky;
-  top: 10px;
-  min-width: 300px;
+}
+
+
+.mensaje-login {
+  display: block;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #a38e14, #8b5a2b);
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.mensaje-login:hover {
+  background: rgb(0, 0, 0);
+  transform: scale(1.05);
 }

@@ -40,12 +40,11 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-
+ // ---- EVENTOS ----
 Route::delete('/eventos/{id}', [EventosController::class, 'destroy'])->name('eliminarEvento');
 
 Route::post('/eventos/create', [EventosController::class, 'store'])->name('crearEvento');
 
-// ------ EDITAR EVENTO ------
 
 Route::get('/evento/{id}/edit', [EventosController::class, 'edit'])->name('actualizarEvento');
 

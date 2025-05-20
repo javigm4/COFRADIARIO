@@ -25,4 +25,8 @@ export class DiarioService {
   editarArticulo(articuloId: number, articuloData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${articuloId}`, articuloData);
 }
+
+  crearArticulo(articuloData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, articuloData);
+  }
 }

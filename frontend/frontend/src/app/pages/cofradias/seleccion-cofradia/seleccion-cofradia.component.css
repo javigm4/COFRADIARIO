@@ -1,0 +1,69 @@
+/* Contenedor general */
+.contenedor-cofradias {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #2d1e12, #8b5a2b);
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Contenido */
+.contenido {
+  text-align: center;
+  color: #fff;
+}
+
+.titulo-secundario {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+/* Grid adaptable */
+.grid-cofradias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Tarjetas con efecto premium */
+.card-cofradia {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card-cofradia:hover {
+  transform: scale(1.07);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Nombre de Cofradía */
+.nombre-cofradia {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #502d11;
+  margin-bottom: 15px;
+}
+
+/* Botón con estilo premium */
+.btn-ver-cofradia {
+  display: inline-block;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #f5d547, #a88532);
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-ver-cofradia:hover {
+  background: linear-gradient(135deg, #e6c03b, #90722a);
+  transform: scale(1.08);
+}

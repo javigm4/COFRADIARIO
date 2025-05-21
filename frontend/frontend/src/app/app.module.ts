@@ -24,6 +24,9 @@ import { FormsModule } from '@angular/forms'; // ✅ IMPORTA FormsModule AQUÍ
 import { CookieService } from 'ngx-cookie-service';
 import { EditarArticuloComponent } from './pages/diario/articulo/editar-articulo/editar-articulo.component';
 import { CrearArticuloComponent } from './pages/diario/articulo/crear-articulo/crear-articulo.component';
+import { CofradiasComponent } from './pages/cofradias/cofradias.component';
+import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
+import { SeleccionCofradiaComponent } from './pages/cofradias/seleccion-cofradia/seleccion-cofradia.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { CrearArticuloComponent } from './pages/diario/articulo/crear-articulo/c
     ListafavoritosComponent,
     EditarEventoComponent,
     EditarArticuloComponent,
-    CrearArticuloComponent
+    CrearArticuloComponent,
+    CofradiasComponent,
+    CofradiaComponent,
+    SeleccionCofradiaComponent
 
   ],
   imports: [

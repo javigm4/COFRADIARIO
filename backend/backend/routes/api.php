@@ -6,6 +6,8 @@ use App\Http\Controllers\EventosController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\ArticulosController;
+use App\Http\Controllers\CofradiasController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,6 +29,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/eventos', [EventosController::class, 'index']);
 Route::get('/eventos/{id}', [EventosController::class, 'show']); //obtener un evento por su id
 Route::get('/articulos', [ArticulosController::class, 'index']);
+Route::get('/cofradias', [CofradiasController::class, 'index']);
+Route::get('/cofradias/{nombre}', [CofradiasController::class, 'mostrar']); //mostrar por nombre
 
 
 

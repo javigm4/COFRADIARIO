@@ -12,34 +12,37 @@ class CofradiasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $cofradias = Cofradias::all();
-	    return view('seleccionCofradia', ['cofradias'=> $cofradias]);
+   public function index()
+{
+    $cofradias = Cofradias::all();
+    return response()->json($cofradias);
+}
+
+
+
+public function mostrar($nombre)
+{
+    // Obtener datos de la base de datos
+    $cofradia = Cofradias::where('nombre', $nombre)->first();
+    if (!$cofradia) {
+        return response()->json(['message' => 'Cofradía no encontrada'], 404);
     }
 
-
-
-    public function mostrar($nombre)
-        {
-    $carpeta = storage_path("cofradiasDatos/{$nombre}");
-
-    if (!is_dir($carpeta)) {
-        abort(404, 'Cofradía no encontrada');
-    }
-
+    // Obtener información desde archivos locales
+$carpeta = public_path("storage/cofradiasDatos/" . strtoupper($nombre));
     $texto = file_exists("$carpeta/info.txt") ? file_get_contents("$carpeta/info.txt") : 'Información no disponible.';
 
-    $imagenes = array_filter(scandir($carpeta), function ($archivo) {
+    $imagenes = array_values(array_filter(scandir($carpeta), function ($archivo) {
         return preg_match('/\\.(jpg|jpeg|png|gif)$/i', $archivo);
-    });
+    }));
 
-    return view('infoCofradias', [
-        'nombre' => $nombre,
+    return response()->json([
+        'cofradia' => $cofradia,
         'texto' => $texto,
         'imagenes' => $imagenes
     ]);
 }
+
 
 
     /**

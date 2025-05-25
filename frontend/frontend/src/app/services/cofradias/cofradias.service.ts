@@ -12,4 +12,9 @@ export class CofradiasService {
   getCofradias(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
+
+  obtenerCofradia(nombre: string): Observable<any> {
+  return this.http.get<any>(`http://127.0.0.1:8000/api/cofradias/${nombre}`);
+}
+
 }

@@ -1,1 +1,14 @@
-<p>cofradia works!</p>
+<div class="contenedor-cofradia">
+  <h1 class="titulo-cofradia">{{ cofradia?.nombre }}</h1>
+
+  <h2 class="titulo-seccion"></h2>
+  <p class="texto-informacion">{{ cofradia?.texto || 'Información no disponible.' }}</p>
+
+  <h2 class="titulo-seccion"></h2>
+  <div class="imagenes-cofradia">
+   <img *ngIf="cofradia?.cofradia?.nombre" [src]="'public/cofradiasDatos/' + cofradia.cofradia.nombre.toUpperCase() + '/cristo.jpg'" />
+<img *ngIf="cofradia?.cofradia?.nombre" [src]="'public/cofradiasDatos/' + cofradia.cofradia.nombre.toUpperCase() + '/virgen.jpg'" />
+
+
+  </div>
+</div>

@@ -20,11 +20,10 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['error' => 'Credenciales inválidas'], 401);
         }
-        // 📌 Asignar correctamente el rol basado en el código ingresado
         if (!empty($request->codigo) && $request->codigo === $user->codigo) {
-            $rol = 'cofradia'; // Si el código ingresado coincide con el del usuario, es cofradía
+            $rol = 'cofradia'; // Si el código ingresado coincide con el del usuario, es una cofradía
         } else {
-            $rol = 'usuario'; // Si no ingresó código o el código es incorrecto, es usuario
+            $rol = 'usuario'; // Si no se ha ingresiado código o es incorrecto, es un usuario
         }
         $token = $user->createToken('authToken')->plainTextToken;
 

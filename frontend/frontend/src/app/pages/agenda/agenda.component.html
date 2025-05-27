@@ -1,21 +1,31 @@
+@if (!esCofradia) {
+  <div class="favoritos-container">
+    <button id="favoritos-btn" (click)="toggleFavoritos()">⭐ FAVORITOS</button>
+  </div>
+}
+
 @if (esCofradia) {
-<div class="crear-evento-container">
-  <table>
-    <tr>
-      <td>
-        <input type="text" id="name" placeholder="Nombre del evento" required />
-      </td>
-      <td><input type="date" id="fecha" required /></td>
-      <td><input type="time" id="hora" required /></td>
-      <td></td>
-      <td colspan="2">
-        <button class="btn btn-crear-evento" (click)="crearEvento()">
-          Añadir Evento
-        </button>
-      </td>
-    </tr>
-  </table>
-</div>
+  <div class="crear-evento-container">
+    <table>
+      <tr>
+        <td>
+          <input type="text" id="name" placeholder="Nombre del evento" required />
+        </td>
+        <td>
+          <input type="date" id="fecha" required />
+        </td>
+        <td>
+          <input type="time" id="hora" required />
+        </td>
+        <td></td>
+        <td colspan="2">
+          <button class="btn btn-crear-evento" (click)="crearEvento()">
+            Añadir Evento
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
 }
 
 <div class="contenedor-principal">
@@ -28,23 +38,22 @@
   </div>
 
   <!-- Lista de Favoritos (Solo si el usuario está autenticado) -->
-
   @if (!esCofradia) {
-  <div class="contenedor-favoritos">
-    @if (esUsuario) {
-    <app-listafavoritos
-      [favoritos]="favoritos"
-      [eventos]="eventos"
-      [cofradias]="cofradias"
-      [usuario]="usuario"
-      (eliminarFavorito)="onEliminar($event)"
-    >
-    </app-listafavoritos>
-    } @else {
-    <a class="mensaje-login" routerLink="/login">
-      Inicia sesión para añadir a favoritos
-    </a>
-    }
-  </div>
+    <div class="contenedor-favoritos">
+      @if (esUsuario) {
+        <app-listafavoritos
+          [favoritos]="favoritos"
+          [eventos]="eventos"
+          [cofradias]="cofradias"
+          [usuario]="usuario"
+          (eliminarFavorito)="onEliminar($event)"
+        >
+        </app-listafavoritos>
+      } @else {
+        <a class="mensaje-login" routerLink="/login">
+          Inicia sesión para añadir a favoritos
+        </a>
+      }
+    </div>
   }
 </div>

@@ -8,6 +8,7 @@ use App\Models\User as Usuario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\RegisterNotification;
+use App\Notifications\ContactoNotification;
 
 
 class AuthController extends Controller
@@ -75,15 +76,28 @@ class AuthController extends Controller
     }
 
 
-   public function logout(Request $request)
-{
-    if ($request->user()) {
-        $request->user()->currentAccessToken()->delete(); // Revoca el token actual
-        return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
-    } else {
-        return response()->json(['error' => 'Usuario no autenticado'], 401);
+    public function logout(Request $request)
+    {
+        if ($request->user()) {
+            $request->user()->currentAccessToken()->delete(); // Revoca el token actual
+            return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
+        } else {
+            return response()->json(['error' => 'Usuario no autenticado'], 401);
+        }
     }
-}
 
+    public function enviarMensajeContacto(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'email' => 'required|email',
+            'mensaje' => 'required'
+        ]);
 
+        // Enviar la notificación al correo deseado
+        Notification::route('mail', 'javierguerreromontero1@gmail.com')
+            ->notify(new ContactoNotification($request->nombre, $request->email, $request->mensaje));
+
+        return response()->json(['message' => 'Mensaje enviado correctamente'], 200);
+    }
 }

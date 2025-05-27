@@ -28,8 +28,10 @@ public function mostrar($nombre)
         return response()->json(['message' => 'Cofradía no encontrada'], 404);
     }
 
-    // Obtener información desde archivos locales
-$carpeta = public_path("storage/cofradiasDatos/" . strtoupper($nombre));
+    // Ajustar nombre carpeta con guiones
+    $nombreCarpeta = strtoupper(str_replace(' ', '-', $nombre));
+    $carpeta = public_path("storage/cofradiasDatos/" . $nombreCarpeta);
+
     $texto = file_exists("$carpeta/info.txt") ? file_get_contents("$carpeta/info.txt") : 'Información no disponible.';
 
     $imagenes = array_values(array_filter(scandir($carpeta), function ($archivo) {
@@ -42,6 +44,7 @@ $carpeta = public_path("storage/cofradiasDatos/" . strtoupper($nombre));
         'imagenes' => $imagenes
     ]);
 }
+
 
 
 

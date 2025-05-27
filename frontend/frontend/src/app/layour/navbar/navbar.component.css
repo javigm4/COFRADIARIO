@@ -1,165 +1,224 @@
 
 
-/* Botón marrón */
-.btn-brown {
-  background-color: #5b420d; /* Marrón */
-  color: #fff; /* Blanco */
-  border: none;
-  padding: 0.75rem 1.5rem;  /* Más espacio */
-  font-size: 1.4rem;
-  font-weight: 500;
-  border-radius: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.btn-brown:hover {
-  background-color: #3f2f08; /* Marrón oscuro */
-  transform: translateY(-5px);  /* Levanta el botón */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
-}
-
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between; /* Espacio entre el título y el logo */
-  align-items: center; /* Centra verticalmente */
-  border-bottom: 2px solid #5e4310; /* Marrón */
-  padding: 0.8rem 2rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Añadir sombra suave */
-  z-index: 100;
-}
-
-/* Logo */
-.navbar img {
-  width: 70px; /* Tamaño del logo */
-  margin-right: 1rem; /* Espacio entre el logo y el título */
-  display: inline-block; /* Asegura que el logo se comporte como bloque */
-  vertical-align: middle; /* Alinea verticalmente con el h1 */
-
-}
-
-/* Título */
-/* Título */
-.navbar h1 {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin: 0;
-  font-family: 'Times New Roman', Times, serif;
-  display: inline-block; /* El título se comporta como bloque en línea */
-  vertical-align: middle; /* Alinea verticalmente con la imagen */
-  background: linear-gradient(to right, #af8207, #49330c); /* Degradado de dorado a marrón */
-  -webkit-background-clip: text; /* Para asegurar que el fondo se aplique al texto */
-  background-clip: text; /* Asegura la compatibilidad */
-  color: transparent; /* Hace el texto transparente para mostrar el degradado */
-}
-
-
-/* Espaciado y orden */
-#divNav {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem auto;
-  padding: 0.5rem;
-  max-width: 90%;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .navbar h1 {
+  /* Botón marrón */
+  .btn-brown {
+    background-color: #5b420d; /* Marrón */
+    color: #fff; /* Blanco */
+    border: none;
+    padding: 0.75rem 1.5rem;  /* Más espacio */
     font-size: 1.4rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
+  .btn-brown:hover {
+    background-color: #3f2f08; /* Marrón oscuro */
+    transform: translateY(-5px);  /* Levanta el botón */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
+  }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between; /* Espacio entre el título y el logo */
+    align-items: center; /* Centra verticalmente */
+    border-bottom: 2px solid #5e4310; /* Marrón */
+    padding: 0.8rem 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Añadir sombra suave */
+    z-index: 100;
+  }
+
+  /* Logo */
+  .navbar img {
+    width: 70px; /* Tamaño del logo */
+    margin-right: 1rem; /* Espacio entre el logo y el título */
+    display: inline-block; /* Asegura que el logo se comporte como bloque */
+    vertical-align: middle; /* Alinea verticalmente con el h1 */
+
+  }
+
+  /* Título */
+  /* Título */
+  .navbar h1 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    display: inline-block; /* El título se comporta como bloque en línea */
+    vertical-align: middle; /* Alinea verticalmente con la imagen */
+    background: linear-gradient(to right, #af8207, #49330c); /* Degradado de dorado a marrón */
+    -webkit-background-clip: text; /* Para asegurar que el fondo se aplique al texto */
+    background-clip: text; /* Asegura la compatibilidad */
+    color: transparent; /* Hace el texto transparente para mostrar el degradado */
+  }
+
+
+  /* Espaciado y orden */
   #divNav {
-    justify-content: flex-start;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+    max-width: 90%;
   }
-}
 
+  /* Responsive */
+  @media (max-width: 768px) {
+    .navbar h1 {
+      font-size: 1.4rem;
+    }
 
-
-/* Otras clases */
-.text-brown {
-  color: #5b420d; /* Marrón */
-}
-
-.bg-brown {
-  background-color: #5b420d; /* Marrón */
-  border-radius: 15px;
-}
-
-.input-group input::placeholder {
-  color: #ccc;
-}
-
-.input-group-text i {
-  color: #fff; /* Blanco */
-}
-
-
-a {
-  text-decoration: none; /* Sin subrayado */
-  color: #5e4310; /* Marrón */
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-
-@keyframes icon-pop {
-  0%   { transform: scale(0); opacity: 0; }
-  100% { transform: scale(1); }
-}
-
-
-#logo  {
-  animation: icon-pop 0.5s ease-in-out;
-}
-
-
-
-/* Oculta el divNav en móviles si no está abierto */
-@media (max-width: 768px) {
-  #divNav.hidden-mobile {
-    display: none !important;
+    #divNav {
+      justify-content: flex-start;
+    }
   }
+
+
+
+  /* Otras clases */
+  .text-brown {
+    color: #5b420d; /* Marrón */
+  }
+
+  .bg-brown {
+    background-color: #5b420d; /* Marrón */
+    border-radius: 15px;
+  }
+
+  .input-group input::placeholder {
+    color: #ccc;
+  }
+
+  .input-group-text i {
+    color: #fff; /* Blanco */
+  }
+
+
+  a {
+    text-decoration: none; /* Sin subrayado */
+    color: #5e4310; /* Marrón */
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+
+  @keyframes icon-pop {
+    0%   { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); }
+  }
+
+
+  #logo  {
+    animation: icon-pop 0.5s ease-in-out;
+  }
+
+
+
+  /* Oculta el divNav en móviles si no está abierto */
+  @media (max-width: 768px) {
+    #divNav.hidden-mobile {
+      display: none !important;
+    }
+
+  }
+
+  /* Oculta el botón hamburguesa en escritorio */
+  @media (min-width: 769px) {
+    .menu-toggle {
+      display: none;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    #divNav {
+      position: absolute;
+      top: 100%; /* Justo debajo del nav */
+      left: 0;
+      right: 0;
+      background-color: white;
+      padding: 1rem;
+      border-radius: 0 0 1rem 1rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    #divNav a {
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 0.75rem 1rem;
+    }
+
+  }
+
+  @media (max-width: 991.98px) {
+    #logo {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+
+
+
+
+
+  @media (max-width: 768px) {
+    #divNav {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+
+      background: black; /* marrón oscuro semitransparente */
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      padding: 1rem 1.5rem;
+      margin-top: 0.75rem;
+    }
+
+    #divNav.show {
+      max-height: 1000px;
+      opacity: 1;
+    }
+
+    /* Opcional: suavizar los botones para móvil */
+    #divNav a.btn-brown {
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #divNav a.btn-brown:hover {
+      background-color: black; /* marrón más claro para hover */
+      transform: translateY(-2px);
+    }
+
+
+  }
+
 
   .menu-toggle {
-    display: block;
-  }
-}
+    transition: transform 0.3s ease;
+    transform: rotate(0deg); /* Estado inicial */
+      padding: 0.4rem 1rem; /* Antes: 0.4rem 1rem */
 
-/* Oculta el botón hamburguesa en escritorio */
-@media (min-width: 769px) {
-  .menu-toggle {
-    display: none;
-  }
-}
-
-
-@media (max-width: 768px) {
-  #divNav {
-    position: absolute;
-    top: 100%; /* Justo debajo del nav */
-    left: 0;
-    right: 0;
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0 0 1rem 1rem;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    z-index: 999;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
   }
 
-  #divNav a {
-    width: 100%;
-    text-align: center;
-    font-size: 1.2rem;
-    padding: 0.75rem 1rem;
+  .menu-toggle.rotate {
+    transform: rotate(90deg); /* Al hacer click */
   }
-}
+

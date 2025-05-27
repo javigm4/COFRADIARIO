@@ -103,4 +103,18 @@ export class AgendaComponent implements OnInit {
     }
   );
 }
+
+  // ----- M O S T R A R / O C U L T A R   F A V O R I T O S -----
+  toggleFavoritos(): void {
+    const favoritosContainer = document.querySelector('.contenedor-favoritos');
+
+    if (favoritosContainer) {
+      favoritosContainer.classList.toggle('activo');
+    }
+  }
 }
+
+
+
+
+

@@ -124,3 +124,75 @@
   font-size: 26px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+
+@media (max-width: 768px) {
+  /* Ajuste general */
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  /* Título de la lista de eventos */
+  .titulo-eventos {
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+
+  /* Tarjetas de eventos más compactas */
+  .evento-card {
+    width: 90%;
+    max-width: none;
+    margin: 15px auto;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .evento-card:hover {
+    transform: none; /* Elimina el efecto de escala en móviles */
+  }
+
+  /* Fecha del evento centrada */
+  .fecha-container {
+    max-width: 100%;
+    padding: 12px;
+    font-size: 18px;
+  }
+
+  .fecha-icon i {
+    font-size: 30px;
+  }
+
+  .fecha-text {
+    font-size: 20px;
+  }
+
+  .fecha {
+    font-size: 22px;
+  }
+
+  /* Texto del evento más legible */
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-text {
+    font-size: 14px;
+  }
+
+  /* Botones y acciones más accesibles */
+  .acciones {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-favorito {
+    font-size: 16px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+  }
+}
+

@@ -11,9 +11,6 @@ export class NavbarComponent {
   constructor(private http: HttpClient, private router: Router) {}
   menuAbierto: boolean = false;
 
-  toggleMenu() {
-    this.menuAbierto = !this.menuAbierto;
-  }
   cerrarSesion(): void {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -42,5 +39,32 @@ export class NavbarComponent {
           console.error('Error al cerrar sesión', error);
         }
       );
+  }
+
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
+
+    const divNav = document.getElementById('divNav');
+    if (divNav) {
+      divNav.classList.toggle('show', this.menuAbierto);
+    }
+
+    const btn = document.querySelector('.menu-toggle');
+    if (btn) {
+      btn.classList.toggle('rotate', this.menuAbierto);
+    }
+  }
+
+  // Añade este método
+  cerrarMenu() {
+    this.menuAbierto = false;
+    const divNav = document.getElementById('divNav');
+    if (divNav) {
+      divNav.classList.remove('show');
+    }
+    const btn = document.querySelector('.menu-toggle');
+    if (btn) {
+      btn.classList.remove('rotate');
+    }
   }
 }

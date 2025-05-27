@@ -1,0 +1,29 @@
+@media (max-width: 768px) {
+  /* Ajuste general de la tabla */
+  table {
+    width: 95%;
+    max-width: 100%;
+    border-collapse: collapse;
+  }
+
+  /* Filas y estructura */
+  tr {
+    flex-direction: column; /* Apila los días */
+    align-items: center;
+    display: flex;
+    gap: 10px;
+  }
+
+  /* Estilos de los elementos dentro de la tabla */
+  app-tiempo-dia {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* Bordes suaves y espaciado */
+  td {
+    padding: 12px;
+    border-bottom: 2px solid #ddd;
+  }
+}

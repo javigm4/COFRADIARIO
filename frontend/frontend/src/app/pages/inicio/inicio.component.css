@@ -90,9 +90,11 @@ section {
   width: 290px;
 }
 
+p{
+  display: none;
+}
 
 
-/* Oculta los tres artículos originales en móvil, y muestra solo uno */
 @media (max-width: 768px) {
   #ar1, #ar2, #ar3 {
     display: none;
@@ -102,8 +104,34 @@ section {
     display: block;
     width: 100vw;
     height: 800px;
-  background-image: url(../../../../public/images/imagenes/ddpnico.jpg);
+    background-image: url(../../../../public/images/imagenes/ddpnico.jpg);
     background-size: cover;
     background-position: center;
+    transform: none !important;
+  }
+
+  #arMovil:hover::before {
+    background-color: transparent !important;
+  }
+
+  #arMovil:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Pie de foto debajo de la imagen */
+  section {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen en móviles */
+    align-items: center;
+  }
+
+  section p {
+    color: #fff; /* Blanco */
+    font-size: 0.9rem;
+    text-align: center;
+    font-style: italic;
+    margin-top: 10px;
+    display: block;
   }
 }

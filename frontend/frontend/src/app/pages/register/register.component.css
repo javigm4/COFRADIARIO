@@ -109,3 +109,85 @@ label {
 h2 {
    font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  /* Oculta las imágenes grandes SOLO en móviles */
+  #ar1, #ar2 {
+    display: none;
+  }
+
+  /* Ajusta el contenedor principal */
+  .login-container {
+    display: flex;
+    flex-direction: column; /* Ordena los elementos en columna */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+  }
+
+  /* Formulario compacto */
+  .form-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Imagen móvil colocada debajo del formulario con el mismo ancho */
+  #arMovil {
+    display: block;
+    width: 90%; /* Mismo ancho que el formulario */
+    height: 500px; /* Más pequeña */
+    background-image: url(../../../../public/images/imagenes/amordolorosonicio.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  #arMovil:hover {
+  transform: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+#arMovil:hover::before {
+  background-color: transparent !important;
+  transform: none !important;
+}
+
+ p {
+    display: block;
+    width: 90%; /* Mismo ancho que la imagen */
+    margin: 5px auto; /* Centrado con menos margen */
+    color: #fff; /* Texto en blanco */
+    font-size: 0.9rem; /* Tamaño más pequeño */
+    text-align: center; /* Centrado */
+    font-style: italic; /* Cursiva para dar estilo de pie de foto */
+  }
+
+}
+
+
+
+
+/* MANTENER imágenes en PC */
+@media (min-width: 769px) {
+  #ar1, #ar2 {
+    display: block;
+  }
+
+  p {
+ display: none;
+}
+  #arMovil {
+    display: none; /* No mostrar la imagen especial para móviles */
+  }
+}

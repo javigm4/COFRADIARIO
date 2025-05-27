@@ -9,4 +9,62 @@
   position: relative;
 }
 
+@media (max-width: 768px) {
+  /* Botón flotante en la parte superior derecha */
+  .favoritos-container {
+    position: fixed;
+    top: 20px; /* Pegado arriba */
+    right: 20px; /* Pegado a la derecha */
+    z-index: 999; /* Siempre visible sobre los eventos */
+  }
 
+  #favoritos-btn {
+    background-color: #d4af37; /* Dorado */
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  #favoritos-btn:hover {
+    background: #b8912c;
+    transform: scale(1.05);
+  }
+
+  /* Panel de favoritos sticky */
+  .contenedor-favoritos {
+    display: none;
+    position: fixed;
+    top: 80px; /* Justo debajo del botón */
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+  }
+
+  /* Mostrar favoritos cuando se activa */
+  .contenedor-favoritos.activo {
+    display: block;
+  }
+}
+
+/* Mantener favoritos en PC */
+@media (min-width: 769px) {
+  .favoritos-container {
+    display: none;
+  }
+
+  .contenedor-favoritos {
+    display: block;
+    position: static;
+  }
+}

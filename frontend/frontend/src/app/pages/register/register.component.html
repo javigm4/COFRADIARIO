@@ -1,11 +1,10 @@
 <div class="login-container">
-  <article class="fotologin" id="ar1"></article>
+  <article class="fotologin" id="ar1"></article> <!-- Imagen izquierda en PC -->
 
   <div class="form-container">
     <div class="card shadow-lg">
       <div class="card-body">
         <h2 class="text-center mb-4">Registro de usuarios</h2>
-
         <form (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
@@ -27,24 +26,16 @@
             <input type="password" id="password_confirmation" class="form-control" [(ngModel)]="password_confirmation" name="password_confirmation" required />
           </div>
 
-          <div class="mb-3">
-            <p class="text-muted">
-              Si eres una cofradía, contacta con <strong>javierguerreromontero1&#64;gmail.com</strong> después de registrarte
-              para que se te proporcione tu código y puedas acceder a todos los permisos.
-            </p>
-          </div>
-
           <button type="submit" class="btn btn-primary">Registrarse</button>
-
-          @if(error) {
-            <div class="alert alert-danger mt-3">
-                  {{error}}
-            </div>
-          }
         </form>
       </div>
     </div>
   </div>
 
-  <article class="fotologin" id="ar2"></article>
+  <article class="fotologin" id="ar2"></article> <!-- Imagen derecha en PC -->
+
+  <!-- Imagen solo para móviles -->
+  <article class="fotologin movil" id="arMovil"></article>
+    <p>"María Santísima del Amor Doloroso", por "Nico Canela"</p>
+
 </div>

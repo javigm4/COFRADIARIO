@@ -1,15 +1,15 @@
 .crear-evento-container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  width: 100%; /* Ocupará todo el ancho */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   background: rgba(50, 50, 50, 0.95);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-  margin: auto; /* Centra el bloque */
+  margin: auto;
+  flex-direction: column;
 }
-
 
 /* Inputs del formulario */
 .crear-evento-container input {
@@ -25,11 +25,15 @@
 .btn-crear-evento {
   display: block;
   width: 100%;
-  padding: 10px 15px;
+  padding: 12px 18px;
+  margin-top: 12px;
   background: linear-gradient(135deg, #f5d547, #a88532);
   color: #000;
   font-weight: bold;
-  border-radius: 5px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -65,8 +69,18 @@
   padding: 14px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  max-height: 500px;
+  overflow-y: auto;
 }
 
+/* Scroll personalizado */
+.contenedor-favoritos::-webkit-scrollbar {
+  width: 8px;
+}
+.contenedor-favoritos::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
 
 .mensaje-login {
   display: block;
@@ -84,4 +98,107 @@
 .mensaje-login:hover {
   background: rgb(0, 0, 0);
   transform: scale(1.05);
+}
+
+/* =================== Estilos para móviles =================== */
+@media (max-width: 768px) {
+  .favoritos-container {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+  }
+
+  #favoritos-btn {
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  #favoritos-btn:hover {
+    background: #b8912c;
+    transform: scale(1.05);
+  }
+
+  .contenedor-favoritos {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    width: 90%;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: 70vh;
+  }
+
+  .contenedor-favoritos.activo {
+    display: block;
+  }
+}
+
+/* =================== Estilos para PC =================== */
+@media (min-width: 769px) {
+  .favoritos-container {
+    display: none;
+  }
+
+  .contenedor-favoritos {
+    display: block;
+    position: static;
+  }
+}
+
+/* Animación de entrada/salida */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutSlide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Para móviles */
+@media (max-width: 768px) {
+  .contenedor-favoritos {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+  }
+
+  .contenedor-favoritos.activo {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    animation: fadeInSlide 0.3s forwards;
+  }
+
+  .contenedor-favoritos.saliendo {
+    animation: fadeOutSlide 0.3s forwards;
+  }
 }

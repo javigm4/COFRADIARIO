@@ -117,3 +117,49 @@ a {
 #logo  {
   animation: icon-pop 0.5s ease-in-out;
 }
+
+
+
+/* Oculta el divNav en móviles si no está abierto */
+@media (max-width: 768px) {
+  #divNav.hidden-mobile {
+    display: none !important;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* Oculta el botón hamburguesa en escritorio */
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+
+@media (max-width: 768px) {
+  #divNav {
+    position: absolute;
+    top: 100%; /* Justo debajo del nav */
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  #divNav a {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 0.75rem 1rem;
+  }
+}

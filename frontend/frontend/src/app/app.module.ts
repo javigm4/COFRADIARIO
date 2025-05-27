@@ -27,6 +27,7 @@ import { CrearArticuloComponent } from './pages/diario/articulo/crear-articulo/c
 import { CofradiasComponent } from './pages/cofradias/cofradias.component';
 import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
 import { SeleccionCofradiaComponent } from './pages/cofradias/seleccion-cofradia/seleccion-cofradia.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
 
 @NgModule({
   declarations: [
@@ -50,14 +51,15 @@ import { SeleccionCofradiaComponent } from './pages/cofradias/seleccion-cofradia
     CrearArticuloComponent,
     CofradiasComponent,
     CofradiaComponent,
-    SeleccionCofradiaComponent
+    SeleccionCofradiaComponent,
+    ContactoComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, // Importar HttpClientModule para realizar peticiones HTTP
-    FormsModule  // ✅ AGREGA FormsModule AQUÍ
+    FormsModule,  // ✅ AGREGA FormsModule AQUÍ
   ],
   providers: [WeatherService,CookieService],
   bootstrap: [AppComponent]

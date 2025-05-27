@@ -29,6 +29,8 @@ export class LoginComponent {
       localStorage.setItem('token', response.data.accessToken);
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
+
+      alert(`Logeado como ${response.data.user.name}`);
       this.router.navigate(['/agenda']);
     },
     (error) => {

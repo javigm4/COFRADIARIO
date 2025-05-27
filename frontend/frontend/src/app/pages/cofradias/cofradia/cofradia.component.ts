@@ -6,10 +6,11 @@ import { CofradiasService } from '../../../services/cofradias/cofradias.service'
   selector: 'app-cofradia',
   standalone: false,
   templateUrl: './cofradia.component.html',
-  styleUrl: './cofradia.component.css'
+  styleUrl: './cofradia.component.css',
 })
 export class CofradiaComponent {
-cofradia: any;
+  cofradia: any;
+  titulares: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -17,23 +18,36 @@ cofradia: any;
   ) {}
 
   ngOnInit(): void {
-    const nombreCofradia = this.route.snapshot.paramMap.get('nombre');
-    if (nombreCofradia) {
-      this.obtenerCofradia(nombreCofradia);
-      }
+    const nombreCofradiaUrl = this.route.snapshot.paramMap.get('nombre') || '';
+    const nombreCofradia = nombreCofradiaUrl.replace(/-/g, ' ');
+    this.obtenerCofradia(nombreCofradia);
   }
 
   obtenerCofradia(nombre: string): void {
     this.cofradiasService.obtenerCofradia(nombre).subscribe(
       (data) => {
         this.cofradia = data;
-              console.log('Datos recibidos:', this.cofradia); // Verifica si `cofradia` tiene datos
+        console.log('Datos recibidos:', this.cofradia); // Verifica si `cofradia` tiene datos
+        this.titulares = this.cofradia.titulares || [];
+        console.log('Titulares:', this.titulares); // Verifica si `titulares` tiene datos
       },
       (error) => {
         console.error('Error al obtener información de la cofradía:', error);
       }
     );
   }
+
+  // En tu componente .ts
+  get textoConSaltos() {
+    return (this.cofradia?.texto || '').replace(/\n/g, '<br>');
+  }
+
+  getRutaCristo(): string {
+  if (!this.cofradia?.cofradia?.nombre) return '';
+  return 'public/cofradiasDatos/' + this.cofradia.cofradia.nombre.toUpperCase().replace(/ /g, '-') + '/cristo.jpg';
 }
-
-
+  getRutaVirgen(): string {
+    if (!this.cofradia?.cofradia?.nombre) return '';
+    return 'public/cofradiasDatos/' + this.cofradia.cofradia.nombre.toUpperCase().replace(/ /g, '-') + '/virgen.jpg';
+  }
+}

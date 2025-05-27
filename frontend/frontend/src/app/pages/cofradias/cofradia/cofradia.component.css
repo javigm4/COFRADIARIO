@@ -1,37 +1,58 @@
+:host {
+  display: block;
+  background-color: #1e1e1e;
+  color: white;
+  font-family: sans-serif;
+}
 
-.contenedor-cofradia {
+.cofradia-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  position: relative;
+  height: 100vh;
 }
 
-.imagenes-cofradia {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.imagenes-cofradia img {
-  width: 20%;
-  max-width: 250px;
+.imagen-lateral {
+  width: 20vw;
   position: sticky;
-  top: 10px;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.imagen-lateral img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contenido-central {
+  flex: 1;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+
+.contenido-central h1 {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.info-secundaria {
+  font-size: 15px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.info-secundaria p {
+  margin: 4px 0;
 }
 
 .texto-informacion {
-  flex-grow: 1;
-  max-width: 600px;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
+  font-size: 18px;
+  line-height: 1.6;
 }

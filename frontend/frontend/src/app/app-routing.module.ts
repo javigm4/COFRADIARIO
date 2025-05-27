@@ -10,6 +10,8 @@ import { EditarArticuloComponent } from './pages/diario/articulo/editar-articulo
 import { CrearArticuloComponent } from './pages/diario/articulo/crear-articulo/crear-articulo.component';
 import { SeleccionCofradiaComponent } from './pages/cofradias/seleccion-cofradia/seleccion-cofradia.component';
 import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
+
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent }, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
   { path: 'agenda', component: AgendaComponent }, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
@@ -17,8 +19,8 @@ const routes: Routes = [
   { path: 'editarArticulo/:id', component: EditarArticuloComponent }, // Nueva página de edición çde articulo
   { path: 'crear-articulo', component: CrearArticuloComponent }, // Nueva página de creación
   { path: 'seleccionCofradia', component: SeleccionCofradiaComponent },
-  { path: 'cofradia/:nombre', component: CofradiaComponent }, // <-- Agrega esta línea
-
+  { path: 'cofradia/:nombre', component: CofradiaComponent },
+  { path: 'contacto', component: ContactoComponent },
 
 
   { path: 'register', component: RegisterComponent },

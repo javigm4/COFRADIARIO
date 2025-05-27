@@ -3,19 +3,21 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  padding:50px;
   gap: 100px;
+  overflow: hidden;
+  height: auto;
 }
 
 .fotologin {
   width: 500px; /* Ajusta el tamaño de las imágenes */
-  height: 750px ;
+  height: 89vh;
   background-size: cover;
   background-position: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-}
+  overflow: hidden;
 
+}
 .fotologin:hover {
   transform: scale(1.1);
   z-index: 10;

@@ -24,7 +24,6 @@ export class AuthService {
     });
   }
 
-
   // get usuario
   getUsuario(): any {
     const token = localStorage.getItem('token'); // cojo el token almacenado
@@ -47,5 +46,12 @@ export class AuthService {
       }
     }
     return null;
+  }
+
+  enviarMensajeContacto(formData: any): Observable<any> {
+    return this.http.post(
+      'http://127.0.0.1:8000/api/enviar-mensaje-contacto',
+      formData
+    );
   }
 }

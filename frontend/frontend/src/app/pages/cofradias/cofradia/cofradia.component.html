@@ -1,14 +1,24 @@
-<div class="contenedor-cofradia">
-  <h1 class="titulo-cofradia">{{ cofradia?.nombre }}</h1>
+<div class="cofradia-container">
+  <div class="imagen-lateral izquierda">
+<img [src]="getRutaCristo()" alt="Cristo">
+  </div>
 
-  <h2 class="titulo-seccion"></h2>
-  <p class="texto-informacion">{{ cofradia?.texto || 'Información no disponible.' }}</p>
+  <div class="contenido-central">
+    <h1>{{ cofradia?.cofradia?.nombre }}</h1>
 
-  <h2 class="titulo-seccion"></h2>
-  <div class="imagenes-cofradia">
-   <img *ngIf="cofradia?.cofradia?.nombre" [src]="'public/cofradiasDatos/' + cofradia.cofradia.nombre.toUpperCase() + '/cristo.jpg'" />
-<img *ngIf="cofradia?.cofradia?.nombre" [src]="'public/cofradiasDatos/' + cofradia.cofradia.nombre.toUpperCase() + '/virgen.jpg'" />
+    <div class="info-secundaria">
+      <p><strong>Titular 1:</strong> {{ cofradia?.cofradia?.titular1 }}</p>
+      <p><strong>Titular 2:</strong> {{ cofradia?.cofradia?.titular2 }}</p>
+      <p><strong>Parroquia:</strong> {{ cofradia?.cofradia?.parroquia }}</p>
+      <p><strong>Dirección:</strong> {{ cofradia?.cofradia?.direccion }}</p>
+    </div>
 
+    <div class="info-hermandad">
+    <p [innerHTML]="textoConSaltos || 'Información no disponible.'"></p>
+    </div>
+  </div>
 
+  <div class="imagen-lateral derecha">
+<img [src]="getRutaVirgen()" alt="Cristo">
   </div>
 </div>

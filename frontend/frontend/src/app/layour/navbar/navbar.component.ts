@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   constructor(private http: HttpClient, private router: Router) {}
+  menuAbierto: boolean = false;
 
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
+  }
   cerrarSesion(): void {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -23,7 +27,7 @@ export class NavbarComponent {
         {},
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
             Accept: 'application/json',
           },
         }
@@ -31,6 +35,7 @@ export class NavbarComponent {
       .subscribe(
         () => {
           localStorage.clear();
+          alert('Deslogeado exitosamente');
           this.router.navigate(['/login']);
         },
         (error) => {

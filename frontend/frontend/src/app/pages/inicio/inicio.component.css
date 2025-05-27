@@ -92,3 +92,18 @@ section {
 
 
 
+/* Oculta los tres artículos originales en móvil, y muestra solo uno */
+@media (max-width: 768px) {
+  #ar1, #ar2, #ar3 {
+    display: none;
+  }
+
+  #arMovil {
+    display: block;
+    width: 100vw;
+    height: 800px;
+  background-image: url(../../../../public/images/imagenes/ddpnico.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+}

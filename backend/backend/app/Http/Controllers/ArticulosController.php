@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Articulo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class ArticulosController extends Controller
 {
@@ -13,11 +15,22 @@ class ArticulosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $articulos = Articulo::all();
-        $usuarios = User::all();
-        return response()->json(['articulos' => $articulos, 'usuarios' => $usuarios]);
+    public function index() {
+        try {
+            $articulos = Articulo::all();
+            $usuarios = User::all();
+
+            return response()->json([
+                'status' => 200,
+                'articulos' => $articulos,
+                'usuarios' => $usuarios
+            ], 200);
+        } catch (QueryException $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Error al obtener los artículos'
+            ], 500);
+        }
     }
 
     /**
@@ -36,26 +49,32 @@ class ArticulosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-  public function store(Request $request)
-{
-    // Validar los datos antes de guardarlos
-    $request->validate([
-        'titular' => 'required|string|max:255',
-        'cuerpo' => 'required|string',
-        'id_autor' => 'required|exists:users,id', // Asegura que el autor existe
-    ]);
+    public function store(Request $request)
+    {
+        // Validar los datos antes de guardarlos
+        $request->validate([
+            'titular' => 'required|string|max:255',
+            'cuerpo' => 'required|string',
+            'id_autor' => 'required|exists:users,id', // Asegura que el autor existe
+        ]);
 
-    // Crear el artículo con los datos recibidos
-    $articulo = Articulo::create([
-        'titular' => $request->input('titular'),
-        'cuerpo' => $request->input('cuerpo'),
-        'id_autor' => $request->input('id_autor'),
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+        // Crear el artículo con los datos recibidos
+        $articulo = Articulo::create([
+            'titular' => $request->input('titular'),
+            'cuerpo' => $request->input('cuerpo'),
+            'id_autor' => $request->input('id_autor'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-    return response()->json(['message' => 'Artículo creado con éxito', 'articulo' => $articulo], 201);
-}
+            Log::info('Articulo creado', [
+                    'status'=>200,
+                    'titular' => $articulo->titular,
+                ]);
+
+
+        return response()->json(['message' => 'Artículo creado con éxito', 'articulo' => $articulo], 201);
+    }
 
     /**
      * Display the specified resource.
@@ -108,6 +127,12 @@ class ArticulosController extends Controller
 
         $articulo->save(); // Esto actualizará `updated_at` automáticamente
 
+         Log::info('Articulo modificado: ', [
+                    'status'=>200,
+                    'titular' => $articulo->titular,
+                ]);
+
+
         return response()->json(['message' => 'Artículo actualizado correctamente']);
     }
 
@@ -121,13 +146,19 @@ class ArticulosController extends Controller
      */
     public function destroy($id)
     {
-        $evento = Articulo::find($id);
+        $articulo = Articulo::find($id);
 
-        if (!$evento) {
+        if (!$articulo) {
             return response()->json(['message' => 'Articulo no encontrado'], 404);
         }
 
-        $evento->delete();
+        $articulo->delete();
+
+         Log::info('Articulo borrado', [
+                    'status'=>200,
+                    'titular' => $articulo->titular,
+                ]);
+
 
         return response()->json(['message' => 'Articulo eliminado correctamente'], 200);
     }

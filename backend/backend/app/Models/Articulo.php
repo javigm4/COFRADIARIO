@@ -18,3 +18,4 @@ class Articulo extends Model
         return $this->belongsTo(User::class, 'id_autor'); // id_autor referencia la clave primaria en usuarios
     }
 }
+

@@ -35,8 +35,7 @@ export class RegisterComponent {
       },
       (error) => {
         console.error('Error al registrar:', error);
-        this.error = 'No se pudo completar el registro';
-      }
+      this.error = error.error.message || 'No se pudo completar el registro';      }
     );
   }
 }

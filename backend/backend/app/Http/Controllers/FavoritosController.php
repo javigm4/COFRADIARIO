@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\favoritos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FavoritosController extends Controller
 {
@@ -31,7 +32,14 @@ class FavoritosController extends Controller
             'id_evento' => 'required|integer|exists:eventos,id', // Verifica que el evento exista
         ]);
         Favoritos::create($request->all());
-            return response()->json(['message' => 'Favorito añadido correctamente'], 200);
+
+        Log::info('Favorito añadido', [
+            'status' => 200,
+            'id_usuario' => $request->id_usuario,
+            'id_evento' => $request->id_evento,
+        ]);
+
+            return response()->json(['status'=>200, 'message' => 'Favorito añadido correctamente'], 200);
         }
 
 
@@ -41,6 +49,13 @@ class FavoritosController extends Controller
 
         if ($favorito) {
             $favorito->delete();
+
+            Log::info('Favorito eliminado', [
+                'status' => 200,
+                'favorito_id' => $id,
+                'id_usuario' => $favorito->id_usuario,
+                'id_evento' => $favorito->id_evento,
+            ]);
             return response()->json(['message' => 'Favorito eliminado correctamente'], 200);
         } else {
         return response()->json(['message' => 'Favorito no encontrado'], 404);

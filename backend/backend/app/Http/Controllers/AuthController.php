@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\RegisterNotification;
 use App\Notifications\ContactoNotification;
-
+use Illuminate\Support\Facades\Log; // Importar la clase Log para registrar información
 
 class AuthController extends Controller
 {
@@ -21,12 +21,25 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['error' => 'Credenciales inválidas'], 401);
         }
+
+         if (!empty($request->codigo) && $request->codigo !== $user->codigo) {
+        return response()->json(['error' => 'Código incorrecto'], 403);
+    }
         if (!empty($request->codigo) && $request->codigo === $user->codigo) {
             $rol = 'cofradia'; // Si el código ingresado coincide con el del usuario, es una cofradía
         } else {
             $rol = 'usuario'; // Si no se ha ingresiado código o es incorrecto, es un usuario
         }
         $token = $user->createToken('authToken')->plainTextToken;
+
+
+         Log::info('Usuario logeado: ', [
+                    'status'=>200,
+                    'usuario' => $user->name,
+                    'email' => $user->email,
+                    'rol' => $rol,
+                ]);
+
 
         return response()->json([
             'data' => [
@@ -70,6 +83,13 @@ class AuthController extends Controller
         $usuario->codigo = $codigoAleatorio;
         $usuario->save();
 
+         Log::info('Usuario registrado: ', [
+                    'status'=>200,
+                    'usuario' => $usuario->name,
+                    'email' => $usuario->email,
+                    'rol' => $usuario->rol,
+                ]);
+
         // Enviar la notificación a tu correo personal
         Notification::route('mail', 'javierguerreromontero1@gmail.com')
             ->notify(new RegisterNotification($usuario));
@@ -80,6 +100,12 @@ class AuthController extends Controller
     {
         if ($request->user()) {
             $request->user()->currentAccessToken()->delete(); // Revoca el token actual
+
+            Log::info('Usuario deslogeado: ', [
+                'status'=>200,
+                'usuario' => $request->user()->name,
+                'email' => $request->user()->email,
+            ]);
             return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
         } else {
             return response()->json(['error' => 'Usuario no autenticado'], 401);
@@ -94,6 +120,12 @@ class AuthController extends Controller
             'mensaje' => 'required'
         ]);
 
+
+            Log::info("Nuevo mensaje de contacto enviado", [
+                    'nombre' => $request->nombre,
+                    'email' => $request->email,
+                    'mensaje' => $request->mensaje
+                ]);
         // Enviar la notificación al correo deseado
         Notification::route('mail', 'javierguerreromontero1@gmail.com')
             ->notify(new ContactoNotification($request->nombre, $request->email, $request->mensaje));

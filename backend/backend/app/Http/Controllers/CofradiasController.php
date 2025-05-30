@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\cofradias;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log; // Importar la clase Log para registrar información
 class CofradiasController extends Controller
 {
     /**
@@ -15,6 +15,12 @@ class CofradiasController extends Controller
    public function index()
 {
     $cofradias = Cofradias::all();
+
+    Log::info('Listado de cofradías consultado', [
+        'status' => 200,
+        'count' => $cofradias->count(),
+    ]);
+
     return response()->json($cofradias);
 }
 
@@ -37,6 +43,11 @@ public function mostrar($nombre)
     $imagenes = array_values(array_filter(scandir($carpeta), function ($archivo) {
         return preg_match('/\\.(jpg|jpeg|png|gif)$/i', $archivo);
     }));
+
+    Log::info('Cofradía consultada', [
+        'status'=>200,
+        'nombre' => $cofradia->nombre,
+    ]);
 
     return response()->json([
         'cofradia' => $cofradia,

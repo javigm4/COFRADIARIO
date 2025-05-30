@@ -8,6 +8,7 @@ use App\Models\Favoritos;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class EventosController extends Controller
 {
@@ -22,7 +23,13 @@ class EventosController extends Controller
         $cofradias = Cofradias::all();
         $favoritos = Favoritos::all();
         $usuario = Auth::user();
-        return response()->json(['eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
+
+        Log::info('Listado de eventos consultado', [
+            'status' => 200,
+            'count' => $eventos->count(),
+        ]);
+
+        return response()->json(['status'=> 200, 'eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
     }
 
 
@@ -35,6 +42,12 @@ class EventosController extends Controller
         }
 
         $evento->delete();
+        Log::info('Evento eliminado', [
+            'status' => 200,
+            'evento_id' => $id,
+            'nombre' => $evento->nombre,
+        ]);
+        // Retornar respuesta JSON con código 200
 
         return response()->json(['message' => 'Evento eliminado correctamente'], 200);
     }
@@ -60,6 +73,14 @@ class EventosController extends Controller
             'nombre' => $request->nombre,
             'cofradia' => $request->cofradia,
             'fecha' => $fechaCompleta, // Guardamos la fecha con la hora
+        ]);
+
+        Log::info('Evento creado', [
+            'status' => 201,
+            'evento_id' => $evento->id,
+            'nombre' => $evento->nombre,
+            'cofradia' => $evento->cofradia,
+            'fecha' => $evento->fecha,
         ]);
 
                 // Retornar respuesta JSON con código 201
@@ -90,6 +111,14 @@ class EventosController extends Controller
             'nombre' => $request->nombre,
             'cofradia' => $request->cofradia,
             'fecha' => $request->fecha,
+        ]);
+
+        Log::info('Evento actualizado', [
+            'status' => 200,
+            'evento_id' => $evento->id,
+            'nombre' => $evento->nombre,
+            'cofradia' => $evento->cofradia,
+            'fecha' => $evento->fecha,
         ]);
 
         return response()->json(['message' => 'Evento actualizado correctamente', 'evento' => $evento], 200);

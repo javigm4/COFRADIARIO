@@ -22,6 +22,8 @@
           </div>
 
           <button type="submit" class="btn btn-block">Iniciar sesión</button>
+                    <p *ngIf="error" class="text-danger">{{ error }}</p>
+
         </form>
         <p>¿No tienes cuenta? <a [routerLink]="['/register']">Regístrate aquí</a></p>
       </div>

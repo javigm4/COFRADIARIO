@@ -1,3 +1,23 @@
+/* Contenedores principales */
+.fondo-general {
+  background-image: url('../../../../public/images/imagenes/petalosnico.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 89vh;
+}
+
+.contenedor-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  gap: 12px;
+  height: 89vh;
+}
+
 .crear-evento-container {
   display: flex;
   justify-content: center;
@@ -11,7 +31,7 @@
   flex-direction: column;
 }
 
-/* Inputs del formulario */
+/* Formulario e inputs */
 .crear-evento-container input {
   width: 100%;
   padding: 10px;
@@ -21,7 +41,7 @@
   color: #ffffff;
 }
 
-/* Botón de "Crear Evento" */
+/* Botón crear evento */
 .btn-crear-evento {
   display: block;
   width: 100%;
@@ -42,27 +62,45 @@
   transform: scale(1.05);
 }
 
-/* Contenedor principal */
-.contenedor-principal {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1400px;
-  margin: auto;
-  gap: 12px;
-}
-
-/* Lista de eventos */
+/* Contenedor lista de eventos */
 .contenedor-eventos {
   flex: 4.5;
   background: linear-gradient(135deg, #a38e14, #e2d1c3);
   padding: 18px;
   border-radius: 10px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  max-height: 88vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
 
-/* Lista de favoritos (Oculta si es Cofradía) */
+.contenedor-eventos::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contenedor-eventos::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.contenedor-eventos::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.contenedor-eventos::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.contenedor-eventos::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Contenedor favoritos */
 .contenedor-favoritos {
   flex: 1.2;
   background: linear-gradient(135deg, #8b5a2b, #ad7e3f);
@@ -73,15 +111,16 @@
   overflow-y: auto;
 }
 
-/* Scroll personalizado */
 .contenedor-favoritos::-webkit-scrollbar {
   width: 8px;
 }
+
 .contenedor-favoritos::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 4px;
 }
 
+/* Mensaje login */
 .mensaje-login {
   display: block;
   text-align: center;
@@ -100,7 +139,35 @@
   transform: scale(1.05);
 }
 
-/* =================== Estilos para móviles =================== */
+/* Botón favoritos (solo móvil) */
+.favoritos-container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+
+#favoritos-btn {
+  background-color: #d4af37;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#favoritos-btn:hover {
+  background: #b8912c;
+  transform: scale(1.05);
+}
+
+/* =================== Media queries =================== */
+
+/* Móviles */
 @media (max-width: 768px) {
   .favoritos-container {
     position: fixed;
@@ -140,14 +207,31 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     overflow-y: auto;
     max-height: 70vh;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
   }
 
   .contenedor-favoritos.activo {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    animation: fadeInSlide 0.3s forwards;
+  }
+
+  .contenedor-favoritos.saliendo {
+    animation: fadeOutSlide 0.3s forwards;
+  }
+
+   .contenedor-eventos {
+    overflow-y: visible;
+    max-height: none;
   }
 }
 
-/* =================== Estilos para PC =================== */
+/* PC */
 @media (min-width: 769px) {
   .favoritos-container {
     display: none;
@@ -159,7 +243,7 @@
   }
 }
 
-/* Animación de entrada/salida */
+/* =================== Animaciones =================== */
 @keyframes fadeInSlide {
   from {
     opacity: 0;
@@ -179,26 +263,5 @@
   to {
     opacity: 0;
     transform: translateY(-20px);
-  }
-}
-
-/* Para móviles */
-@media (max-width: 768px) {
-  .contenedor-favoritos {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    opacity: 0;
-    transform: translateY(-20px);
-    pointer-events: none;
-  }
-
-  .contenedor-favoritos.activo {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    animation: fadeInSlide 0.3s forwards;
-  }
-
-  .contenedor-favoritos.saliendo {
-    animation: fadeOutSlide 0.3s forwards;
   }
 }

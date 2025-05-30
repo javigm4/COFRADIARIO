@@ -1,6 +1,15 @@
 <div class="cofradia-container">
+  <div class="imagenes-superiores">
+    <div class="imagen-centro">
+      <img [src]="getRutaCristo()" alt="Cristo" />
+    </div>
+    <div class="imagen-centro">
+      <img [src]="getRutaVirgen()" alt="Virgen" />
+    </div>
+  </div>
+
   <div class="imagen-lateral izquierda">
-<img [src]="getRutaCristo()" alt="Cristo">
+    <img [src]="getRutaCristo()" alt="Cristo" />
   </div>
 
   <div class="contenido-central">
@@ -14,11 +23,11 @@
     </div>
 
     <div class="info-hermandad">
-    <p [innerHTML]="textoConSaltos || 'Información no disponible.'"></p>
+      <p [innerHTML]="textoConSaltos || 'Información no disponible.'"></p>
     </div>
   </div>
 
   <div class="imagen-lateral derecha">
-<img [src]="getRutaVirgen()" alt="Cristo">
+    <img [src]="getRutaVirgen()" alt="Cristo" />
   </div>
 </div>

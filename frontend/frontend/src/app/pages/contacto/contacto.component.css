@@ -108,3 +108,83 @@ label {
 h2 {
    font-weight: bold;
 }
+
+
+@media (max-width: 768px) {
+  /* Oculta las imágenes grandes en móviles */
+  #ar1, #ar2 {
+    display: none;
+  }
+
+  /* Ajusta el contenedor principal en móviles */
+  .login-container {
+    display: flex;
+    flex-direction: column; /* Ordena los elementos en columna */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+  }
+
+  /* Formulario compacto */
+  .form-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Imagen móvil colocada debajo del formulario con el mismo ancho */
+  #arMovil {
+    display: block;
+    width: 90%;
+    height: 400px; /* Ajuste de tamaño */
+    background-image: url(../../../../public/images/imagenes/rocio.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  /* Pie de foto debajo de la imagen */
+  p {
+    display: block;
+    width: 90%; /* Mismo ancho que la imagen */
+    margin: 5px auto; /* Centrado con menos margen */
+    color: #fff; /* Texto en blanco */
+    font-size: 0.9rem; /* Tamaño más pequeño */
+    text-align: center; /* Centrado */
+    font-style: italic; /* Cursiva para dar estilo de pie de foto */
+  }
+
+  /* Elimina efectos al hacer hover en la imagen móvil */
+  #arMovil:hover,
+  #arMovil:hover::before {
+    transform: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+/* MANTENER imágenes en PC */
+@media (min-width: 769px) {
+  #ar1, #ar2 {
+    display: block;
+  }
+
+  p {
+    display: none; /* Oculta el pie de foto en escritorio */
+  }
+
+  #arMovil {
+    display: none; /* No mostrar la imagen especial para móviles */
+  }
+}
+
+

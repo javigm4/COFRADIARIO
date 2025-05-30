@@ -1,10 +1,24 @@
-/* Contenedor general */
+/* Layout principal */
+.layout-con-imagenes {
+  display: flex;
+  height: 88.9vh;
+  overflow: hidden;
+}
+
+/* Imágenes laterales fijas */
+.imagen-lateral {
+  width: 20vw;
+  height: 100vh;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Contenedor central con scroll interno */
 .contenedor-cofradias {
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #2d1e12, #8b5a2b);
-  border-radius: 15px;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+background: linear-gradient(135deg, #1a1a1a, #3a3a3a);
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -14,22 +28,28 @@
   color: #fff;
 }
 
+/* Título */
 .titulo-secundario {
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 30px;
+   color: #f5d547;
+    text-shadow:
+      1px 1px 3px rgba(0, 0, 0, 0.8),
+      0 0 10px #a88532,
+      0 0 20px #d4af37;
 }
 
 /* Grid adaptable */
 .grid-cofradias {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
 
-/* Tarjetas con efecto premium */
+/* Tarjetas */
 .card-cofradia {
   background: #fff;
   padding: 25px;
@@ -43,7 +63,7 @@
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Nombre de Cofradía */
+/* Nombre Cofradía */
 .nombre-cofradia {
   font-size: 1.5rem;
   font-weight: bold;
@@ -51,7 +71,7 @@
   margin-bottom: 15px;
 }
 
-/* Botón con estilo premium */
+/* Botón */
 .btn-ver-cofradia {
   display: inline-block;
   padding: 12px 18px;
@@ -60,10 +80,74 @@
   font-weight: bold;
   border-radius: 8px;
   text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
 }
 
 .btn-ver-cofradia:hover {
-  background: linear-gradient(135deg, #e6c03b, #90722a);
   transform: scale(1.08);
+  background: linear-gradient(135deg, #e6c03b, #90722a);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.imagen-lateral-izquierda,
+.imagen-lateral-derecha {
+  width: 20vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.imagen-lateral-izquierda {
+  background-image: url('../../../../../public/images/imagenes/cautivoEspaldas.jpg');
+      background-position: 30%; /* Horizontal center, vertical 30% */
+
+}
+
+.imagen-lateral-derecha {
+  background-image: url('../../../../../public/images/imagenes/cautivodelado.jpg');
+        background-position: 25%; /* Horizontal center, vertical 30% */
+
+
+}
+
+@media (max-width: 768px) {
+  .layout-con-imagenes {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    background: none; /* quita fondo aquí */
+  }
+
+  .contenedor-cofradias {
+    background-image: url('../../../../../public/images/imagenes/latrini.jpg'); /* usa assets si es Angular */
+     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .imagen-lateral-izquierda,
+  .imagen-lateral-derecha {
+    display: none;
+  }
+
+  .titulo-secundario {
+    color: #f5d547;
+    text-shadow:
+      1px 1px 3px rgba(0, 0, 0, 0.8),
+      0 0 10px #a88532,
+      0 0 20px #d4af37;
+  }
+
+  .card-cofradia {
+  background: rgba(255, 255, 255, 0.85);
+  width: 60%; /* ancho máximo para móviles */
+  margin: 0 auto;   /* para centrarla si hay espacio extra */
+}
+
+
 }

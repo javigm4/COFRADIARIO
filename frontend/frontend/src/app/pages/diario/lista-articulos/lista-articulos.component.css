@@ -1,6 +1,30 @@
-h1{
-  color: white;
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+
+  /* Fondo degradado con ajuste para cada tema */
+
+  color: #E5C100; /* Dorado oscuro elegante */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); /* Sombra negra para contraste */
+  /* Sombra adaptada a los fondos */
+
 }
-hr{
-  color: white;
+
+hr {
+  border: none;
+  height: 3px;
+  background: linear-gradient(90deg, #FFFFFF, #D4AF37);
+  opacity: 0.9;
+}
+
+/* Ajustes para PC */
+@media (min-width: 769px) {
+
+
+  hr {
+    background: linear-gradient(90deg, #FFFFFF, #FFD700);
+  }
 }

@@ -1,17 +1,23 @@
-<div class="contenedor-cofradias">
-  <div class="contenido">
-    <h2 class="titulo-secundario">Seleccionar Cofradía</h2>
-    <div class="grid-cofradias">
-      @for (cofradia of cofradias; track cofradia.id) {
-        <div class="card-cofradia">
-          <div class="card-body">
-            <h3 class="nombre-cofradia">{{ cofradia.nombre }}</h3>
-            <a class="btn-ver-cofradia" [routerLink]="'/cofradia/' + formatCofradiaName(cofradia.nombre)">
-              Ver Cofradía
-            </a>
+<div class="layout-con-imagenes">
+  <div class="imagen-lateral-izquierda"></div>
+
+  <div class="contenedor-cofradias">
+    <div class="contenido">
+      <h2 class="titulo-secundario">Seleccionar Cofradía</h2>
+      <div class="grid-cofradias">
+        @for (cofradia of cofradias; track cofradia.id) {
+          <div class="card-cofradia">
+            <div class="card-body">
+              <h3 class="nombre-cofradia">{{ cofradia.nombre }}</h3>
+              <a class="btn-ver-cofradia" [routerLink]="'/cofradia/' + formatCofradiaName(cofradia.nombre)">
+                Ver Cofradía
+              </a>
+            </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     </div>
   </div>
+
+  <div class="imagen-lateral-derecha"></div>
 </div>

@@ -31,7 +31,9 @@ export class LoginComponent {
 
 
       alert(`Logeado como ${response.data.user.name}`);
-      this.router.navigate(['/agenda']);
+       this.router.navigate(['/']).then(() => {
+        location.reload(); // Esto evita bugs en Docker
+      });
     },
     (error) => {
       console.error('Error al iniciar sesión:', error);

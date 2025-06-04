@@ -4,38 +4,46 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\articulos;
 
 class ArticulosSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+                DB::table('articulos')->truncate();
+
         DB::table('articulos')->insert([
-            'id' => '1',
-            'titular' => 'La Esperanza en Roma',
-            'id_autor' => 1,
-            'cuerpo'=> 'María Santísima de la Esperanza presidirá junto al Cachorro de Triana la procesión del Jubileo de la  en la capital italia',
-            'created_at' => now(),
-            'updated_at' => now(),
+            [
+                'id' => 1,
+                'titular' => 'La Esperanza en Roma',
+                'id_autor' => 1,
+                'cuerpo' => 'María Santísima de la Esperanza presidirá junto al Cachorro de Triana la procesión del Jubileo en la capital italiana.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 2,
+                'titular' => 'Tradiciones de Sevilla',
+                'id_autor' => 2,
+                'cuerpo' => 'El Capi relata las costumbres más arraigadas en las cofradías sevillanas durante la Semana Santa.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 3,
+                'titular' => 'La Macarena y su historia',
+                'id_autor' => 3,
+                'cuerpo' => 'Un repaso a la historia y devoción de la Virgen de la Macarena, patrona de muchos sevillanos.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 4,
+                'titular' => 'El papel del Hermano Mayor',
+                'id_autor' => 4,
+                'cuerpo' => 'Entrevista con el Hermano Mayor sobre las responsabilidades y retos actuales en la cofradía.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
-
-        /*
-+------------+-----------------+------+-----+---------+----------------+
-| Field      | Type            | Null | Key | Default | Extra          |
-+------------+-----------------+------+-----+---------+----------------+
-| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
-| titular    | varchar(255)    | NO   |     | NULL    |                |
-| autor      | varchar(255)    | YES  |     | NULL    |                |
-| cuerpo     | text            | NO   |     | NULL    |                |
-| created_at | timestamp       | YES  |     | NULL    |                |
-| updated_at | timestamp       | YES  |     | NULL    |                |
-
-        */
-
     }
 }

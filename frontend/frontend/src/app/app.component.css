@@ -1,4 +1,11 @@
 div {
   background-color: #1f1e1b; /* Gris piedra, evocando solemnidad */
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra ligera para profundidad */
-}
+
+  }
+
+  @media (max-width: 768px) {
+    div {
+       padding-top: 40px;
+    }
+  }

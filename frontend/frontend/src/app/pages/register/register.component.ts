@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService} from '../../services/auth/auth.service';
-import { Router
-
-
- } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: false,
@@ -34,8 +31,13 @@ export class RegisterComponent {
         this.router.navigate(['/login']);
       },
       (error) => {
-        console.error('Error al registrar:', error);
-      this.error = error.error.message || 'No se pudo completar el registro';      }
+
+          alert(
+            'Ocurrió un error al registrarse: ' + error.error.message ||
+              'Error desconocido'
+          );
+
+      }
     );
   }
 }

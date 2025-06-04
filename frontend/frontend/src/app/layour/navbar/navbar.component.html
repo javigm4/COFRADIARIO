@@ -1,17 +1,19 @@
-<nav class="navbar navbar-expand-lg bg-white px-4 py-2 align-items-center">
-  <a id="logo" class="d-flex align-items-center me-auto" routerLink="/inicio">
-    <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" width="80" class="me-2" />
-    <h1 class="text-uppercase">PASSIONKOFRADE</h1>
+<nav class="navbar px-4 py-2">
+  <a id="logo" class="navbar-brand" routerLink="/inicio">
+    <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" width="60" />
+    <span class="brand-text">PASSIONKOFRADE</span>
   </a>
 
-  <button class="menu-toggle d-lg-none btn-brown" (click)="toggleMenu()">☰</button>
+  <button class="menu-toggle d-lg-none" (click)="toggleMenu()">
+    <span class="hamburger"></span>
+  </button>
 
-  <div class="d-flex flex-wrap gap-2" id="divNav">
-    <a class="btn btn-brown text-white" routerLink="/login" (click)="cerrarMenu()">INICIAR SESIÓN / REGISTRARSE</a>
-    <a class="btn btn-brown text-white" routerLink="/agenda" (click)="cerrarMenu()">AGENDA</a>
-    <a class="btn btn-brown text-white" routerLink="/diario" (click)="cerrarMenu()">DIARIO</a>
-    <a class="btn btn-brown text-white" routerLink="/seleccionCofradia" (click)="cerrarMenu()">COFRADÍAS</a>
-    <a class="btn btn-brown text-white" routerLink="/contacto" (click)="cerrarMenu()">CONTACTA CON NOSOTROS</a>
-    <a class="btn btn-brown text-white" (click)="cerrarSesion(); cerrarMenu()">CERRAR SESIÓN</a>
-</div>
+  <div id="divNav" class="nav-links hidden-mobile">
+    <a class="nav-item" routerLink="/login" (click)="cerrarMenu()">Entrar / Registro</a>
+    <a class="nav-item" routerLink="/agenda" (click)="cerrarMenu()">Agenda</a>
+    <a class="nav-item" routerLink="/diario" (click)="cerrarMenu()">Diario</a>
+    <a class="nav-item" routerLink="/seleccionCofradia" (click)="cerrarMenu()">Cofradías</a>
+    <a class="nav-item" routerLink="/contacto" (click)="cerrarMenu()">Contacto</a>
+    <button class="nav-item logout" [disabled]="!usuarioAutenticado" [class.disabled]="!usuarioAutenticado" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión</button>
+  </div>
 </nav>

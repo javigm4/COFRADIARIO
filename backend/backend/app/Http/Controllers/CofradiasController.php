@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\cofradias;
+use App\Models\Cofradia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; // Importar la clase Log para registrar información
 class CofradiasController extends Controller
@@ -14,12 +13,8 @@ class CofradiasController extends Controller
      */
    public function index()
 {
-    $cofradias = Cofradias::all();
+    $cofradias = Cofradia::all();
 
-    Log::info('Listado de cofradías consultado', [
-        'status' => 200,
-        'count' => $cofradias->count(),
-    ]);
 
     return response()->json($cofradias);
 }
@@ -29,7 +24,7 @@ class CofradiasController extends Controller
 public function mostrar($nombre)
 {
     // Obtener datos de la base de datos
-    $cofradia = Cofradias::where('nombre', $nombre)->first();
+    $cofradia = Cofradia::where('nombre', $nombre)->first();
     if (!$cofradia) {
         return response()->json(['message' => 'Cofradía no encontrada'], 404);
     }
@@ -86,7 +81,7 @@ public function mostrar($nombre)
      * @param  \App\Models\cofradias  $cofradias
      * @return \Illuminate\Http\Response
      */
-    public function show(cofradias $cofradias)
+    public function show(Cofradia $cofradias)
     {
         //
     }
@@ -97,7 +92,7 @@ public function mostrar($nombre)
      * @param  \App\Models\cofradias  $cofradias
      * @return \Illuminate\Http\Response
      */
-    public function edit(cofradias $cofradias)
+    public function edit(Cofradia $cofradias)
     {
         //
     }
@@ -109,7 +104,7 @@ public function mostrar($nombre)
      * @param  \App\Models\cofradias  $cofradias
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cofradias $cofradias)
+    public function update(Request $request, Cofradia $cofradias)
     {
         //
     }
@@ -120,7 +115,7 @@ public function mostrar($nombre)
      * @param  \App\Models\cofradias  $cofradias
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cofradias $cofradias)
+    public function destroy(Cofradia $cofradias)
     {
         //
     }

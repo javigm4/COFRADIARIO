@@ -7,8 +7,12 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/api/login';
-  private apiUrlRegister = 'http://127.0.0.1:8000/api/register';
+  private apiUrl = 'http://51.68.70.108:8000/api/login';
+  //private apiUrl = `${environment.apiUrl}/login`;
+
+  private apiUrlRegister = 'http://51.68.70.108:8000/api/register';
+  //private apiUrlRegister = `${environment.apiUrl}/register`;
+
   constructor(private http: HttpClient) {}
 
   // auth metodos
@@ -50,7 +54,7 @@ export class AuthService {
 
   enviarMensajeContacto(formData: any): Observable<any> {
     return this.http.post(
-      'http://127.0.0.1:8000/api/enviar-mensaje-contacto',
+      'http://51.68.70.108:8000/api/enviar-mensaje-contacto',
       formData
     );
   }

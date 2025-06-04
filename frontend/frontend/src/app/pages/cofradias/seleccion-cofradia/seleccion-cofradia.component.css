@@ -1,9 +1,16 @@
 /* Layout principal */
+
+#fondo {
+  display: none; /* Oculta imagen en escritorio */
+}
+
 .layout-con-imagenes {
   display: flex;
   height: 88.9vh;
   overflow: hidden;
 }
+
+
 
 /* Imágenes laterales fijas */
 .imagen-lateral {
@@ -115,19 +122,31 @@ background: linear-gradient(135deg, #1a1a1a, #3a3a3a);
 }
 
 @media (max-width: 768px) {
+
+  #fondo {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0; /* Fondo detrás del contenido */
+  }
+
   .layout-con-imagenes {
+    position: relative;
+    z-index: 1; /* Contenido por encima del fondo */
     flex-direction: column;
     height: auto;
     min-height: 100vh;
-    background: none; /* quita fondo aquí */
+    background: none;
   }
 
   .contenedor-cofradias {
-    background-image: url('../../../../../public/images/imagenes/latrini.jpg'); /* usa assets si es Angular */
-     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    position: relative;
+    z-index: 1; /* Asegura que el contenedor esté por encima */
+    background:none;
   }
 
   .imagen-lateral-izquierda,
@@ -144,10 +163,12 @@ background: linear-gradient(135deg, #1a1a1a, #3a3a3a);
   }
 
   .card-cofradia {
-  background: rgba(255, 255, 255, 0.85);
-  width: 60%; /* ancho máximo para móviles */
-  margin: 0 auto;   /* para centrarla si hay espacio extra */
+    background: rgba(255, 255, 255, 0.85);
+    width: 60%;
+    margin: 0 auto;
+  }
+
 }
 
 
-}
+

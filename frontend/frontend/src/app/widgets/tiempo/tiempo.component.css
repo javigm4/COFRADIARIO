@@ -1,29 +1,117 @@
+.table-container {
+  width: 100%;
+  background-color: #1f1e1b;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #ffffff;
+}
+
+.weather-table {
+  width: 100%;
+  background-color: #f7f7f7; /* Blanco suavizado */
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.weather-caption {
+  caption-side: top;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #555555;
+  background-color: #f0f0f0; /* Blanco muy suave */
+  border-bottom: 1px solid #cccccc; /* Borde menos contrastado */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.caption-icon {
+  font-size: 1.25rem;
+  margin: 0 8px;
+}
+
+.weather-cell {
+  width: 14.2857%;
+  padding: 20px;
+  border-right: 1px solid #cccccc;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Mismo fondo suavizado */
+  outline: none;
+}
+
+.weather-cell:last-child {
+  border-right: none;
+}
+
+.cell-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.weather-date {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #555555;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+.weather-icon {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.weather-temp {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #c0392b;
+  line-height: 1.3;
+}
+
+.weather-precip {
+  font-size: 1rem;
+  color: #2980b9;
+  line-height: 1.3;
+}
+
 @media (max-width: 768px) {
-  /* Ajuste general de la tabla */
-  table {
-    width: 95%;
-    max-width: 100%;
-    border-collapse: collapse;
+  .table-container {
+    padding: 20px;
+    overflow-x: auto;
   }
 
-  /* Filas y estructura */
-  tr {
-    flex-direction: column; /* Apila los días */
-    align-items: center;
-    display: flex;
-    gap: 10px;
+  .weather-table {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   }
 
-  /* Estilos de los elementos dentro de la tabla */
-  app-tiempo-dia {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-  }
-
-  /* Bordes suaves y espaciado */
-  td {
+  .weather-cell {
     padding: 12px;
-    border-bottom: 2px solid #ddd;
+  }
+
+  .weather-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .weather-temp {
+    font-size: 1rem;
+  }
+
+  .weather-precip {
+    font-size: 0.9rem;
   }
 }

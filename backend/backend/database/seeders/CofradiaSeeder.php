@@ -14,6 +14,8 @@ class CofradiaSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('cofradias')->truncate();
+
         DB::table('cofradias')->insert([
             [
                 'nombre' => 'Pollinica',
@@ -36,6 +38,7 @@ class CofradiaSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+
                 'nombre' => 'Salutación',
                 'titular1' => 'Divino Nombre de Jesús Nazareno de la Salutación',
                 'titular2' => 'María Santísima del Patrocinio, Reina de los Cielos',
@@ -46,6 +49,7 @@ class CofradiaSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+
                 'nombre' => 'Humildad y Paciencia',
                 'titular1' => 'Santísimo Cristo de la Humildad y Paciencia',
                 'titular2' => 'María Santísima de Dolores y Esperanza',
@@ -65,6 +69,16 @@ class CofradiaSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nombre' => 'Cautivo',
+                'titular1' => 'Nuestro Padre Jesús Cautivo',
+                'titular2' => 'María Santísima de la Trinida Coronada',
+                'titular3' => null,
+                'direccion' => 'Calle Trinidad, 70',
+                'parroquia' => 'Parroquia de San Pablo',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
     }
 }

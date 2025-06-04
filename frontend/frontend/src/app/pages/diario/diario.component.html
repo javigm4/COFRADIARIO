@@ -8,6 +8,13 @@
   ></iframe>
 
   <img src="../../../../public/images/imagenes/cautivomovil.jpg" alt="Logo" id="fondo">
+<h1 class="titulo-seccion text-center fw-bold">Últimos Artículos</h1>
+  <hr class="divider">
+  <div id="crearArticulo">
+    <a class="btn btn-success" routerLink="/crear-articulo">
+      Crear Nuevo Artículo
+    </a>
+  </div>
 
   <div id="diario">
     <app-lista-articulos
@@ -19,11 +26,7 @@
 @if(esUsuario || esCofradia){
 
 
-  <div id="crearArticulo">
-    <a class="btn btn-success" routerLink="/crear-articulo">
-      Crear Nuevo Artículo
-    </a>
-  </div>
+
 
 }
 </div>

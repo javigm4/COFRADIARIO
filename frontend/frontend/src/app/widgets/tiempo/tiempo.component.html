@@ -1,7 +1,29 @@
-<table>
-  <tr>
-    @for (dia of dias; track dia.date) {
-      <app-tiempo-dia [dia]="dia"></app-tiempo-dia>
-    }
-  </tr>
-</table>
+<div class="table-container" role="region" aria-label="Pronóstico del clima">
+  <table class="weather-table" role="table">
+    <caption class="weather-caption">
+      <span class="caption-icon">☀️</span>
+      Pronóstico de 7 días
+      <span class="caption-icon">☁️</span>
+    </caption>
+    <tbody>
+      <tr role="row">
+        @for (dia of dias; track dia.date) {
+          <td class="weather-cell" role="gridcell" tabindex="0">
+            <div class="cell-content">
+              <div class="weather-date">{{ dia.date }}</div>
+              <img
+                src="{{ dia.icono }}"
+                alt="Icono clima"
+                class="weather-icon"
+                width="45"
+                height="45"
+              />
+              <div class="weather-temp" aria-label="Temperatura">{{ dia.temperatura }}°C</div>
+              <div class="weather-precip" aria-label="Precipitación">{{ dia.precipitacion }}</div>
+            </div>
+          </td>
+        }
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: cofradia_agenda
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - app_network
+
+  backend:
+    build:
+      context: ./backend/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"  # Solo exponer backend para acceso externo
+    depends_on:
+      - db
+    environment:
+      APP_ENV: local
+      APP_DEBUG: 'true'
+      APP_URL: http://localhost:8000
+
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: cofradia_agenda
+      DB_USERNAME: root
+      DB_PASSWORD: 1234
+
+      MAIL_MAILER: smtp
+      MAIL_HOST: smtp.sendgrid.net
+      MAIL_PORT: 587
+      MAIL_USERNAME: apikey
+      MAIL_PASSWORD: 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
+      MAIL_ENCRYPTION: tls
+      MAIL_FROM_ADDRESS: passionkofrade@gmail.com
+      MAIL_FROM_NAME: "PASSION KOFRADE"
+
+      SESSION_DOMAIN: localhost
+      SANCTUM_STATEFUL_DOMAINS: http://localhost:4200
+    command: >
+      bash -c '
+        until mysql -h db -u root -p1234 -e "select 1" >/dev/null 2>&1; do
+          echo "Esperando a que MySQL esté listo..."
+          sleep 3
+        done
+        composer install &&
+        php artisan migrate --force &&
+        php artisan db:seed --force &&
+        apache2-foreground
+      '
+
+
+      
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: ./frontend/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"  # Aquí se sirve con Nginx o similar en Dockerfile
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+volumes:
+  dbdata:
+
+networks:
+  app_network:
+    driver: bridge

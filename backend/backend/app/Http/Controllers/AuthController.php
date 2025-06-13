@@ -22,9 +22,9 @@ class AuthController extends Controller
             return response()->json(['error' => 'Credenciales inválidas'], 401);
         }
 
-         if (!empty($request->codigo) && $request->codigo !== $user->codigo) {
-        return response()->json(['error' => 'Código incorrecto'], 403);
-    }
+        if (!empty($request->codigo) && $request->codigo !== $user->codigo) {
+            return response()->json(['error' => 'Código incorrecto'], 403);
+        }
         if (!empty($request->codigo) && $request->codigo === $user->codigo) {
             $rol = 'cofradia'; // Si el código ingresado coincide con el del usuario, es una cofradía
         } else {
@@ -33,12 +33,12 @@ class AuthController extends Controller
         $token = $user->createToken('authToken')->plainTextToken;
 
 
-         Log::info('Usuario logeado: ', [
-                    'status'=>200,
-                    'usuario' => $user->name,
-                    'email' => $user->email,
-                    'rol' => $rol,
-                ]);
+        Log::info('Usuario logeado: ', [
+            'status' => 200,
+            'usuario' => $user->name,
+            'email' => $user->email,
+            'rol' => $rol,
+        ]);
 
 
         return response()->json([
@@ -57,10 +57,6 @@ class AuthController extends Controller
             ]
         ]);
     }
-
-
-
-
 
     public function register(Request $request)
     {
@@ -83,16 +79,19 @@ class AuthController extends Controller
         $usuario->codigo = $codigoAleatorio;
         $usuario->save();
 
-         Log::info('Usuario registrado: ', [
-                    'status'=>200,
-                    'usuario' => $usuario->name,
-                    'email' => $usuario->email,
-                    'rol' => $usuario->rol,
-                ]);
+        Log::info('Usuario registrado: ', [
+            'status' => 200,
+            'usuario' => $usuario->name,
+            'email' => $usuario->email,
+            'rol' => $usuario->rol,
+        ]);
 
-        // Enviar la notificación a tu correo personal
-        Notification::route('mail', 'javierguerreromontero1@gmail.com')
-            ->notify(new RegisterNotification($usuario));
+        try {
+            Notification::route('mail', 'javierguerreromontero1@gmail.com')
+                ->notify(new RegisterNotification($usuario));
+        } catch (\Exception $e) {
+            Log::error('Error al enviar correo de registro: ' . $e->getMessage());
+        }
     }
 
 
@@ -102,7 +101,7 @@ class AuthController extends Controller
             $request->user()->currentAccessToken()->delete(); // Revoca el token actual
 
             Log::info('Usuario deslogeado: ', [
-                'status'=>200,
+                'status' => 200,
                 'usuario' => $request->user()->name,
                 'email' => $request->user()->email,
             ]);
@@ -119,13 +118,11 @@ class AuthController extends Controller
             'email' => 'required|email',
             'mensaje' => 'required'
         ]);
-
-
-            Log::info("Nuevo mensaje de contacto enviado", [
-                    'nombre' => $request->nombre,
-                    'email' => $request->email,
-                    'mensaje' => $request->mensaje
-                ]);
+        Log::info("Nuevo mensaje de contacto enviado", [
+            'nombre' => $request->nombre,
+            'email' => $request->email,
+            'mensaje' => $request->mensaje
+        ]);
         // Enviar la notificación al correo deseado
         Notification::route('mail', 'javierguerreromontero1@gmail.com')
             ->notify(new ContactoNotification($request->nombre, $request->email, $request->mensaje));

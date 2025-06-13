@@ -6,25 +6,20 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\ArticulosController;
 use App\Http\Controllers\CofradiasController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Aquí es donde registras las rutas web de tu aplicación. Se cargan
+| a través del RouteServiceProvider dentro del grupo "web".
 |
 */
 
 Route::get('/', function () {
     return view('welcome');
-
-
-
 });
-
-
 
 Route::get('/agenda', [EventosController::class, 'index'])->name('agenda');
 Route::get('/diario', [ArticulosController::class, 'index'])->name('diario');
@@ -35,50 +30,25 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
-//para quer funcione el registro
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
- // ---- EVENTOS ----
+// ---- EVENTOS ----
 Route::delete('/eventos/{id}', [EventosController::class, 'destroy'])->name('eliminarEvento');
-
 Route::post('/eventos/create', [EventosController::class, 'store'])->name('crearEvento');
-
-
 Route::get('/evento/{id}/edit', [EventosController::class, 'edit'])->name('actualizarEvento');
-
-// Ruta para actualizar el evento (PUT)
 Route::put('/evento/{id}', [EventosController::class, 'update'])->name('editarEvento');
 
-
-
-// ---- favoritos ----
-
+// ---- FAVORITOS ----
 Route::post('/favoritos', [FavoritosController::class, 'store'])->name('agregarFavorito');
-
 Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy'])->name('eliminarFavorito');
 
-
-Route::get('/cofradia/{nombre}', [App\Http\Controllers\CofradiasController::class, 'mostrar']);
-
-
-
-
-
-
-
-Route::get('/register', function () {
-    return view('register');
-})->name('register'); // muestra la vista del registro
-
-
-
-Route::get('/seleccionCofradia', function () {
-    return view('seleccionCofradia');
-})->name('seleccionCofradia'); // muestra la vista de seleccion de cofradia
-
+// ---- COFRADÍAS ----
 Route::get('/seleccionCofradia', [CofradiasController::class, 'index'])->name('seleccionCofradia');
+Route::get('/cofradia/{nombre}', [CofradiasController::class, 'mostrar']);
 
 Route::get('/cofradia/{nombre}', function ($nombre) {
     $rutaTxt = storage_path("app/public/cofradiasDatos/{$nombre}/info.txt");
@@ -86,6 +56,19 @@ Route::get('/cofradia/{nombre}', function ($nombre) {
 
     return view('infoCofradias', [
         'nombre' => $nombre,
-        'texto' => $texto
+        'texto'  => $texto
+    ]);
+});
+
+// ---- RUTA DE DEPURACIÓN DE CONFIGURACIÓN SMTP/SENDGRID ----
+Route::get('/debug-mail-config', function() {
+    dd([
+        'MAIL_MAILER'      => env('MAIL_MAILER'),
+        'MAIL_HOST'        => env('MAIL_HOST'),
+        'MAIL_PORT'        => env('MAIL_PORT'),
+        'MAIL_USERNAME'    => env('MAIL_USERNAME'),
+        'MAIL_PASSWORD'    => env('MAIL_PASSWORD'),
+        'MAIL_ENCRYPTION'  => env('MAIL_ENCRYPTION'),
+        'SENDGRID_API_KEY' => env('SENDGRID_API_KEY'),
     ]);
 });

@@ -42,14 +42,6 @@ export class AgendaComponent implements OnInit {
         this.eventos = response.eventos ?? [];
         this.cofradias = response.cofradias ?? [];
         this.favoritos = response.favoritos ?? [];
-        console.log(
-          '------------------------------------------------------------------------------------'
-        );
-        console.log(response);
-        console.log(
-          '------------------------------------------------------------------------------------'
-        );
-        console.log(this.favoritos);
       },
       (error) => {
         console.error('Error al obtener eventos:', error);
@@ -97,8 +89,7 @@ export class AgendaComponent implements OnInit {
   this.favoritosService.eliminarFavorito(favoritoId).subscribe(
     () => {
       console.log('Favorito eliminado correctamente');
-      // Elimina el favorito del array localmente después de la respuesta exitosa de la API
-      this.favoritos = this.favoritos.filter((f) => f.id !== favoritoId);
+       this.favoritos = this.favoritos.filter((f) => f.id !== favoritoId);
     },
     (error) => {
       console.error('Error al eliminar el favorito:', error);

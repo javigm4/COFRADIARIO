@@ -14,6 +14,7 @@
     <a class="nav-item" routerLink="/diario" (click)="cerrarMenu()">Diario</a>
     <a class="nav-item" routerLink="/seleccionCofradia" (click)="cerrarMenu()">Cofradías</a>
     <a class="nav-item" routerLink="/contacto" (click)="cerrarMenu()">Contacto</a>
-    <button class="nav-item logout" [disabled]="!usuarioAutenticado" [class.disabled]="!usuarioAutenticado" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión</button>
+    <button class="nav-item logout" [disabled]="!usuarioAutenticado" [class.disabled]="!usuarioAutenticado"
+     (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión</button>
   </div>
 </nav>

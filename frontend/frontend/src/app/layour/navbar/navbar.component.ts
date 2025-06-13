@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   menuAbierto: boolean = false;
-  usuarioAutenticado: boolean = false; // Inicializado como falso
+  usuarioAutenticado: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   }
 
   verificarAutenticacion() {
-    this.usuarioAutenticado = !!localStorage.getItem('token'); // Actualiza el estado
+    this.usuarioAutenticado = !!localStorage.getItem('token');
   }
 
   cerrarSesion(): void {

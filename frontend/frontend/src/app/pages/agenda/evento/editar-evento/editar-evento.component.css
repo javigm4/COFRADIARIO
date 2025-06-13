@@ -1,16 +1,16 @@
 /* Fondo oscuro y centrado */
 body {
-  background-color: #121212; /* Fondo oscuro */
+  background-color: #121212;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa toda la pantalla */
+  height: 100vh;
   margin: 0;
 }
 
 /* Estilos del formulario */
 form {
-  background: rgba(50, 50, 50, 0.9); /* Fondo oscuro con transparencia */
+  background: rgba(50, 50, 50, 0.9);
   padding: 20px;
   border-radius: 10px;
   width: 100%;
@@ -23,29 +23,27 @@ form {
 .form-label {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #f5d547; /* Dorado para contraste */
+  color: #f5d547;
 }
 
 /* Inputs */
 input, textarea {
-  background: #282828; /* Fondo más oscuro */
-  border: 1px solid #f5d547; /* Borde dorado */
-  color: #ffffff; /* Texto blanco */
+  background: #282828;
+  border: 1px solid #f5d547;
+  color: #ffffff;
   padding: 10px;
   border-radius: 5px;
   width: 100%;
 }
 
-/* Ajuste en textarea para cuerpo más amplio */
 textarea {
-  height: 150px; /* Espacio para escribir más texto */
-  resize: vertical; /* Permite ajustar tamaño */
+  height: 150px;
+  resize: vertical;
 }
 
-/* Botón elegante */
 .btn-success {
-  background: linear-gradient(135deg, #f5d547, #a88532); /* Degradado dorado */
-  color: #000; /* Texto oscuro */
+  background: linear-gradient(135deg, #f5d547, #a88532);
+  color: #000;
   font-weight: bold;
   border: none;
   padding: 10px 15px;

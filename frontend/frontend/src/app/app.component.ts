@@ -1,6 +1,6 @@
-import { WeatherService } from './services/weather/weather.service'; // Importar el servicio de clima
+import { WeatherService } from './services/weather/weather.service';
 import { Component } from '@angular/core';
-import { TiempoDia } from './widgets/interfaces/tiempo-dia.interface'; // Importar la interfaz TiempoDia
+import { TiempoDia } from './widgets/interfaces/tiempo-dia.interface';
 
 @Component({
   selector: 'app-root',
@@ -28,14 +28,12 @@ export class AppComponent {
   getForecast(city: string): void {
     this.weatherService.getForecast(city).subscribe(
       (data) => {
-        // Transformar forecastday al modelo TiempoDia
-        this.dias = data.forecast.forecastday.map((dia: any) => ({
+         this.dias = data.forecast.forecastday.map((dia: any) => ({
           date: dia.date,
           temperatura: dia.day.avgtemp_c,
           icono: 'https:' + dia.day.condition.icon,
           precipitacion: dia.day.daily_chance_of_rain + '%'
         }));
-        console.log(this.dias); // Para ver si va bien
       },
       (error) => {
         console.error('Error al obtener el pronóstico', error);

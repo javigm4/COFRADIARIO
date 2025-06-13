@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class DiarioService {
   private apiUrl = 'http://51.68.70.108:8000/api/articulos'; // URL correcta de la API
-  //private apiUrl = `${environment.apiUrl}/articulos`;
 
   constructor(private http: HttpClient) {}
 

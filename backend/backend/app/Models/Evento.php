@@ -15,7 +15,7 @@ class Evento extends Model
 
     public function cofradia()
     {
-        return $this->belongsTo(Cofradias::class, 'cofradia');
+        return $this->belongsTo(Cofradia::class, 'cofradia');
     }
 
 }

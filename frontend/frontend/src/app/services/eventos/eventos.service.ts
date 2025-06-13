@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EventosService {
-  private apiUrl = 'http://51.68.70.108:8000/api/eventos';  // URL correcta de la API
-  //private apiUrl = `${environment.apiUrl}/eventos`;
+  private apiUrl = 'http://51.68.70.108:8000/api/eventos';
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +14,8 @@ export class EventosService {
   getEventos(): Observable<any> {
   return this.http.get<any>(this.apiUrl, { withCredentials: true });
   }
-//para obtener solo un evento (para el boton editar)
+
+  //para obtener solo un evento (para el boton editar)
 obtenerEvento(eventoId: number): Observable<any> {
   return this.http.get<any>(`${this.apiUrl}/${eventoId}`);
 }

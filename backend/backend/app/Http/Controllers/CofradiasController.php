@@ -12,12 +12,12 @@ class CofradiasController extends Controller
      * @return \Illuminate\Http\Response
      */
    public function index()
-{
-    $cofradias = Cofradia::all();
+    {
+        $cofradias = Cofradia::all();
 
 
-    return response()->json($cofradias);
-}
+        return response()->json($cofradias);
+    }
 
 
 

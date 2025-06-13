@@ -159,7 +159,6 @@ class ArticulosController extends Controller
                     'titular' => $articulo->titular,
                 ]);
 
-
         return response()->json(['message' => 'Articulo eliminado correctamente'], 200);
     }
 }

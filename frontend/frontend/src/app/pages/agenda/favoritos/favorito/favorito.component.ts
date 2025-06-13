@@ -11,8 +11,8 @@ import { Favorito, Cofradia, Evento } from '../../../interfaces/agenda';
 })
 export class FavoritoComponent {
   @Input() favorito!: Favorito;
-  @Input() eventos: Evento[] = []; // Para obtener el nombre del evento
-  @Input() cofradias: Cofradia[] = []; // Para obtener el nombre de la cofradía
+  @Input() eventos: Evento[] = [];
+  @Input() cofradias: Cofradia[] = [];
 
   @Output() eliminarFavorito = new EventEmitter<number>();
 
@@ -20,7 +20,7 @@ export class FavoritoComponent {
   if (!this.eventos || this.eventos.length === 0 || !this.favorito.id_evento) {
     return 'Evento desconocido';
   }
-  console.log('Buscando evento para favorito:', this.favorito); // 🔍 Debugging
+  console.log('Buscando evento para favorito:', this.favorito);
   const evento = this.eventos.find(e => e.id === this.favorito.id_evento);
   return evento ? evento.nombre : 'Evento desconocido';
 }
@@ -46,7 +46,7 @@ getFecha(): string {
 }
 
 onEliminar(): void {
-  this.eliminarFavorito.emit(this.favorito.id); // ✅ Aquí garantizamos que se envía un número
+  this.eliminarFavorito.emit(this.favorito.id);
 }
 
 }

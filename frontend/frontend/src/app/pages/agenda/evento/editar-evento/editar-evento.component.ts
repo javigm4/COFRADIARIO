@@ -9,7 +9,7 @@ import { Router } from '@angular/router'; // Importar Router para la navegación
   styleUrl: './editar-evento.component.css'
 })
 export class EditarEventoComponent {
-evento: any = {};  // Almacenará los datos del evento
+evento: any = {};
 
   constructor(private route: ActivatedRoute, private eventosService: EventosService, private router : Router) {}
 

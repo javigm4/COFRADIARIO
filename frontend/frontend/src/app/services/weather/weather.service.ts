@@ -11,9 +11,8 @@ export class WeatherService {
   private apiKey = "dfa33c8d7d8b42b992701547250705";
 
   constructor(private http: HttpClient) {}
-  // Método para obtener los datos del pronóstico para los próximos 7 días
-  getForecast(city: string): Observable<any> {
-    const url = `${this.apiUrl}?key=${this.apiKey}&q=${city}&days=7`;  // 'days=7' para pronóstico de 7 días
+   getForecast(city: string): Observable<any> {
+    const url = `${this.apiUrl}?key=${this.apiKey}&q=${city}&days=7`;
     return this.http.get<any>(url);
   }
 }

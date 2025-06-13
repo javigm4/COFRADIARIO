@@ -17,7 +17,7 @@
 .divider {
   border: 0;
   height: 2px;
-  background: #d4af37; /* Dorado */
+  background: #d4af37;
   margin: 15px 0;
 }
 
@@ -87,12 +87,12 @@
   margin: 20px auto;
   width: 100%;
   max-width: 400px;
-  background: linear-gradient(135deg, #003366, #005599); /* Azul elegante */
+  background: linear-gradient(135deg, #003366, #005599);
   padding: 18px;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  border: 3px solid #d4af37; /* Bordes dorados */
+  border: 3px solid #d4af37;
 }
 
 .fecha-container:hover {
@@ -108,7 +108,7 @@
 
 .fecha-icon i {
   font-size: 40px;
-  color: #d4af37; /* Icono dorado */
+  color: #d4af37;
 }
 
 .fecha-text {
@@ -127,20 +127,17 @@
 
 
 @media (max-width: 768px) {
-  /* Ajuste general */
   .container {
     width: 95%;
     padding: 10px;
   }
 
-  /* Título de la lista de eventos */
   .titulo-eventos {
     font-size: 24px;
     letter-spacing: 1px;
     margin-bottom: 15px;
   }
 
-  /* Tarjetas de eventos más compactas */
   .evento-card {
     width: 90%;
     max-width: none;
@@ -151,10 +148,9 @@
   }
 
   .evento-card:hover {
-    transform: none; /* Elimina el efecto de escala en móviles */
+    transform: none;
   }
 
-  /* Fecha del evento centrada */
   .fecha-container {
     max-width: 100%;
     padding: 12px;
@@ -173,7 +169,6 @@
     font-size: 22px;
   }
 
-  /* Texto del evento más legible */
   .card-title {
     font-size: 20px;
   }
@@ -182,7 +177,6 @@
     font-size: 14px;
   }
 
-  /* Botones y acciones más accesibles */
   .acciones {
     flex-direction: column;
     gap: 8px;
@@ -196,3 +190,14 @@
   }
 }
 
+/* Entre 1231px y 1343px: primer paso de reducción */
+@media (max-width: 1340px) and (min-width: 1144px) {
+
+.fecha {
+  font-size: 16px !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+
+}

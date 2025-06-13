@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 })
 export class CofradiasService {
   private apiUrl = 'http://51.68.70.108:8000/api/cofradias'; // Ajusta tu URL
-  //private apiUrl = `${environment.apiUrl}/cofradias`;
 
   constructor(private http: HttpClient) {}
 

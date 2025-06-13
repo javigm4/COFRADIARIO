@@ -10,9 +10,6 @@ use App\Models\Articulo;
 
 class ArticuloTest extends TestCase
 {
-
-
-
     public function test_se_puede_crear_un_articulo()
     {
         $usuario = \App\Models\User::factory()->create();

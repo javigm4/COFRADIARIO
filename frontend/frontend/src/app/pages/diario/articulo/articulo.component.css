@@ -25,9 +25,7 @@
 }
 
 .cuerpo-articulo {
-  font-family: 'Georgia', serif;
-  font-size: 18px;
-  line-height: 1.6;
+  font-family: 'Trebuchet MS', sans-serif;  line-height: 1.6;
   text-align: justify;
   color: #444;
 }

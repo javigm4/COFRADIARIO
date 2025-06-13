@@ -3,7 +3,6 @@
     <h2 class="card-title">{{ evento.nombre }}</h2>
     <hr class="divider" />
 
-    <!-- Fecha destacada -->
     <div class="fecha-container">
       <div class="fecha-content">
         <div class="fecha-icon">
@@ -17,7 +16,7 @@
 
     <p class="card-text">
       <i class="bi bi-people"></i> <strong>Cofradía:</strong>
-      {{ cofradiaNombre }} <!-- problema -->
+      {{ cofradiaNombre }}
     </p>
 
     @if (role == 'cofradia' && nombreUsuario == cofradiaNombre) {

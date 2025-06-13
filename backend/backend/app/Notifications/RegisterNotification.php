@@ -18,7 +18,7 @@ class RegisterNotification extends Notification
     // Determina el canal de notificación (correo)
     public function via($notifiable)
     {
-        return ['mail']; // Solo usaremos el canal de correo
+        return ['mail'];
     }
 
     // Configura el mensaje de correo

@@ -27,7 +27,6 @@ namespace App\Http\Controllers;
                     'status' => 200,
                     'count' => $eventos->count(),
                 ]);
-
                 return response()->json(['status' => 200, 'eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
             }
 
@@ -62,7 +61,7 @@ namespace App\Http\Controllers;
                     'nombre' => 'required|string|max:255',
                     'cofradia' => 'required|integer|exists:cofradias,id',
                     'fecha' => 'required|date',
-                    'hora' => 'required|date_format:H:i', // Asegura que la hora e  sté en formato HH:MM
+                    'hora' => 'required|date_format:H:i', // Asegura que la hora esté en formato HH:MM
                 ]);
 
                 $fechaCompleta = $request->fecha . ' ' . $request->hora;

@@ -5,19 +5,19 @@
   margin: 0 auto;
   gap: 100px;
   overflow: hidden;
-  height: auto;
+  height: 89vh; /* Se reduce un poco la altura total del contenedor */
 }
 
 .fotologin {
-  width: 500px; /* Ajusta el tamaño de las imágenes */
-  height: 89vh;
+  width: 400px; /* Ancho fijo menor para hacer las imágenes más compactas */
+  height: 90vh; /* Sigue ocupando el 90% de la altura del viewport */
   background-size: cover;
   background-position: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
-
 }
+
 
 .fotologin:hover {
   transform: scale(1.1);
@@ -67,7 +67,7 @@
   opacity: 1;
 }
 
-
+/* Resto de tu CSS se mantiene igual */
 #ar2 {
   background-image: url(../../../../public/images/imagenes/mayordolor.jpg);
 }
@@ -90,26 +90,27 @@
 }
 
 .btn {
-    background-color: #5b420d; /* Marrón */
-    color: white;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    margin: 20px;
-    width: 300px;
+  background-color: #5b420d; /* Marrón */
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  margin: 20px;
+  width: 300px;
 }
 
 input {
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    }
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
 
 label {
-  padding:10px;
+  padding: 10px;
   font-weight: bold;
 }
 
 h2 {
-   font-weight: bold;
+  font-weight: bold;
 }
 
+/* Media Queries se mantienen según lo necesario */
 @media (max-width: 768px) {
   /* Oculta las imágenes grandes SOLO en móviles */
   #ar1, #ar2 {
@@ -123,6 +124,7 @@ h2 {
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100vh;
     gap: 20px;
   }
 
@@ -153,17 +155,17 @@ h2 {
   }
 
   #arMovil:hover {
-  transform: none !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
+    transform: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
 
-#arMovil:hover::before {
-  background-color: transparent !important;
-  transform: none !important;
-}
+  #arMovil:hover::before {
+    background-color: transparent !important;
+    transform: none !important;
+  }
 
- p {
+  p {
     display: block;
     width: 90%; /* Mismo ancho que la imagen */
     margin: 5px auto; /* Centrado con menos margen */
@@ -172,11 +174,7 @@ h2 {
     text-align: center; /* Centrado */
     font-style: italic; /* Cursiva para dar estilo de pie de foto */
   }
-
 }
-
-
-
 
 /* MANTENER imágenes en PC */
 @media (min-width: 769px) {
@@ -185,8 +183,9 @@ h2 {
   }
 
   p {
- display: none;
-}
+    display: none;
+  }
+
   #arMovil {
     display: none; /* No mostrar la imagen especial para móviles */
   }

@@ -31,14 +31,13 @@ export class EventoComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.calculaCofradiaNombre(); // Calcula el nombre de la cofradía
-    const usuario = this.authService.getUsuarioData(); // Obtiene el usuario desde localStorage
+    this.calculaCofradiaNombre();
+    const usuario = this.authService.getUsuarioData();
     if (usuario) {
       this.role = usuario.role;
       this.nombreUsuario = usuario.name;
     } else {
-      // Si no hay usuario, asigna valores por defecto para que los botones no se muestren
-      this.role = ''; // o cualquier valor que tu lógica interprete como "sin usuario"
+      this.role = '';
       this.nombreUsuario = '';
     }
   }
@@ -49,7 +48,6 @@ export class EventoComponent implements OnInit, OnChanges {
     }
   }
 
-  //problema --------------
   calculaCofradiaNombre(): void {
     if (this.cofradias && this.evento) {
       console.log('Cofradías:', this.cofradias);
@@ -59,7 +57,7 @@ export class EventoComponent implements OnInit, OnChanges {
       );
       this.cofradiaNombre = cofradia ? cofradia.nombre : 'Desconocida';
     }
-  } //problema --------------
+  }
 
   eliminarEvento(eventoId: number): void {
     this.eventosService.eliminarEvento(eventoId).subscribe(() => {

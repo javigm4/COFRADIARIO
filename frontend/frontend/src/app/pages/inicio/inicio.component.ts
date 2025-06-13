@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { WeatherService } from '../../services/weather/weather.service'; // Importar el servicio de clima
-import { TiempoDia } from '../../widgets/interfaces/tiempo-dia.interface'; // Importar la interfaz TiempoDia
+import { WeatherService } from '../../services/weather/weather.service';
+import { TiempoDia } from '../../widgets/interfaces/tiempo-dia.interface';
 
 @Component({
   selector: 'app-inicio',

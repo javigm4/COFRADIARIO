@@ -8,10 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
   private apiUrl = 'http://51.68.70.108:8000/api/login';
-  //private apiUrl = `${environment.apiUrl}/login`;
 
   private apiUrlRegister = 'http://51.68.70.108:8000/api/register';
-  //private apiUrlRegister = `${environment.apiUrl}/register`;
 
   constructor(private http: HttpClient) {}
 

@@ -5,19 +5,20 @@
   margin: 0 auto;
   gap: 100px;
   overflow: hidden;
-  height: auto;
+  height: 89vh; /* Se reduce un poco la altura total del contenedor */
 }
 
+
 .fotologin {
-  width: 500px; /* Ajusta el tamaño de las imágenes */
-  height: 89vh;
+  width: 400px; /* Ancho fijo menor para hacer las imágenes más compactas */
+  height: 90vh; /* Sigue ocupando el 90% de la altura del viewport */
   background-size: cover;
   background-position: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
-
 }
+
 .fotologin:hover {
   transform: scale(1.1);
   z-index: 10;

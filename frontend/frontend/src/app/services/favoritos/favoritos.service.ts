@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class FavoritosService {
   private apiUrl = 'http://51.68.70.108:8000/api/favoritos'; // URL correcta de la API
-  //private apiUrl = `${environment.apiUrl}/favoritos`;
 
   constructor(private http: HttpClient) {}
 

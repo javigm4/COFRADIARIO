@@ -12,21 +12,18 @@ import { AuthService } from '../../../../services/auth/auth.service';
 })
 export class ListafavoritosComponent {
   @Input()
-  public favoritos: Favorito[] = []; // Array de favoritos
+  public favoritos: Favorito[] = [];
   @Input()
-  public eventos: Evento[] = []; // Almacena los eventos
+  public eventos: Evento[] = [];
   @Input()
-  public cofradias: Cofradia[] = []; // Almacena las cofradías y sus datos
+  public cofradias: Cofradia[] = [];
 
-  // Agrega este Input para que se pueda enlazar desde el padre
-  @Input()
+   @Input()
   public usuario: any;
 
-  // Puedes mantener o usar usuarioId según necesites
-  public usuarioId: any;
+   public usuarioId: any;
 
-  @Output() eliminarFavorito: EventEmitter<number> = new EventEmitter<number>(); // Evento para eliminar el favorito
-
+  @Output() eliminarFavorito: EventEmitter<number> = new EventEmitter<number>();
   constructor(
     private favoritosService: FavoritosService,
     private authService: AuthService
@@ -34,10 +31,8 @@ export class ListafavoritosComponent {
 
   ngOnInit(): void {
     if (this.usuario) {
-      // Si el usuario ya viene desde el componente padre, úsalo para asignar el usuarioId
       this.usuarioId = this.usuario.id;
     } else {
-      // O si no se pasa, la puedes obtener del AuthService
       const storedUser = this.authService.getUsuarioData();
       if (storedUser) {
         this.usuarioId = storedUser.id;
@@ -48,7 +43,7 @@ export class ListafavoritosComponent {
 
   onEliminar(favoritoId: number): void {
     console.log('Eliminar favorito con ID:', favoritoId);
-    this.eliminarFavorito.emit(favoritoId); // Emite solo el ID del favorito
+    this.eliminarFavorito.emit(favoritoId);
   }
 
 

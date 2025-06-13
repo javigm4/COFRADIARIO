@@ -1,9 +1,7 @@
 
 
-/* ==== asegúrate de que #detalles y .weather-icon sigan inline === */
-.card-body {
-  /* sólo para que detalles e imagen sigan en línea */
-  display: flex;
+ .card-body {
+   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #e0e0e0;
@@ -17,26 +15,23 @@
   margin-right: 10px;
 }
 
-/* ==== detalles apilados y centrados ==== */
-#detalles {
+ #detalles {
   display: inline-block;
   text-align: left;
 }
 
-/* ==== temperatura ==== */
-.temp {
+ .temp {
   font-size: 1.2rem;
   color: #333;
   margin: 0;
   padding: 0;
 }
 
-/* ==== precipitación: color contrastado y bloque separado ==== */
-.precip {
+ .precip {
   font-size: 0.9rem;
-  color: #007bff;       /* azul para que contraste */
-  display: block;       /* fuerza nueva línea debajo de la temperatura */
-  margin-top: 4px;      /* un pequeño espacio */
+  color: #007bff;
+  display: block;
+  margin-top: 4px;
 }
 
 .card-body {
@@ -54,8 +49,7 @@ h5{
 }
 
 
-/* ==== Animación del icono al cargar ==== */
-@keyframes icon-pop {
+ @keyframes icon-pop {
   0%   { transform: scale(0); opacity: 0; }
   60%  { transform: scale(1.2); opacity: 1; }
   100% { transform: scale(1); }
@@ -106,7 +100,7 @@ h5 {
 
   /* Tarjeta de clima con fondo blanco y sombras suaves */
   .card {
-    width: 90vw; /* Ancho casi completo en móviles */
+    width: 90vw;
     max-width: 380px;
     margin: 1rem auto;
     border-radius: 16px;

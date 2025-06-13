@@ -31,7 +31,7 @@ class FavoritosController extends Controller
             'id_evento' => 'required|integer|exists:eventos,id', // Verifica que el evento exista
         ]);
 
-// Comprobamos si ya existe ese favorito
+    // Comprobamos si ya existe ese favorito
     $favoritoExistente = Favorito::where('id_usuario', $request->id_usuario)
                                 ->where('id_evento', $request->id_evento)
                                 ->first();

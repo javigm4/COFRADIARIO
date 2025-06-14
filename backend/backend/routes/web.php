@@ -72,3 +72,6 @@ Route::get('/debug-mail-config', function() {
         'SENDGRID_API_KEY' => env('SENDGRID_API_KEY'),
     ]);
 });
+
+
+

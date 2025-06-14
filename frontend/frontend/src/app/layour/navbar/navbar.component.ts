@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     }
 
     this.http
-      .post('http://51.68.70.108:8000/api/logout', {}, {
+      .post('http://127.0.0.1:8000/api/logout', {}, {
         headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
       })
       .subscribe(

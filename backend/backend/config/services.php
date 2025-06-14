@@ -30,9 +30,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    // → Añade este bloque para SendGrid:
     'sendgrid' => [
         'api_key' => env('SENDGRID_API_KEY'),
+    ],
+
+    'mailjet' => [
+        'public_key' => env('MAILJET_PUBLIC_KEY'),
+        'private_key' => env('MAILJET_PRIVATE_KEY'),
     ],
 
 ];

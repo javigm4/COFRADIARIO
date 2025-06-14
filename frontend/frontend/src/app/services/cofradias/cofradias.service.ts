@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CofradiasService {
-  private apiUrl = 'http://51.68.70.108:8000/api/cofradias'; // Ajusta tu URL
+  private apiUrl = 'http://127.0.0.1:8000/api/cofradias'; // Ajusta tu URL
 
   constructor(private http: HttpClient) {}
 

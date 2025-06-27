@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+         $schedule->command('eventos:eliminar-pasados')->everyMinute(); //esto hace que los eventos pasados se eliminen automáticamente una vez al día
     }
 
     /**

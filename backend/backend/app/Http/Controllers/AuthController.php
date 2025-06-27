@@ -44,7 +44,7 @@ class AuthController extends Controller
         return response()->json([
             'data' => [
                 'accessToken' => $token,
-                'toke_type' => 'Bearer',
+                'token_type' => 'Bearer',
                 'user' => [
                     'id' => $user->id,
                     'name' => $user->name,
@@ -58,20 +58,20 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
-    {
+   public function register(Request $request)
+{
+    try {
         $request->validate([
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'name' => 'required|string|max:255',
         ]);
 
-        // Crear un nuevo usuario
         $usuario = new Usuario();
         $usuario->email = $request->email;
         $usuario->name = $request->name;
         $usuario->password = Hash::make($request->password);
 
-        // Generar un código aleatorio único
         do {
             $codigoAleatorio = rand(1111, 9999);
         } while (Usuario::where('codigo', $codigoAleatorio)->exists());
@@ -79,20 +79,19 @@ class AuthController extends Controller
         $usuario->codigo = $codigoAleatorio;
         $usuario->save();
 
-        Log::info('Usuario registrado: ', [
-            'status' => 200,
-            'usuario' => $usuario->name,
-            'email' => $usuario->email,
-            'rol' => $usuario->rol,
-        ]);
+        $usuario->sendEmailVerificationNotification();
 
-        try {
-            Notification::route('mail', 'javierguerreromontero1@gmail.com')
-                ->notify(new RegisterNotification($usuario));
-        } catch (\Exception $e) {
-            Log::error('Error al enviar correo de registro: ' . $e->getMessage());
-        }
+        return response()->json(['message' => 'Usuario registrado con éxito'], 201);
+
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json(['errors' => $e->errors()], 422);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Error en el registro',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
 
 
     public function logout(Request $request)

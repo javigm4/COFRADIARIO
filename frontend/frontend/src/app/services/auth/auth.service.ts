@@ -20,8 +20,8 @@ export class AuthService {
     }); //hacemos que postee el formdata al login del backend
   }
 
-  register(formData: FormData): Observable<any> {
-    return this.http.post<any>(this.apiUrlRegister, formData, {
+  register(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrlRegister, data, {
       withCredentials: true,
     });
   }

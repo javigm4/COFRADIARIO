@@ -17,7 +17,7 @@ services:
       context: ./backend/backend
       dockerfile: Dockerfile
     ports:
-      - "8000:80"  # Solo exponer backend para acceso externo
+      - "8000:80"
     depends_on:
       - db
     environment:
@@ -54,17 +54,28 @@ services:
         php artisan db:seed --force &&
         apache2-foreground
       '
-
-
     networks:
       - app_network
+
+  scheduler:
+    build:
+      context: ./backend/backend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    volumes:
+      - ./backend/backend:/var/www/html
+    networks:
+      - app_network
+    entrypoint: >
+      bash -c "while true; do php artisan schedule:run --no-interaction; sleep 60; done"
 
   frontend:
     build:
       context: ./frontend/frontend
       dockerfile: Dockerfile
     ports:
-      - "4200:80"  # Aquí se sirve con Nginx o similar en Dockerfile
+      - "4200:80"
     depends_on:
       - backend
     networks:

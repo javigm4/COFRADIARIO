@@ -17,11 +17,12 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    const formData = new FormData();
-    formData.append('email', this.email);
-    formData.append('name', this.name);
-    formData.append('password', this.password);
-    formData.append('password_confirmation', this.password_confirmation);
+    const formData = {
+      email: this.email,
+      name: this.name,
+      password: this.password,
+      password_confirmation: this.password_confirmation,
+    };
 
     this.authService.register(formData).subscribe(
       (response) => {
@@ -31,12 +32,18 @@ export class RegisterComponent {
         this.router.navigate(['/login']);
       },
       (error) => {
+        console.error('Error al registrar:', error);
 
+        if (error.status === 422 && error.error.errors) {
+          const errores = error.error.errors;
+          const primerError = Object.values(errores)[0] as string[];
+          alert('Ocurrió un error al registrarse: ' + primerError[0]);
+        } else {
           alert(
-            'Ocurrió un error al registrarse: ' + error.error.message ||
-              'Error desconocido'
+            'Ocurrió un error al registrarse: ' +
+              (error.error?.message || error.message || 'Error desconocido')
           );
-
+        }
       }
     );
   }

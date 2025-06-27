@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,34 +10,37 @@ export class EventosService {
 
   constructor(private http: HttpClient) {}
 
-  // Método para obtener eventos desde la API
+  // Obtener todos los eventos
   getEventos(): Observable<any> {
-  return this.http.get<any>(this.apiUrl, { withCredentials: true });
+    return this.http.get<any>(this.apiUrl);
   }
 
-  //para obtener solo un evento (para el boton editar)
-obtenerEvento(eventoId: number): Observable<any> {
-  return this.http.get<any>(`${this.apiUrl}/${eventoId}`);
-}
+  // Obtener un solo evento por ID
+  obtenerEvento(eventoId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${eventoId}`);
+  }
 
-
-  // Método para eliminar un evento
+  // Eliminar evento
   eliminarEvento(eventoId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${eventoId}`);
   }
 
-  // Método para editar un evento
+  // Editar evento
   editarEvento(eventoId: number, eventoData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${eventoId}`, eventoData);
-}
-
-
-// Método para crear un nuevo evento
-  crearEvento(eventoData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, eventoData);
   }
 
-  // Método para obtener eventos por cofradía
+  // Crear evento (protegido)
+  crearEvento(eventoData: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.post<any>(this.apiUrl, eventoData, { headers });
+  }
+
+  // Obtener eventos por cofradía
   getEventosPorCofradia(cofradiaId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/cofradia/${cofradiaId}`);
   }

@@ -6,7 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\ArticulosController;
 use App\Http\Controllers\CofradiasController;
-
+use App\Models\User;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,3 +76,19 @@ Route::get('/debug-mail-config', function() {
 
 
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+
+Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
+    $user = User::findOrFail($id);
+
+    if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+        abort(403);
+    }
+
+    if (! $user->hasVerifiedEmail()) {
+        $user->markEmailAsVerified();
+    }
+
+    return redirect('http://localhost:4200/verificado');
+})->middleware(['signed'])->name('verification.verify');

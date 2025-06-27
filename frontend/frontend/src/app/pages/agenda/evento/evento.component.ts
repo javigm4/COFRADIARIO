@@ -70,31 +70,41 @@ export class EventoComponent implements OnInit, OnChanges {
     this.router.navigate(['/editar', eventoId]);
   }
 
- anadirFavorito(eventoId: number): void {
-  const usuario = this.authService.getUsuarioData();
-  if (!usuario) {
-    console.error('No se encontró el usuario.');
-    return;
+  anadirFavorito(eventoId: number): void {
+    const usuario = this.authService.getUsuarioData();
+    if (!usuario) {
+      console.error('No se encontró el usuario.');
+      return;
+    }
+
+    const favoritoData = {
+      id_usuario: usuario.id,
+      id_evento: eventoId,
+    };
+
+    this.favoritosService.anadirFavorito(favoritoData).subscribe(
+      (response) => {
+        console.log('Evento añadido a favoritos:', response);
+        window.location.reload();
+      },
+      (error) => {
+        if (error.status === 409) {
+          alert('Ya tienes en favoritos ese evento');
+        } else {
+          console.error('Error al añadir a favoritos:', error);
+        }
+      }
+    );
   }
 
-  const favoritoData = {
-    id_usuario: usuario.id,
-    id_evento: eventoId
-  };
+  formatFecha(fecha: string): string {
+    const date = new Date(fecha);
+    const dia = String(date.getDate()).padStart(2, '0');
+    const mes = String(date.getMonth() + 1).padStart(2, '0');
+    const año = date.getFullYear();
+    const hora = String(date.getHours()).padStart(2, '0');
+    const minutos = String(date.getMinutes()).padStart(2, '0');
 
-  this.favoritosService.anadirFavorito(favoritoData).subscribe(
-    (response) => {
-      console.log('Evento añadido a favoritos:', response);
-      window.location.reload();
-    },
-    (error) => {
-      if (error.status === 409) {
-        alert('Ya tienes en favoritos ese evento');
-      } else {
-        console.error('Error al añadir a favoritos:', error);
-      }
-    }
-  );
-}
-
+    return `${dia} / ${mes} / ${año} - ${hora}:${minutos}`;
+  }
 }

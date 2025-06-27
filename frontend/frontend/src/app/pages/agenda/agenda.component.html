@@ -14,7 +14,7 @@
           <input type="text" id="name" placeholder="Nombre del evento" required />
         </td>
         <td>
-          <input type="date" id="fecha" required />
+          <input type="date" id="fecha"   [attr.min]="minFechaHoy" required />
         </td>
         <td>
           <input type="time" id="hora" required />

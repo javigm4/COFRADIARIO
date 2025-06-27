@@ -64,7 +64,9 @@
 /* Contenedor lista de eventos */
 .contenedor-eventos {
   flex: 4.5;
-  background: linear-gradient(135deg, #a38e14, #e2d1c3);
+  background-image: url('../../../../public/images/imagenes/dorado.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 18px;
   border-radius: 10px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
@@ -73,6 +75,14 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
+
+.container.eventos-container {
+  max-width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 
 .contenedor-eventos::-webkit-scrollbar {
   width: 8px;
@@ -227,6 +237,7 @@
    .contenedor-eventos {
     overflow-y: visible;
     max-height: none;
+    border-radius: 0;
   }
 }
 

@@ -11,6 +11,7 @@ import { CrearArticuloComponent } from './pages/diario/articulo/crear-articulo/c
 import { SeleccionCofradiaComponent } from './pages/cofradias/seleccion-cofradia/seleccion-cofradia.component';
 import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { VerificadoComponent } from './verificado/verificado.component'; // Importa el componente de verificación
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent }, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'seleccionCofradia', component: SeleccionCofradiaComponent },
   { path: 'cofradia/:nombre', component: CofradiaComponent },
   { path: 'contacto', component: ContactoComponent },
+  { path: 'verificado', component: VerificadoComponent },
 
 
   { path: 'register', component: RegisterComponent },

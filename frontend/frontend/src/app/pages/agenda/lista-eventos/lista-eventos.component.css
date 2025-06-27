@@ -1,66 +1,159 @@
+/* ===== SECCIÓN DEL TÍTULO ===== */
+.seccion-titulo-eventos {
+  background: linear-gradient(90deg, #fffbea, #f5f1e0);
+  border-top: 4px solid #c9a84f;
+  border-bottom: 1px solid #e0d7c3;
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.03);
+  padding: 50px 0 30px;
+  box-sizing: border-box;
+}
+
+/* Título centrado y elegante */
 .titulo-eventos {
-  font-size: 32px;
-  font-weight: bold;
-  color:rgb(0, 0, 0);
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 700;
+  color: #ece4eb;
   text-align: center;
-  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  font-family: 'Playfair Display', serif;
   position: relative;
+  margin-bottom: 0;
 }
 
-@media (max-width: 768px) {
-   .favoritos-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
-  }
+.titulo-eventos::after {
+  content: "";
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: 4px;
+  background-color: #ffffff;
+  margin: 14px auto 0;
+  border-radius: 2px;
+}
 
-  #favoritos-btn {
-    background-color: #d4af37;
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 50px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
+/* ===== EVENTO CARD (RESPONSIVE) ===== */
+.evento-card {
+  width: clamp(260px, 100%, 450px);
+  background: #fefefe;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-  #favoritos-btn:hover {
-    background: #b8912c;
-    transform: scale(1.05);
-  }
+.evento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
 
-   .contenedor-favoritos {
-    display: none;
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    width: 300px;
-    max-height: 400px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-  }
+.card-title {
+  color: #1c1c1c;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
 
-   .contenedor-favoritos.activo {
-    display: block;
+.divider {
+  background: #c9a84f;
+  height: 2px;
+  border: none;
+  margin: 16px 0;
+}
+
+/* FECHA */
+.fecha-container {
+  background-color: #fffbea;
+  border-left: 4px solid #c9a84f;
+  padding: 18px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.icono-fecha {
+  color: #c9a84f;
+  font-size: 24px;
+}
+
+.linea-fecha,
+.linea-hora {
+  color: #1c1c1c;
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+/* BOTÓN DETALLES */
+.btn-detalles {
+  background-color: #7b1e1e;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 18px;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-detalles:hover {
+  background-color: #5a1414;
+}
+
+/* BOTÓN FAVORITOS */
+#favoritos-btn {
+  background-color: #c9a84f;
+  color: #1c1c1c;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+#favoritos-btn:hover {
+  background-color: #b59140;
+  transform: scale(1.05);
+}
+
+/* Contenedor de tarjetas de eventos */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0; /* Asegura que no haya scroll lateral */
+  box-sizing: border-box;
+}
+
+/* Columnas Bootstrap ajustadas manualmente */
+.col-md-6.col-lg-4 {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Vista tablet */
+@media (min-width: 768px) {
+  .col-md-6.col-lg-4 {
+    flex: 1 1 48%;
   }
 }
 
- @media (min-width: 769px) {
-  .favoritos-container {
-    display: none;
-  }
-
-  .contenedor-favoritos {
-    display: block;
-    position: static;
+/* Vista escritorio */
+@media (min-width: 992px) {
+  .col-md-6.col-lg-4 {
+    flex: 1 1 31.5%;
   }
 }

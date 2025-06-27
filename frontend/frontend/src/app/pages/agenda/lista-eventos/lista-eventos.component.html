@@ -1,15 +1,15 @@
-<div class="container mt-4">
-  <h1 class="text-center mb-4 titulo-eventos">Lista de Eventos</h1>
+<div class="container eventos-container mt-5">
+  <h1 class="titulo-eventos"> Próximos Eventos</h1>
 
   <div class="row">
     @for (evento of eventos; track evento.id) {
-    <div class="col-md-6 col-lg-4">
-      <app-evento
-        [evento]="evento"
-        [cofradias]="cofradias"
-        ></app-evento
-      >
-     </div>
+      <div class="col-md-6 col-lg-4 d-flex">
+        <app-evento
+          class="flex-fill"
+          [evento]="evento"
+          [cofradias]="cofradias"
+        ></app-evento>
+      </div>
     }
   </div>
 </div>

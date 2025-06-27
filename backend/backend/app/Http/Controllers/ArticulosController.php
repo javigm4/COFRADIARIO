@@ -51,6 +51,12 @@ class ArticulosController extends Controller
      */
     public function store(Request $request)
     {
+
+        if (! $request->user() || ! $request->user()->hasVerifiedEmail()) {
+        return response()->json([
+            'message' => 'Verifícate antes de manipular la web, esto nos ayuda a aumentar la seguridad',
+        ], 403);
+    }
         // Validar los datos antes de guardarlos
         $request->validate([
             'titular' => 'required|string|max:255',

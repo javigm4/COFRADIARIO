@@ -28,6 +28,10 @@ import { CofradiasComponent } from './pages/cofradias/cofradias.component';
 import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
 import { SeleccionCofradiaComponent } from './pages/cofradias/seleccion-cofradia/seleccion-cofradia.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { VerificadoComponent } from './verificado/verificado.component';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -53,6 +57,7 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
     CofradiaComponent,
     SeleccionCofradiaComponent,
     ContactoComponent,
+    VerificadoComponent,
 
   ],
   imports: [

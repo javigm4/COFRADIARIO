@@ -1,61 +1,133 @@
+/* === TARJETA PRINCIPAL DE EVENTO === */
 .evento-card {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 10px;
-  border: none;
+  width: clamp(280px, 90%, 450px); /* Se ajusta progresivamente */
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 
 .evento-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.015);
 }
 
 .divider {
-  border: 0;
-  height: 2px;
+  height: 1.5px;
   background: #d4af37;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .card-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   color: #5b420d;
   text-align: center;
 }
 
 .card-text {
-  font-size: 16px;
+  font-size: 14px;
   color: #333;
+  word-break: break-word;
 }
 
+/* === FECHA Y BOTÓN DETALLES === */
+.fecha-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 12px;
+  padding: 12px;
+  background: #003b80;
+  border: 2px solid #d4af37;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  margin-top: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.fecha-bloque {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.icono-fecha {
+  font-size: 22px;
+  color: #d4af37;
+  flex-shrink: 0;
+}
+
+.fecha-texto {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.linea-fecha,
+.linea-hora {
+  font-size: 15px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.linea-fecha {
+  font-weight: bold;
+}
+
+.btn-detalles {
+  background-color: #5b420d;
+  color: white;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-detalles:hover {
+  background-color: #3e2d08;
+  transform: scale(1.05);
+}
+
+/* === ACCIONES COFRADÍA === */
 .acciones {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .btn-danger,
 .btn-primary {
-  padding: 8px 15px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
+/* === BOTÓN FAVORITO === */
 .btn-favorito {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: 8px 16px;
+  font-size: 16px;
   font-weight: bold;
-  border-radius: 50px;
+  border-radius: 40px;
   background: #d4af37;
   color: white;
   border: none;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
 }
 
@@ -67,12 +139,13 @@
 .favorito-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
+/* === MENSAJE DE ERROR === */
 .error-container {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .error-text {
@@ -80,97 +153,31 @@
   font-weight: bold;
 }
 
-.fecha-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px auto;
-  width: 100%;
-  max-width: 400px;
-  background: linear-gradient(135deg, #003366, #005599);
-  padding: 18px;
-  border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  border: 3px solid #d4af37;
-}
-
-.fecha-container:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-}
-
-.fecha-content {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.fecha-icon i {
-  font-size: 40px;
-  color: #d4af37;
-}
-
-.fecha-text {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  text-align: left;
-}
-
-.fecha {
-  font-size: 26px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .container {
-    width: 95%;
-    padding: 10px;
-  }
-
-  .titulo-eventos {
-    font-size: 24px;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-  }
-
   .evento-card {
-    width: 90%;
-    max-width: none;
-    margin: 15px auto;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    width: 95%;
+    padding: 14px;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   }
 
-  .evento-card:hover {
-    transform: none;
+  .linea-fecha,
+  .linea-hora {
+    font-size: 17px; /* ← Más grande para legibilidad */
   }
 
-  .fecha-container {
-    max-width: 100%;
-    padding: 12px;
-    font-size: 18px;
+  .icono-fecha {
+    font-size: 26px; /* ← Ícono de calendario más notorio */
   }
 
-  .fecha-icon i {
-    font-size: 30px;
-  }
-
-  .fecha-text {
-    font-size: 20px;
-  }
-
-  .fecha {
-    font-size: 22px;
+  .btn-detalles {
+    font-size: 16px;  /* ← Botón más legible y usable */
+    padding: 10px 16px;
   }
 
   .card-title {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .card-text {
@@ -179,25 +186,13 @@
 
   .acciones {
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .btn-favorito {
-    font-size: 16px;
+    font-size: 15px;
     width: 100%;
     padding: 12px;
-    border-radius: 30px;
+    border-radius: 25px;
   }
-}
-
-/* Entre 1231px y 1343px: primer paso de reducción */
-@media (max-width: 1340px) and (min-width: 1144px) {
-
-.fecha {
-  font-size: 16px !important;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-
-
 }

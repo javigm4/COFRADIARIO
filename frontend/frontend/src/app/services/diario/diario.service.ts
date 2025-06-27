@@ -28,6 +28,11 @@ export class DiarioService {
 }
 
   crearArticulo(articuloData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, articuloData);
-  }
+  const token = localStorage.getItem('token');
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  return this.http.post<any>(this.apiUrl, articuloData, { headers });
+}
+
 }

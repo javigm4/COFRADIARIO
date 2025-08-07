@@ -1,20 +1,22 @@
 <div class="fondo-general">
-
-@if (!esCofradia) {
+  @if (!esCofradia) {
   <div class="favoritos-container">
     <button id="favoritos-btn" (click)="toggleFavoritos()">⭐ FAVORITOS</button>
   </div>
-}
-
-@if (esCofradia) {
+  } @if (esCofradia) {
   <div class="crear-evento-container">
     <table>
       <tr>
         <td>
-          <input type="text" id="name" placeholder="Nombre del evento" required />
+          <input
+            type="text"
+            id="name"
+            placeholder="Nombre del evento"
+            required
+          />
         </td>
         <td>
-          <input type="date" id="fecha"   [attr.min]="minFechaHoy" required />
+          <input type="date" id="fecha" [attr.min]="minFechaHoy" required />
         </td>
         <td>
           <input type="time" id="hora" required />
@@ -28,35 +30,70 @@
       </tr>
     </table>
   </div>
-}
+  }
 
-<div class="contenedor-principal">
-  <!-- Lista de Eventos -->
-  <div class="contenedor-eventos">
-    <app-lista-eventos
-      [eventos]="eventos"
-      [cofradias]="cofradias"
-    ></app-lista-eventos>
-  </div>
+  <div class="contenedor-principal">
 
-  <!-- Lista de Favoritos (Solo si el usuario está autenticado) -->
-  @if (!esCofradia) {
+
+    <!-- Lista de Eventos -->
+    <div class="contenedor-eventos">
+      <!-- NUEVO contenedor de filtros -->
+      <div class="barra-filtros">
+        <div class="filtro-izquierdo">
+          <label for="filtroCofradia">Filtrar por cofradía:</label>
+          <select
+            id="filtroCofradia"
+            class="filtro-cofradia"
+            (change)="seleccionarCofradia($event)"
+          >
+            <option [ngValue]="null">-- Todas --</option>
+            @for (cofradia of cofradiasEventos; track cofradia.id) {
+            <option value="{{ cofradia.id }}">{{ cofradia.nombre }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Línea separadora -->
+        <div class="linea-separadora"></div>
+
+        <div class="filtro-derecho">
+          <label for="filtromes">Filtrar por mes:</label>
+          <select
+            id="filtromes"
+            class="filtro-cofradia"
+            (change)="seleccionarMes($event)"
+          >
+            @for (mes of mesesAno; track mes.id) {
+            <option value="{{ mes.id }}">{{ mes.nombre }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <app-lista-eventos
+        [eventos]="eventos"
+        [cofradias]="cofradias"
+      ></app-lista-eventos>
+    </div>
+
+    <!-- Lista de Favoritos (Solo si el usuario está autenticado) -->
+    @if (!esCofradia) {
     <div class="contenedor-favoritos">
       @if (esUsuario) {
-        <app-listafavoritos
-          [favoritos]="favoritos"
-          [eventos]="eventos"
-          [cofradias]="cofradias"
-          [usuario]="usuario"
-          (eliminarFavorito)="onEliminar($event)"
-        >
-        </app-listafavoritos>
+      <app-listafavoritos
+        [favoritos]="favoritos"
+        [eventos]="eventos"
+        [cofradias]="cofradias"
+        [usuario]="usuario"
+        (eliminarFavorito)="onEliminar($event)"
+      >
+      </app-listafavoritos>
       } @else {
-        <a class="mensaje-login" routerLink="/login">
-          Inicia sesión para añadir a favoritos
-        </a>
+      <a class="mensaje-login" routerLink="/login">
+        Inicia sesión para añadir a favoritos
+      </a>
       }
     </div>
-  }
+    }
+  </div>
 </div>
-

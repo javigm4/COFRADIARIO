@@ -11,6 +11,6 @@ export class ListaEventosComponent {
 @Input() eventos: Evento[] = [];
 @Input() esCofradia: boolean = false;
 @Input() usuario: any = null;
-  @Input() cofradias: any[] = [];
+@Input() cofradias: any[] = [];
 
 }

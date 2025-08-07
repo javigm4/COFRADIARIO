@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './layour/navbar/navbar.component';
@@ -31,6 +30,8 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { VerificadoComponent } from './verificado/verificado.component';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 registerLocaleData(localeEs);
 
 @NgModule({
@@ -65,6 +66,7 @@ registerLocaleData(localeEs);
     AppRoutingModule,
     HttpClientModule, // Importar HttpClientModule para realizar peticiones HTTP
     FormsModule,  // ✅ AGREGA FormsModule AQUÍ
+    BrowserAnimationsModule,
   ],
   providers: [WeatherService,CookieService],
   bootstrap: [AppComponent]

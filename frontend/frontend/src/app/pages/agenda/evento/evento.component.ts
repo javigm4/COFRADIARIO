@@ -10,12 +10,26 @@ import { EventosService } from '../../../services/eventos/eventos.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FavoritosService } from '../../../services/favoritos/favoritos.service';
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-evento',
   standalone: false,
   templateUrl: './evento.component.html',
   styleUrls: ['./evento.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+    ]),
+  ],
 })
 export class EventoComponent implements OnInit, OnChanges {
   @Input() public evento!: Evento;

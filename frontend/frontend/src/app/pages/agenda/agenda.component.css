@@ -178,6 +178,8 @@
 
 /* Móviles */
 @media (max-width: 768px) {
+
+
   .favoritos-container {
     position: fixed;
     top: 10px;
@@ -241,6 +243,35 @@
   }
 }
 
+
+.barra-filtros {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border-bottom: 2px solid white; /* línea blanca como PRÓXIMOS EVENTOS */
+  gap: 16px;
+}
+
+.filtro-izquierdo,
+.filtro-derecho {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.linea-separadora {
+  width: 2px;
+  height: 60px;
+  background-color: white;
+  opacity: 0.8;
+}
+
+
+
+
 /* PC */
 @media (min-width: 769px) {
   .favoritos-container {
@@ -252,6 +283,57 @@
     position: static;
   }
 }
+
+/* Estilo para el select de filtro de cofradías */
+.filtro-cofradia {
+  background-color: #c9972f; /* dorado */
+  color: #ffffff; /* blanco */
+  border: 2px solid #7d5a11; /* marrón oscuro para borde */
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-family: 'Georgia', serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(125, 90, 17, 0.4);
+}
+
+/* Hover y foco para mejorar experiencia */
+.filtro-cofradia:hover,
+.filtro-cofradia:focus {
+  background-color: #7d5a11; /* más oscuro */
+  color: #f4e6c3; /* más claro */
+  outline: none;
+  border-color: #c9972f;
+  box-shadow: 0 0 8px #c9972f;
+}
+
+/* Para que las opciones también combinen */
+.filtro-cofradia option {
+  background-color: #c9972f;
+  color: #fff;
+  font-weight: 600;
+  font-family: 'Georgia', serif;
+}
+
+
+/* Contenedor del filtro para separar y dar espacio */
+.contenedor-eventos label {
+  font-weight: 700;
+  color: #7d5a11; /* color marrón oscuro (dorado/marrón de la imagen) */
+  margin-right: 10px;
+  font-family: 'Georgia', serif;
+}
+
+
+
+/* Opcional: si vas a hacer el filtro de fecha, puedes darle clase y reutilizar estilos */
+.filtro-fecha {
+  /* copia estilos similares a .filtro-cofradia */
+}
+
+
+
 
 /* =================== Animaciones =================== */
 @keyframes fadeInSlide {
@@ -275,3 +357,5 @@
     transform: translateY(-20px);
   }
 }
+
+

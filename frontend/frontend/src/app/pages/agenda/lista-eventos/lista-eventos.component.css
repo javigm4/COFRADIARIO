@@ -1,3 +1,4 @@
+
 /* ===== SECCIÓN DEL TÍTULO ===== */
 .seccion-titulo-eventos {
   background: linear-gradient(90deg, #fffbea, #f5f1e0);
@@ -12,6 +13,7 @@
 .titulo-eventos {
   font-size: clamp(28px, 5vw, 40px);
   font-weight: 700;
+  margin-top: -35px;
   color: #ece4eb;
   text-align: center;
   text-transform: uppercase;

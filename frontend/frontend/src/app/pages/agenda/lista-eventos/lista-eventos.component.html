@@ -1,7 +1,7 @@
 <div class="container eventos-container mt-5">
-  <h1 class="titulo-eventos"> Próximos Eventos</h1>
+  <h1 class="titulo-eventos">Próximos Eventos</h1>
 
-  <div class="row">
+  <div *ngIf="eventos.length > 0; else noEventos" class="row">
     @for (evento of eventos; track evento.id) {
       <div class="col-md-6 col-lg-4 d-flex">
         <app-evento
@@ -12,4 +12,13 @@
       </div>
     }
   </div>
+
+  <ng-template #noEventos>
+    <div class="no-eventos-container">
+      <p class="no-eventos-texto">
+        <i class="bi bi-calendar-x"></i>
+        No existen eventos
+      </p>
+    </div>
+  </ng-template>
 </div>

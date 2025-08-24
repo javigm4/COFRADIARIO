@@ -1,8 +1,10 @@
 export interface Evento {
   id: number;
   nombre: string;
-  cofradia: number,
+  cofradia: number;
   fecha: string;
+  detalles: string;
+  lugar:string;
 }
 
 export interface Cofradia {
@@ -22,6 +24,5 @@ export interface Favorito {
   fecha: string;
   id_usuario: number;
   id_evento: number;
-
 
 }

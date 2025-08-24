@@ -3,38 +3,9 @@
   <div class="favoritos-container">
     <button id="favoritos-btn" (click)="toggleFavoritos()">⭐ FAVORITOS</button>
   </div>
-  } @if (esCofradia) {
-  <div class="crear-evento-container">
-    <table>
-      <tr>
-        <td>
-          <input
-            type="text"
-            id="name"
-            placeholder="Nombre del evento"
-            required
-          />
-        </td>
-        <td>
-          <input type="date" id="fecha" [attr.min]="minFechaHoy" required />
-        </td>
-        <td>
-          <input type="time" id="hora" required />
-        </td>
-        <td></td>
-        <td colspan="2">
-          <button class="btn btn-crear-evento" (click)="crearEvento()">
-            Añadir Evento
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
   }
 
   <div class="contenedor-principal">
-
-
     <!-- Lista de Eventos -->
     <div class="contenedor-eventos">
       <!-- NUEVO contenedor de filtros -->
@@ -96,4 +67,45 @@
     </div>
     }
   </div>
+  @if (esCofradia) {
+  <div class="crear-evento-container">
+    <table>
+      <tr>
+        <td class="titulos">Nombre</td>
+        <td class="titulos">Fecha</td>
+        <td class="titulos">Hora</td>
+        <td class="titulos">Lugar</td>
+        <td class="titulos">Detalles</td>
+      </tr>
+      <tr>
+        <td>
+          <input
+            type="text"
+            id="name"
+            placeholder="Nombre del evento"
+            required
+          />
+        </td>
+        <td>
+          <input type="date" id="fecha" [attr.min]="minFechaHoy" required />
+        </td>
+        <td>
+          <input type="time" id="hora" required />
+        </td>
+        <td>
+          <input type="text" id="lugar" required />
+        </td>
+
+        <td>
+          <input type="textarea" id="detalles" required />
+        </td>
+        <td colspan="2">
+          <button class="btn btn-crear-evento" (click)="crearEvento()">
+            Añadir Evento
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  }
 </div>

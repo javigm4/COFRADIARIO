@@ -68,6 +68,8 @@ class EventosController extends Controller
             'cofradia' => 'required|integer|exists:cofradias,id',
             'fecha' => 'required|date',
             'hora' => 'required|date_format:H:i', // Asegura que la hora esté en formato HH:MM
+            'detalles' => 'required|string|max:255',
+            'lugar' => 'required|string|max:255',
         ]);
 
         $fechaCompleta = $request->fecha . ' ' . $request->hora;
@@ -77,6 +79,8 @@ class EventosController extends Controller
             'nombre' => $request->nombre,
             'cofradia' => $request->cofradia,
             'fecha' => $fechaCompleta, // Guardamos la fecha con la hora
+            'detalles'=> $request->detalles,
+            'lugar' => $request->lugar
         ]);
 
         Log::info('Evento creado', [
@@ -85,6 +89,8 @@ class EventosController extends Controller
             'nombre' => $evento->nombre,
             'cofradia' => $evento->cofradia,
             'fecha' => $evento->fecha,
+            'detalles' => $evento->detalles,
+            'lugar' => $evento->lugar
         ]);
 
         // Retornar respuesta JSON con código 201
@@ -108,6 +114,8 @@ class EventosController extends Controller
             'nombre' => 'required|string|max:255',
             'cofradia' => 'required|integer|exists:cofradias,id',
             'fecha' => 'required|date',
+            'detalles' => 'required|string|max:255',
+            'lugar' => 'required|string|max:255',
         ]);
 
         // Actualizar los datos del evento
@@ -115,6 +123,8 @@ class EventosController extends Controller
             'nombre' => $request->nombre,
             'cofradia' => $request->cofradia,
             'fecha' => $request->fecha,
+            'detalles'=> $request->detalles,
+            'lugar' => $request->lugar
         ]);
 
         Log::info('Evento actualizado', [
@@ -123,6 +133,8 @@ class EventosController extends Controller
             'nombre' => $evento->nombre,
             'cofradia' => $evento->cofradia,
             'fecha' => $evento->fecha,
+            'detalles'=> $request->detalles,
+            'lugar' => $request->lugar
         ]);
 
         return response()->json(['message' => 'Evento actualizado correctamente', 'evento' => $evento], 200);

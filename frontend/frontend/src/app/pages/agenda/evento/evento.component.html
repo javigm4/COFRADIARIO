@@ -1,42 +1,90 @@
+<div *ngIf="modalVisible" class="modal" (click)="cerrarModal($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-btn" (click)="cerrarModal($event)">&times;</span>
+
+    <h2 class="modal-title">{{ evento.nombre }}</h2>
+
+    <div class="modal-info-grid">
+      <div class="modal-info-item">
+        <i class="bi bi-people-fill"></i>
+        <span class="label">Cofradía:</span>
+        <span class="value">{{ cofradiaNombre }}</span>
+      </div>
+      <div class="modal-info-item">
+        <i class="bi bi-calendar-event"> </i>
+        <span class="label">Fecha:</span>
+        <span class="value">{{ formatFecha(evento.fecha).split(" - ")[0] }}</span>
+      </div>
+      <div class="modal-info-item">
+        <i class="bi bi-clock"></i>
+        <span class="label">Hora:</span>
+        <span class="value">{{ formatFecha(evento.fecha).split(" - ")[1] }}</span>
+      </div>
+      <div class="modal-info-item">
+        <i class="bi bi-geo-alt-fill"></i>
+        <span class="label">Lugar:</span>
+        <span class="value">{{ evento.lugar }}</span>
+      </div>
+    </div>
+
+    <div class="modal-description">
+      <h4>Detalles</h4>
+      <p>{{ evento.detalles }}</p>
+    </div>
+  </div>
+</div>
+
+
 <div class="card evento-card" @fadeIn>
   <div class="card-body">
     <h2 class="card-title">{{ evento.nombre }}</h2>
     <hr class="divider" />
 
     <!-- Fecha y botón en línea -->
-    <div class="fecha-container d-flex align-items-center justify-content-between">
+    <div
+      class="fecha-container d-flex align-items-center justify-content-between"
+    >
       <div class="fecha-bloque d-flex align-items-center gap-3">
         <i class="bi bi-calendar-event icono-fecha"></i>
         <div class="fecha-texto">
-          <div class="linea-fecha">{{ formatFecha(evento.fecha).split(' - ')[0] }}</div>
-          <div class="linea-hora">{{ formatFecha(evento.fecha).split(' - ')[1] }}</div>
+          <div class="linea-fecha">
+            {{ formatFecha(evento.fecha).split(" - ")[0] }}
+          </div>
+          <div class="linea-hora">
+            {{ formatFecha(evento.fecha).split(" - ")[1] }}
+          </div>
         </div>
       </div>
 
-      <button class="btn btn-detalles">
-        <i class="bi bi-info-circle"></i>
+      <button class="btn btn-detalles" (click)="abrirModal()">
+        <i class="bi bi-info-circle" ></i>
       </button>
     </div>
 
     <p class="card-text mt-3">
-      <i class="bi bi-people"></i> <strong>Cofradía:</strong> {{ cofradiaNombre }}
+      <i class="bi bi-people"></i> <strong>Cofradía:</strong>
+      {{ cofradiaNombre }}
+    </p>
+    <p class="card-text mt-3">
+<i class="bi bi-geo-alt-fill"></i> <strong>Lugar:</strong>
+      {{ evento.lugar }}
     </p>
 
     @if (role == 'cofradia' && nombreUsuario == cofradiaNombre) {
-      <div class="acciones">
-        <button class="btn btn-danger btn-sm" (click)="eliminarEvento(evento.id)">
-          <i class="bi bi-trash-fill"></i> Eliminar
-        </button>
-        <button class="btn btn-primary btn-sm" (click)="editarEvento(evento.id)">
-          <i class="bi bi-pencil-fill"></i> Editar
-        </button>
-      </div>
+    <div class="acciones">
+      <button class="btn btn-danger btn-sm" (click)="eliminarEvento(evento.id)">
+        <i class="bi bi-trash-fill"></i> Eliminar
+      </button>
+      <button class="btn btn-primary btn-sm" (click)="editarEvento(evento.id)">
+        <i class="bi bi-pencil-fill"></i> Editar
+      </button>
+    </div>
     } @else if (role == 'usuario') {
-      <div class="favorito-container">
-        <button (click)="anadirFavorito(evento.id)" class="btn btn-favorito">
-          <i class="bi bi-star-fill"></i> Añadir a favoritos
-        </button>
-      </div>
+    <div class="favorito-container">
+      <button (click)="anadirFavorito(evento.id)" class="btn btn-favorito">
+        <i class="bi bi-star-fill"></i> Añadir a favoritos
+      </button>
+    </div>
     }
   </div>
 </div>

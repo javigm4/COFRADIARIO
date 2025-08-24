@@ -21,6 +21,9 @@ export class AgendaComponent implements OnInit {
   cofradiasEventos: any[] = []; //es el filtro del nombre de las cofradias que tienen eventos
   todoslosEventos: any[] = []; //para guardar todos los eventos y poder filtrarlos por cofradia
   fechaFiltro: string | null = null;
+  cofradiaSeleccionadaId: number | null = null;
+mesSeleccionado: number | null = null;
+
   mesesAno = [
     { id: 0, nombre: 'Todos los meses' }, // Añadimos una opción para mostrar todos los eventos
     { id: 1, nombre: 'Enero' },
@@ -92,6 +95,9 @@ export class AgendaComponent implements OnInit {
       fecha: fechaInput,
       hora: horaInput,
       cofradia: cofradiaId,
+      detalles: (document.getElementById('detalles') as HTMLInputElement).value,
+      lugar: (document.getElementById('lugar') as HTMLInputElement).value,
+
     };
 
     this.eventosService.crearEvento(eventoData).subscribe(
@@ -139,38 +145,28 @@ export class AgendaComponent implements OnInit {
 
   // ----- F I L T R A R   E V E N T O S   P O R   C O F R A D Í A -----
   seleccionarCofradia(event: any): void {
-    const cofradiaSeleccionadaId = Number(event.target.value);
-    console.log(
-      '----------------------------------',
-      cofradiaSeleccionadaId,
-      '----------------------------------'
-    );
+  const valor = event.target.value;
+  this.cofradiaSeleccionadaId = valor ? Number(valor) : null;
+  this.aplicarFiltros();
+}
 
-    if (cofradiaSeleccionadaId) {
-      this.eventos = this.todoslosEventos.filter(
-        (evento) => evento.cofradia === cofradiaSeleccionadaId
-      );
-    } else {
-      // Mostrar todos los eventos si no hay selección
-      this.eventos = [...this.todoslosEventos];
-    }
-  }
+seleccionarMes(event: any): void {
+  const valor = event.target.value;
+  this.mesSeleccionado = valor ? Number(valor) : null;
+  this.aplicarFiltros();
+}
 
-  // ----- F I L T R A R   E V E N T O S   P O R   F E C H A -----
-  seleccionarMes(event: any): void {
-  const mesSeleccionado = Number(event.target.value);
+aplicarFiltros(): void {
+  this.eventos = this.todoslosEventos.filter((evento) => {
+    const coincideCofradia =
+      !this.cofradiaSeleccionadaId ||
+      evento.cofradia === this.cofradiaSeleccionadaId;
 
-    if (mesSeleccionado === 0) {
-      this.eventos = [...this.todoslosEventos];
-      return;
-    } else if (mesSeleccionado) {
-      this.eventos = this.todoslosEventos.filter((evento) => {
-        const fechaEvento = new Date(evento.fecha);
-        return fechaEvento.getMonth() + 1 === Number(mesSeleccionado);
-      });
-    } else {
-      // Mostrar todos los eventos si no hay selección
-      this.eventos = [...this.todoslosEventos];
-    }
-  }
+    const coincideMes =
+      !this.mesSeleccionado || this.mesSeleccionado === 0 ||
+      (new Date(evento.fecha).getMonth() + 1) === this.mesSeleccionado;
+
+    return coincideCofradia && coincideMes;
+  });
+}
 }

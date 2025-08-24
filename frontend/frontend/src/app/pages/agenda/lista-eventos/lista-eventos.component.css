@@ -1,3 +1,28 @@
+.no-eventos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  border-radius: 12px;
+  box-shadow:  0 10px 10px rgba(231, 229, 229, 0.08);
+  margin-top: 20px;
+}
+
+.no-eventos-texto {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #302525;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-eventos-texto i {
+  color: #d9534f; /* Rojo suave */
+  font-size: 1.6rem;
+}
+
 
 /* ===== SECCIÓN DEL TÍTULO ===== */
 .seccion-titulo-eventos {

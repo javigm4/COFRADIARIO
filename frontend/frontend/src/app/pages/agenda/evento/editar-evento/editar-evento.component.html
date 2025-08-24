@@ -20,8 +20,26 @@
       name="fecha"
     />
   </div>
-
-
+  <div class="mb-3">
+    <label for="lugar" class="form-label">Lugar del evento:</label>
+    <input
+      id="lugar"
+      type="text"
+      class="form-control"
+      [(ngModel)]="evento.lugar"
+      name="lugar"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="detalles" class="form-label">Detalles:</label>
+    <textarea
+      id="detalles"
+      type="textarea"
+      class="form-control"
+      [(ngModel)]="evento.detalles"
+      name="detalles"
+    ></textarea>
+  </div>
 
   <button class="btn btn-success" (click)="guardarCambios()">
     Guardar cambios

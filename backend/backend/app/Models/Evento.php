@@ -11,7 +11,7 @@ class Evento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'cofradia', 'fecha'];
+    protected $fillable = ['nombre', 'cofradia', 'fecha', 'detalles','lugar'];
 
     public function cofradia()
     {

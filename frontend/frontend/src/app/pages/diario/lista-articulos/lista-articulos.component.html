@@ -1,0 +1,10 @@
+<div class="lista-articulos container">
+
+  <div class="row">
+    @for (articulo of articulos; track articulo.id) {
+      <div class="col-md-6 mb-4">
+        <app-articulo [articulo]="articulo" [usuarios]="usuarios"></app-articulo>
+      </div>
+    }
+  </div>
+</div>

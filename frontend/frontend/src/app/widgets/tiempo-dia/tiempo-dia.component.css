@@ -1,0 +1,80 @@
+.card {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #fdfdfd;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.weather-icon {
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(0 0 5px #fff8d2);
+}
+
+.temp {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffe89a;
+}
+
+.precip {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #ccc;
+}
+
+/* =========================
+   Responsive móviles
+   ========================= */
+@media (max-width: 900px) {
+  .card {
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+ 
+  .weather-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .temp {
+    font-size: 1.15rem;
+  }
+
+  .precip {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    width: 15%;        /* más larga que el contenedor si quieres */
+    margin-left: -7.5%; /* centrada visualmente */
+  }
+
+  .weather-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .temp {
+    font-size: 1rem;
+  }
+
+  .precip {
+    font-size: 0.8rem;
+  }
+}

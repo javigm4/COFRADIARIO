@@ -1,0 +1,20 @@
+
+<section class="tiempo-container" role="list">
+    <h2>PRONÓSTICO DEL TIEMPO</h2>
+  <article class="weather-card" *ngFor="let dia of dias" role="listitem">
+    <div class="weather-date">{{ dia.date }}</div>
+    <figure class="weather-icon-wrapper">
+      <img
+        [src]="dia.icono"
+        class="weather-icon"
+        alt=""
+        aria-hidden="true"
+      />
+      <figcaption class="sr-only">
+
+      </figcaption>
+    </figure>
+    <div class="weather-temp">{{ dia.temperatura }}°C</div>
+    <div class="weather-precip">{{ dia.precipitacion }}</div>
+  </article>
+</section>

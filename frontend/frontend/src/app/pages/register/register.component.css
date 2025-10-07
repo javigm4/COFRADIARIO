@@ -1,0 +1,173 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 100px;
+  overflow: hidden;
+  height: 89vh; /* Se reduce un poco la altura total del contenedor */
+  background-image: url(../../../../public/images/imagenes/incienso.png);
+  background-repeat: no-repeat;
+  background-size: cover; /* Ocupa todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* Para que el fondo no se mueva al hacer scroll */
+}
+
+.fotologin {
+  width: 400px; /* Ancho fijo menor para hacer las imágenes más compactas */
+  height: 90vh; /* Sigue ocupando el 90% de la altura del viewport */
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-body{
+box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+  
+}
+
+
+.fotologin::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+}
+
+
+
+/* Resto de tu CSS se mantiene igual */
+#ar2 {
+  background-image: url(../../../../public/images/imagenes/mayordolor.jpg);
+}
+
+#ar1 {
+  background-image: url(../../../../public/images/imagenes/pasionhd.jpg);
+}
+
+.form-container {
+  width: 1000px;
+  background-color: #5b420d; /* Marrón */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.card-body {
+  background: transparent;
+}
+
+.btn {
+  background-color: #5b420d; /* Marrón */
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  margin: 20px;
+  width: 300px;
+}
+
+input {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+label {
+  padding: 10px;
+  font-weight: bold;
+}
+
+ h2 {
+  color: #946b12  ; /* tono dorado claro */
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-align: center;
+  text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* Media Queries se mantienen según lo necesario */
+@media (max-width: 768px) {
+  /* Oculta las imágenes grandes SOLO en móviles */
+  #ar1, #ar2 {
+    display: none;
+  }
+
+  /* Ajusta el contenedor principal */
+  .login-container {
+    display: flex;
+    flex-direction: column; /* Ordena los elementos en columna */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    gap: 20px;
+  }
+
+  /* Formulario compacto */
+  .form-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Imagen móvil colocada debajo del formulario con el mismo ancho */
+  #arMovil {
+    display: block;
+    width: 90%; /* Mismo ancho que el formulario */
+    height: 500px; /* Más pequeña */
+    background-image: url(../../../../public/images/imagenes/amordolorosonicio.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  #arMovil:hover {
+    transform: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #arMovil:hover::before {
+    background-color: transparent !important;
+    transform: none !important;
+  }
+
+  p {
+    display: block;
+    width: 90%; /* Mismo ancho que la imagen */
+    margin: 5px auto; /* Centrado con menos margen */
+    color: #fff; /* Texto en blanco */
+    font-size: 0.9rem; /* Tamaño más pequeño */
+    text-align: center; /* Centrado */
+    font-style: italic; /* Cursiva para dar estilo de pie de foto */
+  }
+}
+
+/* MANTENER imágenes en PC */
+@media (min-width: 769px) {
+  #ar1, #ar2 {
+    display: block;
+  }
+
+  p {
+    display: none;
+  }
+
+  #arMovil {
+    display: none; /* No mostrar la imagen especial para móviles */
+  }
+}

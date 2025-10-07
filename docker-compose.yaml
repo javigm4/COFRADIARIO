@@ -1,0 +1,45 @@
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: cofradiario
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - dbdata:/var/lib/mysql   # Persistencia de datos
+    ports:
+      - "3307:3306" 
+    networks:
+      - app_network
+
+  backend:
+    build:
+      context: ./backend/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    env_file:
+      - ./backend/backend/.env   # Monta el .env dentro del contenedor
+    networks:
+      - app_network
+    command: sh -c "sleep 20 && php artisan migrate --force && php artisan db:seed --force && while true; do php artisan schedule:run --verbose; sleep 60; done & apache2-foreground"
+  frontend:
+    build:
+      context: ./frontend/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+volumes:
+  dbdata:
+
+networks:
+  app_network:
+    driver: bridge

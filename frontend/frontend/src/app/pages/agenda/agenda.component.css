@@ -1,0 +1,395 @@
+/* Contenedores principales */
+.fondo-general {
+  background-image: url('../../../../public/images/imagenes/inciensoo.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 88.7vh;
+}
+
+.contenedor-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  gap: 12px;
+  height:  88.7vh;
+}
+
+.crear-evento-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: rgba(50, 50, 50, 0.95);
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  margin: auto;
+  flex-direction: column;
+}
+
+/* Formulario e inputs */
+.crear-evento-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #f5d547;
+  border-radius: 5px;
+  background: #282828;
+  color: #ffffff;
+}
+
+/* Botón crear evento */
+.btn-crear-evento {
+  display: block;
+  width: 100%;
+  padding: 12px 18px;
+  margin-top: 12px;
+  background: linear-gradient(135deg, #f5d547, #a88532);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-crear-evento:hover {
+  background: linear-gradient(135deg, #e6c03b, #90722a);
+  transform: scale(1.05);
+}
+
+/* Contenedor lista de eventos */
+.contenedor-eventos {
+  flex: 4.5;
+  background-image: url('../../../../public/images/imagenes/dorado.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  max-height: 88vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.container.eventos-container {
+  max-width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+
+.contenedor-eventos::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contenedor-eventos::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.contenedor-eventos::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.contenedor-eventos::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.contenedor-eventos::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Contenedor favoritos */
+.contenedor-favoritos {
+  flex: 1.2;
+  background: linear-gradient(135deg, #8b5a2b, #ad7e3f);
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.contenedor-favoritos::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contenedor-favoritos::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+/* Mensaje login */
+.mensaje-login {
+  display: block;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #a38e14, #8b5a2b);
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.mensaje-login:hover {
+  background: rgb(0, 0, 0);
+  transform: scale(1.05);
+}
+
+/* Botón favoritos (solo móvil) */
+.favoritos-container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+
+#favoritos-btn {
+  background-color: #d4af37;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#favoritos-btn:hover {
+  background: #b8912c;
+  transform: scale(1.05);
+}
+
+/* =================== Media queries =================== */
+
+/* Móviles */
+@media (max-width: 768px) {
+
+
+  .favoritos-container {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+  }
+
+  #favoritos-btn {
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  #favoritos-btn:hover {
+    background: #b8912c;
+    transform: scale(1.05);
+  }
+
+  .contenedor-favoritos {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    width: 90%;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: 70vh;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+  }
+
+  .contenedor-favoritos.activo {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    animation: fadeInSlide 0.3s forwards;
+  }
+
+  .contenedor-favoritos.saliendo {
+    animation: fadeOutSlide 0.3s forwards;
+  }
+
+   .contenedor-eventos {
+    overflow-y: visible;
+    max-height: none;
+    border-radius: 0;
+  }
+}
+
+
+.barra-filtros {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border-bottom: 2px solid white; /* línea blanca como PRÓXIMOS EVENTOS */
+  gap: 16px;
+}
+
+.filtro-izquierdo,
+.filtro-derecho {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.linea-separadora {
+  width: 2px;
+  height: 60px;
+  background-color: white;
+  opacity: 0.8;
+}
+
+
+.titulos {
+  text-align: center;
+}
+
+
+/* PC */
+@media (min-width: 769px) {
+  .favoritos-container {
+    display: none;
+  }
+
+  .contenedor-favoritos {
+    display: block;
+    position: static;
+  }
+}
+
+/* Estilo para el select de filtro de cofradías */
+.filtro-cofradia {
+  background-color: #c9972f; /* dorado */
+  color: #ffffff; /* blanco */
+  border: 2px solid #7d5a11; /* marrón oscuro para borde */
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-family: 'Georgia', serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(125, 90, 17, 0.4);
+}
+
+/* Hover y foco para mejorar experiencia */
+.filtro-cofradia:hover,
+.filtro-cofradia:focus {
+  background-color: #7d5a11; /* más oscuro */
+  color: #f4e6c3; /* más claro */
+  outline: none;
+  border-color: #c9972f;
+  box-shadow: 0 0 8px #c9972f;
+}
+
+/* Para que las opciones también combinen */
+.filtro-cofradia option {
+  background-color: #c9972f;
+  color: #fff;
+  font-weight: 600;
+  font-family: 'Georgia', serif;
+}
+
+
+/* Contenedor del filtro para separar y dar espacio */
+.contenedor-eventos label {
+  font-weight: 700;
+  color: #7d5a11; /* color marrón oscuro (dorado/marrón de la imagen) */
+  margin-right: 10px;
+  font-family: 'Georgia', serif;
+}
+
+label {
+  color: #e6b812 !important 
+  ;
+}
+
+/* Opcional: si vas a hacer el filtro de fecha, puedes darle clase y reutilizar estilos */
+
+
+#boton-secreto {
+  position: absolute;
+  top: 120px;   /* ponlo donde quieras */
+  left: 10px;
+  opacity: 0;  /* totalmente transparente */
+  z-index: 9999; /* que quede encima de todo */
+  cursor: pointer;
+}
+/* Fondo semitransparente */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* Caja del popup */
+.popup {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+
+/* =================== Animaciones =================== */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutSlide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+

@@ -1,0 +1,47 @@
+<form>
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre del evento:</label>
+    <input
+      id="nombre"
+      type="text"
+      class="form-control"
+      [(ngModel)]="evento.nombre"
+      name="nombre"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="fecha" class="form-label">Fecha del evento:</label>
+    <input
+      id="fecha"
+      type="datetime-local"
+      class="form-control"
+      [(ngModel)]="evento.fecha"
+      name="fecha"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="lugar" class="form-label">Lugar del evento:</label>
+    <input
+      id="lugar"
+      type="text"
+      class="form-control"
+      [(ngModel)]="evento.lugar"
+      name="lugar"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="detalles" class="form-label">Detalles:</label>
+    <textarea
+      id="detalles"
+      type="textarea"
+      class="form-control"
+      [(ngModel)]="evento.detalles"
+      name="detalles"
+    ></textarea>
+  </div>
+
+  <button class="btn btn-success" (click)="guardarCambios()">
+    Guardar cambios
+  </button>
+</form>

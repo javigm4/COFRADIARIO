@@ -1,0 +1,31 @@
+<form (ngSubmit)="crearArticulo()">
+  <!-- Título del artículo -->
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Título:</label>
+    <input
+      id="titulo"
+      type="text"
+      class="form-control"
+      [(ngModel)]="nuevoArticulo.titular"
+      name="titular"
+      required
+    />
+  </div>
+
+  <!-- Cuerpo del artículo -->
+  <div class="mb-3">
+    <label for="cuerpo" class="form-label">Cuerpo:</label>
+    <textarea
+      id="cuerpo"
+      class="form-control"
+      [(ngModel)]="nuevoArticulo.cuerpo"
+      name="cuerpo"
+      rows="6"
+      required
+    ></textarea>
+  </div>
+
+  <button class="btn btn-success" type="submit">
+    Guardar cambios
+  </button>
+</form>

@@ -1,0 +1,45 @@
+<div class="login-container">
+  <article class="fotologin" id="ar1"></article> <!-- Imagen izquierda en PC -->
+
+  <div class="form-container">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <h2 class="text-center mb-4">REGISTRO DE USUARIOS</h2>
+        <p>¡Regístrate para poder opinar y añadir eventos a favoritos! </p>
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required placeholder="Introduce tu email" />
+
+          </div>
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre:</label>
+            <input type="text" id="name" class="form-control" [(ngModel)]="name" name="name" required placeholder="Introduce tu nombre de usuario" />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña:</label>
+            <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Introduce tu contraseña" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="password_confirmation" class="form-label">Confirmar contraseña:</label>
+            <input type="password" id="password_confirmation" class="form-control" [(ngModel)]="password_confirmation" name="password_confirmation" required placeholder="Repite la contraseña"/>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Registrarse</button>
+          <p *ngIf="error" class="text-danger">{{ error }}</p>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <article class="fotologin" id="ar2"></article> <!-- Imagen derecha en PC -->
+
+  <!-- Imagen solo para móviles -->
+  <article class="fotologin movil" id="arMovil"></article>
+    <p>"María Santísima del Amor Doloroso", por "Nico Canela"</p>
+
+</div>

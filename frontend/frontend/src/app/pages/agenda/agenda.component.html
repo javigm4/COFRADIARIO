@@ -1,0 +1,124 @@
+<div class="fondo-general">
+
+  <button id="boton-secreto" (click)="mostrarPopup = true">
+    Botón secreto
+  </button>
+  <div *ngIf="mostrarPopup" class="overlay">
+    <div class="popup">
+      <label for="passwordInput">Contraseña:</label>
+      <input type="password" [(ngModel)]="inputPassword" id="passwordInput" />
+      <button (click)="validarPassword()">Aceptar</button>
+    </div>
+  </div>
+  <div *ngIf="popupExito" class="overlay">
+    <div class="popup">
+      <ul class="lista-cofradias">
+        @for (cofradia of cofradias; track cofradia.id) {
+        <li>
+          <span class="cofradia-id">#{{ cofradia.id }}</span>
+          <span class="cofradia-nombre">{{ cofradia.nombre }}</span>
+          <button class="btn-borrar" (click)="eliminarCofradia(cofradia.id)">Borrar</button>
+        </li>
+        }
+      </ul>
+
+      <div class="nueva-cofradia">
+        <label for="nombreCofradia">Nueva cofradía:</label>
+        <input type="text" id="nombreCofradia" [(ngModel)]="nuevaCofradia" />
+        <button (click)="crearCofradia()">Añadir</button>
+      </div>
+      
+      <button (click)="cerrarPopupExito()">Cerrar</button>
+    </div>
+  </div>
+
+
+  @if (!esCofradia) {
+  <div class="favoritos-container">
+    <button id="favoritos-btn" (click)="toggleFavoritos()">⭐ FAVORITOS</button>
+  </div>
+  }
+
+  <div class="contenedor-principal">
+    <!-- Lista de Eventos -->
+    <div class="contenedor-eventos">
+      <!-- NUEVO contenedor de filtros -->
+      <div class="barra-filtros">
+        <div class="filtro-izquierdo">
+          <label for="filtroCofradia">Filtrar por cofradía:</label>
+          <select id="filtroCofradia" class="filtro-cofradia" (change)="seleccionarCofradia($event)">
+            <option [ngValue]="null">-- Todas --</option>
+            @for (cofradia of cofradiasEventos; track cofradia.id) {
+            <option value="{{ cofradia.id }}">{{ cofradia.nombre }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Línea separadora -->
+        <div class="linea-separadora"></div>
+
+        <div class="filtro-derecho">
+          <label for="filtromes">Filtrar por mes:</label>
+          <select id="filtromes" class="filtro-cofradia" (change)="seleccionarMes($event)">
+            @for (mes of mesesAno; track mes.id) {
+            <option value="{{ mes.id }}">{{ mes.nombre }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <app-lista-eventos [eventos]="eventos" [cofradias]="cofradias"></app-lista-eventos>
+    </div>
+
+    <!-- Lista de Favoritos (Solo si el usuario está autenticado) -->
+    @if (!esCofradia) {
+    <div class="contenedor-favoritos">
+      @if (esUsuario) {
+      <app-listafavoritos [favoritos]="favoritos" [eventos]="eventos" [cofradias]="cofradias" [usuario]="usuario"
+        (eliminarFavorito)="onEliminar($event)">
+      </app-listafavoritos>
+      } @else {
+      <a class="mensaje-login" routerLink="/login">
+        Inicia sesión para añadir a favoritos
+      </a>
+      }
+    </div>
+    }
+  </div>
+  @if (esCofradia) {
+  <div class="crear-evento-container">
+    <table>
+      <tr>
+        <td class="titulos">Nombre</td>
+        <td class="titulos">Fecha</td>
+        <td class="titulos">Hora</td>
+        <td class="titulos">Lugar</td>
+        <td class="titulos">Detalles</td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" id="name" placeholder="Nombre del evento" required />
+        </td>
+        <td>
+          <input type="date" id="fecha" [attr.min]="minFechaHoy" required />
+        </td>
+        <td>
+          <input type="time" id="hora" required />
+        </td>
+        <td>
+          <input type="text" id="lugar" required />
+        </td>
+
+        <td>
+          <input type="textarea" id="detalles" required />
+        </td>
+        <td colspan="2">
+          <button class="btn btn-crear-evento" (click)="crearEvento()">
+            Añadir Evento
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  }
+</div>

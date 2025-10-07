@@ -1,0 +1,862 @@
+/*------------------------ MAIN ---------------------------------*/
+
+h2 {
+  color: white;
+
+}
+
+#fondo {
+  position: relative;
+  min-height: 100vh;
+  /* ocupa toda la altura de la pantalla */
+  overflow: hidden;
+  background-image: url(../../../../public/images/imagenes/incienso.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* cubre todo el área sin repetir */
+
+}
+
+#fondo::before {
+  content: "";
+  /* obligatorio para que aparezca */
+  position: fixed;
+  /* cubre toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url(../../../../public/images/imagenes/incienso.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  transform: scaleY(-1);
+  /* invierte solo la imagen */
+  z-index: -1;
+  /* detrás del contenido */
+}
+
+
+
+.fotomain {
+  padding: 0px;
+  height: 800px;
+  border-collapse: collapse;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+
+.fotomain:hover::after {
+  opacity: 1;
+}
+
+/*-------------------------------------*/
+section {
+  display: flex;
+  width: 99vw;
+}
+
+#ar1 {
+  background-image: url(../../../../public/images/imagenes/fotocristocena.jpg);
+  width: 20%;
+
+}
+
+#ar2 {
+  background-image: url(../../../../public/images/imagenes/soledaddemenamanos.jpg);
+  width: 65%;
+  border: 1px solid rgb(184, 172, 10);
+  border-bottom: none;
+}
+
+#ar3 {
+  background-image: url(../../../../public/images/imagenes/zamarrillanico.jpg);
+  /*zamarrillanico*/
+  width: 295px;
+}
+
+p {
+  display: none;
+}
+
+/* --------- RED SOCIAL (modo Twitter) ---------- */
+#redSocial {
+  color: #e1e8ed;
+  width: 100%;
+  padding: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.redsocialtitulos {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+#redSocial>div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.cofradia {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+color: #d4af37; /* dorado suave */
+  margin-top: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-align: right;
+}
+
+
+#redSocial h2 {
+  font-size: 4rem;
+  color: #d4af37;
+  /* antes azul, ahora dorado suave */
+  text-align: center;
+  font-weight: bold;
+}
+
+#redSocial>div {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  /* espacio entre ellos */
+}
+
+.articulo {
+  background-color: #2a2f38;
+  /* un gris más claro que el fondo general */
+  /* fondo diferente, más azulado/gris */
+  border: 1px solid #2d313a;
+  /* borde más claro que el fondo */
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+  width: 70%;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  /* sombra externa */
+  box-shadow:
+    inset 4px 4px 10px rgba(255, 255, 255, 0.15),
+    inset -4px -4px 10px rgba(0, 0, 0, 0.6),
+    3px 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.articulo:hover {
+  background-color: #2a2f38;
+  /* sutil aclarado al hover */
+  /* hover más claro */
+  box-shadow:
+    inset 3px 3px 8px rgba(255, 255, 255, 0.1),
+    inset -3px -3px 8px rgba(0, 0, 0, 0.5),
+    2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+#redSocial>div>div:hover {
+  background-color: #22303c;
+  /* efecto hover */
+}
+
+#redSocial h3 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  color: #cfcfcf;
+}
+
+#redSocial h5 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #cfcfcf;
+  /* gris más suave y legible */
+  margin-top: 10px;
+}
+
+
+#redSocial .post-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+#redSocial .post-link div {
+  cursor: pointer;
+}
+
+
+button {
+  font-family: 'Sacramento', serif;
+  background: linear-gradient(135deg, #d4af37, #b8860b);
+  /* dorado elegante */
+  color: #0f1115;
+  /* texto oscuro para buen contraste */
+  border: none;
+  border-radius: 8px;
+  padding: 12px 48px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #f1c40f, #d4af37);
+  /* dorado más vivo al hover */
+  transform: translateY(-2px);
+  /* efecto de “levitar” */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+}
+
+button:active {
+  transform: translateY(0);
+  /* al click vuelve a bajar */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+
+#eventos {
+  width: 100%;
+  box-sizing: border-box;
+  /* fondo oscuro tipo Twitter */
+  color: #e1e8ed;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  /* centra el contenedor interno */
+
+}
+
+/* contenedor principal: eventos a la izquierda, foto a la derecha */
+.eventos-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1600px;
+  justify-content: flex-start;
+  /* eventos a la izquierda, foto a la derecha */
+  align-items: flex-start;
+  /* alinea al tope de la lista y foto */
+  width: 100%;
+}
+
+/* lista de eventos a la izquierda */
+.eventos-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eventos-list h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #ffe25f, #feb47b);
+  /* gradiente llamativo */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* sombra sutil para resaltar */
+  margin-bottom: 10px;
+}
+
+
+.eventos-list small {
+  text-align: center !important;
+}
+.evento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; /* espacio entre header y fecha */
+}
+
+.evento-card {
+  background: linear-gradient(135deg, #574719 0%, #b97a14 100%);
+  /* dorado cálido con degradado */
+  border-radius: 12px;
+  padding: 15px 20px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow:
+    inset 3px 3px 8px rgba(255, 255, 255, 0.25),
+    /* luz interna */
+    inset -3px -3px 8px rgba(0, 0, 0, 0.2),
+    /* sombra interna */
+    2px 2px 6px rgba(0, 0, 0, 0.15);
+  /* ligera sombra externa */
+
+  /* --- NUEVO: layout vertical centrado --- */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px; /* espacio entre título, cofradía y fecha */
+}
+
+.evento-card h3,
+.evento-card .cofradia,
+.evento-card .evento-fecha {
+  margin: 0; /* eliminar márgenes predeterminados */
+}
+
+
+.evento-card:hover {
+  background: linear-gradient(135deg, #fce38a 0%, #f39c12 100%);
+  /* más brillante al pasar el cursor */
+  box-shadow:
+    inset 4px 4px 10px rgba(255, 255, 255, 0.3),
+    inset -4px -4px 10px rgba(0, 0, 0, 0.25),
+    3px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.evento-fecha {
+  text-align: center;
+  font-size: 0.95rem; /* mantener tamaño similar a small */
+  margin-top: 5px;
+  color: #22303c; /* hereda color del card */
+  
+}
+/* 3. Ajustar márgenes de h3 y h4 dentro del card */
+
+a {
+  text-decoration: none;
+}
+
+.evento-card:hover {
+  background-color: #22303c;
+  box-shadow:
+    inset 4px 4px 12px rgba(255, 255, 255, 0.15),
+    inset -4px -4px 12px rgba(0, 0, 0, 0.8),
+    3px 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* título de cada evento esculpido */
+.evento-card h3 {
+  margin: 0 0 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  width: 600px;
+  background: linear-gradient(145deg, #ffffff, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(214, 183, 183, 0.5);
+
+}
+
+/* texto dentro de la tarjeta */
+.evento-card p,
+.evento-card small {
+  color: #cfd9e0;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+
+/* foto fija a la derecha */
+.evento-foto {
+  width: 1000px;
+  /* ancho fijo */
+  display: flex;
+  margin-right: -100px;
+}
+
+/* imagen dentro de la foto */
+.evento-foto img {
+  width: 100%;
+  object-fit: cover;
+  /* cubre todo sin deformarse */
+
+}
+
+
+
+/* ------------------ SECCIÓN QUIÉNES SOMOS ------------------ */
+#quienesomos {
+  display: flex;
+  gap: 120px;
+  /* espacio entre imagen y texto */
+  padding: 60px 20px;
+  /* fondo oscuro elegante */
+}
+
+#quienesomos>div:first-child {
+  flex: 0 0 400px;
+  margin: 0;
+  margin-left: 100px;
+}
+
+#quienesomos>div:first-child img {
+  width: 100%;
+  border-radius: 16px;
+  border: 4px solid #d4af17;
+  /* borde dorado llamativo */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  object-fit: cover;
+  margin-left: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#quienesomos>div:first-child img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+#quienesomos>div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 1100px;
+  text-align: center;
+  /* centra todo el texto */
+}
+
+#quienesomos h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  background: linear-gradient(90deg, #e6d712, #6e4c02);
+  /* gradiente premium */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+#quienesomos small {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #e1e8ed;
+  line-height: 1.8;
+  text-align: justify;
+  text-justify: inter-word;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+h5 {
+  color: white;
+}
+
+#dudas {
+  width: 100%;
+  color: #fbff00
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 992px) {
+  
+  .evento-card h3 {
+    width: 400px;
+
+  }
+  
+
+
+
+
+
+
+  #redSocial {
+    max-width: 992px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background: #1f1c18;
+    color: #fdfdfd;
+    font-family: 'Cardo', serif;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 20px  !important;
+  }
+
+
+  #redSocial h2.redsocialtitulos {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: #ffe89a;
+  }
+
+  #redSocial h5.redsocialtitulos {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #ccc;
+    margin-bottom: 2rem;
+  }
+
+  #redSocial .articulo {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #redSocial .articulo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #d4af37;
+  }
+
+  #redSocial .articulo h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffe89a;
+  }
+
+  #redSocial .articulo h5 {
+    font-size: 0.95rem;
+    color: #eee;
+    font-weight: 400;
+  }
+
+  #redSocial a.post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  #redSocial button {
+    margin-top: 1.5rem;
+    background: #d4af37;
+    color: #1f1c18;
+    border: none;
+    border-radius: 8px;
+  }
+
+  #redSocial button:hover {
+    background: #ffe89a;
+    transform: translateY(-3px);
+  }
+
+
+
+
+  #quienesomos>div:first-child {
+    flex: 1 1 80%;
+    margin-bottom: 30px;
+    width: 400px;
+    padding-top: 150px;
+  }
+
+  #quienesomos>div:last-child {
+    flex: 1 1 100%;
+  }
+
+  #quienesomos h2 {
+    font-size: 2.5rem;
+
+  }
+
+  #quienesomos small {
+    text-align: center;
+  }
+}
+
+
+
+/* Título h4 en blanco y centrado */
+#quienesomos h4 {
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Contenedor de iconos y texto */
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* Cada bloque: texto + icono */
+.social-icons small {
+  color: #e1e8ed;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-right: 5px;
+}
+
+
+/* Iconos */
+.social-icons a {
+  color: #e1e8ed;
+  font-size: 1.6rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover efecto dorado y ligero agrandamiento */
+.social-icons a:hover {
+  color: #d4af17;
+  /* dorado */
+  transform: scale(1.25);
+}
+
+
+
+
+/*---- FOOTER ----*/
+
+.site-footer {
+  background: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  /* ajusta de 0 (transparente) a 1 (opaco) */
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-social a {
+  margin: 0 8px;
+  color: #ccc;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.footer-social a:hover,
+.creditos a:hover {
+  color: #e3b505;
+}
+
+.creditos a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+p {
+  display: block;
+}
+
+h3 {
+  text-align: center;
+}
+
+/*------------------ RESPONSIVE MÓVIL ------------------*/
+@media (max-width: 992px) {
+
+  /* Sección Quiénes somos */
+  #quienesomos {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+    padding: 30px 10px;
+  }
+
+  #quienesomos>div:first-child {
+    flex: 1 1 90%;
+    margin-left: 0;
+  }
+
+  #quienesomos>div:first-child img {
+    width: 100%;
+    margin-left: 0;
+    border-radius: 16px;
+  }
+
+  #quienesomos>div:last-child {
+    width: 100%;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  #quienesomos h2 {
+    font-size: 2rem;
+  }
+
+  #quienesomos small {
+    text-align: justify;
+    font-size: 0.95rem;
+    padding: 0 5px;
+  }
+
+  /* Contenedor de eventos */
+  .eventos-container {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+  }
+
+
+  .eventos-list {
+    width: 100%;
+    text-align: center;
+    flex: 1 1 100%;
+  }
+
+  .evento-foto {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .evento-foto img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .evento-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 15px auto;
+  }
+
+  /* Red social */
+  #redSocial {
+    padding: 50px 10px;
+  }
+
+  #redSocial>div {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .articulo {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  button {
+    width: 90%;
+    max-width: 350px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+  }
+
+  /* Redes sociales: iconos apilados */
+  .social-icons {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .social-icons small {
+    display: block;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  /* Footer */
+  .footer-container {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .footer-social a {
+    font-size: 1.4rem;
+    margin: 0 6px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Ocultar imágenes grandes y mostrar solo versión móvil */
+  #ar1,
+  #ar2,
+  #ar3 {
+    display: none;
+  }
+
+  #arMovil {
+    display: block;
+    width: 101vw;
+    margin-top: -1px;
+    height: 60vh;
+    /* altura proporcional al móvil */
+    background-image: url(../../../../public/images/imagenes/ddpnico.jpg);
+    background-size: cover;
+    background-position: center;
+    transform: none !important;
+  }
+
+  #arMovil:hover::before {
+    background-color: transparent !important;
+  }
+
+  #arMovil:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Secciones apiladas */
+  section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section p {
+    color: #fff;
+    font-size: 0.9rem;
+    text-align: center;
+    font-style: italic;
+    margin-top: 10px;
+    display: block;
+  }
+
+  .footer-container p {
+    font-size: 10px;
+  }
+
+  .username {
+    display: none !important;
+  }
+
+  i {
+    display: inline-block;
+    margin:10px;
+    font-size: 50px;
+  }
+
+  .maschico{
+    font-size: 20px;
+  }
+
+}

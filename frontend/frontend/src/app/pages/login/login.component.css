@@ -1,0 +1,259 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 100px;
+  overflow: hidden;
+  height: 89vh; /* Se reduce un poco la altura total del contenedor */
+  background-image: url(../../../../public/images/imagenes/incienso.png);
+  background-repeat: no-repeat;
+  background-size: cover; /* Ocupa todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* Para que el fondo no se mueva al hacer scroll */
+}
+.card-body{
+box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5) !important;
+  
+}
+
+
+.fotologin {
+  width: 400px; /* Ancho fijo menor para hacer las imágenes más compactas */
+  height: 90vh; /* Sigue ocupando el 90% de la altura del viewport */
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.fotologin::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+}
+
+
+
+.fotologin::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+
+
+
+#ar2 {
+  background-image: url(../../../../public/images/imagenes/amarguraIniciarSesion.jpg);
+}
+
+#ar1 {
+  background-image: url(../../../../public/images/imagenes/descendimientoIniciarSesion.png);
+}
+
+.form-container {
+  width: 1000px;
+  background-color: #5b420d; /* Marrón */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-body {
+  background: transparent;
+}
+
+.btn {
+    background-color: #5b420d; /* Marrón */
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+
+}
+
+input {
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+label {
+  padding:10px;
+  font-weight: bold;
+}
+
+.form-container h2 {
+  color: #946b12  ; /* tono dorado claro */
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-align: center;
+  text-shadow: 3px 10px 10px rgba(0, 0, 0, 0.7);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+
+
+@media (max-width: 768px) {
+  /* Oculta las imágenes grandes en móviles */
+  #ar1, #ar2 {
+    display: none;
+  }
+
+  /* Ajusta el contenedor principal en móviles */
+  .login-container {
+    display: flex;
+    flex-direction: column; /* Ordena los elementos en columna */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+  }
+
+  /* Formulario compacto */
+  .form-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Imagen móvil colocada debajo del formulario con el mismo ancho */
+  #arMovil {
+    display: block;
+    width: 90%;
+    height: 400px; /* Ajuste de tamaño */
+    background-image: url(../../../../public/images/imagenes/amarguraIniciarSesion.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  /* Pie de foto debajo de la imagen */
+  p {
+    display: block;
+    width: 90%; /* Mismo ancho que la imagen */
+    margin: 5px auto; /* Centrado con menos margen */
+    color: #fff; /* Texto en blanco */
+    font-size: 0.9rem; /* Tamaño más pequeño */
+    text-align: center; /* Centrado */
+    font-style: italic; /* Cursiva para dar estilo de pie de foto */
+  }
+
+  /* Elimina efectos al hacer hover en la imagen móvil */
+  #arMovil:hover,
+  #arMovil:hover::before {
+    transform: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+}
+/* Bloque de recuperación de contraseña */
+.login-container .recuperar-password {
+    background-color: #f4f4f4; /* Fondo claro */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Inputs dentro del bloque */
+.login-container .recuperar-password input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+/* Botón enviar */
+.login-container .recuperar-password button {
+    background-color: #5b420d; /* Marrón consistente con botones */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container .recuperar-password button:hover {
+    background-color: #3e2d08; /* Marrón más oscuro al hover */
+}
+
+/* Mensajes de éxito y error */
+.login-container .recuperar-password .text-success {
+    color: #28a745;
+    font-size: 0.9rem;
+}
+
+.login-container .recuperar-password .text-danger {
+    color: #dc3545;
+    font-size: 0.9rem;
+}
+
+/* Link de volver al login */
+.login-container .recuperar-password a {
+    color: #5b420d;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.login-container .recuperar-password a:hover {
+    color: #3e2d08;
+}
+
+
+/* MANTENER imágenes en PC */
+@media (min-width: 769px) {
+  #ar1, #ar2 {
+    display: block;
+  }
+
+  p {
+    display: none; /* Oculta el pie de foto en escritorio */
+  }
+
+  #arMovil {
+    display: none; /* No mostrar la imagen especial para móviles */
+  }
+}
+
+
+.form-container p {
+  color: black;
+  margin-top: 15px;
+  font-size: 1rem;
+  display: block;
+}
+

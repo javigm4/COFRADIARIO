@@ -3,8 +3,8 @@
     <h5 class="card-title mb-2"><b>{{ dia.date }}</b></h5>
     <img [src]="dia.icono" class="weather-icon mb-2" alt="Icono clima">
     <div id="detalles">
-      <p class="temp mb-1"><strong>{{ dia.temperatura }}°C</strong></p>
-      <p class="precip mb-0">{{ dia.precipitacion }}</p>
+      <p class="temp mb-1"><strong>{{ dia.temperatura.max }}°C / {{ dia.temperatura.min }}°C</strong></p>
+      <p class="precip mb-0">{{ dia.precipitacion }}%</p>
     </div>
   </div>
 </div>

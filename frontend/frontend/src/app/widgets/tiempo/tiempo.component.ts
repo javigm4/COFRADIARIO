@@ -13,12 +13,18 @@ export class TiempoComponent implements OnChanges {
   @Input()
   public dias: TiempoDia[] = [];
 
+  onImgError(event: Event): void {
+    (event.target as HTMLImageElement).src = 'assets/icons/sol.png';
+  }
+  // TiempoComponent
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['dias'] && this.dias?.length) {
       this.dias = this.dias.map(dia => ({
         ...dia,
-        date: formatDate(dia.date, 'EEEE, d \'de\' MMMM', 'es-ES')
+        date: formatDate(dia.date, 'EEEE, d \'de\' MMMM', 'es-ES')  // formatear aquí
       }));
     }
   }
+
+
 }

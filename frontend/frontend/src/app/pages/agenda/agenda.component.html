@@ -1,10 +1,46 @@
+@if (esCofradia) {
+
+<div class="crear-evento-container">
+  <div class="grupo-campo">
+    <label for="name">Nombre</label>
+    <input type="text" id="name" placeholder="Nombre del evento" required />
+  </div>
+
+  <div class="grupo-campo">
+    <label for="fecha">Fecha</label>
+    <input type="date" id="fecha" [attr.min]="minFechaHoy" required />
+  </div>
+
+  <div class="grupo-campo">
+    <label for="hora">Hora</label>
+    <input type="time" id="hora" required />
+  </div>
+
+  <div class="grupo-campo">
+    <label for="lugar">Lugar</label>
+    <input type="text" id="lugar" required />
+  </div>
+
+  <div class="grupo-campo">
+    <label for="detalles">Detalles</label>
+    <textarea id="detalles" required></textarea>
+  </div>
+
+  <button class="btn btn-crear-evento" (click)="crearEvento()">Añadir Evento</button>
+</div>
+}
 <div class="fondo-general">
+
 
   <button id="boton-secreto" (click)="mostrarPopup = true">
     Botón secreto
   </button>
+
+
   <div *ngIf="mostrarPopup" class="overlay">
     <div class="popup">
+      <button (click)="cerrarPopupExito()">X</button>
+
       <label for="passwordInput">Contraseña:</label>
       <input type="password" [(ngModel)]="inputPassword" id="passwordInput" />
       <button (click)="validarPassword()">Aceptar</button>
@@ -12,25 +48,103 @@
   </div>
   <div *ngIf="popupExito" class="overlay">
     <div class="popup">
-      <ul class="lista-cofradias">
-        @for (cofradia of cofradias; track cofradia.id) {
-        <li>
-          <span class="cofradia-id">#{{ cofradia.id }}</span>
-          <span class="cofradia-nombre">{{ cofradia.nombre }}</span>
-          <button class="btn-borrar" (click)="eliminarCofradia(cofradia.id)">Borrar</button>
-        </li>
-        }
-      </ul>
 
-      <div class="nueva-cofradia">
-        <label for="nombreCofradia">Nueva cofradía:</label>
-        <input type="text" id="nombreCofradia" [(ngModel)]="nuevaCofradia" />
-        <button (click)="crearCofradia()">Añadir</button>
+      <!-- Lista de cofradías -->
+      <div class="lista-cofradias-container">
+        <h3>Cofradías existentes</h3>
+        <section class="filtro-cofradias">
+          <label for="buscarCofradia">Buscar:</label>
+          <input type="text" id="buscarCofradia" placeholder="Filtrar cofradías..."
+            (input)="filtrarCofradias($event)" />
+        </section>
+
+        <section class="lista-cofradias">
+          <ul>
+            @for (cofradia of listaCofradiasFiltrada; track cofradia.id) {
+            <li>
+              <span class="cofradia-id">#{{ cofradia.id }}</span>
+              <span class="cofradia-nombre">{{ cofradia.nombre }}</span>
+              <button class="btn-borrar" (click)="eliminarCofradia(cofradia.id)">Borrar</button>
+            </li>
+            }
+          </ul>
+        </section>
+
+
+        <!-- Añadir nueva cofradía -->
+        <div class="nueva-cofradia">
+          <label for="nombreCofradia">Nueva cofradía:</label>
+          <input type="text" id="nombreCofradia" [(ngModel)]="nuevaCofradia" />
+          <button (click)="crearCofradia()">Añadir</button>
+        </div>
       </div>
-      
-      <button (click)="cerrarPopupExito()">Cerrar</button>
+
+      <!-- Lista de eventos existentes -->
+      <div class="lista-eventos-container">
+        <h3>Eventos existentes</h3>
+        <section class="filtro-eventos">
+          <label for="buscarCofradia">Buscar:</label>
+          <input type="text" id="buscarEvento" placeholder="Filtrar eventos..." (input)="filtrarEventos($event)" />
+        </section>
+
+        <ul class="lista-eventos">
+          @for (evento of listaEventosFiltrada; track evento.id) {
+          <li>
+            <span class="evento-nombre">{{ evento.nombre }}</span>
+            <span class="evento-cofradia">{{evento.cofradia}}</span>
+            <button class="btn-borrar" (click)="eliminarEvento(evento.id)">Borrar</button>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Formulario admin para crear eventos -->
+      <div class="crear-evento-admin">
+        <h3>Crear Nuevo Evento</h3>
+
+        <section class="form-section">
+          <label for="nameAdmin">Nombre</label>
+          <input type="text" id="nameAdmin" placeholder="Nombre del evento" required />
+        </section>
+
+        <section class="form-section">
+          <label for="fechaAdmin">Fecha</label>
+          <input type="date" id="fechaAdmin" [attr.min]="minFechaHoy" required />
+        </section>
+
+        <section class="form-section">
+          <label for="horaAdmin">Hora</label>
+          <input type="time" id="horaAdmin" required />
+        </section>
+
+        <section class="form-section">
+          <label for="lugarAdmin">Lugar</label>
+          <input type="text" id="lugarAdmin" required />
+        </section>
+
+        <section class="form-section">
+          <label for="detallesAdmin">Detalles</label>
+          <textarea id="detallesAdmin" required></textarea>
+        </section>
+
+        <section class="form-section">
+          <label for="cofradiaAdmin">Cofradía</label>
+          <select id="cofradiaAdmin">
+            @for(cofradia of cofradias ; track cofradia.id){
+            <option value="{{ cofradia.id }}">{{ cofradia.nombre }}</option>
+            }
+          </select>
+        </section>
+
+        <button type="button" class="btn btn-crear-evento" (click)="crearEventoAdmin($event)">Añadir Evento</button>
+      </div>
+
+      <!-- Botón cerrar popup -->
+      <button class="btn-cerrar-popup" (click)="cerrarPopupExito()">Cerrar</button>
+
     </div>
   </div>
+
 
 
   @if (!esCofradia) {
@@ -45,13 +159,8 @@
       <!-- NUEVO contenedor de filtros -->
       <div class="barra-filtros">
         <div class="filtro-izquierdo">
-          <label for="filtroCofradia">Filtrar por cofradía:</label>
-          <select id="filtroCofradia" class="filtro-cofradia" (change)="seleccionarCofradia($event)">
-            <option [ngValue]="null">-- Todas --</option>
-            @for (cofradia of cofradiasEventos; track cofradia.id) {
-            <option value="{{ cofradia.id }}">{{ cofradia.nombre }}</option>
-            }
-          </select>
+          <label for="filtroCofradia">Escribe el título o la cofradía:</label>
+          <input type="text" class="filtro-cofradia" id="filtroCofradia" (input)="filtroTotal($event)">
         </div>
 
         <!-- Línea separadora -->
@@ -79,46 +188,11 @@
       </app-listafavoritos>
       } @else {
       <a class="mensaje-login" routerLink="/login">
-        Inicia sesión para añadir a favoritos
+        ¡Inicia sesión para añadir eventos a tus favoritos y recibir un recordatorio!
       </a>
       }
     </div>
     }
   </div>
-  @if (esCofradia) {
-  <div class="crear-evento-container">
-    <table>
-      <tr>
-        <td class="titulos">Nombre</td>
-        <td class="titulos">Fecha</td>
-        <td class="titulos">Hora</td>
-        <td class="titulos">Lugar</td>
-        <td class="titulos">Detalles</td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" id="name" placeholder="Nombre del evento" required />
-        </td>
-        <td>
-          <input type="date" id="fecha" [attr.min]="minFechaHoy" required />
-        </td>
-        <td>
-          <input type="time" id="hora" required />
-        </td>
-        <td>
-          <input type="text" id="lugar" required />
-        </td>
 
-        <td>
-          <input type="textarea" id="detalles" required />
-        </td>
-        <td colspan="2">
-          <button class="btn btn-crear-evento" (click)="crearEvento()">
-            Añadir Evento
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  }
 </div>

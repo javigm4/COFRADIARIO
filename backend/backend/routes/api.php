@@ -34,6 +34,7 @@ Route::get('/articulos/{id}', [ArticulosController::class, 'show']);
 Route::get('/cofradias', [CofradiasController::class, 'index']);
 Route::get('/cofradias/{nombre}', [CofradiasController::class, 'mostrar']);
 
+Route::post('/eventos', [EventosController::class, 'store'])->withoutMiddleware([\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class]);
 
 // ---------- RUTAS PÚBLICAS (CORREOS) --------- 
 Route::post('/enviar-mensaje-contacto', [AuthController::class, 'enviarMensajeContacto']);
@@ -44,7 +45,6 @@ Route::post('/password/forgot', [AuthController::class, 'sendResetLinkEmail']);
 // --------- RUTAS PROTEGIDAS SOLO PARA CREAR ---------
 Route::middleware(['auth:sanctum'])->group(function () {
     // Crear eventos y artículos
-    Route::post('/eventos', [EventosController::class, 'store']);
     Route::post('/articulos', [ArticulosController::class, 'store']);
 
     // Favoritos (recomendado mantener protegidos)

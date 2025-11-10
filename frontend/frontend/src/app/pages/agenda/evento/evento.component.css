@@ -29,7 +29,7 @@
 }
 
 .card-text {
-  font-size: 14px;
+  font-size: 15px;
   color: #333;
   word-break: break-word;
 }
@@ -248,45 +248,99 @@
 
 
 /* === RESPONSIVE === */
-@media (max-width: 768px) {
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
   .evento-card {
-    width: 95%;
-    padding: 14px;
+    width: 92%;
+    padding: 16px;
     border-radius: 6px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   }
 
   .linea-fecha,
   .linea-hora {
-    font-size: 17px; /* ← Más grande para legibilidad */
+    font-size: 15px;
   }
 
   .icono-fecha {
-    font-size: 26px; /* ← Ícono de calendario más notorio */
+    font-size: 0px;
   }
 
   .btn-detalles {
-    font-size: 16px;  /* ← Botón más legible y usable */
-    padding: 10px 16px;
+    font-size: 17px;
+    padding: 10px 18px;
   }
 
   .card-title {
-    font-size: 19px;
+    font-size: 21px;
   }
 
   .card-text {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .acciones {
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
   .btn-favorito {
-    font-size: 15px;
+    font-size: 16px;
     width: 100%;
     padding: 12px;
     border-radius: 25px;
+  }
+
+  .modal-content {
+    padding: 18px;
+    border-radius: 8px;
+  }
+
+  .modal-title {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .modal-info-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* ← Una sola columna */
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .modal-info-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* ← evita que los elementos se vayan abajo */
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #1F180A;
+    word-break: break-word;
+    overflow: hidden;
+  }
+
+  .modal-info-item .label {
+    white-space: nowrap; /* ← evita que "Lugar:" se divida */
+  }
+
+  .modal-info-item .value {
+    flex: 1; /* ← permite que el texto largo ocupe el espacio restante */
+    min-width: 0; /* ← necesario para que el texto largo se recorte correctamente */
+    overflow: hidden;
+    text-overflow: ellipsis; /* ← añade puntos suspensivos si el texto es muy largo */
+  }
+
+  .modal-description h4 {
+    font-size: 18px;
+    margin-top: 22px;
+  }
+
+  .modal-description p {
+    font-size: 15px;
+    line-height: 1.6;
   }
 }

@@ -18,6 +18,18 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('pollino22'),
                 'codigo' => '3505',
             ],
+            [
+                'name' => 'Manolo',
+                'email' => 'manoloejemplonose@gmail.com',
+                'password' => bcrypt('123123'),
+                'codigo' => '2482',
+            ],
+            [
+                'name' => 'Javi',
+                'email' => 'javierguerreromontero1@gmail.com',
+                'password' => bcrypt('123123'),
+                'codigo' => '1111',
+            ],
         ]);
     }
 }

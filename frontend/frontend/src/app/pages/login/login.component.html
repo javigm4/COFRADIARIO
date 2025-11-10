@@ -26,7 +26,7 @@
           </div>
 
           <button type="submit" class="btn btn-block">Iniciar sesión</button>
-          <p *ngIf="error" class="text-danger">{{ error }}</p>
+          <p *ngIf="error" class="text-danger mt-2">{{ error }}</p>
 
         </form>
         <p>¿No tienes cuenta? <a [routerLink]="['/register']">Regístrate aquí</a></p>
@@ -38,7 +38,6 @@
           <input type="email" [(ngModel)]="emailReset" placeholder="Introduce tu email" />
           <button (click)="solicitarReset()">Enviar enlace de recuperación</button>
         </div>
-
       </div>
     </div>
   </div>
@@ -49,4 +48,4 @@
   <article class="fotologin movil" id="arMovil"></article>
   <p>"María Santísima de la Amargura Coronada", por "Nico Canela"</p>
 
-  </div>
+</div>

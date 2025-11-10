@@ -29,24 +29,43 @@ export class LoginComponent {
 
     this.authService.login(formData).subscribe(
       (response) => {
-        console.log('Login exitoso:', response);
+        console.log('Respuesta del servidor:', response);
 
-        // Guardamos el token y los datos del usuario
+        // Si el backend devuelve { error: "..." }, mostramos el mensaje y detenemos todo
+        if (response.error) {
+          this.error = response.error;
+          console.log('Error mostrado:', this.error);
+          return;
+        }
+
+        // Si no hay token o estructura inesperada
+        if (!response.data || !response.data.accessToken) {
+          this.error = 'Error inesperado en la respuesta del servidor';
+          return;
+        }
+
+        // Si llega aquí, el login fue correcto
         localStorage.setItem('token', response.data.accessToken);
         localStorage.setItem('user', JSON.stringify(response.data.user));
 
-
         alert(`Logeado como ${response.data.user.name}`);
-        this.router.navigate(['/']).then(() => {
-          location.reload(); // Esto evita bugs en Docker
-        });
+        this.router.navigate(['/']).then(() => location.reload());
       },
       (error) => {
-        console.error('Error al iniciar sesión:', error);
-        this.error = 'Credenciales incorrectas';
+        console.error('Error HTTP:', error);
+        if (error.status === 401) {
+          this.error = error.error?.error || 'Credenciales inválidas';
+        } else if (error.status === 403) {
+          this.error = error.error?.error || 'Código incorrecto';
+        } else {
+          this.error = 'Error de conexión con el servidor';
+        }
       }
+
     );
   }
+
+
 
   mostrarFormularioReset() {
     this.mostrarReset = true;
@@ -70,9 +89,5 @@ export class LoginComponent {
         this.mensajeReset = '';
       },
     });
-
   }
-
-
-
 }

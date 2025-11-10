@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 
 use App\Models\Cofradia;
@@ -25,10 +27,7 @@ class EventosController extends Controller
         $favoritos = Favorito::all();
         $usuario = Auth::user();
 
-        Log::info('Listado de eventos consultado', [
-            'status' => 200,
-            'count' => $eventos->count(),
-        ]);
+       
         return response()->json(['status' => 200, 'eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
     }
 
@@ -42,11 +41,7 @@ class EventosController extends Controller
         }
 
         $evento->delete();
-        Log::info('Evento eliminado', [
-            'status' => 200,
-            'evento_id' => $id,
-            'nombre' => $evento->nombre,
-        ]);
+      
         // Retornar respuesta JSON con código 200
 
         return response()->json(['message' => 'Evento eliminado correctamente'], 200);
@@ -58,11 +53,7 @@ class EventosController extends Controller
     public function store(Request $request)
     {
 
-        if (! $request->user()) {
-            return response()->json([
-                'message' => 'Verifícate antes de manipular la web, esto nos ayuda a aumentar la seguridad',
-            ], 403);
-        }
+       
         // Validar los datos enviados desde el formulario
         $request->validate([
             'nombre' => 'required|string|max:255',

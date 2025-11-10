@@ -121,11 +121,13 @@ label {
   /* Ajusta el contenedor principal en móviles */
   .login-container {
     display: flex;
+    height: auto; /* ← permite que crezca según el contenido */
+    overflow: visible; /* ← evita que se recorte la imagen */
     flex-direction: column; /* Ordena los elementos en columna */
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 15px;
+    gap: 10px;
   }
 
   /* Formulario compacto */
@@ -143,16 +145,17 @@ label {
   }
 
   /* Imagen móvil colocada debajo del formulario con el mismo ancho */
-  #arMovil {
-    display: block;
-    width: 90%;
-    height: 400px; /* Ajuste de tamaño */
-    background-image: url(../../../../public/images/imagenes/amarguraIniciarSesion.jpg);
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    margin-top: 10px;
-  }
+ #arMovil {
+  display: block;
+  width: 380px; /* Tamaño fijo para todos los móviles */
+  height: 400px !important; /* Altura fija, evita recortes */
+  background-image: url(../../../../public/images/imagenes/amarguraIniciarSesion.jpg);
+  background-size: cover; /* Ocupa todo el contenedor */
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  margin: 10px auto; /* Centrado */
+}
 
   /* Pie de foto debajo de la imagen */
   p {

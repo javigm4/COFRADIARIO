@@ -4,7 +4,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],   // tu Angular
+   'allowed_origins' => ['http://51.68.70.108:4200','http://localhost:4200',],
 
     'allowed_origins_patterns' => [],
 

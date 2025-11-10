@@ -1,20 +1,13 @@
-
 <section class="tiempo-container" role="list">
-    <h2>PRONÓSTICO DEL TIEMPO</h2>
+  <h2>PRONÓSTICO DEL TIEMPO - MÁLAGA </h2>
   <article class="weather-card" *ngFor="let dia of dias" role="listitem">
     <div class="weather-date">{{ dia.date }}</div>
     <figure class="weather-icon-wrapper">
-      <img
-        [src]="dia.icono"
-        class="weather-icon"
-        alt=""
-        aria-hidden="true"
-      />
-      <figcaption class="sr-only">
+      <img [src]="dia.icono" class="weather-icon" alt="Icono del clima" />
 
-      </figcaption>
+
     </figure>
-    <div class="weather-temp">{{ dia.temperatura }}°C</div>
-    <div class="weather-precip">{{ dia.precipitacion }}</div>
+    <div class="weather-temp">{{ dia.temperatura.max }}°C / {{ dia.temperatura.min }}°C</div>
+    <div class="weather-precip">{{ dia.precipitacion }}%</div>
   </article>
 </section>

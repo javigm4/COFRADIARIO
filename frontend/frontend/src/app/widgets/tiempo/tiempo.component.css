@@ -155,33 +155,36 @@
    TIEMPO (widget "tiempo") - Responsive móviles y tablets
    ========================= */
 @media (max-width: 900px) {
- .tiempo-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem 1rem;
-  padding: 1rem;
-  text-align: center;  /* centra el texto del h2 */
+  .tiempo-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    justify-items: center;
+  }
 
-}
+  /* Tarjetas generales */
+  .tiempo-container .weather-card {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
 
-
-.tiempo-container .weather-card {
-  width: 90%;
-  margin: 0 auto;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-
+  /* Centrar la última tarjeta (posición 7) */
+  .tiempo-container > .weather-card:nth-child(8) {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
 
   /* El título ocupa toda la fila */
   .tiempo-container h2 {
     grid-column: 1 / -1;
     margin-bottom: 0.6rem;
     font-size: 1.8rem;
+    text-align: center;
   }
 
- 
-  
   /* Iconos y textos adaptados */
   .tiempo-container .weather-icon {
     width: 48px;
@@ -196,7 +199,7 @@
     font-size: 0.9rem;
   }
 
-  /* Opcional: pequeño offset para alternar pares visualmente */
+  /* Offset visual para alternar pares */
   .tiempo-container > .weather-card:nth-child(odd) {
     transform: translateX(-3%);
   }
@@ -210,7 +213,6 @@
     transform: translateY(-6px) scale(1.01);
   }
 }
-
 /* Pantallas muy pequeñas (móviles estrechos) */
 @media (max-width: 360px) {
   .tiempo-container {

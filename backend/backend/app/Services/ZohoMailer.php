@@ -35,7 +35,8 @@ class ZohoMailer
             });
             return true;
         } catch (\Exception $e) {
-            dd('Error enviando email con Zoho: ' . $e->getMessage());
+		Log::error('Error enviando email con Zoho: ' ,$e->getMessage());
+            return false;
         }
     }
 }

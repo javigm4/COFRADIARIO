@@ -70,4 +70,4 @@ export class AuthService {
       password_confirmation
     });
   }
-}
+} 

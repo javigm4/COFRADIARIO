@@ -34,14 +34,10 @@ export class EventosService {
   }
 
   // Crear evento (protegido)
-  crearEvento(eventoData: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
+ crearEvento(eventoData: any): Observable<any> {
+  return this.http.post<any>(this.apiUrl, eventoData); // sin headers
+}
 
-    return this.http.post<any>(this.apiUrl, eventoData, { headers });
-  }
 
   
 

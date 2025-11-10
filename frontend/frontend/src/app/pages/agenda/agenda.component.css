@@ -15,25 +15,39 @@
   max-width: 1400px;
   margin: auto;
   gap: 12px;
-  height:  88.7vh;
+  height: 88.7vh;
 }
 
 .crear-evento-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   background: rgba(50, 50, 50, 0.95);
   padding: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   margin: auto;
-  flex-direction: column;
+}
+
+.grupo-campo {
+  display: inline-block;
+  padding: 70px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  text-align: center;
+}
+
+
+
+#detalles {
+  margin-bottom: -14px;
 }
 
 /* Formulario e inputs */
-.crear-evento-container input {
-  width: 100%;
+.crear-evento-container input,
+#detalles {
+  width: 140%;
   padding: 10px;
+  height: 38px;
+  /* iguala la altura */
+
   border: 1px solid #f5d547;
   border-radius: 5px;
   background: #282828;
@@ -156,6 +170,10 @@
   z-index: 999;
 }
 
+.titulos {
+  color: white
+}
+
 #favoritos-btn {
   background-color: #d4af37;
   color: white;
@@ -176,9 +194,49 @@
 
 /* =================== Media queries =================== */
 
-/* Móviles */
-@media (max-width: 768px) {
 
+
+
+/* Móviles */
+@media (max-width: 900px) {
+
+  #detalles {
+    width: 300px;
+  }
+
+  .crear-evento-container table,
+  .crear-evento-container tr,
+  .crear-evento-container td {
+    display: block;
+    width: 100%;
+  }
+
+  .crear-evento-container .titulos {
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  .crear-evento-container {
+    flex-direction: column;
+  }
+
+  .grupo-campo {
+    width: 100%;
+  }
+
+  .crear-evento-container input,
+  .crear-evento-container textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+  }
+
+  .crear-evento-container button {
+    width: 100%;
+    margin-top: 12px;
+  }
 
   .favoritos-container {
     position: fixed;
@@ -236,7 +294,7 @@
     animation: fadeOutSlide 0.3s forwards;
   }
 
-   .contenedor-eventos {
+  .contenedor-eventos {
     overflow-y: visible;
     max-height: none;
     border-radius: 0;
@@ -250,7 +308,8 @@
   align-items: center;
   margin-bottom: 18px;
   padding: 12px 16px;
-  border-bottom: 2px solid white; /* línea blanca como PRÓXIMOS EVENTOS */
+  border-bottom: 2px solid white;
+  /* línea blanca como PRÓXIMOS EVENTOS */
   gap: 16px;
 }
 
@@ -289,9 +348,12 @@
 
 /* Estilo para el select de filtro de cofradías */
 .filtro-cofradia {
-  background-color: #c9972f; /* dorado */
-  color: #ffffff; /* blanco */
-  border: 2px solid #7d5a11; /* marrón oscuro para borde */
+  background-color: #c9972f;
+  /* dorado */
+  color: #ffffff;
+  /* blanco */
+  border: 2px solid #7d5a11;
+  /* marrón oscuro para borde */
   border-radius: 6px;
   padding: 6px 12px;
   font-weight: 600;
@@ -304,8 +366,10 @@
 /* Hover y foco para mejorar experiencia */
 .filtro-cofradia:hover,
 .filtro-cofradia:focus {
-  background-color: #7d5a11; /* más oscuro */
-  color: #f4e6c3; /* más claro */
+  background-color: #7d5a11;
+  /* más oscuro */
+  color: #f4e6c3;
+  /* más claro */
   outline: none;
   border-color: #c9972f;
   box-shadow: 0 0 8px #c9972f;
@@ -323,14 +387,14 @@
 /* Contenedor del filtro para separar y dar espacio */
 .contenedor-eventos label {
   font-weight: 700;
-  color: #7d5a11; /* color marrón oscuro (dorado/marrón de la imagen) */
+  color: #7d5a11;
+  /* color marrón oscuro (dorado/marrón de la imagen) */
   margin-right: 10px;
   font-family: 'Georgia', serif;
 }
 
 label {
-  color: #e6b812 !important 
-  ;
+  color: #e6b812 !important;
 }
 
 /* Opcional: si vas a hacer el filtro de fecha, puedes darle clase y reutilizar estilos */
@@ -338,35 +402,37 @@ label {
 
 #boton-secreto {
   position: absolute;
-  top: 120px;   /* ponlo donde quieras */
+  top: 120px;
+  /* ponlo donde quieras */
   left: 10px;
-  opacity: 0;  /* totalmente transparente */
-  z-index: 9999; /* que quede encima de todo */
+  opacity: 0;
+  /* totalmente transparente */
+  z-index: 9999;
+  /* que quede encima de todo */
   cursor: pointer;
 }
+
 /* Fondo semitransparente */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
+  height: 100vh;
+  /* limitar a toda la pantalla */
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10000;
+  overflow-y: auto;
+  /* para permitir scroll si el popup es muy grande */
+  padding: 20px;
+  /* evita que el popup toque los bordes */
+  box-sizing: border-box;
 }
 
-/* Caja del popup */
-.popup {
-  background: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-  min-width: 250px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
+
 
 
 /* =================== Animaciones =================== */
@@ -375,6 +441,7 @@ label {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -386,6 +453,7 @@ label {
     opacity: 1;
     transform: translateY(0);
   }
+
   to {
     opacity: 0;
     transform: translateY(-20px);
@@ -393,3 +461,258 @@ label {
 }
 
 
+/* ===================== POPUP PROFESIONAL ===================== */
+/* ===================== POPUP COMPLETO ===================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.popup {
+  background: linear-gradient(135deg, #282828, #3a3a3a);
+  color: #f5d547;
+  padding: 25px 30px;
+  border-radius: 12px;
+  max-height: 85vh;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Secciones separadas con línea dorada */
+.popup section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f5d547;
+}
+
+/* Lista de eventos */
+.popup section li {
+  padding: 12px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+/* Inputs, textarea y selects */
+.popup input,
+.popup select,
+.popup textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #f5d547;
+  background: #1e1e1e;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Select de cofradía específico */
+.popup select#cofradiaAdmin,
+.popup select#filtroCofradia {
+  font-weight: bold;
+  color: #000;
+  background-color: #f5d547;
+  border: 2px solid #a88532;
+}
+
+/* Botones dentro del popup */
+.popup button {
+  background: linear-gradient(135deg, #f5d547, #a88532);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.popup button:hover {
+  background: linear-gradient(135deg, #e6c03b, #90722a);
+  transform: scale(1.03);
+}
+
+/* Botón nueva cofradía siempre abajo */
+.nueva-cofradia {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===================== MÓVILES ===================== */
+@media (max-width: 900px) {
+  .popup {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
+    padding: 20px 15px;
+    gap: 20px;
+    overflow-y: auto;
+  }
+
+  .popup section {
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+
+  .popup li {
+    padding: 14px;
+  }
+
+  .popup input,
+  .popup select,
+  .popup textarea {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .popup button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  /* Botón nueva cofradía abajo */
+  .nueva-cofradia {
+    margin-top: auto;
+  }
+
+  /* Scrollbar para móviles */
+  .popup::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .popup::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 215, 0, 0.4);
+    border-radius: 3px;
+  }
+
+  .popup::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 215, 0, 0.7);
+  }
+}
+
+/* 🔧 Ajuste para móviles: evita que el contenedor dorado se desborde */
+@media (max-width: 900px) {
+  .contenedor-eventos {
+    flex: none;
+    /* evita que se estire demasiado */
+    width: 100%;
+    /* que use solo el ancho disponible */
+    max-width: 100%;
+    /* evita desbordamiento */
+    overflow-x: hidden;
+    /* corta cualquier contenido que se salga horizontalmente */
+    box-sizing: border-box;
+    /* incluye padding en el ancho total */
+    background-position: center;
+    /* centra el fondo dorado */
+  }
+
+  .contenedor-principal {
+    flex-direction: column;
+    /* apila eventos y favoritos */
+    align-items: center;
+    overflow-x: hidden;
+    /* asegura que nada se desborde */
+  }
+}
+
+/* 🎨 Ajuste estético de filtros en móviles */
+@media (max-width: 900px) {
+  .barra-filtros {
+    flex-direction: column;
+    /* apila los filtros uno debajo del otro */
+    align-items: stretch;
+    /* que ocupen todo el ancho */
+    gap: 10px;
+    /* espacio entre los filtros */
+    padding: 10px 0;
+    border-bottom: none;
+    /* elimina línea blanca gruesa si molesta */
+  }
+
+  .filtro-izquierdo,
+  .filtro-derecho {
+    width: 100%;
+    /* que los inputs y selects usen todo el ancho */
+    text-align: left;
+    /* etiquetas alineadas a la izquierda */
+  }
+
+  .filtro-izquierdo label,
+  .filtro-derecho label {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .filtro-cofradia {
+    width: 100%;
+    /* evita que se corte el input o el select */
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .linea-separadora {
+    display: none;
+    /* oculta la línea vertical en móviles */
+  }
+}
+
+/* ❌ Botón de cierre del popup */
+.cerrar-popup {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  color: #ff0000;
+  /* dorado */
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10100;
+  /* encima del contenido del popup */
+}
+
+.cerrar-popup:hover {
+  color: #ffffff;
+  /* blanco al pasar el ratón */
+  transform: scale(1.2);
+}
+
+/* 📱 Ajuste para móviles */
+@media (max-width: 900px) {
+  .cerrar-popup {
+    top: 10px;
+    right: 12px;
+    font-size: 24px;
+  }
+}

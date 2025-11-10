@@ -20,24 +20,5 @@ export class AppComponent {
 
   constructor(private weatherService: WeatherService) {}
 
-  ngOnInit(): void {
-    this.getForecast('Málaga');  // Obtener pronóstico para Málaga
-  }
-
-  // Método para obtener el pronóstico y manejar los datos
-  getForecast(city: string): void {
-    this.weatherService.getForecast(city).subscribe(
-      (data) => {
-         this.dias = data.forecast.forecastday.map((dia: any) => ({
-          date: dia.date,
-          temperatura: dia.day.avgtemp_c,
-          icono: 'https:' + dia.day.condition.icon,
-          precipitacion: dia.day.daily_chance_of_rain + '%'
-        }));
-      },
-      (error) => {
-        console.error('Error al obtener el pronóstico', error);
-      }
-    );
-  }
+  
 }

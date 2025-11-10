@@ -13,23 +13,14 @@ class EventosSeeder extends Seeder
         DB::table('eventos')->truncate();
 
         DB::table('eventos')->insert([
+    
             [
-                'id' => 70,
-                'nombre' => 'Extraordinaria de Nuestro Padre Jesus de la Soledad',
-                'cofradia' => 1,
-                'fecha' => Carbon::create(2025, 10, 4, 17, 15, 0),
-                'lugar' => 'casa hermandad de los estudiantes',
-                'detalles' => '',
-                'created_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
-                'updated_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
-            ],
-            [
-                'id' => 71,
-                'nombre' => 'Presentacion del Retablo',
+                'id' => 1,
+                'nombre' => 'Presentación del Retablo',
                 'cofradia' => 2,
-                'fecha' => Carbon::create(2025, 10, 17, 20, 0, 0),       
-                'lugar' => 'iglesia de santo domingo',
-                'detalles' => '',
+                'fecha' => Carbon::create(2025, 10, 17, 20, 3, 0),       
+                'lugar' => 'Parroquia de Santo Domingo de Guzmán',
+                'detalles' => 'Este retablo no es solo madera tallada y dorada, sino ofrenda viva y testimonio de fe.',
                 'created_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
                 'updated_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
             ],
@@ -37,23 +28,22 @@ class EventosSeeder extends Seeder
                 'id' => 3,
                 'nombre' => 'Extraordinaria de Maria Santisima de la Trinidad Coronada',
                 'cofradia' => 3,
-                'fecha' => Carbon::create(2025, 10, 25, 20, 0, 0),
-                'lugar' => 'casa hermandad del cautivo, calle trinidad',
-                'detalles' => '',
+                'fecha' => Carbon::create(2025, 10, 25, 16, 3, 0),
+                'lugar' => 'Casa de hermandad del Cautivo',
+                'detalles' => 'Procesión extraordinaria por el XXV aniversario de su Coronación Canónica',
                 'created_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
                 'updated_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
             ],
             [
                 'id' => 4,
-                'nombre' => 'Extraordinaria de Maria Santisima del Gran Perdon',
-                'cofradia' => 4,
-                'fecha' => Carbon::create(2025, 10, 17, 18, 0, 0),
-                'lugar' => 'casa hermandad de los estudiantes',
-                'detalles' => '',
+                'nombre' => 'Zambomba Solidaria',
+                'cofradia' => 2,
+                'fecha' => Carbon::create(2025, 11, 28, 17, 0, 0),
+                'lugar' => 'Plaza de Fray Alonso de Santo Tomás',
+                'detalles' => 'La Congregación de Mena tiene el placer de invitaros a participar en la Zambomba Solidaria que se celebrará el próximo 28/11 a partir de las 17h en la Plaza de Fray Alonso de Sto. Tomás.',
                 'created_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
                 'updated_at' => Carbon::create(2025, 9, 22, 18, 11, 6),
-            ],
-           
+            ],           
         ]);
     }
 }

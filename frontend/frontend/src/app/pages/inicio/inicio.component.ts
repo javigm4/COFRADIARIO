@@ -22,29 +22,28 @@ export class InicioComponent {
   constructor(private weatherService: WeatherService, private diarioService: DiarioService, private eventosService: EventosService, private cofradiasService: CofradiasService) { }
 
   ngOnInit(): void {
-    this.getForecast(this.city);
+    this.getForecast();
     this.getUltimosArticulos();
     this.getProximosEventos();
   }
 
 
 
+getForecast(): void {
+  this.weatherService.getForecast().subscribe(
+    (data) => {
+      this.dias = data.map(dia => ({
+        ...dia,
+        date: dia.date // dejar como string puro
+      }));
+    },
+    (error) => {
+      console.error('Error al obtener el pronóstico de AEMET', error);
+    }
+  );
+}
 
-  getForecast(city: string): void {
-    this.weatherService.getForecast(city).subscribe(
-      (data) => {
-        this.dias = data.forecast.forecastday.map((dia: any) => ({
-          date: dia.date,
-          temperatura: dia.day.avgtemp_c,
-          icono: 'https:' + dia.day.condition.icon,
-          precipitacion: dia.day.daily_chance_of_rain + '%'
-        }));
-      },
-      (error) => {
-        console.error('Error al obtener el pronóstico', error);
-      }
-    );
-  }
+
 
   getUltimosArticulos(): void {
     this.diarioService.getUltimosArticulos().subscribe(
@@ -58,28 +57,28 @@ export class InicioComponent {
     );
   }
 
- getProximosEventos(): void {
-  this.eventosService.getProximosEventos().subscribe(
-    (response) => {
-      this.eventosProximos = response.eventos ?? [];
-      this.cofradias = response.cofradias ?? [];
+  getProximosEventos(): void {
+    this.eventosService.getProximosEventos().subscribe(
+      (response) => {
+        this.eventosProximos = response.eventos ?? [];
+        this.cofradias = response.cofradias ?? [];
 
-      const cofradiasRef = this.cofradias; // ← guardamos referencia
+        const cofradiasRef = this.cofradias; // ← guardamos referencia
 
-      this.eventosProximos.forEach(evento => {
-        evento.getCofradiaNombre = () => {
-        const cofradia = cofradiasRef.find(c => Number(c.id) === Number(evento.cofradia));
-          return cofradia ? cofradia.nombre : 'Desconocida';
-        };
-        console.log('RESPUESTA EVENTOS:', response);
-        console.log('RESPUESTA COFRADIAS:', response.cofradias)
-      });
-    },
-    (error) => {
-      console.error('Error al obtener artículos:', error);
-    }
-  );
-}
+        this.eventosProximos.forEach(evento => {
+          evento.getCofradiaNombre = () => {
+            const cofradia = cofradiasRef.find(c => Number(c.id) === Number(evento.cofradia));
+            return cofradia ? cofradia.nombre : 'Desconocida';
+          };
+          console.log('RESPUESTA EVENTOS:', response);
+          console.log('RESPUESTA COFRADIAS:', response.cofradias)
+        });
+      },
+      (error) => {
+        console.error('Error al obtener artículos:', error);
+      }
+    );
+  }
 
 
 

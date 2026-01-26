@@ -1,0 +1,336 @@
+/* Aseguramos que body y html ocupen toda la pantalla y no hagan scroll */
+html,
+body {
+  height: 861px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* evita scroll global */
+  font-family: 'Arial', sans-serif;
+  background-image: url("../../../../public/images/imagenes/cautivomovil.jpg");
+
+}
+
+/* Contenedor del calendario */
+full-calendar {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 15px;
+  height: 98%;
+  /* ocupa todo el alto disponible */
+  background-color: #fdf6e3;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+/* Overlay oscuro para el fondo */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Modal de detalles */
+#detalleEvento {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* Contenido dentro del modal */
+#detalleEvento h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+#detalleEvento p {
+  margin: 8px 0;
+  color: #555;
+}
+
+#detalleEvento button {
+  margin-top: 15px;
+  padding: 8px 14px;
+  background-color: #ca9c06;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#detalleEvento button:hover {
+  background-color: #b28f00;
+}
+
+/* Mostrar modal con transición */
+#detalleEvento.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+/* FullCalendar global */
+::ng-deep .fc {
+  font-family: 'Arial', sans-serif;
+}
+
+/* Encabezado de días - Desktop */
+::ng-deep .fc .fc-col-header-cell a {
+  text-decoration: none !important;
+  color: inherit !important;
+  /* toma el color del header */
+  font-weight: bold !important;
+}
+
+/* Encabezado de días */
+::ng-deep .fc .fc-col-header-cell {
+  background-color: #ca9c06 !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  padding: 12px 0 !important;
+  border: 1px solid #d4af37 !important;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  text-align: center;
+  text-decoration: none !important;
+  /* quita subrayado */
+
+}
+
+/* Celdas de los días */
+::ng-deep .fc .fc-daygrid-day {
+  background-color: #fff !important;
+  vertical-align: top !important;
+  padding: 8px !important;
+  border: 1px solid #a8a4a4 !important;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+/* Hover en celdas */
+::ng-deep .fc .fc-daygrid-day:hover {
+  background-color: #fef5d4 !important;
+}
+
+/* Eventos */
+::ng-deep .fc .fc-daygrid-event {
+  background-color: #ca9c06 !important;
+  color: #000 !important;
+  font-size: 0.85rem !important;
+  border-radius: 6px !important;
+  border: 1px solid #b28f00;
+  padding: 6px 8px !important;
+  margin-bottom: 4px !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  display: block !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Cofradía debajo del evento */
+::ng-deep .fc .fc-daygrid-event small {
+  display: block !important;
+  font-size: 0.75rem !important;
+  color: #333 !important;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* Toolbar */
+::ng-deep .fc .fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+::ng-deep .fc .fc-button {
+  background-color: #333 !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  border: none !important;
+  padding: 6px 14px !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s;
+}
+
+::ng-deep .fc .fc-button:hover {
+  background-color: #555 !important;
+}
+
+/* Animación de entrada del overlay */
+#overlay.show {
+  animation: overlayFadeIn 0.3s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animación de salida del overlay */
+#overlay.hide {
+  animation: overlayFadeOut 0.3s ease forwards;
+}
+
+@keyframes overlayFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* Animación del modal al aparecer */
+#detalleEvento.show {
+  animation: modalPopIn 0.35s ease forwards;
+}
+
+@keyframes modalPopIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Animación del modal al cerrarse */
+#detalleEvento.hide {
+  animation: modalPopOut 0.3s ease forwards;
+}
+
+@keyframes modalPopOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+}
+
+::ng-deep .fc .fc-button:disabled {
+  background-color: #ccc !important;
+  color: #666 !important;
+}
+
+/* Separación entre celdas y eventos */
+::ng-deep .fc .fc-daygrid-day-top {
+  margin-bottom: 5px;
+}
+
+/* Ajuste de scroll en celdas si hay muchos eventos */
+
+::ng-deep .fc-daygrid-day-top a {
+  text-decoration: none !important;
+  color: inherit !important;
+  /* toma el color del div que pusimos */
+}
+
+/* Responsive: para móviles, ajustamos padding y fuente */
+@media (max-width: 768px) {
+  ::ng-deep .fc .fc-col-header-cell {
+    font-size: 0.8rem;
+    padding: 8px 0 !important;
+  }
+
+  ::ng-deep .fc .fc-daygrid-event {
+    font-size: 0.9rem !important;
+    padding: 8px 10px !important;
+  }
+
+  ::ng-deep .fc .fc-toolbar-title {
+    font-size: 1.2rem;
+  }
+
+  ::ng-deep .fc .fc-button {
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* Cursor pointer al pasar sobre los eventos */
+::ng-deep .fc .fc-daygrid-event:hover {
+  cursor: pointer;
+  background-color: #b28f00 !important;
+  /* opcional: cambio de color al hover */
+}
+
+@media (max-width: 768px) {
+  full-calendar {
+
+    max-height: 70vh;
+    /* no ocupa toda la pantalla */
+    overflow-y: auto;
+    /* scroll interno solo en el calendario */
+  }
+
+  /* Contenedor de eventos en móvil */
+  ::ng-deep .fc-daygrid-day {
+    display: flex;
+    flex-direction: column;
+  }
+
+  ::ng-deep .fc-col-header {
+    display: none !important;
+  }
+
+  ::ng-deep .fc-daygrid-day-events {
+    max-height: 30vh;
+    /* máximo 30% de la pantalla */
+    overflow-y: auto;
+    /* scroll interno si hay muchos eventos */
+  }
+
+
+}

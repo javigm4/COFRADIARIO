@@ -30,17 +30,12 @@
 </div>
 }
 <div class="fondo-general">
-
-
   <button id="boton-secreto" (click)="mostrarPopup = true">
     Botón secreto
   </button>
-
-
   <div *ngIf="mostrarPopup" class="overlay">
     <div class="popup">
       <button (click)="cerrarPopupExito()">X</button>
-
       <label for="passwordInput">Contraseña:</label>
       <input type="password" [(ngModel)]="inputPassword" id="passwordInput" />
       <button (click)="validarPassword()">Aceptar</button>
@@ -48,8 +43,6 @@
   </div>
   <div *ngIf="popupExito" class="overlay">
     <div class="popup">
-
-      <!-- Lista de cofradías -->
       <div class="lista-cofradias-container">
         <h3>Cofradías existentes</h3>
         <section class="filtro-cofradias">
@@ -57,7 +50,6 @@
           <input type="text" id="buscarCofradia" placeholder="Filtrar cofradías..."
             (input)="filtrarCofradias($event)" />
         </section>
-
         <section class="lista-cofradias">
           <ul>
             @for (cofradia of listaCofradiasFiltrada; track cofradia.id) {

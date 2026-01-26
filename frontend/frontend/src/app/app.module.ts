@@ -32,6 +32,8 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { CalendarioComponent } from './pages/calendario/calendario.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 registerLocaleData(localeEs);
 
@@ -61,6 +63,7 @@ registerLocaleData(localeEs);
     ContactoComponent,
     VerificadoComponent,
     ResetPasswordComponent,
+    CalendarioComponent,
 
   ],
   imports: [
@@ -69,6 +72,7 @@ registerLocaleData(localeEs);
     HttpClientModule, // Importar HttpClientModule para realizar peticiones HTTP
     FormsModule,  // ✅ AGREGA FormsModule AQUÍ
     BrowserAnimationsModule,
+    FullCalendarModule
   ],
   providers: [WeatherService,CookieService],
   bootstrap: [AppComponent]

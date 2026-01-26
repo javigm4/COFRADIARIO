@@ -3,17 +3,18 @@
     <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" width="60" />
     <span class="brand-text">COFRADIARIO</span>
   </a>
- 
+
   <button class="menu-toggle d-lg-none" (click)="toggleMenu()">
     <span class="hamburger"></span>
   </button>
 
   <div id="divNav" class="nav-links hidden-mobile">
-    <a routerLink="/inicio" class="nav-item"  (click)="cerrarMenu()">INICIO</a>
-    <a  *ngIf="!usuarioAutenticado" class="nav-item" routerLink="/login" (click)="cerrarMenu()">
+    <a routerLink="/inicio" class="nav-item" (click)="cerrarMenu()">INICIO</a>
+    <a *ngIf="!usuarioAutenticado" class="nav-item" routerLink="/login" (click)="cerrarMenu()">
       Entrar / Registro
     </a>
     <a class="nav-item" routerLink="/agenda" (click)="cerrarMenu()">Agenda</a>
+    <a class="nav-item" routerLink="/calendario" (click)="cerrarMenu()">Calendario</a>
     <a class="nav-item" routerLink="/diario" (click)="cerrarMenu()">Diario</a>
     <a class="nav-item" routerLink="/contacto" (click)="cerrarMenu()">Contacto</a>
     <button *ngIf="usuarioAutenticado" class="nav-item logout" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión

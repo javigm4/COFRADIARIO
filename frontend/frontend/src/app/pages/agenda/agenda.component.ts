@@ -171,33 +171,22 @@ export class AgendaComponent implements OnInit {
     this.aplicarFiltros(); // usa el mismo sistema de filtro general
   }
 
-
-
   seleccionarMes(event: any): void {
     const valor = event.target.value;
     this.mesSeleccionado = valor ? Number(valor) : null;
     this.aplicarFiltros();
   }
 
-
   aplicarFiltros(): void {
     this.eventos = this.todoslosEventos.filter(evento => {
-
-
       const coincideMes =
         !this.mesSeleccionado || this.mesSeleccionado === 0 ||
         (new Date(evento.fecha).getMonth() + 1) === this.mesSeleccionado;
-
-    
-      
-
-
-        //el 
       const coincideTitulo =
-        !this.palabraFiltro || evento.nombre.toLowerCase().includes(this.palabraFiltro) ||   (this.cofradias.find(c => c.id === evento.cofradia)?.nombre.toLowerCase().includes(this.palabraFiltro));
+        !this.palabraFiltro || evento.nombre.toLowerCase().includes(this.palabraFiltro) || (this.cofradias.find(c => c.id === evento.cofradia)?.nombre.toLowerCase().includes(this.palabraFiltro));
 
-      return  coincideMes && coincideTitulo;
-    }); 
+      return coincideMes && coincideTitulo;
+    });
   }
 
   // ------ VALIDAR CONTRASEÑA Y CERRRAR POP UP-----
@@ -208,12 +197,10 @@ export class AgendaComponent implements OnInit {
       this.popupExito = true;
     }
   }
-
-
   cerrarPopupExito() {
-  this.mostrarPopup = false;
-  this.popupExito = false;
-}
+    this.mostrarPopup = false;
+    this.popupExito = false;
+  }
 
   // --- Crear o borrar cofradias ----
 

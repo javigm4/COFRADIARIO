@@ -38,9 +38,6 @@ export class EventosService {
   return this.http.post<any>(this.apiUrl, eventoData); // sin headers
 }
 
-
-  
-
   // Obtener eventos por cofradía
   getEventosPorCofradia(cofradiaId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/cofradia/${cofradiaId}`);

@@ -13,10 +13,12 @@ import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { VerificadoComponent } from './verificado/verificado.component'; // Importa el componente de verificación
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { CalendarioComponent } from './pages/calendario/calendario.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent }, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
   { path: 'agenda', component: AgendaComponent }, // Cambia 'InicioComponent' por el nombre del componente que quieras usar
+  { path: 'calendario', component: CalendarioComponent },
   { path: 'editar/:id', component: EditarEventoComponent }, // Nueva página de edición
   { path: 'editarArticulo/:id', component: EditarArticuloComponent }, // Nueva página de edición çde articulo
   { path: 'crear-articulo', component: CrearArticuloComponent }, // Nueva página de creación

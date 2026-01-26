@@ -34,7 +34,7 @@ getForecast(): void {
     (data) => {
       this.dias = data.map(dia => ({
         ...dia,
-        date: dia.date // dejar como string puro
+        date: dia.date 
       }));
     },
     (error) => {

@@ -65,12 +65,34 @@
   </section>
 
 
+  <section id="calendario">
+    <div class="calendario-container">
+      <!-- Imagen a la izquierda -->
+      <div class="calendario-foto">
+        <img src="../../../../public/images/imagenes/calendarioInicio.png" alt="Calendario de eventos">
+      </div>
 
-  <section id="quienesomos">
-    <!-- Imagen a la izquierda -->
-    <div>
-      <img src="../../../../public/images/imagenes/yo2.png" alt="Javier Guerrero">
+      <!-- Contenido a la derecha -->
+      <div class="calendario-contenido">
+        <h2 class="redsocialtitulos">Entra en nuestro calendario de eventos</h2>
+        <h5 class="redsocialtitulos">Consulta los eventos de forma general y con un solo click.
+        </h5>
+        <h5 class="redsocialtitulos">
+          Resuelve todas tus dudas y no te pierdas ni uno.</h5>
+        <h5 class="redsocialtitulos">
+          Todo aquí, en el calendario de COFRADIARIO.</h5>
+        <button id="btnAcceder" [routerLink]="['/calendario']">CALENDARIO</button>
+      </div>
+
+      <button id="btnMovil" [routerLink]="['/calendario']">CALENDARIO</button>
+
     </div>
+  </section>
+
+
+
+  <hr>
+  <section id="quienesomos">
 
     <!-- Texto descriptivo a la derecha -->
     <div>
@@ -102,6 +124,10 @@
             class="username">javierguerreromontero1&#64;gmail.com</small>
         </div>
       </div>
+    </div>
+
+    <div id="fotoQuienesSomos">
+      <img src="../../../../public/images/imagenes/yo2.png" alt="Javier Guerrero">
     </div>
   </section>
 

@@ -34,7 +34,6 @@ export class WeatherService {
         const dias = data[0].prediccion.dia.map((d: any) => {
           const rawCode = d.estadoCielo?.[0]?.value;
           console.log(rawCode)
-
           return {
             date: d.fecha,
             temperatura: { min: d.temperatura.minima, max: d.temperatura.maxima },
@@ -42,11 +41,9 @@ export class WeatherService {
             icono: this.mapIcon(rawCode)
           };
         });
-
         // Guardar en cache
         localStorage.setItem('weatherCache', JSON.stringify(dias));
         localStorage.setItem('weatherCacheTime', now.toString());
-
         return dias;
       }),
       retryWhen(errors =>
@@ -84,6 +81,5 @@ private mapIcon(code?: string): string {
 
   return '../../../../public/images/icons/sol.png';
 }
-
 
 }

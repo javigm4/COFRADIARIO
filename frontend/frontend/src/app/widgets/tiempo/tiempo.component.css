@@ -1,53 +1,13 @@
-@keyframes barrelRoll {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-    filter: blur(4px);
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
 .tiempo-container {
-  padding: clamp(2rem, 6vw, 4rem) 1rem;
-  /* Fondo más rico y profundo con efecto "foco" */
-  background:
-    radial-gradient(circle at 50% 50%, rgba(92, 80, 66, 0.4) 0%, transparent 70%),
-    linear-gradient(135deg, #2a241f 0%, #3d352e 50%, #2a241f 100%);
-
-  /* Bordes metálicos tipo cinta */
-  border-top: 2px solid #d4af37;
-  border-bottom: 2px solid #d4af37;
+  padding: clamp(2rem, 6vw, 3.5rem) 1rem;
+  background: #0d0906;
+  border-top: 2px solid #b8860b;
+  border-bottom: 1px solid rgba(184, 134, 11, 0.18);
   position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-/* Líneas ornamentales finas paralelas a los bordes */
-.tiempo-container::before,
-.tiempo-container::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.3);
-}
-
-.tiempo-container::before {
-  top: 8px;
-}
-
-.tiempo-container::after {
-  bottom: 8px;
 }
 
 .countdown-vertical-wrapper {
@@ -55,8 +15,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.2rem, 4vw, 2rem);
-  /* Mejor ritmo vertical */
+  gap: clamp(1rem, 3vw, 1.6rem);
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -66,7 +25,7 @@
 
 .label-pre {
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .label-post {
@@ -78,44 +37,28 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  line-height: 1.1;
-  /* Reset label-heading conflicts */
-  background: none;
-  -webkit-text-fill-color: initial;
-  background-clip: border-box;
-  -webkit-background-clip: border-box;
-  letter-spacing: normal;
-  filter: none;
+  line-height: 1.2;
 }
 
 .label-heading {
   font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 5vw, 2.5rem);
-  font-weight: 900;
-  color: #d4af37;
-  letter-spacing: 6px;
-  /* Más aire en las letras para elegancia */
+  font-size: clamp(9px, 1.4vw, 11px);
+  font-weight: 700;
+  color: #b8860b;
+  letter-spacing: .38em;
   margin: 0;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #ffe89a, #d4af37, #fdfdfd, #d4af37, #ffe89a);
-  background-size: 200% auto;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
-  animation: shineText 4s linear infinite;
 }
 
 .label-post .small-text {
   font-family: var(--font-body);
-  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-  color: #ffe89a;
-  text-transform: lowercase;
   font-style: italic;
+  font-size: clamp(14px, 2vw, 16px);
+  color: #b8860bd9;
   font-weight: 400;
-  letter-spacing: 2px;
-  margin-bottom: 5px;
-  opacity: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  margin-bottom: 4px;
   text-align: center;
   width: 100%;
   display: block;
@@ -123,210 +66,81 @@
 
 .label-post .highlight-target {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 6vw, 3.5rem);
-  font-weight: 900;
-  letter-spacing: 4px;
-  background: linear-gradient(90deg, #ffe89a, #d4af37, #fdfdfd, #d4af37, #ffe89a);
-  background-size: 200% auto;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+  font-size: clamp(20px, 4vw, 30px);
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: #fdf5dc;
   text-transform: uppercase;
   text-align: center;
-  animation: pulseLight 3s ease-in-out infinite;
-}
-
-@keyframes pulseLight {
-
-  0%,
-  100% {
-    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
-    transform: scale(1);
-  }
-
-  50% {
-    filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.6));
-    transform: scale(1.02);
-  }
-}
-
-@keyframes shineText {
-  to {
-    background-position: 200% center;
-  }
 }
 
 .cards-container {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: clamp(0.5rem, 2vw, 2.5rem);
-  /* Aumentado para mayor separación */
+  align-items: center;
+  gap: clamp(6px, 1.2vw, 10px);
   width: 100%;
+  max-width: 460px;
 }
 
 .barrel-card {
   display: flex;
   flex-direction: column;
-  /* Desktop */
   align-items: center;
-  gap: 0.3rem;
-  flex: 0 1 auto;
+  gap: 5px;
+  flex: 1;
   min-width: 0;
+  max-width: 90px;
 }
 
-/* El barril 3D */
 .barrel-box {
   position: relative;
-  width: clamp(55px, 15vw, 240px);
-  height: clamp(40px, 8vw, 140px);
-
-  /* Gradiente multi-capa para simular refracción de luz en vidrio curvo */
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.5) 100%);
-
-  backdrop-filter: blur(25px);
-  /* Desenfoque cinemático */
-  -webkit-backdrop-filter: blur(25px);
-
-  /* Borde de laton oscuro con destello en aristas */
-  border: 1px solid rgba(139, 109, 18, 0.8);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.4);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-
-  border-radius: clamp(12px, 2vw, 30px);
-
-  box-shadow:
-    inset 0 10px 30px rgba(0, 0, 0, 0.9),
-    inset 0 -5px 20px rgba(255, 255, 255, 0.08);
-  /* Eliminada la sombra exterior por abajo para un aspecto más limpio */
-
+  width: 100%;
+  height: clamp(50px, 8vw, 68px);
+  background: #110d0a;
+  border: 1px solid rgba(184, 134, 11, 0.2);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Brillo principal (Reflejo de ventana/foco) */
-.barrel-box::before {
-  content: '';
-  position: absolute;
-  top: 4%;
-  left: 10%;
-  width: 80%;
-  height: 35%;
-  background: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.3) 0%,
-      rgba(255, 255, 255, 0.1) 20%,
-      transparent 100%);
-  border-radius: 50% 50% 40% 40% / 100% 100% 30% 30%;
-  filter: blur(1px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Punto de luz intenso (Specular highlight) */
-.barrel-box::after {
-  content: '';
-  position: absolute;
-  top: 10%;
-  right: 15%;
-  width: 15%;
-  height: 20%;
-  background: radial-gradient(circle at center,
-      rgba(255, 255, 255, 0.4) 0%,
-      transparent 80%);
-  filter: blur(2px);
-  transform: rotate(-15deg);
-  pointer-events: none;
-  z-index: 2;
-}
-
 .weather-temp {
   font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 6vw, 7rem);
-  font-weight: 500;
-  color: #ffe89a;
-  text-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 400;
+  color: #d4a017;
   margin: 0;
   line-height: 1;
   position: relative;
   z-index: 0;
-  /* Por detrás de los reflejos */
-}
-
-.weather-temp.roll {
-  animation: barrelRoll 0.3s ease-out forwards;
 }
 
 .weather-date {
-  font-family: var(--font-body);
-  font-size: clamp(0.5rem, 1.1vw, 1.1rem);
-  font-weight: 800;
-  color: #d4af37;
-  letter-spacing: clamp(1px, 0.3vw, 3px);
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 600;
+  color: #fdf5dc94;
+  letter-spacing: .18em;
   text-transform: uppercase;
   text-align: center;
 }
 
-@media (max-width: 850px) {
-  .barrel-card {
-    flex-direction: column;
-    /* De vuelta debajo */
-    gap: 0.4rem;
-    /* Separación aumentada */
-  }
-
-  .cards-container {
-    gap: 0.6rem;
-    /* Aumentado */
-  }
-}
-
-/* Responsive Overrides for extremely small screens */
 @media (max-width: 480px) {
   .tiempo-container {
-    padding: 1rem 0.1rem;
+    padding: 1.5rem 0.5rem;
   }
 
   .cards-container {
-    gap: 0.1rem;
-  }
-
-  .label-heading {
-    font-size: clamp(1rem, 5vw, 1.8rem);
-    letter-spacing: 2px;
-    margin-top: 4px;
-  }
-
-  .label-post .highlight-target {
-    font-size: clamp(1rem, 4vw, 1.3rem);
-    letter-spacing: 1px;
-  }
-
-  .cards-container {
-    gap: 0.4rem;
-    /* Aumentado para que no se vean pegados en móvil */
+    gap: 5px;
   }
 
   .barrel-box {
-    width: clamp(70px, 20vw, 85px);
-    /* Reducido un poco */
-    height: 65px;
-    border-radius: 12px;
+    height: 52px;
   }
 
   .weather-temp {
-    font-size: 2.8rem;
-    /* Números mucho más grandes */
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-  }
-
-  .weather-date {
-    font-size: 0.7rem;
-    letter-spacing: 0.2px;
+    font-size: 22px;
   }
 }

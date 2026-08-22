@@ -46,7 +46,7 @@
   text-align: center;
   padding: 56px 24px;
   color: rgba(232,201,106,0.4);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-body);
   font-size: 18px;
   font-style: italic;
 }

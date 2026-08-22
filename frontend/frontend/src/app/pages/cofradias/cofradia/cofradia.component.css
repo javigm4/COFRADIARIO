@@ -2,7 +2,7 @@
   display: block;
   background-color: #1e1e1e;
   color: white;
-  font-family: sans-serif;
+  font-family: var(--font-body);
 }
 
 .cofradia-container {

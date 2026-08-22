@@ -9,8 +9,8 @@
   --crema:         #FAF3E0;
   --crema-media:   #F0E4C4;
   --crema-borde:   #DCC99A;
-  --azul:          #152645;
-  --azul-med:      #1E3560;
+  --azul:          #1a0c04;
+  --azul-med:      #3a2210;
   --texto:         #1A0E00;
   --texto-medio:   #503010;
   --texto-suave:   #7A5530;
@@ -71,7 +71,7 @@
 
 .card-header h2 {
   margin: 0;
-  font-family: 'Georgia', serif;
+  font-family: var(--font-heading);
   color: #f5d547;
   font-size: 1.8rem;
 }
@@ -437,7 +437,7 @@ input:checked+.slider:before {
 }
 
 .fav-header span {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 15px;
   font-weight: 600;
   color: var(--crema);
@@ -768,7 +768,7 @@ input:checked+.slider:before {
     border: 1px solid rgba(255,255,255,0.4) !important;
     border-radius: 6px !important;
     color: #ffffff !important;
-    font-family: 'Jost', sans-serif !important;
+    font-family: var(--font-heading) !important;
     font-size: 13px !important;
     font-weight: 500 !important;
     padding: 9px 13px !important;
@@ -832,7 +832,7 @@ select.filtro-cofradia option {
   flex-shrink: 0;
 }
 .cabecera h1 {
-  font-family: 'Libre Baskerville', serif;
+  font-family: var(--font-heading);
   font-size: clamp(26px, 4.5vw, 44px);
   font-weight: 700;
   color: var(--crema);
@@ -885,7 +885,7 @@ select.filtro-cofradia option {
   color: #7d5a11;
   /* color marrón oscuro (dorado/marrón de la imagen) */
   margin-right: 10px;
-  font-family: 'Georgia', serif;
+  font-family: var(--font-heading);
 }
 
 label {

@@ -89,7 +89,7 @@
 }
 
 .label-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.6rem, 5vw, 2.5rem);
   font-weight: 900;
   color: #d4af37;
@@ -107,7 +107,7 @@
 }
 
 .label-post .small-text {
-  font-family: 'Cardo', serif;
+  font-family: var(--font-body);
   font-size: clamp(0.9rem, 2.2vw, 1.1rem);
   color: #ffe89a;
   text-transform: lowercase;
@@ -122,7 +122,7 @@
 }
 
 .label-post .highlight-target {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.8rem, 6vw, 3.5rem);
   font-weight: 900;
   letter-spacing: 4px;
@@ -246,7 +246,7 @@
 }
 
 .weather-temp {
-  font-family: 'Jost', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.5rem, 6vw, 7rem);
   font-weight: 500;
   color: #ffe89a;
@@ -263,7 +263,7 @@
 }
 
 .weather-date {
-  font-family: 'Cardo', serif;
+  font-family: var(--font-body);
   font-size: clamp(0.5rem, 1.1vw, 1.1rem);
   font-weight: 800;
   color: #d4af37;

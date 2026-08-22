@@ -40,7 +40,7 @@
 
 /* título */
 .tarjeta-titulo {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 17px;
   font-weight: 600;
   font-style: normal;
@@ -222,7 +222,7 @@
 }
 
 .modal-titulo {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 26px; /* Más grande */
   font-weight: 700;
   color: var(--azul);
@@ -240,7 +240,7 @@
   padding: 20px;
   margin-bottom: 25px;
   border-radius: 0 8px 8px 0;
-  font-family: 'Jost', sans-serif;
+  font-family: var(--font-body);
 }
 
 .modal-meta { 
@@ -261,7 +261,7 @@
   border: none;
   border-radius: 8px;
   padding: 16px;
-  font-family: 'Jost', sans-serif;
+  font-family: var(--font-heading);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.15em;

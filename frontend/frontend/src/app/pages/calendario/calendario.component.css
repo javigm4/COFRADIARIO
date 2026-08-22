@@ -6,7 +6,7 @@ body {
   padding: 0;
   overflow: hidden;
   /* evita scroll global */
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-body);
   background-image: url("../../../../public/images/imagenes/cautivomovil.jpg");
 
 }
@@ -114,7 +114,7 @@ full-calendar {
 
 /* FullCalendar global */
 ::ng-deep .fc {
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-body);
 }
 
 /* Encabezado de días - Desktop */

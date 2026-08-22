@@ -27,7 +27,7 @@
 }
 
 .fav-card-titulo {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 14px;
   font-weight: 600;
   color: var(--crema);

@@ -1,3 +1,10 @@
+/* Tipografía de marca — alineada con diariodelasbandas.es (misma empresa) */
+:root {
+  --font-display: 'Cinzel Decorative', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'EB Garamond', Georgia, serif;
+}
+
 .golden-divider {
     position: relative;
     height: 2px;

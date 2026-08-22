@@ -116,7 +116,7 @@ section {
 
 
 .stat-value {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 5rem;
   font-weight: 900;
   color: #d4af37;
@@ -129,7 +129,7 @@ section {
 }
 
 .stat-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
@@ -155,7 +155,7 @@ section {
 /* Mejoras estéticas en párrafos */
 .calendario-contenido p,
 #redSocial p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   /* Más grande como pidió el usuario */
   color: #e1e8ed;
@@ -214,7 +214,7 @@ p {
 }
 
 .cofradia {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.5rem;
   color: #d4af37;
@@ -305,7 +305,7 @@ p {
 
 
 button {
-  font-family: 'Sacramento', serif;
+  font-family: var(--font-heading);
   background: linear-gradient(135deg, #d4af37, #b8860b);
   /* dorado elegante */
   color: #0f1115;
@@ -369,7 +369,7 @@ button:active {
 }
 
 .eventos-list h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 2.5rem;
   background: linear-gradient(90deg, #ffe25f, #feb47b);
@@ -462,7 +462,7 @@ a {
 /* título de cada evento esculpido */
 .evento-card h3 {
   margin: 0 0 8px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
   font-size: 1.5rem;
   width: 600px;
@@ -557,7 +557,7 @@ a {
 
 #quienesomos h2 {
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 900;
   font-size: 3rem;
   background: linear-gradient(90deg, #e6d712, #6e4c02);
@@ -568,7 +568,7 @@ a {
 
 #quienesomos small {
   text-align: center !important;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 400;
   font-size: 1rem;
   color: #e1e8ed;
@@ -669,7 +669,7 @@ h5 {
     padding: 2rem 1rem;
     background: #1f1c18;
     color: #fdfdfd;
-    font-family: 'Cardo', serif;
+    font-family: var(--font-body);
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     text-align: center;
@@ -682,7 +682,7 @@ h5 {
 
 
   #redSocial h2.redsocialtitulos {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
@@ -773,7 +773,7 @@ h5 {
 #quienesomos h4 {
   color: #ffffff;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.8rem;
   margin-bottom: 20px;
@@ -791,7 +791,7 @@ h5 {
 /* Cada bloque: texto + icono */
 .social-icons small {
   color: #e1e8ed;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 500;
   font-size: 0.95rem;
   margin-right: 5px;
@@ -925,7 +925,7 @@ h3 {
 }
 
 .calendario-contenido h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 2.5rem;
   background: linear-gradient(90deg, #ffe25f, #feb47b);
@@ -935,7 +935,7 @@ h3 {
 }
 
 .calendario-contenido h5 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 400;
   font-size: 1.1rem;
   color: #cfd9e0;
@@ -1233,7 +1233,7 @@ h3 {
 }
 
 .contact-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 800;
   text-align: center;
@@ -1283,7 +1283,7 @@ h3 {
   /* Separación reducida FORZADO */
   align-items: center !important;
   text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem !important;
   /* Fuente más pequeña FORZADO */
   font-weight: 600;
@@ -1746,7 +1746,7 @@ h3 {
 }
 
 #estadisticas h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 700;
   color: #e1e8ed;

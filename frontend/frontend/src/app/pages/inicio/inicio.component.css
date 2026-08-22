@@ -1,4 +1,102 @@
-﻿/*------------------------ MAIN ---------------------------------*/
+﻿/* --- TICKER DE COFRADÍAS (panel deslizante, igual que diariodelasbandas.es) --- */
+.ticker-wrap {
+  display: flex;
+  align-items: center;
+  background: #0a0604;
+  border-bottom: 1px solid rgba(184, 134, 11, 0.25);
+  height: 42px;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+.ticker-label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: #d4a017;
+  background: #0a0604;
+  border-right: 1px solid rgba(184, 134, 11, 0.25);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.ticker-label-orn {
+  font-size: 11px;
+}
+
+.ticker-viewport {
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: tickerScroll 30s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes tickerScroll {
+  0% {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translate(-50%);
+  }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 28px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: #fdf5dceb;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.ticker-item:hover {
+  color: #d4a017;
+}
+
+.ticker-item-sep {
+  color: #b8860b8c;
+  font-family: var(--font-heading);
+  font-size: 10px;
+}
+
+@media (max-width: 480px) {
+  .ticker-label {
+    padding: 0 12px;
+    font-size: 8px;
+  }
+
+  .ticker-item {
+    font-size: 13px;
+    padding: 0 18px;
+  }
+}
+
+/*------------------------ MAIN ---------------------------------*/
 
 h2 {
   color: white;
@@ -315,170 +413,6 @@ section {
   color: #b8860be6;
   text-transform: none;
   letter-spacing: normal;
-}
-
-/* --- COFRADÍAS EN LA WEB (igual que .bandas-section de diariodelasbandas.es) --- */
-.bandas-section {
-  padding: 88px 40px;
-  background: #0a0604;
-  border-top: 1px solid rgba(184, 134, 11, 0.1);
-  overflow: hidden;
-}
-
-.bandas-inner {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.sec-head {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 10px;
-}
-
-.sec-head.centered {
-  justify-content: center;
-}
-
-.sec-rule {
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: #b8860b;
-  flex-shrink: 0;
-}
-
-.sec-label {
-  font-family: var(--font-heading);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .38em;
-  text-transform: uppercase;
-  color: #b8860b;
-  white-space: nowrap;
-}
-
-.sec-title {
-  font-family: var(--font-heading);
-  font-size: clamp(20px, 2.8vw, 30px);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  color: #fdf5dc;
-  margin: 0 0 36px;
-}
-
-.sec-title.centered {
-  text-align: center;
-}
-
-.bandas-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 36px;
-}
-
-.band-card {
-  background: #0d0906;
-  border: 1px solid rgba(184, 134, 11, 0.14);
-  padding: 22px 20px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  min-width: 0;
-  transition: all 0.25s ease;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-.band-card:hover {
-  border-color: #b8860b61;
-  background: #110d0a;
-  transform: translateY(-2px);
-}
-
-.band-logo-wrap {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgba(184, 134, 11, 0.22);
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.band-logo-orn {
-  font-family: var(--font-heading);
-  font-size: 15px;
-  color: #b8860b61;
-}
-
-.band-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.band-name {
-  font-family: var(--font-heading);
-  font-size: 13px;
-  font-weight: 600;
-  color: #fdf5dc;
-  white-space: normal;
-  overflow-wrap: break-word;
-  line-height: 1.3;
-}
-
-.band-badge {
-  font-family: var(--font-heading);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  color: #d4a017;
-  margin-top: 2px;
-}
-
-.bandas-vacio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 56px 20px;
-  color: #fdf5dc47;
-  font-style: italic;
-  font-size: 15px;
-  text-align: center;
-}
-
-.bv-orn {
-  font-family: var(--font-heading);
-  font-size: 22px;
-  color: #b8860b38;
-}
-
-@media (max-width: 900px) {
-  .bandas-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .bandas-section {
-    padding: 56px 20px;
-  }
-
-  .bandas-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 768px) {

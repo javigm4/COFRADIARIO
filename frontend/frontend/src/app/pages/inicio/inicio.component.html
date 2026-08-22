@@ -1,4 +1,27 @@
-﻿<section>
+﻿<div class="ticker-wrap">
+    <div class="ticker-label">
+        <span class="ticker-label-orn">✠</span>
+        Cofradías
+    </div>
+    <div class="ticker-viewport">
+        <div class="ticker-track">
+            @for (c of cofradias; track c.id) {
+            <a class="ticker-item" [routerLink]="'/cofradia/' + formatCofradiaName(c.nombre)">
+                {{ c.nombre }}
+                <span class="ticker-item-sep">✠</span>
+            </a>
+            }
+            @for (c of cofradias; track c.id) {
+            <a class="ticker-item" [routerLink]="'/cofradia/' + formatCofradiaName(c.nombre)">
+                {{ c.nombre }}
+                <span class="ticker-item-sep">✠</span>
+            </a>
+            }
+        </div>
+    </div>
+</div>
+
+<section>
     <article class="fotomain" id="ar1"></article>
     <article class="fotomain" id="ar2"></article>
     <article class="fotomain" id="ar3"></article>
@@ -38,37 +61,6 @@
                 <div class="stat-value">+{{displayTotalEventos}}</div>
                 <div class="stat-label">Eventos activos</div>
             </div>
-        </div>
-    </section>
-
-    <section class="bandas-section">
-        <div class="bandas-inner">
-            <div class="sec-head centered">
-                <span class="sec-rule"></span>
-                <span class="sec-label">Comunidad</span>
-            </div>
-            <h2 class="sec-title centered">Cofradías en la web</h2>
-
-            @if (cofradias.length === 0) {
-            <div class="bandas-vacio">
-                <span class="bv-orn">✠</span>
-                Aún no hay cofradías registradas.
-            </div>
-            } @else {
-            <div class="bandas-grid">
-                @for (c of cofradias; track c.id) {
-                <a class="band-card" [routerLink]="'/cofradia/' + formatCofradiaName(c.nombre)">
-                    <div class="band-logo-wrap">
-                        <span class="band-logo-orn">✠</span>
-                    </div>
-                    <div class="band-info">
-                        <span class="band-name">{{ c.nombre }}</span>
-                        <span class="band-badge">Cofradía</span>
-                    </div>
-                </a>
-                }
-            </div>
-            }
         </div>
     </section>
 

@@ -1,7 +1,10 @@
 <nav class="navbar px-4 py-2">
   <a id="logo" class="navbar-brand" routerLink="/inicio">
     <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" width="60" />
-    <span class="brand-text">COFRADIARIO</span>
+    <span class="logo-wordmark">
+      <span class="brand-text">COFRADIARIO</span>
+      <span class="brand-tagline">Agenda Cofrade de España</span>
+    </span>
   </a>
 
   <button class="menu-toggle d-lg-none" (click)="toggleMenu()">
@@ -10,14 +13,14 @@
 
   <div id="divNav" class="nav-links hidden-mobile">
     <a routerLink="/inicio" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}" class="nav-item" (click)="cerrarMenu()">INICIO</a>
-    <a *ngIf="!usuarioAutenticado" class="nav-item" routerLink="/login" routerLinkActive="activo" (click)="cerrarMenu()">
-      Entrar / Registro
-    </a>
     <a class="nav-item" routerLink="/agenda" routerLinkActive="activo" (click)="cerrarMenu()">Agenda</a>
     <a class="nav-item" routerLink="/calendario" routerLinkActive="activo" (click)="cerrarMenu()">Calendario</a>
 
     <a class="nav-item" routerLink="/diario" routerLinkActive="activo" (click)="cerrarMenu()">Diario</a>
     <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()">Contacto</a>
+    <a *ngIf="!usuarioAutenticado" class="btn-acc" routerLink="/login" (click)="cerrarMenu()">
+      Acceder
+    </a>
     <button *ngIf="usuarioAutenticado" class="nav-item logout" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión
     </button>
   </div>

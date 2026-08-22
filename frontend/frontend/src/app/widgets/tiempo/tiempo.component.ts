@@ -7,7 +7,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./tiempo.component.css']
 })
 export class TiempoComponent implements OnInit, OnDestroy {
-  targetDate: Date = new Date('2026-03-29T00:00:00');
+  targetDate: Date = TiempoComponent.getProximoDomingoDeRamos();
   countdown = {
     days: 0,
     hours: 0,
@@ -24,6 +24,42 @@ export class TiempoComponent implements OnInit, OnDestroy {
   };
 
   private timer: any;
+
+  /** Domingo de Pascua (algoritmo de Meeus/Jones/Butcher) para el año dado */
+  private static getDomingoDePascua(year: number): Date {
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const month = Math.floor((h + l - 7 * m + 114) / 31); // 3 = marzo, 4 = abril
+    const day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
+  }
+
+  /** Próximo Domingo de Ramos (Pascua - 7 días) a partir de hoy */
+  private static getProximoDomingoDeRamos(): Date {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    for (const year of [hoy.getFullYear(), hoy.getFullYear() + 1]) {
+      const pascua = TiempoComponent.getDomingoDePascua(year);
+      const ramos = new Date(pascua);
+      ramos.setDate(ramos.getDate() - 7);
+      if (ramos.getTime() >= hoy.getTime()) {
+        return ramos;
+      }
+    }
+    // Fallback (no debería alcanzarse)
+    return TiempoComponent.getDomingoDePascua(hoy.getFullYear() + 1);
+  }
 
   ngOnInit(): void {
     this.calculateCountdown();

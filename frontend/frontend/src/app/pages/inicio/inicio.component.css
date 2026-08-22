@@ -353,7 +353,7 @@ button:active {
   box-sizing: border-box;
   /* fondo oscuro tipo Twitter */
   color: #e1e8ed;
-  padding: 20px;
+  padding: 64px 40px;
   display: flex;
   justify-content: center;
   /* centra el contenedor interno */
@@ -363,13 +363,14 @@ button:active {
 /* contenedor principal: eventos a la izquierda, foto a la derecha */
 .eventos-container {
   display: flex;
-  gap: 40px;
-  max-width: 1600px;
+  gap: 48px;
+  max-width: 1200px;
   justify-content: flex-start;
   /* eventos a la izquierda, foto a la derecha */
   align-items: flex-start;
   /* alinea al tope de la lista y foto */
   width: 100%;
+  margin: 0 auto;
 }
 
 /* lista de eventos a la izquierda */
@@ -516,16 +517,17 @@ a {
 
 /* foto fija a la derecha */
 .evento-foto {
-  width: 1000px;
-  /* ancho fijo */
+  width: 380px;
+  flex-shrink: 0;
   display: flex;
-  margin-right: -100px;
 }
 
 /* imagen dentro de la foto */
 .evento-foto img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  border: 1px solid rgba(184, 134, 11, 0.25);
   /* cubre todo sin deformarse */
 
 }
@@ -1400,15 +1402,7 @@ h3 {
   }
 
   .evento-foto {
-    margin-top: 0;
-    /* Quitar el margen forzado de escritorio */
-    width: 45%;
-    /* Reducir un poco el ancho */
-    margin-right: 0;
-  }
-
-  .eventos-list {
-    width: 50%;
+    width: 320px;
   }
 
   /* 3. Arreglar Quiénes Somos (foto cortada) */

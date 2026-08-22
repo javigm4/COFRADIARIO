@@ -13,10 +13,13 @@
 
   <div id="divNav" class="nav-links hidden-mobile">
     <a routerLink="/inicio" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}" class="nav-item" (click)="cerrarMenu()">INICIO</a>
+    <span class="nav-sep">◆</span>
     <a class="nav-item" routerLink="/agenda" routerLinkActive="activo" (click)="cerrarMenu()">Agenda</a>
+    <span class="nav-sep">◆</span>
     <a class="nav-item" routerLink="/calendario" routerLinkActive="activo" (click)="cerrarMenu()">Calendario</a>
-
+    <span class="nav-sep">◆</span>
     <a class="nav-item" routerLink="/diario" routerLinkActive="activo" (click)="cerrarMenu()">Diario</a>
+    <span class="nav-sep">◆</span>
     <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()">Contacto</a>
     <a *ngIf="!usuarioAutenticado" class="btn-acc" routerLink="/login" (click)="cerrarMenu()">
       Acceder

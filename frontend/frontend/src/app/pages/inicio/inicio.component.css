@@ -125,7 +125,8 @@ p{
   }
 
   section p {
-    color: #fff;
+    color: var(--gold-pale);
+    font-family: var(--font-body);
     font-size: 0.9rem;
     text-align: center;
     font-style: italic;

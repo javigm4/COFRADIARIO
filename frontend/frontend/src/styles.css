@@ -1,0 +1,98 @@
+/* ---------------------------------------------------------------
+   Identidad visual COFRADIARIO — alineada con diariodelasbandas.es
+   (misma empresa, mismo lenguaje visual: dorado, negro-marrón,
+   pergamino y tipografía Cinzel / EB Garamond)
+------------------------------------------------------------------*/
+:root {
+  --gold: #b8860b;
+  --gold-light: #d4a017;
+  --gold-pale: #f0d890;
+  --dark: #0c0804;
+  --dark-2: #1a0c04;
+  --dark-3: #3a2210;
+  --cream: #fdf5dc;
+  --cream-2: #faf4e8;
+  --red: #6b0000;
+  --red-2: #8b1a1a;
+
+  --font-display: 'Cinzel Decorative', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'EB Garamond', Georgia, serif;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--dark-2);
+  font-family: var(--font-body);
+}
+
+router-outlet + * {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--dark-2);
+  letter-spacing: 0.5px;
+}
+
+a {
+  color: var(--gold);
+}
+a:hover {
+  color: var(--gold-light);
+}
+
+::selection {
+  background: var(--gold-pale);
+  color: var(--dark);
+}
+
+/* Reskin de Bootstrap: dorado en vez del azul por defecto */
+.btn-primary {
+  --bs-btn-color: var(--cream);
+  --bs-btn-bg: var(--gold);
+  --bs-btn-border-color: var(--gold);
+  --bs-btn-hover-color: var(--dark);
+  --bs-btn-hover-bg: var(--gold-light);
+  --bs-btn-hover-border-color: var(--gold-light);
+  --bs-btn-focus-shadow-rgb: 184, 134, 11;
+  --bs-btn-active-color: var(--cream);
+  --bs-btn-active-bg: var(--dark-3);
+  --bs-btn-active-border-color: var(--dark-3);
+  --bs-btn-disabled-color: var(--cream);
+  --bs-btn-disabled-bg: var(--gold-pale);
+  --bs-btn-disabled-border-color: var(--gold-pale);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--gold);
+  --bs-btn-border-color: var(--gold);
+  --bs-btn-hover-color: var(--dark);
+  --bs-btn-hover-bg: var(--gold);
+  --bs-btn-hover-border-color: var(--gold);
+  --bs-btn-active-color: var(--dark);
+  --bs-btn-active-bg: var(--gold-light);
+  --bs-btn-active-border-color: var(--gold-light);
+  --bs-btn-focus-shadow-rgb: 184, 134, 11;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.25rem rgba(184, 134, 11, 0.25);
+}

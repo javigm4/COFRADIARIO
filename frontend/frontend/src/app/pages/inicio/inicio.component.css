@@ -80,11 +80,14 @@ section {
   pointer-events: none;
 }
 
+/* Ocupa toda la sección (no un recuadro más pequeño) para que el
+   degradado se disuelva del todo antes de llegar a ningún borde */
 .hero-title-scrim {
   position: absolute;
   inset: 0;
-  z-index: -1;
-  background: radial-gradient(ellipse at center, rgba(8, 5, 3, 0.88) 0%, rgba(8, 5, 3, 0.72) 40%, rgba(8, 5, 3, 0.3) 65%, transparent 82%);
+  z-index: 15;
+  pointer-events: none;
+  background: radial-gradient(ellipse 55% 65% at center, rgba(8, 5, 3, 0.85) 0%, rgba(8, 5, 3, 0.55) 35%, rgba(8, 5, 3, 0.2) 55%, transparent 72%);
 }
 
 .hero-eyebrow {

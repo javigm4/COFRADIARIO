@@ -138,17 +138,6 @@
   cursor: pointer;
 }
 
-.nav-item+.nav-item::before {
-  content: '';
-  position: absolute;
-  left: -1px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 2px;
-  height: 40%;
-  background-color: rgba(184, 134, 11, 0.4);
-}
-
 .nav-item:hover {
   color: #d4a017;
 }
@@ -269,10 +258,6 @@
   .nav-item.activo {
     color: #fdf5dc;
     border-left-color: #d4a017;
-  }
-
-  .nav-item+.nav-item::before {
-    content: none;
   }
 
   .logout {

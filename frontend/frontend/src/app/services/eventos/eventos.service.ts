@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { enviroment } from '../../../enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventosService {
-  private apiUrl = 'http://127.0.0.1:8000/api/eventos';
+  private apiUrl = enviroment.backendApiKey + '/eventos';
+  
+  private apiUltimosEventos = enviroment.backendApiKey + "/proximosEventos";
 
   constructor(private http: HttpClient) {}
 
@@ -31,17 +34,19 @@ export class EventosService {
   }
 
   // Crear evento (protegido)
-  crearEvento(eventoData: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
+ crearEvento(eventoData: any): Observable<any> {
+  return this.http.post<any>(this.apiUrl, eventoData); // sin headers
+}
 
-    return this.http.post<any>(this.apiUrl, eventoData, { headers });
-  }
+
+  
 
   // Obtener eventos por cofradía
   getEventosPorCofradia(cofradiaId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/cofradia/${cofradiaId}`);
+  }
+
+  getProximosEventos(){
+    return this.http.get<any>(this.apiUltimosEventos);
   }
 }

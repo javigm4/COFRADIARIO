@@ -1,10 +1,12 @@
 div {
-  background-color: var(--cream-2);
+  background-color: #1f1e1b;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   @media (max-width: 768px) {
     div {
-       padding-top: 40px;
+       padding-top: 1px;
     }
+    
   }
+

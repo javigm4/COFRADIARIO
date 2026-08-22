@@ -3,6 +3,7 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+
     RewriteEngine On
 
     # Handle Authorization Header
@@ -19,3 +20,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Esto es para que se respeten los codigos de error
+ErrorDocument 404 default
+ErrorDocument 422 default
+ErrorDocument 500 default

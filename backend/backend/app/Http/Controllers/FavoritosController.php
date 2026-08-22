@@ -42,11 +42,7 @@ class FavoritosController extends Controller
 
         Favorito::create($request->all());
 
-        Log::info('Favorito añadido', [
-            'status' => 200,
-            'id_usuario' => $request->id_usuario,
-            'id_evento' => $request->id_evento,
-        ]);
+        
 
             return response()->json(['status'=>200, 'message' => 'Favorito añadido correctamente'], 200);
         }

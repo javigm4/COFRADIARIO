@@ -1,18 +1,55 @@
-<section class="tiempo-container" role="list">
-  <article class="weather-card" *ngFor="let dia of dias" role="listitem">
-    <div class="weather-date">{{ dia.date }}</div>
-    <figure class="weather-icon-wrapper">
-      <img
-        [src]="dia.icono"
-        class="weather-icon"
-        alt=""
-        aria-hidden="true"
-      />
-      <figcaption class="sr-only">
+<section class="tiempo-container" role="region">
+  <div class="countdown-vertical-wrapper">
+    <!-- ARRIBA -->
+    <h1 class="label-heading label-pre">QUEDAN</h1>
 
-      </figcaption>
-    </figure>
-    <div class="weather-temp">{{ dia.temperatura }}°C</div>
-    <div class="weather-precip">{{ dia.precipitacion }}</div>
-  </article>
+    <!-- MEDIO -->
+    <div class="cards-container">
+      <!-- DÍAS -->
+      <article class="barrel-card">
+        <div class="barrel-box">
+          <div class="weather-temp" [class.roll]="animating.days">
+            {{ countdown.days }}
+          </div>
+        </div>
+        <div class="weather-date">DÍAS</div>
+      </article>
+
+      <!-- HORAS -->
+      <article class="barrel-card">
+        <div class="barrel-box">
+          <div class="weather-temp" [class.roll]="animating.hours">
+            {{ countdown.hours }}
+          </div>
+        </div>
+        <div class="weather-date">HORAS</div>
+      </article>
+
+      <!-- MINUTOS -->
+      <article class="barrel-card">
+        <div class="barrel-box">
+          <div class="weather-temp" [class.roll]="animating.minutes">
+            {{ countdown.minutes }}
+          </div>
+        </div>
+        <div class="weather-date">MINUTOS</div>
+      </article>
+
+      <!-- SEGUNDOS -->
+      <article class="barrel-card">
+        <div class="barrel-box">
+          <div class="weather-temp" [class.roll]="animating.seconds">
+            {{ countdown.seconds }}
+          </div>
+        </div>
+        <div class="weather-date">SEGUNDOS</div>
+      </article>
+    </div>
+
+    <!-- ABAJO -->
+    <h1 class="label-post">
+      <span class="small-text">para el</span>
+      <span class="highlight-target">DOMINGO DE RAMOS</span>
+    </h1>
+  </div>
 </section>

@@ -12,9 +12,13 @@ export class RegisterComponent {
   name: string = '';
   password: string = '';
   password_confirmation: string = '';
+  aceptaPolitica: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+  mostrarAvisoCofradia: boolean = false;
   error: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   onSubmit(): void {
     const formData = {
@@ -24,27 +28,25 @@ export class RegisterComponent {
       password_confirmation: this.password_confirmation,
     };
 
-    this.authService.register(formData).subscribe(
-      (response) => {
-        console.log('Registro exitoso:', response);
-        alert(`Registrado como ${this.name}`);
 
-        this.router.navigate(['/login']);
-      },
-      (error) => {
-        console.error('Error al registrar:', error);
-
-        if (error.status === 422 && error.error.errors) {
-          const errores = error.error.errors;
-          const primerError = Object.values(errores)[0] as string[];
-          alert('Ocurrió un error al registrarse: ' + primerError[0]);
+    this.authService.register(formData).subscribe({
+      next: (response) => {
+        if (response.errors) { // si el backend mandó errores dentro del body
+          Object.keys(response.errors).forEach(campo => {
+            alert(response.errors[campo][0]);
+          });
         } else {
-          alert(
-            'Ocurrió un error al registrarse: ' +
-              (error.error?.message || error.message || 'Error desconocido')
-          );
+          alert(`Registrado como ${this.name}`);
+          this.router.navigate(['/login']);
         }
+      },
+      error: (error) => {
+        alert('Ocurrió un error: ' + (error.message || 'desconocido'));
       }
-    );
+    });
+  }
+
+  toggleAvisoCofradia(): void {
+    this.mostrarAvisoCofradia = !this.mostrarAvisoCofradia;
   }
 }

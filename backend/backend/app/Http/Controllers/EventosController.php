@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 
 use App\Models\Cofradia;
@@ -9,6 +11,7 @@ use App\Models\Favorito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class EventosController extends Controller
 {
@@ -24,10 +27,7 @@ class EventosController extends Controller
         $favoritos = Favorito::all();
         $usuario = Auth::user();
 
-        Log::info('Listado de eventos consultado', [
-            'status' => 200,
-            'count' => $eventos->count(),
-        ]);
+       
         return response()->json(['status' => 200, 'eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
     }
 
@@ -41,11 +41,7 @@ class EventosController extends Controller
         }
 
         $evento->delete();
-        Log::info('Evento eliminado', [
-            'status' => 200,
-            'evento_id' => $id,
-            'nombre' => $evento->nombre,
-        ]);
+      
         // Retornar respuesta JSON con código 200
 
         return response()->json(['message' => 'Evento eliminado correctamente'], 200);
@@ -57,18 +53,14 @@ class EventosController extends Controller
     public function store(Request $request)
     {
 
-        if (! $request->user() || ! $request->user()->hasVerifiedEmail()) {
-            return response()->json([
-                'message' => 'Verifícate antes de manipular la web, esto nos ayuda a aumentar la seguridad',
-            ], 403);
-        }
+       
         // Validar los datos enviados desde el formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
             'cofradia' => 'required|integer|exists:cofradias,id',
             'fecha' => 'required|date',
             'hora' => 'required|date_format:H:i', // Asegura que la hora esté en formato HH:MM
-            'detalles' => 'required|string|max:255',
+            'detalles' => 'required|string|nullable',
             'lugar' => 'required|string|max:255',
         ]);
 
@@ -79,7 +71,7 @@ class EventosController extends Controller
             'nombre' => $request->nombre,
             'cofradia' => $request->cofradia,
             'fecha' => $fechaCompleta, // Guardamos la fecha con la hora
-            'detalles'=> $request->detalles,
+            'detalles' => $request->detalles,
             'lugar' => $request->lugar
         ]);
 
@@ -123,7 +115,7 @@ class EventosController extends Controller
             'nombre' => $request->nombre,
             'cofradia' => $request->cofradia,
             'fecha' => $request->fecha,
-            'detalles'=> $request->detalles,
+            'detalles' => $request->detalles,
             'lugar' => $request->lugar
         ]);
 
@@ -133,7 +125,7 @@ class EventosController extends Controller
             'nombre' => $evento->nombre,
             'cofradia' => $evento->cofradia,
             'fecha' => $evento->fecha,
-            'detalles'=> $request->detalles,
+            'detalles' => $request->detalles,
             'lugar' => $request->lugar
         ]);
 
@@ -160,5 +152,20 @@ class EventosController extends Controller
             return response()->json(['message' => 'Evento no encontrado'], 404);
         }
         return response()->json($evento, 200);
+    }
+
+
+    public function proximosEventos()
+    {
+        $hoy = Carbon::now('Europe/Madrid'); // hora local de Málaga
+
+        $eventos = Evento::where('fecha', '>=', $hoy)
+            ->orderBy('fecha', 'asc')
+            ->take(4)
+            ->get();
+        return response()->json([
+            'eventos' => $eventos,
+            'cofradias' => Cofradia::all()
+        ]);
     }
 }

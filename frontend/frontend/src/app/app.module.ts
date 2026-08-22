@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './layour/navbar/navbar.component';
-import { WeatherService } from './services/weather/weather.service';
 import { TiempoComponent } from './widgets/tiempo/tiempo.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TiempoDiaComponent } from './widgets/tiempo-dia/tiempo-dia.component';
 import { EventoComponent } from './pages/agenda/evento/evento.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { ListaEventosComponent } from './pages/agenda/lista-eventos/lista-eventos.component';
@@ -19,18 +18,23 @@ import { RegisterComponent } from './pages/register/register.component';
 import { FavoritoComponent } from './pages/agenda/favoritos/favorito/favorito.component';
 import { ListafavoritosComponent } from './pages/agenda/favoritos/listafavoritos/listafavoritos.component';
 import { EditarEventoComponent } from './pages/agenda/evento/editar-evento/editar-evento.component';
-import { FormsModule } from '@angular/forms'; // ✅ IMPORTA FormsModule AQUÍ
+import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { EditarArticuloComponent } from './pages/diario/articulo/editar-articulo/editar-articulo.component';
 import { CrearArticuloComponent } from './pages/diario/articulo/crear-articulo/crear-articulo.component';
-import { CofradiasComponent } from './pages/cofradias/cofradias.component';
-import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
-import { SeleccionCofradiaComponent } from './pages/cofradias/seleccion-cofradia/seleccion-cofradia.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { VerificadoComponent } from './verificado/verificado.component';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { CalendarioComponent } from './pages/calendario/calendario.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CookieBannerComponent } from './widgets/cookie-banner/cookie-banner.component';
+import { FooterComponent } from './layour/footer/footer.component';
+import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad.component';
+import { AvisoLegalComponent } from './pages/aviso-legal/aviso-legal.component';
+import { TerminosUsoComponent } from './pages/terminos-uso/terminos-uso.component';
 
 registerLocaleData(localeEs);
 
@@ -39,7 +43,6 @@ registerLocaleData(localeEs);
     AppComponent,
     NavbarComponent,
     TiempoComponent,
-    TiempoDiaComponent,
     EventoComponent,
     AgendaComponent,
     ListaEventosComponent,
@@ -54,21 +57,26 @@ registerLocaleData(localeEs);
     EditarEventoComponent,
     EditarArticuloComponent,
     CrearArticuloComponent,
-    CofradiasComponent,
-    CofradiaComponent,
-    SeleccionCofradiaComponent,
     ContactoComponent,
     VerificadoComponent,
-
+    ResetPasswordComponent,
+    CalendarioComponent,
+    PoliticaPrivacidadComponent,
+    AvisoLegalComponent,
+    TerminosUsoComponent,
+    FooterComponent,
+    CookieBannerComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
-    HttpClientModule, // Importar HttpClientModule para realizar peticiones HTTP
-    FormsModule,  // ✅ AGREGA FormsModule AQUÍ
+    HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
+    FullCalendarModule
   ],
-  providers: [WeatherService,CookieService],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

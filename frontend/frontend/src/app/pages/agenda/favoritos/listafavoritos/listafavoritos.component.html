@@ -1,18 +1,23 @@
-<div class="favoritos-container">
-  <h2 class="favoritos-title">
-    <u><b> Tus Favoritos</b></u>
-  </h2>
+<div class="listafav-wrapper">
+  <div class="fav-header">
+    <i class="bi bi-bookmark-star-fill"></i>
+    <span>Mis Favoritos</span>
+  </div>
 
-  <div class="favoritos-list">
-    @for (favorito of favoritos; track favorito.id) {
-      @if(usuarioId == favorito.id_usuario){
-        <app-favorito
-          [favorito]="favorito"
-          [eventos]="eventos"
-          [cofradias]="cofradias"
-          (eliminarFavorito)="onEliminar(favorito.id)"
-        ></app-favorito>
+  <div class="fav-lista">
+    @if (favoritos.length > 0) {
+      @for (favorito of favoritos; track favorito.id) {
+        @if(usuarioId == favorito.id_usuario){
+          <app-favorito
+            [favorito]="favorito"
+            [eventos]="eventos"
+            [cofradias]="cofradias"
+            (eliminarFavorito)="onEliminar(favorito.id)"
+          ></app-favorito>
+        }
       }
+    } @else {
+      <div class="fav-vacio">Guarda eventos para verlos aquí</div>
     }
   </div>
 </div>

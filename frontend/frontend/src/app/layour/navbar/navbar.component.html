@@ -9,12 +9,16 @@
   </button>
 
   <div id="divNav" class="nav-links hidden-mobile">
-    <a class="nav-item" routerLink="/login" (click)="cerrarMenu()">Entrar / Registro</a>
+    <a routerLink="/inicio" class="nav-item" (click)="cerrarMenu()">INICIO</a>
+    <a *ngIf="!usuarioAutenticado" class="nav-item" routerLink="/login" (click)="cerrarMenu()">
+      Entrar / Registro
+    </a>
     <a class="nav-item" routerLink="/agenda" (click)="cerrarMenu()">Agenda</a>
+    <a class="nav-item" routerLink="/calendario" (click)="cerrarMenu()">Calendario</a>
+
     <a class="nav-item" routerLink="/diario" (click)="cerrarMenu()">Diario</a>
-    <a class="nav-item" routerLink="/seleccionCofradia" (click)="cerrarMenu()">Cofradías</a>
     <a class="nav-item" routerLink="/contacto" (click)="cerrarMenu()">Contacto</a>
-    <button class="nav-item logout" [disabled]="!usuarioAutenticado" [class.disabled]="!usuarioAutenticado"
-     (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión</button>
+    <button *ngIf="usuarioAutenticado" class="nav-item logout" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión
+    </button>
   </div>
 </nav>

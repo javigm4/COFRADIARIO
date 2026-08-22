@@ -1,111 +1,306 @@
+@if (esCofradia) {
+<div class="crear-evento-wrapper">
+  <div class="crear-evento-card">
+    <div class="card-header">
+      <i class="bi bi-calendar-plus-fill header-icon"></i>
+      <h2>Crear Nuevo Evento</h2>
+    </div>
+
+    <div class="crear-evento-grid">
+      <div class="grupo-campo full-width">
+        <label for="name">
+          Nombre del Evento
+        </label>
+        <input type="text" id="name" placeholder="Ej: Procesión del Silencio" required />
+      </div>
+
+      <div class="grupo-campo full-width">
+        <div class="toggle-container">
+          <label class="switch">
+            <input type="checkbox" id="masDeUnDia" (change)="toggleMasDeUnDia()" [checked]="masDeUnDia">
+            <span class="slider round"></span>
+          </label>
+          <span class="toggle-label">¿Es un evento de varios días?</span>
+        </div>
+      </div>
+
+      <div class="grupo-campo full-width">
+        <label>
+          <i class="bi bi-calendar3"></i> Fechas del Evento
+        </label>
+        <div class="rango-fechas-container" [class.es-rango]="masDeUnDia">
+          <div class="input-wrapper clickable-input" (click)="pickerInicio.showPicker()">
+            <span class="input-label" *ngIf="masDeUnDia">Inicio</span>
+            <input type="date" id="fecha" [attr.min]="minFechaHoy" #pickerInicio required />
+          </div>
+
+          <div class="rango-separador" *ngIf="masDeUnDia">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+
+          <div class="input-wrapper animate-fade-in clickable-input" *ngIf="masDeUnDia"
+            (click)="pickerFin.showPicker()">
+            <span class="input-label">Fin</span>
+            <input type="date" id="fechaFinal" [attr.min]="minFechaHoy" #pickerFin required />
+          </div>
+        </div>
+        <small class="text-muted" *ngIf="masDeUnDia">Máximo 8 días de duración.</small>
+      </div>
+
+      <div class="grupo-campo">
+        <label for="hora">
+          <i class="bi bi-clock"></i> Hora
+        </label>
+        <div class="input-with-icon">
+          <input type="time" id="hora" required />
+        </div>
+      </div>
+
+      <div class="grupo-campo">
+        <label for="lugar">
+          <i class="bi bi-geo-alt"></i> Lugar
+        </label>
+        <div class="input-with-icon">
+          <input type="text" id="lugar" placeholder="Ej: Parroquia de la Victoria" required />
+        </div>
+      </div>
+
+      <div class="grupo-campo full-width">
+        <label for="detalles">
+          <i class="bi bi-info-circle"></i> Detalles adicionales (opcional)
+        </label>
+        <textarea id="detalles" placeholder="Describe brevemente el itinerario, puntos de interés..."
+          required></textarea>
+      </div>
+    </div>
+
+    <button class="btn btn-crear-evento" (click)="crearEvento()">
+      <i class="bi bi-plus-lg"></i> Publicar Evento
+    </button>
+  </div>
+</div>
+}
+
 <div class="fondo-general">
+
+
+  <button id="boton-secreto" (click)="mostrarPopup = true">
+    Botón secreto
+  </button>
+
+
+  <div *ngIf="mostrarPopup" class="overlay">
+    <div class="popup">
+      <button (click)="cerrarPopupExito()">X</button>
+
+      <label for="passwordInput">Contraseña:</label>
+      <div class="input-wrapper-admin">
+        <input [type]="showAdminPassword ? 'text' : 'password'" [(ngModel)]="inputPassword" id="passwordInput" />
+        <i class="bi" [ngClass]="showAdminPassword ? 'bi-eye-slash' : 'bi-eye'"
+          (click)="showAdminPassword = !showAdminPassword"></i>
+      </div>
+      <button (click)="validarPassword()">Aceptar</button>
+    </div>
+  </div>
+  <div *ngIf="popupExito" class="overlay">
+    <div class="popup">
+      <button class="btn-close-x" (click)="toggleAdminPopup()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <!-- Formulario admin para crear eventos -->
+      <div class="crear-evento-admin">
+        <h3><i class="bi bi-calendar-plus"></i> Gestionar Agenda</h3>
+
+        <div class="toggle-container-admin">
+          <label class="switch">
+            <input type="checkbox" (change)="toggleMasDeUnDia()" [checked]="masDeUnDia">
+            <span class="slider round"></span>
+          </label>
+          <span class="toggle-label">¿Rango de fechas?</span>
+        </div>
+
+        <div class="form-grid-admin">
+          <section class="form-section full-width">
+            <label for="nameAdmin"><i class="bi bi-type"></i> Nombre del Evento</label>
+            <input type="text" id="nameAdmin" placeholder="Nombre del evento" required />
+          </section>
+
+          <section class="form-section full-width">
+            <label><i class="bi bi-calendar3"></i> Fechas del Evento</label>
+            <div class="rango-fechas-container admin-range" [class.es-rango]="masDeUnDia">
+              <div class="input-wrapper clickable-input" (click)="pickerAdminInicio.showPicker()">
+                <span class="input-label" *ngIf="masDeUnDia">Inicio</span>
+                <input type="date" id="fechaAdmin" [attr.min]="minFechaHoy" #pickerAdminInicio required />
+              </div>
+
+              <div class="rango-separador" *ngIf="masDeUnDia">
+                <i class="bi bi-arrow-right"></i>
+              </div>
+
+              <div class="input-wrapper animate-fade-in clickable-input" *ngIf="masDeUnDia"
+                (click)="pickerAdminFin.showPicker()">
+                <span class="input-label">Fin</span>
+                <input type="date" id="fechaFinalAdmin" [attr.min]="minFechaHoy" #pickerAdminFin required />
+              </div>
+            </div>
+            <small class="text-muted" *ngIf="masDeUnDia">Selecciona un rango de hasta 8 días.</small>
+          </section>
+
+          <section class="form-section">
+            <label for="horaAdmin"><i class="bi bi-clock"></i> Hora</label>
+            <input type="time" id="horaAdmin" required />
+          </section>
+
+          <section class="form-section">
+            <label for="lugarAdmin"><i class="bi bi-geo-alt"></i> Lugar</label>
+            <input type="text" id="lugarAdmin" placeholder="Ubicación" required />
+          </section>
+
+          <section class="form-section full-width">
+            <label for="cofradiaAdmin"><i class="bi bi-people"></i> Cofradía</label>
+            <select id="cofradiaAdmin">
+              @for(cofradia of cofradias ; track cofradia.id){
+              <option value="{{ cofradia.id }}">{{ cofradia.nombre }}</option>
+              }
+            </select>
+          </section>
+
+          <section class="form-section full-width">
+            <label for="detallesAdmin"><i class="bi bi-info-circle"></i> Detalles</label>
+            <textarea id="detallesAdmin" rows="3" placeholder="Detalles adicionales..." required></textarea>
+          </section>
+        </div>
+
+        <button type="button" class="btn btn-crear-evento-admin btn-shine" (click)="crearEventoAdmin($event)">
+          <i class="bi bi-plus-circle"></i> Publicar Evento
+        </button>
+      </div>
+
+      <hr class="admin-divider">
+
+      <div class="admin-lists-container">
+        <!-- Lista de Cofradías -->
+        <section class="admin-list-section">
+          <h4><i class="bi bi-house"></i> Cofradías</h4>
+          <input type="text" (input)="filtrarCofradias($event)" placeholder="Buscar..." class="admin-search-input">
+          <div class="scrollable-list">
+            <ul>
+              <li *ngFor="let cofradia of listaCofradiasFiltrada">
+                {{ cofradia.nombre }}
+                <button class="btn-delete-small" (click)="eliminarCofradia(cofradia.id)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Lista de Eventos -->
+        <section class="admin-list-section">
+          <h4><i class="bi bi-calendar-event"></i> Eventos</h4>
+          <input type="text" (input)="filtrarEventos($event)" placeholder="Buscar..." class="admin-search-input">
+          <div class="scrollable-list">
+            <ul>
+              <li *ngFor="let evento of listaEventosFiltrada">
+                <div class="evento-info-admin">
+                  <strong>{{ evento.nombre }}</strong>
+                  <small>{{ evento.fecha }}</small>
+                </div>
+                <div class="admin-actions">
+                  <button class="btn-delete-small" (click)="eliminarEvento(evento.id)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <section class="nueva-cofradia">
+        <h4><i class="bi bi-person-plus"></i> Nueva Cofradía</h4>
+        <div class="input-with-button">
+          <input type="text" id="nombreCofradia" placeholder="Nombre completo" />
+          <button (click)="crearCofradia()">Crear</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+
+
+
   @if (!esCofradia) {
-  <div class="favoritos-container">
+  <div class="favoritos-container" [class.visible]="mostrarBotonFavoritosScroll">
     <button id="favoritos-btn" (click)="toggleFavoritos()">⭐ FAVORITOS</button>
   </div>
   }
 
   <div class="contenedor-principal">
     <!-- Lista de Eventos -->
-    <div class="contenedor-eventos">
+    <div class="contenedor-eventos" (scroll)="onDivScroll($event)">
+
       <!-- NUEVO contenedor de filtros -->
       <div class="barra-filtros">
         <div class="filtro-izquierdo">
-          <label for="filtroCofradia">Filtrar por cofradía:</label>
-          <select
-            id="filtroCofradia"
-            class="filtro-cofradia"
-            (change)="seleccionarCofradia($event)"
-          >
-            <option [ngValue]="null">-- Todas --</option>
-            @for (cofradia of cofradiasEventos; track cofradia.id) {
-            <option value="{{ cofradia.id }}">{{ cofradia.nombre }}</option>
-            }
-          </select>
+          <label for="filtroCofradia">Búsqueda rápida</label>
+          <div class="input-con-icono">
+            <i class="bi bi-search"></i>
+            <input placeholder="Título, cofradía o lugar..." type="text" class="filtro-cofradia" id="filtroCofradia"
+              (input)="filtroTotal($event)">
+          </div>
         </div>
 
-        <!-- Línea separadora -->
-        <div class="linea-separadora"></div>
-
-        <div class="filtro-derecho">
-          <label for="filtromes">Filtrar por mes:</label>
-          <select
-            id="filtromes"
-            class="filtro-cofradia"
-            (change)="seleccionarMes($event)"
-          >
-            @for (mes of mesesAno; track mes.id) {
-            <option value="{{ mes.id }}">{{ mes.nombre }}</option>
-            }
-          </select>
+        <div class="filtro-rango">
+          <label>Rango de fechas</label>
+          <div class="rango-inputs">
+            <div class="fecha-wrapper">
+              <span>De</span>
+              <input type="date" class="filtro-cofradia" (change)="setFechaInicio($event)">
+            </div>
+            <div class="fecha-wrapper">
+              <span>A</span>
+              <input type="date" class="filtro-cofradia" (change)="setFechaFin($event)">
+            </div>
+          </div>
         </div>
       </div>
 
-      <app-lista-eventos
-        [eventos]="eventos"
-        [cofradias]="cofradias"
-      ></app-lista-eventos>
+      <div class="cabecera">
+        <div class="cabecera-ornamento">
+          <span></span>
+          <div class="cabecera-ornamento-rombo"></div>
+          <span></span>
+        </div>
+        <h1>Próximos Eventos</h1>
+        <div class="cabecera-sub">Agenda cofrade</div>
+      </div>
+
+      <app-lista-eventos [eventos]="eventos" [cofradias]="cofradias" [favoritos]="favoritos"
+        (favoritoAnadido)="cargarDatos()"></app-lista-eventos>
     </div>
 
-    <!-- Lista de Favoritos (Solo si el usuario está autenticado) -->
+    <!-- Favoritos Sidebar -->
     @if (!esCofradia) {
     <div class="contenedor-favoritos">
       @if (esUsuario) {
-      <app-listafavoritos
-        [favoritos]="favoritos"
-        [eventos]="eventos"
-        [cofradias]="cofradias"
-        [usuario]="usuario"
-        (eliminarFavorito)="onEliminar($event)"
-      >
-      </app-listafavoritos>
+        <app-listafavoritos [favoritos]="favoritos" [eventos]="eventos" [cofradias]="cofradias" [usuario]="usuario"
+          (eliminarFavorito)="onEliminar($event)">
+        </app-listafavoritos>
       } @else {
-      <a class="mensaje-login" routerLink="/login">
-        Inicia sesión para añadir a favoritos
-      </a>
+        <div class="fav-header">
+          <i class="bi bi-bookmark-star"></i>
+          <span>Mis Favoritos</span>
+        </div>
+        <div class="fav-vacio-ext">
+          <p>¡Inicia sesión para añadir eventos a tus favoritos!</p>
+          <a class="btn-login-fav" routerLink="/login">Iniciar Sesión</a>
+        </div>
       }
     </div>
     }
   </div>
-  @if (esCofradia) {
-  <div class="crear-evento-container">
-    <table>
-      <tr>
-        <td class="titulos">Nombre</td>
-        <td class="titulos">Fecha</td>
-        <td class="titulos">Hora</td>
-        <td class="titulos">Lugar</td>
-        <td class="titulos">Detalles</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="text"
-            id="name"
-            placeholder="Nombre del evento"
-            required
-          />
-        </td>
-        <td>
-          <input type="date" id="fecha" [attr.min]="minFechaHoy" required />
-        </td>
-        <td>
-          <input type="time" id="hora" required />
-        </td>
-        <td>
-          <input type="text" id="lugar" required />
-        </td>
 
-        <td>
-          <input type="textarea" id="detalles" required />
-        </td>
-        <td colspan="2">
-          <button class="btn btn-crear-evento" (click)="crearEvento()">
-            Añadir Evento
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-  }
 </div>

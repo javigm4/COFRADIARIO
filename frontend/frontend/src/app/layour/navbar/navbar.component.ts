@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     }
 
     this.http
-      .post('http://127.0.0.1:8000/api/logout', {}, {
+      .post('https://cofradiario.es/api/logout', {}, {
         headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
       })
       .subscribe(
@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
 
   toggleMenu() {
     this.menuAbierto = !this.menuAbierto;
-
+ 
     const divNav = document.getElementById('divNav');
     if (divNav) {
       divNav.classList.toggle('show', this.menuAbierto);
@@ -66,7 +66,7 @@ export class NavbarComponent implements OnInit {
     const divNav = document.getElementById('divNav');
     if (divNav) {
       divNav.classList.remove('show');
-    }
+    } 
 
     const btn = document.querySelector('.menu-toggle');
     if (btn) {

@@ -15,7 +15,8 @@ class ArticulosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         try {
             $articulos = Articulo::all();
             $usuarios = User::all();
@@ -52,11 +53,11 @@ class ArticulosController extends Controller
     public function store(Request $request)
     {
 
-        if (! $request->user() || ! $request->user()->hasVerifiedEmail()) {
-        return response()->json([
-            'message' => 'Verifícate antes de manipular la web, esto nos ayuda a aumentar la seguridad',
-        ], 403);
-    }
+        if (! $request->user()) {
+            return response()->json([
+                'message' => 'Verifícate antes de manipular la web, esto nos ayuda a aumentar la seguridad',
+            ], 403);
+        }
         // Validar los datos antes de guardarlos
         $request->validate([
             'titular' => 'required|string|max:255',
@@ -73,10 +74,10 @@ class ArticulosController extends Controller
             'updated_at' => now(),
         ]);
 
-            Log::info('Articulo creado', [
-                    'status'=>200,
-                    'titular' => $articulo->titular,
-                ]);
+        Log::info('Articulo creado', [
+            'status' => 200,
+            'titular' => $articulo->titular,
+        ]);
 
 
         return response()->json(['message' => 'Artículo creado con éxito', 'articulo' => $articulo], 201);
@@ -133,10 +134,10 @@ class ArticulosController extends Controller
 
         $articulo->save(); // Esto actualizará `updated_at` automáticamente
 
-         Log::info('Articulo modificado: ', [
-                    'status'=>200,
-                    'titular' => $articulo->titular,
-                ]);
+        Log::info('Articulo modificado: ', [
+            'status' => 200,
+            'titular' => $articulo->titular,
+        ]);
 
 
         return response()->json(['message' => 'Artículo actualizado correctamente']);
@@ -160,11 +161,17 @@ class ArticulosController extends Controller
 
         $articulo->delete();
 
-         Log::info('Articulo borrado', [
-                    'status'=>200,
-                    'titular' => $articulo->titular,
-                ]);
+        Log::info('Articulo borrado', [
+            'status' => 200,
+            'titular' => $articulo->titular,
+        ]);
 
         return response()->json(['message' => 'Articulo eliminado correctamente'], 200);
+    }
+
+    public function ultimosArticulos()
+    {
+        $articulos = Articulo::orderBy('created_at', 'desc')->take(2)->get();
+    return response()->json(['status' => 200, 'articulos' => $articulos]);
     }
 }

@@ -1,0 +1,96 @@
+.cookie-bubble {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background: rgba(31, 28, 24, 0.95);
+    /* Marrón oscuro del proyecto */
+    border: 2px solid #d4af37;
+    /* Dorado */
+    border-radius: 50px;
+    /* Forma de burbuja/píldora */
+    padding: 10px 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    animation: slideUp 0.5s ease-out;
+}
+
+.cookie-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.cookie-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fdfdfd;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+.cookie-text p {
+    margin: 0;
+}
+
+.cookie-text a {
+    color: #ffe89a;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.cookie-logo {
+    height: 35px;
+    width: auto;
+}
+
+.btn-aceptar {
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    color: #1f1c18;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-aceptar:hover {
+    background: linear-gradient(135deg, #ffe89a, #d4af37);
+    transform: scale(1.05);
+}
+
+@keyframes slideUp {
+    from {
+        bottom: -100px;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 20px;
+        opacity: 1;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 600px) {
+    .cookie-bubble {
+        border-radius: 20px;
+        bottom: 10px;
+        padding: 15px;
+    }
+
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cookie-text {
+        flex-direction: column;
+    }
+}

@@ -15,8 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('eventos:eliminar-pasados')->everyMinute(); //esto hace que los eventos pasados se eliminen automáticamente una vez al día
-        $schedule->command('backup:database')->weeklyOn(0, '00:00'); // Copia de seguridad cada Domingo a las 00:00
+         $schedule->command('eventos:eliminar-pasados')->daily(); //esto hace que los eventos pasados se eliminen automáticamente una vez al día
     }
 
     /**
@@ -26,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
     }

@@ -1,0 +1,12 @@
+<div class="cookie-bubble" *ngIf="!cookiesAccepted">
+    <div class="cookie-content">
+        <div class="cookie-text">
+            <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" class="cookie-logo">
+            <p>
+                Utilizamos cookies para mejorar tu experiencia. Si sigues navegando, entendemos que aceptas nuestra
+                <a [routerLink]="['/politica-privacidad']">Política de Privacidad</a>.
+            </p>
+        </div>
+        <button (click)="aceptarCookies()" class="btn-aceptar">Aceptar</button>
+    </div>
+</div>

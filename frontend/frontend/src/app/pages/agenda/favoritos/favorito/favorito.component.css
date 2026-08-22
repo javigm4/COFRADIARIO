@@ -1,55 +1,71 @@
-.favorito-card {
-  width: 100%;
-  max-width: 350px;
-  margin: 20px auto;
-  background: linear-gradient(135deg, #003366, #005599);
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
+.fav-card {
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  border-left: 3px solid var(--dorado);
 }
 
-.favorito-card:hover {
-  transform: scale(1.03);
+.fav-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(191, 140, 10, 0.4);
+  transform: translateX(4px);
 }
 
-.favorito-header {
-  background: #d4af37;
-  padding: 8px;
-  border-radius: 10px 10px 0 0;
-  text-align: center;
-  color: white;
-  font-weight: bold;
+.fav-card-interior {
+  padding: 12px 14px;
 }
 
-.favorito-title {
-  margin: 0;
-  font-size: 18px;
+.fav-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
-.favorito-text {
-  font-size: 16px;
-  color: white;
-  margin: 10px 0;
-  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+.fav-card-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--crema);
+  line-height: 1.3;
+}
+
+.fav-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--dorado-suave);
+  opacity: 0.8;
+}
+
+.meta-item i {
+  font-size: 12px;
+  opacity: 0.7;
 }
 
 .btn-eliminar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: #ff4444;
-  color: white;
-  font-size: 16px;
-  padding: 8px 15px;
-  border-radius: 8px;
+  background: transparent;
   border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  transition: color 0.2s, transform 0.2s;
+  flex-shrink: 0;
 }
 
 .btn-eliminar:hover {
-  background: #cc0000;
-  transform: scale(1.05);
+  color: #ff4d4d;
+  transform: scale(1.1);
 }

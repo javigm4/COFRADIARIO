@@ -13,11 +13,13 @@ class CreateEventosTable extends Migration
      */
     public function up()
     {
-        Schema::create('eventos', function (Blueprint $table) {
+         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->integer('cofradia'); //esto es la id de la cofradia a la que pertenece
-            $table->dateTime('fecha'); //esto es la fecha y hora del evento
+            $table->foreignId('cofradia')->constrained()->onDelete('cascade'); // Establece la relación con cofradias
+            $table->dateTime('fecha');
+            $table->string('lugar')->nullable(); // Lugar del evento
+            $table->text('detalles')->nullable(); // Detalles adicionales del evento
             $table->timestamps();
         });
     }

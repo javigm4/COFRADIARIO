@@ -5,11 +5,21 @@
   margin: 0 auto;
   gap: 100px;
   overflow: hidden;
-  height: auto;
+  height: 89vh;
+  /* Se reduce un poco la altura total del contenedor */
+  background-image: url(../../../../public/images/imagenes/incienso.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Ocupa todo el contenedor */
+  background-position: center;
+  /* Centra la imagen */
+  background-attachment: fixed;
+  /* Para que el fondo no se mueva al hacer scroll */
 }
 
 .fotologin {
-  width: 500px; /* Ajusta el tamaño de las imágenes */
+  width: 500px;
+  /* Ajusta el tamaño de las imágenes */
   height: 89vh;
   background-size: cover;
   background-position: center;
@@ -18,11 +28,7 @@
   overflow: hidden;
 
 }
-.fotologin:hover {
-  transform: scale(1.1);
-  z-index: 10;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
+
 
 .fotologin::before {
   content: "";
@@ -35,8 +41,8 @@
   transition: background-color 0.3s ease;
 }
 
-.fotologin:hover::before {
-  background-color: rgba(0, 0, 0, 0.5);
+textarea {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .fotologin::after {
@@ -54,18 +60,11 @@
   transition: opacity 0.3s ease;
 }
 
-#ar1::after {
-  content: "María Santísima del Rocío Coronada";
-}
 
-#ar2::after {
-  content: "María Santísima de la Esperanza";
+.card-body{
+box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+  
 }
-
-.fotologin:hover::after {
-  opacity: 1;
-}
-
 
 #ar2 {
   background-image: url(../../../../public/images/imagenes/esperanza.jpg);
@@ -77,11 +76,12 @@
 
 .form-container {
   width: 1000px;
-  background-color: #5b420d; /* Marrón */
+  background-color: #5b420d;
+  /* Marrón */
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
   text-align: center;
+
 }
 
 .card-body {
@@ -89,37 +89,40 @@
 }
 
 .btn {
-    background-color: #5b420d; /* Marrón */
-    color: white;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    margin: 20px;
-
+  background-color: #5b420d;
+  /* Marrón */
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  margin: 20px;
 }
 
 input {
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    }
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
 
 label {
-  padding:10px;
+  padding: 10px;
   font-weight: bold;
 }
 
 h2 {
-   font-weight: bold;
+  font-weight: bold;
 }
 
 
 @media (max-width: 768px) {
+
   /* Oculta las imágenes grandes en móviles */
-  #ar1, #ar2 {
+  #ar1,
+  #ar2 {
     display: none;
   }
 
   /* Ajusta el contenedor principal en móviles */
   .login-container {
     display: flex;
-    flex-direction: column; /* Ordena los elementos en columna */
+    flex-direction: column;
+    /* Ordena los elementos en columna */
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -144,7 +147,8 @@ h2 {
   #arMovil {
     display: block;
     width: 90%;
-    height: 400px; /* Ajuste de tamaño */
+    height: 400px;
+    /* Ajuste de tamaño */
     background-image: url(../../../../public/images/imagenes/rocio.jpg);
     background-size: cover;
     background-position: center;
@@ -155,12 +159,18 @@ h2 {
   /* Pie de foto debajo de la imagen */
   p {
     display: block;
-    width: 90%; /* Mismo ancho que la imagen */
-    margin: 5px auto; /* Centrado con menos margen */
-    color: #fff; /* Texto en blanco */
-    font-size: 0.9rem; /* Tamaño más pequeño */
-    text-align: center; /* Centrado */
-    font-style: italic; /* Cursiva para dar estilo de pie de foto */
+    width: 90%;
+    /* Mismo ancho que la imagen */
+    margin: 5px auto;
+    /* Centrado con menos margen */
+    color: #fff;
+    /* Texto en blanco */
+    font-size: 0.9rem;
+    /* Tamaño más pequeño */
+    text-align: center;
+    /* Centrado */
+    font-style: italic;
+    /* Cursiva para dar estilo de pie de foto */
   }
 
   /* Elimina efectos al hacer hover en la imagen móvil */
@@ -174,17 +184,19 @@ h2 {
 
 /* MANTENER imágenes en PC */
 @media (min-width: 769px) {
-  #ar1, #ar2 {
+
+  #ar1,
+  #ar2 {
     display: block;
   }
 
   p {
-    display: none; /* Oculta el pie de foto en escritorio */
+    display: none;
+    /* Oculta el pie de foto en escritorio */
   }
 
   #arMovil {
-    display: none; /* No mostrar la imagen especial para móviles */
+    display: none;
+    /* No mostrar la imagen especial para móviles */
   }
 }
-
-

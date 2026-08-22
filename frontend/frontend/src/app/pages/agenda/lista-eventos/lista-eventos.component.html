@@ -1,24 +1,28 @@
-<div class="container eventos-container mt-5">
-  <h1 class="titulo-eventos">Próximos Eventos</h1>
+<div class="dia-grupo-wrapper">
+  @if (gruposEventos.length > 0) {
+    @for (grupo of gruposEventos; track grupo.fecha; let gi = $index) {
+      <div class="dia-grupo">
+        <div class="dia-header">
+          <div class="dia-header-linea-izq"></div>
+          <div class="dia-header-texto">{{ getDiaNombre(grupo.fecha) }}</div>
+          <div class="dia-header-linea-der"></div>
+          <div class="dia-header-n">{{ grupo.eventos.length }} acto{{ grupo.eventos.length !== 1 ? 's' : '' }}</div>
+        </div>
 
-  <div *ngIf="eventos.length > 0; else noEventos" class="row">
-    @for (evento of eventos; track evento.id) {
-      <div class="col-md-6 col-lg-4 d-flex">
-        <app-evento
-          class="flex-fill"
-          [evento]="evento"
-          [cofradias]="cofradias"
-        ></app-evento>
+        <div class="grid">
+          @for (evento of grupo.eventos; track evento.id; let i = $index) {
+            <app-evento 
+              [evento]="evento" 
+              [cofradias]="cofradias"
+              [favoritos]="favoritos"
+              [style.animation-delay]="(gi * 40 + i * 65) + 'ms'"
+              (favoritoAnadido)="favoritoAnadido.emit()">
+            </app-evento>
+          }
+        </div>
       </div>
     }
-  </div>
-
-  <ng-template #noEventos>
-    <div class="no-eventos-container">
-      <p class="no-eventos-texto">
-        <i class="bi bi-calendar-x"></i>
-        No existen eventos
-      </p>
-    </div>
-  </ng-template>
+  } @else {
+    <div class="vacio">No se encontraron eventos.</div>
+  }
 </div>

@@ -1,30 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
+import { enviroment } from '../../../enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/api/login';
+  private apiUrl = enviroment.backendApiKey + '/login';
+  private apiUrlRegister = enviroment.backendApiKey + '/register';
+  private apiAuth = enviroment.backendApiKey;
 
-  private apiUrlRegister = 'http://127.0.0.1:8000/api/register';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // auth metodos
   login(formData: FormData): Observable<any> {
-    return this.http.post<any>(this.apiUrl, formData, {
-      withCredentials: true,
-    }); //hacemos que postee el formdata al login del backend
+    return this.http.post<any>(this.apiUrl, formData); //hacemos que postee el formdata al login del backend
   }
 
   register(data: any): Observable<any> {
     return this.http.post<any>(this.apiUrlRegister, data, {
-      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
     });
   }
+
 
   // get usuario
   getUsuario(): any {
@@ -51,9 +54,20 @@ export class AuthService {
   }
 
   enviarMensajeContacto(formData: any): Observable<any> {
-    return this.http.post(
-      'http://127.0.0.1:8000/api/enviar-mensaje-contacto',
-      formData
-    );
+    return this.http.post(`${this.apiAuth}/enviar-mensaje-contacto`, formData);
   }
-}
+
+  sendResetLink(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiAuth}/password/forgot`, { email });
+  }
+
+  // Cambiar contraseña con token
+  resetPassword(email: string, token: string, password: string, password_confirmation: string): Observable<any> {
+    return this.http.post<any>(`${this.apiAuth}/password/reset`, {
+      email,
+      token,
+      password,
+      password_confirmation
+    });
+  }
+} 

@@ -1,43 +1,126 @@
 <div class="login-container">
-  <article class="fotologin" id="ar1"></article> <!-- Imagen izquierda en PC -->
+  <!-- Imagen izquierda en PC -->
+  <article class="fotologin" id="ar1"></article>
 
   <div class="form-container">
-    <div class="card shadow-lg">
+    <div class="card premium-card">
       <div class="card-body">
-        <h2 class="text-center mb-4">Registro de usuarios</h2>
-        <form (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required />
+        <h2 class="text-center">REGISTRO DE USUARIOS</h2>
+        <p class="subtitle">¡Regístrate para poder añadir eventos a favoritos o crearlos si eres una
+          cofradía!</p>
+
+        <form (ngSubmit)="onSubmit()" class="premium-form">
+          <div class="form-group-custom">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+              <i class="bi bi-envelope"></i>
+              <input type="email" id="email" [(ngModel)]="email" name="email" required placeholder="tu&#64;email.com" />
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label for="name" class="form-label">Nombre:</label>
-            <input type="text" id="name" class="form-control" [(ngModel)]="name" name="name" required />
+          <div class="form-group-custom">
+            <label for="name">Nombre de Usuario</label>
+            <div class="input-wrapper">
+              <i class="bi bi-person"></i>
+              <input type="text" id="name" [(ngModel)]="name" name="name" required placeholder="Tu nombre o Cofradía" />
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label for="password" class="form-label">Contraseña:</label>
-            <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
+          <div class="form-group-custom">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <i class="bi bi-lock"></i>
+              <input [type]="showPassword ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password"
+                required placeholder="Mínimo 8 caracteres" />
+              <i class="bi toggle-password" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+                (click)="showPassword = !showPassword"></i>
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirmar contraseña:</label>
-            <input type="password" id="password_confirmation" class="form-control" [(ngModel)]="password_confirmation" name="password_confirmation" required />
+          <div class="form-group-custom">
+            <label for="password_confirmation">Confirmar Contraseña</label>
+            <div class="input-wrapper">
+              <i class="bi bi-shield-lock"></i>
+              <input [type]="showConfirmPassword ? 'text' : 'password'" id="password_confirmation"
+                [(ngModel)]="password_confirmation" name="password_confirmation" required
+                placeholder="Repite tu contraseña" />
+              <i class="bi toggle-password" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"
+                (click)="showConfirmPassword = !showConfirmPassword"></i>
+            </div>
           </div>
 
-          <button type="submit" class="btn btn-primary">Registrarse</button>
-          <p *ngIf="error" class="text-danger">{{ error }}</p>
+          <div class="privacy-container">
+            <label class="custom-checkbox">
+              <input type="checkbox" [(ngModel)]="aceptaPolitica" name="aceptaPolitica" required>
+              <span class="checkmark"></span>
+              <span class="privacy-text">He leído y acepto la <a routerLink="/politica-privacidad"
+                  target="_blank">Política de
+                  Privacidad</a></span>
+            </label>
+            <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" class="mini-logo">
+          </div>
 
+          <div class="aviso-cofradia-section">
+            <button type="button" class="btn-aviso" (click)="toggleAvisoCofradia()">
+              <i class="bi bi-exclamation-diamond"></i> ¿ERES UNA COFRADÍA? LEE ESTO
+            </button>
+          </div>
+
+          <button type="submit" class="btn-submit" [disabled]="!aceptaPolitica">
+            <span>REGISTRARSE</span>
+            <i class="bi bi-arrow-right-short"></i>
+          </button>
+
+          <p *ngIf="error" class="error-msg"><i class="bi bi-exclamation-circle"></i> {{ error }}</p>
         </form>
+
+        <div class="footer-links">
+          <span>¿Ya tienes cuenta? <a [routerLink]="['/login']">Inicia sesión</a></span>
+        </div>
       </div>
     </div>
   </div>
 
-  <article class="fotologin" id="ar2"></article> <!-- Imagen derecha en PC -->
+  <!-- Imagen derecha en PC -->
+  <article class="fotologin" id="ar2"></article>
 
-  <!-- Imagen solo para móviles -->
-  <article class="fotologin movil" id="arMovil"></article>
-    <p>"María Santísima del Amor Doloroso", por "Nico Canela"</p>
-
+  <!-- Modal Aviso Cofradía -->
+  <div *ngIf="mostrarAvisoCofradia" class="modal-overlay" (click)="toggleAvisoCofradia()">
+    <div class="modal-notis" (click)="$event.stopPropagation()">
+      <div class="modal-notis-header">
+        <i class="bi bi-exclamation-diamond-fill"></i>
+        <h3>INSTRUCCIONES PARA COFRADÍAS</h3>
+      </div>
+      <div class="modal-notis-body">
+        <ul>
+          <li>
+            <i class="bi bi-pencil-square"></i>
+            <span>Para registrar vuestra cofradía, el nombre de usuario debe ser: <strong>"Nombre Cofradía -
+                Localidad"</strong>. Recordad escribirlo SIN TILDES ni "Ñ" para que el sistema os reconozca.</span>
+          </li>
+          <li>
+            <i class="bi bi-person-check"></i>
+            <span>Una vez registrados, contactad con el administrador para que os proporcione vuestro <strong>código de
+                verificación único</strong>. Podréis contactarle vía:
+              <div class="social-contact">
+                <a href="https://www.instagram.com/cofradiariomlg" target="_blank" class="contact-link"><i
+                    class="bi bi-instagram"></i> &#64;cofradiariomlg</a>
+                <a href="mailto:cofradiariodemalaga@gmail.com" class="contact-link"><i class="bi bi-envelope"></i>
+                  cofradiariodemalaga&#64;gmail.com</a>
+              </div>
+            </span>
+          </li>
+          <li>
+            <i class="bi bi-key"></i>
+            <span>Hacerlo es indispensable para poder subir eventos a la <strong>AGENDA</strong>.</span>
+          </li>
+          <li>
+            <i class="bi bi-check-circle"></i>
+            <span>¡Gracias por formar parte de Cofradiario!</span>
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-modal-close" (click)="toggleAvisoCofradia()">¡ENTENDIDO!</button>
+    </div>
+  </div>
 </div>

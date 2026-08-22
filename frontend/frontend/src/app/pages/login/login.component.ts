@@ -11,35 +11,85 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   codigo: string = '';
+  esCofradia: boolean = false;
+  showPassword: boolean = false;
   error: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  // Para reset de contraseña
+  mostrarReset: boolean = false;
+  emailReset: string = '';
+  mensajeReset: string = '';
+  errorReset: string = '';
 
-    onSubmit(): void {
-  const formData = new FormData();
-  formData.append('email', this.email);
-  formData.append('password', this.password);
-  formData.append('codigo', this.codigo);
+  constructor(private authService: AuthService, private router: Router) { }
 
-  this.authService.login(formData).subscribe(
-    (response) => {
-      console.log('Login exitoso:', response);
+  onSubmit(): void {
+    const formData = new FormData();
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+    formData.append('codigo', this.codigo);
 
-      // Guardamos el token y los datos del usuario
-      localStorage.setItem('token', response.data.accessToken);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+    this.authService.login(formData).subscribe(
+      (response) => {
+        console.log('Respuesta del servidor:', response);
+
+        // Si el backend devuelve { error: "..." }, mostramos el mensaje y detenemos todo
+        if (response.error) {
+          this.error = response.error;
+          console.log('Error mostrado:', this.error);
+          return;
+        }
+
+        // Si no hay token o estructura inesperada
+        if (!response.data || !response.data.accessToken) {
+          this.error = 'Error inesperado en la respuesta del servidor';
+          return;
+        }
+
+        // Si llega aquí, el login fue correcto
+        localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+
+        alert(`Logeado como ${response.data.user.name}`);
+        this.router.navigate(['/']).then(() => location.reload());
+      },
+      (error) => {
+        console.error('Error HTTP:', error);
+        if (error.status === 401) {
+          this.error = error.error?.error || 'Credenciales inválidas';
+        } else if (error.status === 403) {
+          this.error = error.error?.error || 'Código incorrecto';
+        } else {
+          this.error = 'Error de conexión con el servidor';
+        }
+      }
+
+    );
+  }
 
 
-      alert(`Logeado como ${response.data.user.name}`);
-       this.router.navigate(['/']).then(() => {
-        location.reload(); // Esto evita bugs en Docker
-      });
-    },
-    (error) => {
-      console.error('Error al iniciar sesión:', error);
-      this.error = 'Credenciales incorrectas';
+
+  mostrarFormularioReset() {
+    this.mostrarReset = true;
+  }
+
+  // Método para solicitar el enlace de recuperación y enviar el correo
+  solicitarReset() {
+    if (!this.emailReset.trim()) {
+      this.errorReset = 'Debes ingresar tu correo';
+      return;
     }
-  );
-}
 
+    this.authService.sendResetLink(this.emailReset).subscribe({
+      next: (res) => {
+        this.mensajeReset = 'Se ha enviado un enlace de recuperación a tu correo';
+        this.errorReset = '';
+      },
+      error: (err) => {
+        console.error('Error al solicitar reset:', err);
+        this.errorReset = err.error?.message || 'No se pudo enviar el enlace';
+        this.mensajeReset = '';
+      },
+    });
+  }
 }

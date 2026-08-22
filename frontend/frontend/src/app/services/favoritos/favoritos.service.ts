@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { enviroment } from '../../../enviroments/enviroment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritosService {
-  private apiUrl = 'http://127.0.0.1:8000/api/favoritos';
+  private apiUrl = enviroment.backendApiKey + '/favoritos';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   eliminarFavorito(id: number): Observable<void> {
     const token = localStorage.getItem('token');

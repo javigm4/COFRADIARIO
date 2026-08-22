@@ -1,0 +1,62 @@
+.privacy-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 89vh;
+    padding: 40px 20px;
+    background-image: url(../../../../public/images/imagenes/incienso.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.content-card {
+    max-width: 800px;
+    background-color: #5b420d;
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+h1,
+h2 {
+    color: #946b12;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 900;
+}
+
+section {
+    margin-bottom: 25px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.btn-home {
+    background-color: white;
+    color: #5b420d;
+}
+
+button:hover {
+    transform: scale(1.05);
+}

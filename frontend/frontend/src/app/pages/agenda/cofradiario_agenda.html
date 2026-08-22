@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cofradiario — Agenda</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Libre+Baskerville:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --marron:        #9A5210;
+  --marron-oscuro: #7A3A08;
+  --marron-claro:  #B86818;
+  --dorado:        #BF8C0A;
+  --dorado-claro:  #D9A82A;
+  --dorado-suave:  #E8C96A;
+  --dorado-palido: #F2DFA0;
+  --crema:         #FAF3E0;
+  --crema-media:   #F0E4C4;
+  --crema-borde:   #DCC99A;
+  --azul:          #152645;
+  --azul-med:      #1E3560;
+  --texto:         #1A0E00;
+  --texto-medio:   #503010;
+  --texto-suave:   #7A5530;
+  --blanco:        #FFFFFF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background-color: var(--marron-oscuro);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 15% 0%,   #C06818 0%, transparent 55%),
+    radial-gradient(ellipse 70% 70% at 85% 100%,  #5A2800 0%, transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='rgba(191,140,10,0.04)' stroke-width='0.5'/%3E%3C/svg%3E");
+  min-height: 100vh;
+  color: var(--texto);
+}
+
+/* ── BARRA DE FILTROS ─────────────────── */
+.filtros {
+  background: rgba(20, 10, 0, 0.35);
+  border-bottom: 1px solid rgba(191,140,10,0.2);
+  backdrop-filter: blur(4px);
+  padding: 16px 40px;
+}
+.filtros-inner {
+  max-width: 1020px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.fg { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 180px; }
+.fg label {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dorado-suave);
+}
+.fg input, .fg select {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(191,140,10,0.35);
+  border-radius: 4px;
+  color: var(--crema);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  padding: 9px 13px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.fg input::placeholder { color: rgba(242,223,160,0.3); }
+.fg input:focus, .fg select:focus {
+  border-color: var(--dorado-claro);
+  background: rgba(255,255,255,0.1);
+}
+.fg select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23D9A82A' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+.fg select option { background: #3E1C00; color: var(--crema); }
+
+/* ── CABECERA ─────────────────────────── */
+.cabecera {
+  text-align: center;
+  padding: 48px 40px 28px;
+}
+.cabecera-ornamento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.cabecera-ornamento span {
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dorado));
+}
+.cabecera-ornamento span:last-child {
+  background: linear-gradient(90deg, var(--dorado), transparent);
+}
+.cabecera-ornamento-rombo {
+  width: 7px;
+  height: 7px;
+  background: var(--dorado);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+.cabecera h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(26px, 4.5vw, 44px);
+  font-weight: 700;
+  color: var(--crema);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.cabecera-sub {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dorado-suave);
+  opacity: 0.7;
+}
+
+/* ── CONTENIDO ────────────────────────── */
+.contenido {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+
+/* ── GRUPO POR DÍA ────────────────────── */
+.dia-grupo { margin-bottom: 40px; }
+
+.dia-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.dia-header-linea-izq {
+  width: 24px;
+  height: 1px;
+  background: var(--dorado);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.dia-header-texto {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dorado-claro);
+  white-space: nowrap;
+}
+.dia-header-linea-der {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(191,140,10,0.4), transparent);
+}
+.dia-header-n {
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: rgba(217,168,42,0.4);
+  white-space: nowrap;
+}
+
+/* ── GRID ─────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* ── TARJETA ──────────────────────────── */
+@keyframes aparecer {
+  from { opacity:0; transform: translateY(10px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.tarjeta {
+  background: var(--crema);
+  border: 1px solid var(--crema-borde);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 14px rgba(30,10,0,0.22), 0 1px 3px rgba(30,10,0,0.12);
+  transition: transform 0.2s cubic-bezier(.25,.8,.25,1), box-shadow 0.2s;
+  animation: aparecer 0.4s ease both;
+  position: relative;
+}
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(30,10,0,0.32), 0 2px 6px rgba(30,10,0,0.14);
+}
+
+/* franja superior dorada */
+.tarjeta-franja {
+  height: 4px;
+  background: linear-gradient(90deg, var(--dorado) 0%, var(--dorado-suave) 50%, var(--dorado) 100%);
+  flex-shrink: 0;
+}
+
+/* cuerpo */
+.tarjeta-cuerpo {
+  padding: 18px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 14px;
+}
+
+/* título */
+.tarjeta-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--azul);
+  line-height: 1.35;
+  padding-right: 26px;
+}
+
+/* fecha/hora */
+.tarjeta-cuando {
+  display: flex;
+  align-items: stretch;
+  background: var(--azul);
+  border-radius: 5px;
+  overflow: hidden;
+  gap: 0;
+}
+.cuando-icono {
+  padding: 0 11px;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+.cuando-datos {
+  flex: 1;
+  padding: 8px 10px;
+}
+.cuando-fecha {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--crema);
+  letter-spacing: 0.04em;
+}
+.cuando-hora {
+  font-size: 12px;
+  color: rgba(250,243,224,0.75);
+  margin-top: 1px;
+  font-weight: 400;
+}
+.cuando-btn-info {
+  background: var(--dorado);
+  border: none;
+  cursor: pointer;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.cuando-btn-info:hover { background: var(--dorado-claro); }
+
+/* separador ornamental */
+.tarjeta-divisor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.divisor-linea {
+  flex: 1;
+  height: 1px;
+  background: var(--crema-borde);
+}
+.divisor-rombo {
+  width: 5px;
+  height: 5px;
+  background: var(--crema-borde);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* meta */
+.tarjeta-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.meta-linea {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--texto-medio);
+  line-height: 1.45;
+  font-weight: 400;
+}
+.meta-linea svg { flex-shrink: 0; margin-top: 2px; opacity: 0.55; }
+.meta-linea b { font-weight: 600; color: var(--texto); margin-right: 3px; }
+
+/* favorito */
+.btn-fav {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--crema-borde);
+  padding: 2px;
+  line-height: 1;
+  transition: color 0.2s, transform 0.2s;
+  z-index: 2;
+}
+.btn-fav:hover { color: var(--dorado); transform: scale(1.2); }
+.btn-fav.activo { color: var(--dorado); }
+
+/* ── MODAL ────────────────────────────── */
+.modal-telón {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20,8,0,0.65);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(3px);
+}
+.modal-telón.abierto { display: flex; }
+
+.modal {
+  background: var(--crema);
+  border-radius: 10px;
+  max-width: 420px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(20,8,0,0.5);
+  animation: aparecer 0.25s ease both;
+}
+.modal-franja {
+  height: 5px;
+  background: linear-gradient(90deg, var(--dorado), var(--dorado-suave), var(--dorado));
+}
+.modal-interior { padding: 24px 26px 26px; }
+.modal-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--azul);
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+.modal-info {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--texto-medio);
+  line-height: 1.7;
+  border-left: 2px solid var(--dorado);
+  padding-left: 13px;
+  margin-bottom: 18px;
+  font-style: italic;
+}
+.modal-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+.modal-cerrar {
+  width: 100%;
+  background: var(--azul);
+  color: var(--crema);
+  border: none;
+  border-radius: 5px;
+  padding: 11px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.modal-cerrar:hover { background: var(--azul-med); }
+
+/* ── VACÍO ────────────────────────────── */
+.vacio {
+  text-align: center;
+  padding: 56px 24px;
+  color: rgba(232,201,106,0.4);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+}
+
+/* ── RESPONSIVE ───────────────────────── */
+@media (max-width: 640px) {
+  .filtros { padding: 14px 18px; }
+  .cabecera { padding: 32px 18px 20px; }
+  .contenido { padding: 0 14px 48px; }
+  .grid { grid-template-columns: 1fr; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="filtros">
+  <div class="filtros-inner">
+    <div class="fg">
+      <label for="buscar">Título o cofradía</label>
+      <input id="buscar" type="text" placeholder="Buscar..." oninput="render()"/>
+    </div>
+    <div class="fg">
+      <label for="fmes">Mes</label>
+      <select id="fmes" onchange="render()">
+        <option value="">Todos los meses</option>
+        <option value="03/2026" selected>Marzo 2026</option>
+        <option value="04/2026">Abril 2026</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label for="ftipo">Tipo de acto</label>
+      <select id="ftipo" onchange="render()">
+        <option value="">Todos</option>
+        <option value="besamanos">Besamanos / Besapiés</option>
+        <option value="ensayo">Ensayo</option>
+        <option value="culto">Culto / Función</option>
+        <option value="representacion">Representación</option>
+        <option value="reparto">Reparto / Acto interno</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="cabecera">
+  <div class="cabecera-ornamento">
+    <span></span>
+    <div class="cabecera-ornamento-rombo"></div>
+    <span></span>
+  </div>
+  <h1>Próximos Eventos</h1>
+  <div class="cabecera-sub">Agenda cofrade</div>
+</div>
+
+<div class="contenido">
+  <div id="root"></div>
+</div>
+
+<div class="modal-telón" id="modal" onclick="cerrar(event)">
+  <div class="modal">
+    <div class="modal-franja"></div>
+    <div class="modal-interior">
+      <div class="modal-titulo" id="m-titulo"></div>
+      <div class="modal-info"   id="m-info"></div>
+      <div class="modal-meta"   id="m-meta"></div>
+      <button class="modal-cerrar" onclick="document.getElementById('modal').classList.remove('abierto')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const DIAS  = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+
+const datos = [
+  { id:1,  fecha:"15/03/2026", hora:"10:00", titulo:"Besamanos Virgen Aurora",                         tipo:"besamanos",      cofradia:"Sagrada Resurrección — Puerto Real",   lugar:"Parroquia San Sebastián",                      info:"Abierto de 10:00 a 20:00 h. Acceso libre hasta completar aforo." },
+  { id:2,  fecha:"15/03/2026", hora:"10:30", titulo:"3º Ensayo Nuestro Padre Jesús Cautivo (Madrugá)", tipo:"ensayo",         cofradia:"Los Moraos — Alcalá del Valle",        lugar:"Casa Hermandad, C/ San Roque nº 21",            info:"Ensayo de música procesional. Convocatoria puntual." },
+  { id:3,  fecha:"15/03/2026", hora:"11:00", titulo:"Ensayo de la Virgen",                             tipo:"ensayo",         cofradia:"Ecce Homo — Ronda",                    lugar:"Casa Hermandad, C/ Armiñán 72",                 info:"" },
+  { id:4,  fecha:"15/03/2026", hora:"13:00", titulo:"XV Representación La Pasión de Cristo — Acto V",  tipo:"representacion", cofradia:"",                                     lugar:"Plaza Mayor",                                   info:"Entrada gratuita. Se ruega llegar con antelación." },
+  { id:5,  fecha:"15/03/2026", hora:"16:30", titulo:"Ensayo Salud",                                    tipo:"ensayo",         cofradia:"Huerto — Ronda",                       lugar:"Casa Hermandad",                                info:"" },
+  { id:6,  fecha:"16/03/2026", hora:"18:30", titulo:"Reparto de túnicas y papeletas",                  tipo:"reparto",        cofradia:"Silencio — Ronda",                     lugar:"Casa Hermandad",                                info:"Solo para nazarenos inscritos. Llevar DNI." },
+  { id:7,  fecha:"16/03/2026", hora:"20:00", titulo:"Solemne Función de Quinario",                     tipo:"culto",          cofradia:"Las Angustias — Granada",              lugar:"Basílica de Nuestra Señora de las Angustias",   info:"Predicación a cargo del Rvdo. D. José Martínez. Acceso libre." },
+  { id:8,  fecha:"22/03/2026", hora:"10:00", titulo:"Besapiés al Santísimo Cristo del Mayor Dolor",    tipo:"besamanos",      cofradia:"Dulce Nombre — Málaga",                lugar:"Parroquia de San Lorenzo",                      info:"Horario: 10:00–13:30 h y 17:00–21:00 h." },
+  { id:9,  fecha:"22/03/2026", hora:"20:30", titulo:"Septenario a Ntra. Sra. de la Esperanza de Triana", tipo:"culto",        cofradia:"Esperanza de Triana — Sevilla",        lugar:"Parroquia de Santa Ana",                        info:"Solemne septenario con predicación." },
+];
+
+const favs = new Set();
+
+const ICO_CAL   = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(250,243,224,0.65)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+const ICO_INFO  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.5" fill="white" stroke="white" stroke-width="2"/></svg>`;
+const ICO_GENTE = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
+const ICO_PIN   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+const ICO_CAL2  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+const ICO_FAV   = (on) => `<svg width="16" height="16" viewBox="0 0 24 24" fill="${on?'currentColor':'none'}" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+
+function diaNombre(fecha) {
+  const [d,m,y] = fecha.split('/');
+  const dt = new Date(+y,+m-1,+d);
+  const dn = DIAS[dt.getDay()];
+  return `${dn[0].toUpperCase()+dn.slice(1)}, ${+d} de ${MESES[+m-1]} de ${y}`;
+}
+
+function agrupar(arr) {
+  const m = {};
+  arr.forEach(e => { (m[e.fecha] = m[e.fecha]||[]).push(e); });
+  return m;
+}
+
+function toggleFav(id, btn) {
+  favs.has(id) ? favs.delete(id) : favs.add(id);
+  btn.classList.toggle('activo', favs.has(id));
+  btn.innerHTML = ICO_FAV(favs.has(id));
+}
+
+function abrirInfo(ev) {
+  document.getElementById('m-titulo').textContent = ev.titulo;
+  document.getElementById('m-info').textContent   = ev.info || 'Sin información adicional.';
+  document.getElementById('m-meta').innerHTML = [
+    ev.cofradia ? `<div class="meta-linea">${ICO_GENTE}<span><b>Cofradía:</b>${ev.cofradia}</span></div>` : '',
+    ev.lugar    ? `<div class="meta-linea">${ICO_PIN}<span><b>Lugar:</b>${ev.lugar}</span></div>` : '',
+    `<div class="meta-linea">${ICO_CAL2}<span><b>Fecha:</b>${ev.fecha} · ${ev.hora} h</span></div>`
+  ].join('');
+  document.getElementById('modal').classList.add('abierto');
+}
+
+function cerrar(e) {
+  if (e.target.id === 'modal') document.getElementById('modal').classList.remove('abierto');
+}
+
+function render() {
+  const q  = document.getElementById('buscar').value.toLowerCase().trim();
+  const m  = document.getElementById('fmes').value;
+  const t  = document.getElementById('ftipo').value;
+  const r  = document.getElementById('root');
+
+  const fil = datos.filter(e =>
+    (!q || e.titulo.toLowerCase().includes(q) || e.cofradia.toLowerCase().includes(q)) &&
+    (!m || e.fecha.slice(3) === m) &&
+    (!t || e.tipo === t)
+  );
+
+  if (!fil.length) {
+    r.innerHTML = '<div class="vacio">No se encontraron eventos.</div>';
+    return;
+  }
+
+  const grupos = agrupar(fil);
+  r.innerHTML = '';
+
+  Object.keys(grupos).sort().forEach((fecha, gi) => {
+    const evs  = grupos[fecha];
+    const divG = document.createElement('div');
+    divG.className = 'dia-grupo';
+    divG.innerHTML = `
+      <div class="dia-header">
+        <div class="dia-header-linea-izq"></div>
+        <div class="dia-header-texto">${diaNombre(fecha)}</div>
+        <div class="dia-header-linea-der"></div>
+        <div class="dia-header-n">${evs.length} acto${evs.length!==1?'s':''}</div>
+      </div>`;
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+
+    evs.forEach((ev, i) => {
+      const c = document.createElement('div');
+      c.className = 'tarjeta';
+      c.style.animationDelay = (gi*40 + i*65)+'ms';
+      c.innerHTML = `
+        <div class="tarjeta-franja"></div>
+        <div class="tarjeta-cuerpo">
+          <button class="btn-fav${favs.has(ev.id)?' activo':''}" title="Guardar en favoritos" onclick="toggleFav(${ev.id},this)">${ICO_FAV(favs.has(ev.id))}</button>
+          <div class="tarjeta-titulo">${ev.titulo}</div>
+          <div class="tarjeta-cuando">
+            <div class="cuando-icono">${ICO_CAL}</div>
+            <div class="cuando-datos">
+              <div class="cuando-fecha">${ev.fecha}</div>
+              <div class="cuando-hora">${ev.hora} h</div>
+            </div>
+            ${ev.info ? `<button class="cuando-btn-info" onclick="abrirInfo(${JSON.stringify(ev).replace(/"/g,'&quot;')})" title="Ver información">${ICO_INFO}</button>` : ''}
+          </div>
+          <div class="tarjeta-divisor">
+            <div class="divisor-linea"></div>
+            <div class="divisor-rombo"></div>
+            <div class="divisor-linea"></div>
+          </div>
+          <div class="tarjeta-meta">
+            ${ev.cofradia ? `<div class="meta-linea">${ICO_GENTE}<span><b>Cofradía:</b> ${ev.cofradia}</span></div>` : ''}
+            ${ev.lugar    ? `<div class="meta-linea">${ICO_PIN}<span><b>Lugar:</b> ${ev.lugar}</span></div>` : ''}
+          </div>
+        </div>`;
+      grid.appendChild(c);
+    });
+
+    divG.appendChild(grid);
+    r.appendChild(divG);
+  });
+}
+
+render();
+</script>
+</body>
+</html>

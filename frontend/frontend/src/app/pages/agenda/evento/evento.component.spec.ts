@@ -29,30 +29,7 @@ describe('EventoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('debería asignar el nombre de la cofradía según el evento y la lista de cofradías', () => {
-    component.cofradias = [
-      { id: 1, nombre: 'Pollinica' },
-      { id: 2, nombre: 'Dulce Nombre' }
-    ];
-    component.evento = {
-      id: 10,
-      nombre: 'Misa de la Virgen',
-      cofradia: 2,
-      fecha: '2025-05-29',
-    };
-    component.calculaCofradiaNombre();
-    expect(component.cofradiaNombre).toBe('Dulce Nombre');
-  });
+  
 
-  it('debería asignar "Desconocida" si no encuentra la cofradía', () => {
-    component.cofradias = [{ id: 1, nombre: 'Pollinica' }];
-    component.evento = {
-      id: 10,
-      nombre: 'Evento no encontrado',
-      cofradia: 3,
-      fecha: '2025-05-29',
-    };
-    component.calculaCofradiaNombre();
-    expect(component.cofradiaNombre).toBe('Desconocida');
-  });
+  
 });

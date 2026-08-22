@@ -1,11 +1,132 @@
-<section>
-  <article class="fotomain" id="ar1"></article>
-  <article class="fotomain" id="ar2"></article>
-  <article class="fotomain" id="ar3"></article>
-  <!-- lo de abajo solo se muestra en el movil-->
-  <article class="fotomain movil" id="arMovil"></article>
-  <p>Fotografía realizada por Nico Canela</p>
+﻿<section>
+    <article class="fotomain" id="ar1"></article>
+    <article class="fotomain" id="ar2"></article>
+    <article class="fotomain" id="ar3"></article>
+    <article class="fotomain movil" id="arMovil"></article>
 </section>
-<br>
-<br>
-<app-tiempo [dias]="dias"></app-tiempo>
+
+<app-tiempo></app-tiempo>
+
+<div id="fondo">
+    <section id="estadisticas" #estadisticas>
+        <div class="stat-container">
+            <div class="stat-card">
+                <div class="stat-value">+{{displayTotalCofradias}}</div>
+                <div class="stat-label">Cofradías registradas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">+{{displayTotalEventos}}</div>
+                <div class="stat-label">Eventos activos</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eventos">
+        <div class="eventos-container">
+            <div class="eventos-list">
+                <h2>PRÓXIMOS EVENTOS</h2>
+
+                @if (eventosProximos.length === 0) {
+                <h3>No hay eventos próximos</h3>
+                }
+
+                @for (evento of eventosProximos; track evento.id) {
+                <a href="/agenda" class="post-link">
+                    <div class="evento-card">
+                        <h3>
+                            {{ evento.nombre.length > 75 ? (evento.nombre | slice:0:75) + '...' : evento.nombre }}
+                        </h3>
+                        <h4 class="cofradia">{{ evento.getCofradiaNombre() }}</h4>
+                        <div class="evento-fecha">
+                            {{ evento.fecha | date:'dd/MM/yyyy, HH:mm' }}
+                        </div>
+                    </div>
+                </a>
+                }
+                <small>¡No olvides iniciar sesión para añadir eventos a favoritos y recibir un recordatorio el día antes
+                    por email!
+                </small>
+            </div>
+            <div class="evento-foto">
+                <img src="./../../../../public/images/imagenes/fotoTriniIglesia.jpg" alt="Foto de eventos" />
+            </div>
+        </div>
+    </section>
+
+
+    <div class="golden-divider"></div>
+    <section id="redSocial">
+        <div>
+            <h2 class="redsocialtitulos">Únete a nuestra red social interna</h2>
+        </div>
+        <p>Publica tus propios articulos sobre el mundo cofrade y lee los de otros usuarios.
+        </p>
+        <div>
+
+            @for (art of ultimosArticulos; track art.id) {
+            <div class="articulo">
+                <a href="/diario" class="post-link">
+                    <h3>{{ art.titular }}</h3>
+                    <h5>
+                        {{ art.cuerpo.length > 150 ? (art.cuerpo | slice:0:150) + '...' : art.cuerpo }}
+                    </h5>
+                </a>
+            </div>
+            }
+        </div>
+        <button id="btnAcceder" [routerLink]="['/diario']">ACCEDER</button>
+    </section>
+    <div class="golden-divider"></div>
+    <section id="calendario">
+        <div class="calendario-container">
+            <div class="calendario-foto">
+                <img src="../../../../public/images/imagenes/calendarioInicio.png" alt="Calendario">
+            </div>
+            <div class="calendario-contenido">
+                <h2 class="redsocialtitulos">Entra en nuestro calendario de eventos</h2>
+                <p>Consulta los eventos de forma general y con un solo click.
+                    Resuelve todas tus dudas y no te pierdas ni uno.
+                    Todo aquí, en el calendario de COFRADIARIO.
+                </p>
+                <button id="btnAcceder" [routerLink]="['/calendario']">CALENDARIO</button>
+            </div>
+        </div>
+    </section>
+    <div class="golden-divider"></div>
+    <section id="quienesomos">
+        <div>
+            <h2>¿Quiénes somos?</h2>
+            <small>Soy Javier Guerrero: Desarrollador Web, hermano de la Congregación de Mena y músico de la banda de
+                cornetas y tambores Nuestra Señora del Rosario de Arriate. Creé esta web a modo de TFG en un inicio,
+                pero al ver la necesidad real en el mundo cofrade de tener una buena agenda donde consultar todos los
+                datos necesarios de los distintos actos de las hermandades de Málaga, no pude evitar hacer evolucionar
+                este trabajo de fin de grado y convertirlo en la solución a nuestros problemas. Esta web, hecha con el
+                mayor cariño del mundo y solo por mí, permitirá a los usuarios consultar y añadir eventos a favoritos,
+                lo cual facilitará encontrarlos entre tantos actos y hará posible la llegada de un recordatorio el día
+                de antes (que yo por lo menos, soy muy olvidadizo). En esta web, las propias cofradías podrán crear,
+                editar y borrar sus propios eventos con total libertad. También tenemos una propia red social en fase
+                "beta", donde los usuarios podrán escribir sus propios artículos sobre este maravilloso mundo que, poco
+                a poco, va "in crescendo". Bueno, dejo de dar tanto "por saco" y me callo. Disfruten de esta web y ¡que
+                viva la Soledad de Mena!</small>
+
+            <div class="contact-section">
+                <h3 class="contact-title">Cualquier duda, mis redes sociales:</h3>
+                <div class="social-icons">
+                    <a href="https://instagram.com/cofradiariomlg" target="_blank" class="social-link">
+                        <i class="fa-brands fa-instagram"></i> &#64;cofradiariomlg
+                    </a>
+                    <a href="https://github.com/javigm4" target="_blank" class="social-link">
+                        <i class="fa-brands fa-github"></i> javigm4
+                    </a>
+                    <a href="mailto:javierguerreromontero1@gmail.com" class="social-link">
+                        <i class="fa-regular fa-envelope"></i> javierguerreromontero1&#64;gmail.com
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="fotoQuienesSomos">
+            <img src="../../../../public/images/imagenes/yo2.png" alt="Javier Guerrero">
+        </div>
+    </section>
+    <app-footer></app-footer>
+</div>

@@ -1,90 +1,104 @@
-<div *ngIf="modalVisible" class="modal" (click)="cerrarModal($event)">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <span class="close-btn" (click)="cerrarModal($event)">&times;</span>
+<div class="tarjeta">
+  <div class="tarjeta-franja"></div>
+  <div class="tarjeta-cuerpo">
+    <!-- Favorito Logic -->
+    @if (role === 'cofradia') {
+      <!-- Hide heart -->
+    } @else {
+      <button class="btn-fav" [class.activo]="estaEnFavoritos()" (click)="handleFavorito($event)" title="Guardar en favoritos">
+        <i class="bi" [class.bi-heart-fill]="estaEnFavoritos()" [class.bi-heart]="!estaEnFavoritos()"></i>
+      </button>
+    }
 
-    <h2 class="modal-title">{{ evento.nombre }}</h2>
-
-    <div class="modal-info-grid">
-      <div class="modal-info-item">
-        <i class="bi bi-people-fill"></i>
-        <span class="label">Cofradía:</span>
-        <span class="value">{{ cofradiaNombre }}</span>
+    <div class="tarjeta-titulo">{{ evento.nombre }}</div>
+    
+    <div class="tarjeta-cuando">
+      <div class="cuando-icono">
+        <i class="bi bi-calendar-event"></i>
       </div>
-      <div class="modal-info-item">
-        <i class="bi bi-calendar-event"> </i>
-        <span class="label">Fecha:</span>
-        <span class="value">{{ formatFecha(evento.fecha).split(" - ")[0] }}</span>
+      <div class="cuando-datos">
+        <div class="cuando-fecha">{{ formatFecha(evento.fecha).split(' - ')[0] }}</div>
+        <div class="cuando-hora">{{ formatFecha(evento.fecha).split(' - ')[1] }} h</div>
       </div>
-      <div class="modal-info-item">
-        <i class="bi bi-clock"></i>
-        <span class="label">Hora:</span>
-        <span class="value">{{ formatFecha(evento.fecha).split(" - ")[1] }}</span>
-      </div>
-      <div class="modal-info-item">
-        <i class="bi bi-geo-alt-fill"></i>
-        <span class="label">Lugar:</span>
-        <span class="value">{{ evento.lugar }}</span>
-      </div>
+      <button class="cuando-btn-info" (click)="abrirModal()" title="Ver información">
+        <i class="bi bi-info-circle"></i>
+      </button>
     </div>
 
-    <div class="modal-description">
-      <h4>Detalles</h4>
-      <p>{{ evento.detalles }}</p>
+    <div class="tarjeta-divisor">
+      <div class="divisor-linea"></div>
+      <div class="divisor-rombo"></div>
+      <div class="divisor-linea"></div>
     </div>
-  </div>
-</div>
 
-
-<div class="card evento-card" @fadeIn>
-  <div class="card-body">
-    <h2 class="card-title">{{ evento.nombre }}</h2>
-    <hr class="divider" />
-
-    <!-- Fecha y botón en línea -->
-    <div
-      class="fecha-container d-flex align-items-center justify-content-between"
-    >
-      <div class="fecha-bloque d-flex align-items-center gap-3">
-        <i class="bi bi-calendar-event icono-fecha"></i>
-        <div class="fecha-texto">
-          <div class="linea-fecha">
-            {{ formatFecha(evento.fecha).split(" - ")[0] }}
-          </div>
-          <div class="linea-hora">
-            {{ formatFecha(evento.fecha).split(" - ")[1] }}
-          </div>
+    <div class="tarjeta-meta">
+      @if (cofradiaNombre) {
+        <div class="meta-linea">
+          <i class="bi bi-people"></i>
+          <span><b>Cofradía:</b> {{ cofradiaNombre }}</span>
         </div>
+      }
+      @if (evento.lugar) {
+        <div class="meta-linea">
+          <i class="bi bi-geo-alt"></i>
+          <span><b>Lugar:</b> {{ evento.lugar }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Admin actions for cofradia owner -->
+    @if (role === 'cofradia' && nombreUsuario === cofradiaNombre) {
+      <div class="acciones">
+        <button class="btn-accion btn-delete" (click)="eliminarEvento(evento.id)">
+          <i class="bi bi-trash"></i> Eliminar
+        </button>
+        <button class="btn-accion btn-edit" (click)="editarEvento(evento.id)">
+          <i class="bi bi-pencil"></i> Editar
+        </button>
       </div>
-
-      <button class="btn btn-detalles" (click)="abrirModal()">
-        <i class="bi bi-info-circle" ></i>
-      </button>
-    </div>
-
-    <p class="card-text mt-3">
-      <i class="bi bi-people"></i> <strong>Cofradía:</strong>
-      {{ cofradiaNombre }}
-    </p>
-    <p class="card-text mt-3">
-<i class="bi bi-geo-alt-fill"></i> <strong>Lugar:</strong>
-      {{ evento.lugar }}
-    </p>
-
-    @if (role == 'cofradia' && nombreUsuario == cofradiaNombre) {
-    <div class="acciones">
-      <button class="btn btn-danger btn-sm" (click)="eliminarEvento(evento.id)">
-        <i class="bi bi-trash-fill"></i> Eliminar
-      </button>
-      <button class="btn btn-primary btn-sm" (click)="editarEvento(evento.id)">
-        <i class="bi bi-pencil-fill"></i> Editar
-      </button>
-    </div>
-    } @else if (role == 'usuario') {
-    <div class="favorito-container">
-      <button (click)="anadirFavorito(evento.id)" class="btn btn-favorito">
-        <i class="bi bi-star-fill"></i> Añadir a favoritos
-      </button>
-    </div>
     }
   </div>
 </div>
+
+<!-- Modal Detalles -->
+@if (modalVisible) {
+  <div class="modal-telon" (click)="modalVisible = false">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-franja"></div>
+      <div class="modal-interior">
+        <button class="modal-btn-cerrar-aspa" (click)="modalVisible = false">&times;</button>
+        <div class="modal-titulo">{{ evento.nombre }}</div>
+        
+        <!-- Info details at the end as requested, but the mockup has them here -->
+        <!-- I'll put the "modal-info" (details) and then the meta -->
+        
+        <div class="modal-meta">
+          @if (cofradiaNombre) {
+            <div class="meta-linea"><i class="bi bi-people"></i><span><b>Cofradía:</b> {{ cofradiaNombre }}</span></div>
+          }
+          @if (evento.lugar) {
+            <div class="meta-linea"><i class="bi bi-geo-alt"></i><span><b>Lugar:</b> {{ evento.lugar }}</span></div>
+          }
+          <div class="meta-linea"><i class="bi bi-calendar-check"></i><span><b>Fecha:</b> {{ formatFecha(evento.fecha).split(' - ')[0] }} · {{ formatFecha(evento.fecha).split(' - ')[1] }} h</span></div>
+        </div>
+
+        <div class="modal-info">
+          {{ evento.detalles || 'Sin información adicional.' }}
+        </div>
+
+        <button class="modal-cerrar" (click)="modalVisible = false">Cerrar</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Popup Registro -->
+@if (mostrarPopupRegistro) {
+  <div class="popup-registro">
+    <p>Regístrate para añadir a favoritos y recibir un recordatorio el día antes del evento.</p>
+    <div class="btns">
+      <a routerLink="/register" class="btn-registro">Registrarse</a>
+      <button class="btn-cerrar-popup" (click)="mostrarPopupRegistro = false">Cerrar</button>
+    </div>
+  </div>
+}

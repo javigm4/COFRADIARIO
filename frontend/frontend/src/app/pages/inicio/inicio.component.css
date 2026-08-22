@@ -90,6 +90,56 @@ section {
   background: radial-gradient(ellipse 55% 65% at center, rgba(8, 5, 3, 0.85) 0%, rgba(8, 5, 3, 0.55) 35%, rgba(8, 5, 3, 0.2) 55%, transparent 72%);
 }
 
+.hero-orn-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+.hero-orn-line {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 160, 23, .6));
+}
+
+.hero-orn-row .hero-orn-line:last-child {
+  background: linear-gradient(90deg, rgba(212, 160, 23, .6), transparent);
+}
+
+.hero-orn-cross {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: #d4a017;
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.hero-divider span:first-child,
+.hero-divider span:last-child {
+  display: block;
+  width: 88px;
+  height: 1px;
+  background: #d4a01759;
+}
+
+.hd-orn {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  color: #d4a017;
+  width: auto !important;
+  height: auto !important;
+  background: none !important;
+}
+
 .hero-eyebrow {
   display: block;
   font-family: var(--font-heading);

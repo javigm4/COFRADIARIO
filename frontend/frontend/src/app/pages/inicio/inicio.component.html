@@ -67,7 +67,11 @@
     <section id="eventos">
         <div class="eventos-container">
             <div class="eventos-list">
-                <h2>PRÓXIMOS EVENTOS</h2>
+                <div class="sec-head centered">
+                    <span class="sec-rule"></span>
+                    <span class="sec-label">Agenda</span>
+                    <h2 class="sec-title">Próximos Eventos</h2>
+                </div>
 
                 @if (eventosProximos.length === 0) {
                 <h3>No hay eventos próximos</h3>
@@ -101,10 +105,13 @@
     </section>
 
 
-    <div class="golden-divider"></div>
     <section id="redSocial">
         <div>
-            <h2 class="redsocialtitulos">Únete a nuestra red social interna</h2>
+            <div class="sec-head centered">
+                <span class="sec-rule"></span>
+                <span class="sec-label">Comunidad</span>
+                <h2 class="sec-title">Únete a nuestra red social interna</h2>
+            </div>
         </div>
         <p>Publica tus propios articulos sobre el mundo cofrade y lee los de otros usuarios.
         </p>
@@ -123,14 +130,15 @@
         </div>
         <button id="btnAcceder" [routerLink]="['/diario']">ACCEDER</button>
     </section>
-    <div class="golden-divider"></div>
     <section id="calendario">
         <div class="calendario-container">
             <div class="calendario-foto">
                 <img src="../../../../public/images/imagenes/calendarioInicio.png" alt="Calendario">
             </div>
             <div class="calendario-contenido">
-                <h2 class="redsocialtitulos">Entra en nuestro calendario de eventos</h2>
+                <span class="sec-rule"></span>
+                <span class="sec-label">Calendario</span>
+                <h2 class="sec-title">Entra en nuestro calendario de eventos</h2>
                 <p>Consulta los eventos de forma general y con un solo click.
                     Resuelve todas tus dudas y no te pierdas ni uno.
                     Todo aquí, en el calendario de COFRADIARIO.
@@ -139,10 +147,11 @@
             </div>
         </div>
     </section>
-    <div class="golden-divider"></div>
     <section id="quienesomos">
         <div>
-            <h2>¿Quiénes somos?</h2>
+            <span class="sec-rule"></span>
+            <span class="sec-label">Cofradiario</span>
+            <h2 class="sec-title">¿Quiénes somos?</h2>
             <small>Soy Javier Guerrero: Desarrollador Web, hermano de la Congregación de Mena y músico de la banda de
                 cornetas y tambores Nuestra Señora del Rosario de Arriate. Creé esta web a modo de TFG en un inicio,
                 pero al ver la necesidad real en el mundo cofrade de tener una buena agenda donde consultar todos los

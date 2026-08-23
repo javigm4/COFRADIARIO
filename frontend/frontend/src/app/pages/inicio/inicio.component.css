@@ -96,6 +96,56 @@
   }
 }
 
+/* --- Cabecera de sección reutilizable (dorado + Cinzel) --- */
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.sec-head.centered {
+  align-items: center;
+  text-align: center;
+}
+
+.sec-rule {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: #d4a017;
+  align-self: center;
+}
+
+.sec-label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .38em;
+  text-transform: uppercase;
+  color: #b8860b;
+  align-self: center;
+}
+
+.sec-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 2.8vw, 30px);
+  text-transform: uppercase;
+  color: #fdf5dc;
+  margin: 0;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  text-shadow: none;
+}
+
+.sec-title.centered {
+  text-align: center;
+  align-self: center;
+}
+
 /*------------------------ MAIN ---------------------------------*/
 
 h2 {
@@ -441,15 +491,15 @@ section {
 /* Mejoras estéticas en párrafos */
 .calendario-contenido p,
 #redSocial p {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  /* Más grande como pidió el usuario */
-  color: #e1e8ed;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #fdf5dcc0;
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto 20px auto;
   text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
 }
 
 #ar1 {
@@ -475,21 +525,16 @@ p {
   display: none;
 }
 
-/* --------- RED SOCIAL (modo Twitter) ---------- */
+/* --------- RED SOCIAL ---------- */
 #redSocial {
-  color: #e1e8ed;
+  color: #fdf5dcb3;
   width: 100%;
-  padding: 200px;
+  background: #080503;
+  border-top: 1px solid rgba(184, 134, 11, 0.18);
+  padding: 88px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  display: flex;
-}
-
-.redsocialtitulos {
-  width: 100%;
-  display: block;
-  text-align: center;
 }
 
 #redSocial>div:first-child {
@@ -497,26 +542,6 @@ p {
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-}
-
-.cofradia {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: #d4af37;
-  /* dorado suave */
-  margin-top: 10px;
-  transition: color 0.3s ease, transform 0.3s ease;
-  text-align: right;
-}
-
-
-#redSocial h2 {
-  font-size: 4rem;
-  color: #d4af37;
-  /* antes azul, ahora dorado suave */
-  text-align: center;
-  font-weight: bold;
 }
 
 #redSocial>div {
@@ -527,54 +552,36 @@ p {
 }
 
 .articulo {
-  background-color: #2a2f38;
-  /* un gris más claro que el fondo general */
-  /* fondo diferente, más azulado/gris */
-  border: 1px solid #2d313a;
-  /* borde más claro que el fondo */
-  border-radius: 12px;
-  padding: 15px 20px;
+  background: #0d0906;
+  border: 1px solid rgba(184, 134, 11, 0.14);
+  border-radius: 4px;
+  padding: 20px 24px;
   margin-bottom: 15px;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   display: inline-block;
   width: 70%;
-
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-  /* sombra externa */
-  box-shadow:
-    inset 4px 4px 10px rgba(255, 255, 255, 0.15),
-    inset -4px -4px 10px rgba(0, 0, 0, 0.6),
-    3px 3px 6px rgba(0, 0, 0, 0.25);
 }
 
 .articulo:hover {
-  background-color: #2a2f38;
-  /* sutil aclarado al hover */
-  /* hover más claro */
-  box-shadow:
-    inset 3px 3px 8px rgba(255, 255, 255, 0.1),
-    inset -3px -3px 8px rgba(0, 0, 0, 0.5),
-    2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-
-
-#redSocial>div>div:hover {
-  background-color: #22303c;
-  /* efecto hover */
+  background: rgba(184, 134, 11, 0.07);
+  border-color: rgba(184, 134, 11, 0.3);
+  transform: translateY(-2px);
 }
 
 #redSocial h3 {
-  font-size: 1.6rem;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
   margin-bottom: 8px;
-  color: #cfcfcf;
+  color: #fdf5dc;
 }
 
 #redSocial h5 {
-  font-size: 1.2rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
   font-weight: 400;
-  color: #cfcfcf;
-  /* gris más suave y legible */
+  color: #fdf5dcb3;
+  line-height: 1.5;
   margin-top: 10px;
 }
 
@@ -592,9 +599,9 @@ p {
 
 button {
   font-family: var(--font-heading);
-  background: linear-gradient(135deg, #d4af37, #b8860b);
+  background: linear-gradient(135deg, #d4a017, #b8860b);
   /* dorado elegante */
-  color: #0f1115;
+  color: #080503;
   /* texto oscuro para buen contraste */
   border: none;
   border-radius: 8px;
@@ -607,7 +614,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(135deg, #f1c40f, #d4af37);
+  background: linear-gradient(135deg, #f0c040, #d4a017);
   /* dorado más vivo al hover */
   transform: translateY(-2px);
   /* efecto de “levitar” */
@@ -625,8 +632,9 @@ button:active {
 #eventos {
   width: 100%;
   box-sizing: border-box;
-  /* fondo oscuro tipo Twitter */
-  color: #e1e8ed;
+  color: #fdf5dcb3;
+  background: #0a0604;
+  border-top: 1px solid rgba(184, 134, 11, 0.18);
   padding: 64px 40px;
   display: flex;
   justify-content: center;
@@ -654,21 +662,6 @@ button:active {
   flex-direction: column;
   gap: 20px;
 }
-
-.eventos-list h2 {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 2.5rem;
-  background: linear-gradient(90deg, #ffe25f, #feb47b);
-  /* gradiente llamativo */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  /* sombra sutil para resaltar */
-  margin-bottom: 10px;
-}
-
 
 .eventos-list small {
   text-align: center !important;
@@ -779,14 +772,6 @@ a {
   text-decoration: none;
 }
 
-/* texto dentro de la tarjeta */
-.evento-card p,
-.evento-card small {
-  color: #cfd9e0;
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
 
 
 /* foto fija a la derecha */
@@ -825,6 +810,8 @@ a {
   display: flex;
   gap: 20px;
   /* espacio entre imagen y texto */
+  background: #080503;
+  border-top: 1px solid rgba(184, 134, 11, 0.18);
   padding: 60px 20px;
   align-items: flex-start;
   text-align: left;
@@ -862,36 +849,14 @@ a {
   text-align: center;
 }
 
-#quienesomos h2 {
-  text-align: center;
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: 3rem;
-  background: linear-gradient(90deg, #e6d712, #6e4c02);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 20px;
-}
-
 #quienesomos small {
   text-align: center !important;
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-weight: 400;
-  font-size: 1rem;
-  color: #e1e8ed;
+  font-size: 1.05rem;
+  color: #fdf5dcb3;
   line-height: 1.8;
   padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-h5 {
-  text-align: center !important;
-  color: white;
-}
-
-#dudas {
-  width: 100%;
-  color: #fbff00;
 }
 
 @media (max-width: 900px) {
@@ -902,12 +867,6 @@ h5 {
     align-items: center;
     text-align: center;
     gap: 20px;
-  }
-
-  /* Título arriba */
-  #quienesomos h2 {
-    order: 1;
-    /* título arriba */
   }
 
   /* Foto en medio */
@@ -922,11 +881,6 @@ h5 {
     order: 3;
     width: 100%;
     text-align: center;
-  }
-
-  /* Ajustes de tamaños */
-  #quienesomos h2 {
-    font-size: 2.5rem;
   }
 
   #quienesomos small {
@@ -945,17 +899,6 @@ h5 {
   }
 }
 
-
-
-h5 {
-  color: white;
-}
-
-#dudas {
-  width: 100%;
-  color: #fbff00
-}
-
 /* ------------------ RESPONSIVE ------------------ */
 @media (max-width: 992px) {
 
@@ -965,64 +908,23 @@ h5 {
 
 
   #redSocial {
-    max-width: 992px;
-    margin: 0 auto;
     padding: 2rem 1rem;
-    background: #1f1c18;
-    color: #fdfdfd;
-    font-family: var(--font-body);
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     text-align: center;
   }
 
-  h3 {
-    font-size: 25px !important;
-    width: 300px !important;
-  }
-
-
-  #redSocial h2.redsocialtitulos {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-    color: #ffe89a;
-  }
-
-  #redSocial h5.redsocialtitulos {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #ccc;
-    margin-bottom: 2rem;
-  }
-
   #redSocial .articulo {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1rem;
     text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  #redSocial .articulo:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px #d4af37;
   }
 
   #redSocial .articulo h3 {
     font-size: 1.2rem;
-    font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #ffe89a;
   }
 
   #redSocial .articulo h5 {
     font-size: 0.95rem;
-    color: #eee;
-    font-weight: 400;
   }
 
   #redSocial a.post-link {
@@ -1033,14 +935,14 @@ h5 {
 
   #redSocial button {
     margin-top: 1.5rem;
-    background: #d4af37;
-    color: #1f1c18;
+    background: #d4a017;
+    color: #080503;
     border: none;
     border-radius: 8px;
   }
 
   #redSocial button:hover {
-    background: #ffe89a;
+    background: #fdf5dc;
     transform: translateY(-3px);
   }
 
@@ -1056,11 +958,6 @@ h5 {
 
   #quienesomos>div:last-child {
     flex: 1 1 100%;
-  }
-
-  #quienesomos h2 {
-    font-size: 2.5rem;
-
   }
 
   #quienesomos small {
@@ -1089,81 +986,6 @@ h5 {
   margin-top: 15px;
 }
 
-/* Cada bloque: texto + icono */
-.social-icons small {
-  color: #e1e8ed;
-  font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: 0.95rem;
-  margin-right: 5px;
-}
-
-
-/* Iconos */
-.social-icons a {
-  color: #e1e8ed;
-  font-size: 1.6rem;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-/* Hover efecto dorado y ligero agrandamiento */
-.social-icons a:hover {
-  color: #d4af17;
-  /* dorado */
-  transform: scale(1.25);
-}
-
-
-
-
-/*---- FOOTER ----*/
-
-.site-footer {
-  background: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 0.85rem;
-  opacity: 0.9;
-  /* ajusta de 0 (transparente) a 1 (opaco) */
-}
-
-.footer-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.footer-social a {
-  margin: 0 8px;
-  color: #ccc;
-  font-size: 1.2rem;
-  transition: color 0.3s;
-}
-
-.footer-social a:hover,
-.creditos a:hover {
-  color: #e3b505;
-}
-
-.politica-link a {
-  color: #946b12;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
-.politica-link a:hover {
-  text-decoration: underline;
-}
-
-.creditos a {
-  color: #ccc;
-  text-decoration: none;
-  font-weight: 500;
-}
-
 p {
   display: block;
 }
@@ -1176,11 +998,12 @@ h3 {
 #calendario {
   width: 100%;
   box-sizing: border-box;
-  color: #e1e8ed;
-  padding: 20px;
+  color: #fdf5dcb3;
+  background: #0a0604;
+  border-top: 1px solid rgba(184, 134, 11, 0.18);
+  padding: 80px 40px;
   display: flex;
   justify-content: center;
-  margin-bottom: 100px;
   text-align: center;
 }
 
@@ -1219,64 +1042,16 @@ h3 {
   text-align: center;
 }
 
-.calendario-contenido h2,
-.calendario-contenido h5 {
-  margin: 0;
-  text-align: center;
-}
-
-.calendario-contenido h2 {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 2.5rem;
-  background: linear-gradient(90deg, #ffe25f, #feb47b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.calendario-contenido h5 {
-  font-family: var(--font-heading);
-  font-weight: 400;
-  font-size: 1.1rem;
-  color: #cfd9e0;
-}
-
 /* Botón ACCEDER */
 #calendario #btnAcceder {
   width: fit-content;
   padding: 15px 20px;
   font-size: 1.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ffe25f, #feb47b);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 0 auto;
-  /* centra horizontalmente */
-  margin-top: 30px;
-
+  margin: 30px auto 0;
 }
-
 
 #calendario #btnAcceder:hover {
-  background: linear-gradient(135deg, #feb47b, #ffe25f);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-#btnMovil {
-  width: fit-content;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, #ffe25f, #feb47b);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: none;
-
 }
 
 /* Responsivo: en móviles, apilar imagen y contenido */
@@ -1297,14 +1072,6 @@ h3 {
     align-items: center;
     margin-bottom: -50px;
     /* Ajustado margen negativo */
-  }
-
-  /* Ajuste del título */
-  .calendario-contenido h2 {
-    text-align: center;
-    font-size: 1.8rem;
-    /* Un poco más grande */
-    margin-bottom: 15px;
   }
 
   /* Texto parrafo */
@@ -1349,11 +1116,6 @@ h3 {
     width: 100%;
     text-align: center;
     padding: 0 10px;
-  }
-
-  #quienesomos h2 {
-    font-size: 2rem;
-    order: 0;
   }
 
   #quienesomos small {
@@ -1574,7 +1336,7 @@ h3 {
 }
 
 .social-link {
-  color: #e1e8ed;
+  color: #fdf5dcb3;
   display: flex;
   flex-direction: column !important;
   /* Icono arriba, texto abajo FORZADO */
@@ -1712,17 +1474,6 @@ h3 {
    ========================================= */
 @media (max-width: 768px) {
 
-  /* Título "PRÓXIMOS EVENTOS" */
-  .eventos-list h2 {
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    background: linear-gradient(180deg, #b88a1c, #ffe25f);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 12px;
-    line-height: 1.1;
-  }
-
   /* Reducir padding del contenedor principal en móvil para ganar ancho */
   #eventos {
     padding: 0 !important;
@@ -1770,9 +1521,8 @@ h3 {
     text-align: center;
     padding: 20px !important;
     height: auto !important;
-    background-color: #2a2f38;
-    /* Asegurar fondo */
-    border-radius: 12px;
+    background-color: #0d0906;
+    border-radius: 4px;
   }
 
   /* Título del artículo */
@@ -1780,8 +1530,7 @@ h3 {
     width: 100%;
     font-size: 1.5rem !important;
     margin-bottom: 10px !important;
-    color: #ffd700 !important;
-    /* Dorado */
+    color: #fdf5dc !important;
     text-align: center !important;
   }
 
@@ -1789,19 +1538,12 @@ h3 {
   .articulo h5 {
     width: 100%;
     font-size: 0.95rem !important;
-    color: #e0e0e0 !important;
+    color: #fdf5dcb3 !important;
     text-align: justify !important;
     /* Texto justificado para lectura limpia */
     line-height: 1.4;
     margin: 0 !important;
     font-weight: 400;
-  }
-
-  /* Red Social Titulos */
-  .redsocialtitulos {
-    font-size: 1.8rem !important;
-    text-align: center;
-    margin-bottom: 20px;
   }
 
   #redSocial p {
@@ -1878,13 +1620,6 @@ h3 {
     padding: 40px 10px !important;
     width: 100% !important;
     box-sizing: border-box;
-  }
-
-  #redSocial h2,
-  #calendario h2 {
-    font-size: 1.8rem !important;
-    line-height: 1.2;
-    margin-bottom: 20px;
   }
 
   #redSocial p,

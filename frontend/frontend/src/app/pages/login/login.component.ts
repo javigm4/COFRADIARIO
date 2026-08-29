@@ -52,7 +52,7 @@ export class LoginComponent {
         localStorage.setItem('user', JSON.stringify(response.data.user));
 
         this.notificacionService.exito(`Logeado como ${response.data.user.name}`);
-        this.router.navigate(['/']).then(() => location.reload());
+        this.router.navigate(['/']).then(() => setTimeout(() => location.reload(), 1200));
       },
       (error) => {
         console.error('Error HTTP:', error);

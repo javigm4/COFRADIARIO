@@ -183,7 +183,8 @@ export class AgendaComponent implements OnInit {
     this.eventosService.editarEvento(this.eventoEditandoId, eventoData).subscribe({
       next: () => {
         this.notificacionService.exito('Evento actualizado correctamente.');
-        window.location.reload();
+        this.cerrarModalEvento();
+        this.cargarDatos();
       },
       error: (error) => {
         console.error('Error al actualizar el evento:', error);
@@ -244,7 +245,8 @@ export class AgendaComponent implements OnInit {
           completados++;
           if (completados === observables.length) {
             this.notificacionService.exito(fechas.length > 1 ? `Se han creado ${fechas.length} eventos correctamente.` : 'Evento creado correctamente.');
-            window.location.reload();
+            this.cerrarModalEvento();
+            this.cargarDatos();
           }
         },
         error: (error) => {
@@ -525,7 +527,7 @@ export class AgendaComponent implements OnInit {
           completados++;
           if (completados === observables.length) {
             this.notificacionService.exito(fechas.length > 1 ? `Se han creado ${fechas.length} eventos (Modo Admin).` : 'Evento creado correctamente.');
-            window.location.reload();
+            this.cargarDatos();
           }
         },
         error: (error) => {
@@ -565,7 +567,7 @@ export class AgendaComponent implements OnInit {
     this.eventosService.editarEvento(this.editandoEvento.id, this.editandoEvento).subscribe({
       next: () => {
         this.notificacionService.exito('Evento actualizado correctamente');
-        window.location.reload();
+        this.cargarDatos();
       },
       error: (err: any) => {
         console.error('Error al actualizar evento', err);

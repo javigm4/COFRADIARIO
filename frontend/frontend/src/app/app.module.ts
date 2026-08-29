@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,8 +29,8 @@ import localeEs from '@angular/common/locales/es';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { CalendarioComponent } from './pages/calendario/calendario.component';
-import { FullCalendarModule } from '@fullcalendar/angular';
 import { CookieBannerComponent } from './widgets/cookie-banner/cookie-banner.component';
+import { NotificacionesComponent } from './widgets/notificaciones/notificaciones.component';
 import { FooterComponent } from './layour/footer/footer.component';
 import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad.component';
 import { AvisoLegalComponent } from './pages/aviso-legal/aviso-legal.component';
@@ -65,7 +65,8 @@ registerLocaleData(localeEs);
     AvisoLegalComponent,
     TerminosUsoComponent,
     FooterComponent,
-    CookieBannerComponent
+    CookieBannerComponent,
+    NotificacionesComponent
   ],
   imports: [
     BrowserModule,
@@ -73,10 +74,9 @@ registerLocaleData(localeEs);
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
-    FullCalendarModule
+    BrowserAnimationsModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

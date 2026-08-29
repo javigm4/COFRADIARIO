@@ -12,11 +12,7 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  background-image: url(../../../../public/images/imagenes/incienso.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: linear-gradient(160deg, #1a0c04, #0c0804 55%, #0a0604);
   overflow: hidden;
 }
 
@@ -38,32 +34,102 @@
   color: #d4a017;
 }
 
-/* --- SIDE IMAGES (Subtle Ribbons) --- */
-.fotologin {
-  flex: 0 0 20%;
-  /* Consistente con el ajuste manual del usuario */
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  transition: all 0.5s ease;
+/* --- PANELES LATERALES --- */
+.auth-side {
+  flex: 0 0 250px;
+  padding: 40px 22px;
+  display: flex;
+  flex-direction: column;
 }
 
-.fotologin::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.7));
+.auth-side--izq {
+  background: linear-gradient(165deg, #6b0000, #4a0000);
+  border-right: 2px solid #b8860b;
 }
 
-#ar1 {
-  background-image: url(../../../../public/images/imagenes/descendimientoIniciarSesion.png);
+.auth-tagline-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid #d4a017;
+  padding: 20px 18px;
 }
 
-#ar2 {
-  background-image: url(../../../../public/images/imagenes/amarguraIniciarSesion.jpg);
+.auth-tagline-cruz {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: #d4a017;
+  margin-bottom: 10px;
+}
+
+.auth-tagline-card p {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #fdf5dc;
+  margin: 0;
+}
+
+.auth-side--der {
+  border-left: 2px solid #b8860b;
+  align-items: stretch;
+}
+
+.auth-anuncio {
+  background: rgba(184, 134, 11, 0.06);
+  border: 1px solid rgba(184, 134, 11, 0.4);
+  border-radius: 6px;
+  padding: 24px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-anuncio-cruz {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: #d4a017;
+  margin-bottom: 10px;
+}
+
+.auth-anuncio-label {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d4a017;
+  margin-bottom: 12px;
+}
+
+.auth-anuncio-texto {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(253, 245, 220, 0.7);
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.auth-anuncio-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #6b0000, #4a0000);
+  color: #fdf5dc;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 9px 20px;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.auth-anuncio-btn:hover {
+  background: linear-gradient(135deg, #8b1a1a, #6b0000);
 }
 
 /* --- FORM CONTAINER (Wider Focus for PC) --- */
@@ -366,8 +432,8 @@ h2 {
 }
 
 /* --- MOBILE RESPONSIVENESS --- */
-@media (max-width: 992px) {
-  #ar2 {
+@media (max-width: 1200px) {
+  .auth-side {
     display: none;
   }
 
@@ -394,30 +460,9 @@ h2 {
     padding: 16px 20px;
   }
 
-  #ar1 {
-    width: 100%;
-    height: 35vh;
-    flex: none;
-    order: -1;
-  }
-
-  #ar2 {
-    display: block !important;
-    width: 100%;
-    height: 35vh;
-    flex: none;
-    order: 1;
-  }
-
-  #ar2::after {
-    background: linear-gradient(to top, transparent 40%, rgba(0, 0, 0, 0.7));
-  }
-
   .form-container {
     width: 100%;
     padding: 25px;
-    margin-top: -50px;
-    margin-bottom: -50px;
     flex: none;
     z-index: 2;
   }

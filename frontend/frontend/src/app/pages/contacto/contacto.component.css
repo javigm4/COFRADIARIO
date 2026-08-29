@@ -1,43 +1,135 @@
-/* --- CONTAINER (mismo patrón que login) --- */
+.auth-page {
+  height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .login-container {
   display: flex;
   align-items: stretch;
   justify-content: center;
-  height: 88.4vh;
+  flex: 1;
+  min-height: 0;
   width: 100%;
-  background-image: url(../../../../public/images/imagenes/incienso.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: linear-gradient(160deg, #1a0c04, #0c0804 55%, #0a0604);
   overflow: hidden;
 }
 
-/* --- SIDE IMAGES --- */
-.fotologin {
-  flex: 0 0 20%;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  transition: all 0.5s ease;
+/* --- FOOTER COMPACTO (mismo estilo que el navbar) --- */
+.auth-footer {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #1a0c04, #0c0804);
+  border-top: 2px solid #b8860b;
+  padding: 10px 20px;
+  text-align: center;
 }
 
-.fotologin::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.7));
+.auth-footer span {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #d4a017;
 }
 
-#ar1 {
-  background-image: url(../../../../public/images/imagenes/rocio.jpg);
+/* --- PANELES LATERALES --- */
+.auth-side {
+  flex: 0 0 250px;
+  padding: 40px 22px;
+  display: flex;
+  flex-direction: column;
 }
 
-#ar2 {
-  background-image: url(../../../../public/images/imagenes/esperanza.jpg);
+.auth-side--izq {
+  background: linear-gradient(165deg, #6b0000, #4a0000);
+  border-right: 2px solid #b8860b;
+}
+
+.auth-tagline-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid #d4a017;
+  padding: 20px 18px;
+}
+
+.auth-tagline-cruz {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: #d4a017;
+  margin-bottom: 10px;
+}
+
+.auth-tagline-card p {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #fdf5dc;
+  margin: 0;
+}
+
+.auth-side--der {
+  border-left: 2px solid #b8860b;
+  align-items: stretch;
+}
+
+.auth-anuncio {
+  background: rgba(184, 134, 11, 0.06);
+  border: 1px solid rgba(184, 134, 11, 0.4);
+  border-radius: 6px;
+  padding: 24px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-anuncio-cruz {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: #d4a017;
+  margin-bottom: 10px;
+}
+
+.auth-anuncio-label {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d4a017;
+  margin-bottom: 12px;
+}
+
+.auth-anuncio-texto {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(253, 245, 220, 0.7);
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.auth-anuncio-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #6b0000, #4a0000);
+  color: #fdf5dc;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 9px 20px;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.auth-anuncio-btn:hover {
+  background: linear-gradient(135deg, #8b1a1a, #6b0000);
 }
 
 /* --- FORM CONTAINER --- */
@@ -51,14 +143,14 @@
 }
 
 .premium-card {
-  background: rgba(43, 31, 6, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 30px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: #fefcf6;
+  border-radius: 6px;
+  border: 1px solid rgba(184, 134, 11, 0.4);
+  border-top: 4px solid #b8860b;
   width: 100%;
   max-width: 720px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
 }
 
 .card-body {
@@ -67,21 +159,21 @@
 
 h2 {
   font-family: var(--font-heading);
-  color: #d4af37;
+  color: #0c0804;
   font-size: 2.2rem;
   font-weight: 700;
   letter-spacing: 3px;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+  text-shadow: none;
   text-align: center;
   margin-bottom: 8px !important;
 }
 
 .subtitle {
   font-family: var(--font-body);
-  color: #f0e6d2;
+  font-style: italic;
+  color: #6b4c30;
   font-size: 1.1rem;
   margin-bottom: 25px;
-  opacity: 0.9;
   text-align: center;
 }
 
@@ -95,7 +187,7 @@ h2 {
 .form-group-custom label {
   display: block;
   font-family: var(--font-heading);
-  color: #d4af37;
+  color: #3a2210;
   font-weight: 700;
   font-size: 0.95rem;
   margin-bottom: 8px;
@@ -112,7 +204,7 @@ h2 {
 .input-wrapper i {
   position: absolute;
   left: 20px;
-  color: #d4af37;
+  color: #9a7a58;
   font-size: 1.2rem;
 }
 
@@ -120,14 +212,29 @@ h2 {
 .input-wrapper textarea {
   width: 100%;
   padding: 16px 20px 16px 60px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 15px;
-  color: #fff;
+  background: #faf4e8;
+  border: 1px solid rgba(184, 134, 11, 0.35);
+  border-radius: 3px;
+  color: #0c0804;
   font-family: var(--font-body);
   font-size: 1.1rem;
-  transition: all 0.3s ease;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  box-shadow: none;
+}
+
+.input-wrapper input::placeholder,
+.input-wrapper textarea::placeholder {
+  color: #9a7a58;
+  font-style: italic;
+}
+
+.input-wrapper input:focus,
+.input-wrapper textarea:focus {
+  outline: none;
+  border-color: #b8860b;
+  background: #fefcf6;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
+  transform: none;
 }
 
 .input-wrapper-textarea {
@@ -144,29 +251,22 @@ h2 {
   line-height: 1.5;
 }
 
-.input-wrapper input:focus,
-.input-wrapper textarea:focus {
-  outline: none;
-  border-color: #d4af37;
-  background: rgba(0, 0, 0, 0.8);
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25), inset 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
 /* --- SUBMIT BUTTON --- */
 .btn-submit {
   width: 100%;
   padding: 18px;
-  background: linear-gradient(135deg, #d4af37, #946b12, #5b420d);
-  border: none;
-  border-radius: 15px;
-  color: white;
   font-family: var(--font-heading);
+  background: linear-gradient(135deg, #6b0000, #4a0000);
+  border: 1px solid #4a0000;
+  border-radius: 3px;
+  color: #fdf5dc;
   font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: 2px;
+  font-size: 1.1rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,24 +274,15 @@ h2 {
 }
 
 .btn-submit:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(148, 107, 18, 0.6);
-  filter: brightness(1.2);
+  background: linear-gradient(135deg, #8b1a1a, #6b0000);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  filter: none;
 }
 
 /* --- MOBILE RESPONSIVENESS --- */
-@media (min-width: 769px) {
-  #arMovil {
-    display: none;
-  }
-
-  p {
-    display: none;
-  }
-}
-
-@media (max-width: 992px) {
-  #ar2 {
+@media (max-width: 1200px) {
+  .auth-side {
     display: none;
   }
 
@@ -201,43 +292,32 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  .auth-page {
+    height: auto;
+    overflow: visible;
+  }
+
   .login-container {
     flex-direction: column;
     height: auto;
     min-height: 100vh;
     overflow-y: auto;
     padding: 0;
-    background-attachment: scroll;
   }
 
-  #ar1,
-  #ar2 {
-    display: none;
-  }
-
-  #arMovil {
-    display: block;
-    width: 100%;
-    height: 35vh;
-    background-image: url(../../../../public/images/imagenes/rocio.jpg);
-    background-size: cover;
-    background-position: center;
-  }
-
-  p {
-    display: block;
-    color: #f0e6d2;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-style: italic;
-    text-align: center;
-    margin: 8px auto 0;
+  .auth-footer {
+    padding: 16px 20px;
   }
 
   .form-container {
     width: 100%;
     padding: 25px;
     flex: none;
+    z-index: 2;
+  }
+
+  .premium-card {
+    border-radius: 6px;
   }
 
   .card-body {

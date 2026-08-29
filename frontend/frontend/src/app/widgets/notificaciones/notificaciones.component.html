@@ -1,0 +1,9 @@
+<div class="notif-stack">
+  @for (n of notificaciones; track n.id) {
+    <div class="notif-toast" [class.notif-toast--error]="n.tipo === 'error'">
+      <i class="bi notif-icono" [ngClass]="n.tipo === 'error' ? 'bi-exclamation-triangle-fill' : 'bi-check-circle-fill'"></i>
+      <span class="notif-msg">{{ n.mensaje }}</span>
+      <button type="button" class="notif-cerrar" (click)="cerrar(n.id)">&times;</button>
+    </div>
+  }
+</div>

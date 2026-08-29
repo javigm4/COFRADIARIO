@@ -136,6 +136,15 @@ class AuthController extends Controller
 
 
 
+    public function listarUsuarios()
+    {
+        $usuarios = Usuario::select('id', 'name', 'email', 'codigo', 'created_at', 'updated_at')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json(['usuarios' => $usuarios]);
+    }
+
     public function enviarMensajeContacto(Request $request, ZohoMailer $mailer)
     {
         $request->validate([

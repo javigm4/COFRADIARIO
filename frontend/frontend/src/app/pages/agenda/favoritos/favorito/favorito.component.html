@@ -1,21 +1,21 @@
-<div class="fav-card">
-  <div class="fav-card-interior">
-    <div class="fav-card-header">
-      <div class="fav-card-titulo">{{ getEventoNombre() }}</div>
-      <button class="btn-eliminar" (click)="onEliminar()" title="Quitar de favoritos">
-        <i class="bi bi-trash"></i>
-      </button>
-    </div>
-    
-    <div class="fav-card-meta">
-      <div class="meta-item">
-        <i class="bi bi-people"></i>
-        <span>{{ getCofradiaNombre() }}</span>
-      </div>
-      <div class="meta-item">
-        <i class="bi bi-calendar3"></i>
-        <span>{{ getFecha() }}</span>
-      </div>
-    </div>
+<div class="feat">
+  <div class="feat-top">
+    <span class="feat-badge">Favorito</span>
+    <button class="feat-quitar" (click)="onEliminar()" title="Quitar de favoritos">
+      <i class="bi bi-x-lg"></i>
+    </button>
   </div>
+
+  <div class="feat-cuando">
+    <div class="feat-fecha">
+      <span class="feat-day">{{ getFecha() | date:'dd' }}</span>
+      <span class="feat-mo">{{ getFecha() | date:'MMM' }}</span>
+    </div>
+    <span class="feat-hora">{{ getFecha() | date:'HH:mm' }} h</span>
+  </div>
+
+  <div class="feat-rule"></div>
+
+  <div class="feat-title">{{ getEventoNombre() }}</div>
+  <div class="feat-banda">{{ getCofradiaNombre() }}</div>
 </div>

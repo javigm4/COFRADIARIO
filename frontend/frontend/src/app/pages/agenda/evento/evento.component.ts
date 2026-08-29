@@ -5,13 +5,14 @@ import {
   OnChanges,
   SimpleChanges,
   Output,
-  EventEmitter
+  EventEmitter,
+  ElementRef
 } from '@angular/core';
 import { Evento } from '../../interfaces/agenda';
 import { EventosService } from '../../../services/eventos/eventos.service';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FavoritosService } from '../../../services/favoritos/favoritos.service';
+import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -35,7 +36,9 @@ export class EventoComponent implements OnInit, OnChanges {
   @Input() public evento!: Evento;
   @Input() public cofradias: any[] = []; // ✅ Recibido desde el padre
   @Input() public favoritos: any[] = []; // ✅ Recibido desde el padre
+  @Input() public eventoDestacado: number | null = null; // ✅ Llega desde el calendario para abrir el acto directamente
   @Output() public favoritoAnadido = new EventEmitter<void>();
+  @Output() public editarSolicitado = new EventEmitter<Evento>();
   role: string = '';
   cofradiaNombre: string = '';
   nombreUsuario: string = '';
@@ -44,9 +47,10 @@ export class EventoComponent implements OnInit, OnChanges {
 
   constructor(
     private eventosService: EventosService,
-    private router: Router,
     private authService: AuthService,
-    private favoritosService: FavoritosService
+    private favoritosService: FavoritosService,
+    private elRef: ElementRef,
+    private notificacionService: NotificacionService
   ) { }
 
   abrirModal() {
@@ -66,6 +70,11 @@ export class EventoComponent implements OnInit, OnChanges {
     } else {
       this.role = '';
       this.nombreUsuario = '';
+    }
+
+    if (this.eventoDestacado != null && this.eventoDestacado === this.evento?.id) {
+      this.elRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => this.abrirModal(), 300);
     }
   }
 
@@ -93,8 +102,8 @@ export class EventoComponent implements OnInit, OnChanges {
     });
   }
 
-  editarEvento(eventoId: number): void {
-    this.router.navigate(['/editar', eventoId]);
+  editarEvento(): void {
+    this.editarSolicitado.emit(this.evento);
   }
 
   estaEnFavoritos(): boolean {
@@ -129,7 +138,7 @@ export class EventoComponent implements OnInit, OnChanges {
         },
         (error) => {
           if (error.status === 409) {
-            alert('Ya tienes en favoritos ese evento');
+            this.notificacionService.exito('Ya tienes en favoritos ese evento');
           } else {
             console.error('Error al añadir a favoritos:', error);
           }

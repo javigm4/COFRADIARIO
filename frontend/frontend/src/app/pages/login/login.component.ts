@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { NotificacionService } from '../../services/notificacion/notificacion.service';
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -21,7 +22,7 @@ export class LoginComponent {
   mensajeReset: string = '';
   errorReset: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private notificacionService: NotificacionService) { }
 
   onSubmit(): void {
     const formData = new FormData();
@@ -50,7 +51,7 @@ export class LoginComponent {
         localStorage.setItem('token', response.data.accessToken);
         localStorage.setItem('user', JSON.stringify(response.data.user));
 
-        alert(`Logeado como ${response.data.user.name}`);
+        this.notificacionService.exito(`Logeado como ${response.data.user.name}`);
         this.router.navigate(['/']).then(() => location.reload());
       },
       (error) => {

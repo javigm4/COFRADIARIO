@@ -12,15 +12,20 @@
   </button>
 
   <div id="divNav" class="nav-links hidden-mobile">
-    <a routerLink="/inicio" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}" class="nav-item" (click)="cerrarMenu()">INICIO</a>
+    <a routerLink="/inicio" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}" class="nav-item"
+      (click)="cerrarMenu()">INICIO</a>
     <span class="nav-sep">✦</span>
     <a class="nav-item" routerLink="/agenda" routerLinkActive="activo" (click)="cerrarMenu()">Agenda</a>
     <span class="nav-sep">✦</span>
     <a class="nav-item" routerLink="/calendario" routerLinkActive="activo" (click)="cerrarMenu()">Calendario</a>
     <span class="nav-sep">✦</span>
-    <a class="nav-item" routerLink="/diario" routerLinkActive="activo" (click)="cerrarMenu()">Diario</a>
+    <a class="nav-item" routerLink="/cofradias" routerLinkActive="activo" (click)="cerrarMenu()">Cofradías</a>
     <span class="nav-sep">✦</span>
     <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()">Contacto</a>
+    <span class="nav-sep">✦</span>
+    <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()">Sugerencias</a>
+    <span class="nav-sep">✦</span>
+    <a class="nav-item" href="https://www.diariodelasbandas.es" target="_blank" rel="noopener noreferrer" (click)="cerrarMenu()">DIARIO DE LAS BANDAS</a>
     <a *ngIf="!usuarioAutenticado" class="btn-acc" routerLink="/login" (click)="cerrarMenu()">
       Acceder
     </a>

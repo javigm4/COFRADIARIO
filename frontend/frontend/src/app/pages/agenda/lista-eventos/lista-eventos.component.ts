@@ -12,7 +12,9 @@ export class ListaEventosComponent implements OnChanges {
   @Input() usuario: any = null;
   @Input() cofradias: any[] = [];
   @Input() favoritos: any[] = [];
+  @Input() eventoDestacado: number | null = null;
   @Output() favoritoAnadido = new EventEmitter<void>();
+  @Output() editarEvento = new EventEmitter<Evento>();
 
   gruposEventos: { fecha: string; eventos: Evento[] }[] = [];
 

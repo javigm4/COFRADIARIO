@@ -3,20 +3,23 @@
     @for (grupo of gruposEventos; track grupo.fecha; let gi = $index) {
       <div class="dia-grupo">
         <div class="dia-header">
-          <div class="dia-header-linea-izq"></div>
+          <div class="dia-header-linea"></div>
+          <span class="dia-header-cruz">✠</span>
           <div class="dia-header-texto">{{ getDiaNombre(grupo.fecha) }}</div>
-          <div class="dia-header-linea-der"></div>
-          <div class="dia-header-n">{{ grupo.eventos.length }} acto{{ grupo.eventos.length !== 1 ? 's' : '' }}</div>
+          <span class="dia-header-cruz">✠</span>
+          <div class="dia-header-linea"></div>
         </div>
 
         <div class="grid">
           @for (evento of grupo.eventos; track evento.id; let i = $index) {
-            <app-evento 
-              [evento]="evento" 
+            <app-evento
+              [evento]="evento"
               [cofradias]="cofradias"
               [favoritos]="favoritos"
+              [eventoDestacado]="eventoDestacado"
               [style.animation-delay]="(gi * 40 + i * 65) + 'ms'"
-              (favoritoAnadido)="favoritoAnadido.emit()">
+              (favoritoAnadido)="favoritoAnadido.emit()"
+              (editarSolicitado)="editarEvento.emit($event)">
             </app-evento>
           }
         </div>

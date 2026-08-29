@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NotificacionService } from '../../services/notificacion/notificacion.service';
+
+const EMAILS_GESTION = ['diariodelasbandas@gmail.com', 'cofradiariodemalaga@gmail.com'];
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +14,9 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   menuAbierto: boolean = false;
   usuarioAutenticado: boolean = false;
+  esAdminGestion: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private notificacionService: NotificacionService) {}
 
   ngOnInit() {
     this.verificarAutenticacion(); // Verificar autenticación al iniciar
@@ -20,6 +24,14 @@ export class NavbarComponent implements OnInit {
 
   verificarAutenticacion() {
     this.usuarioAutenticado = !!localStorage.getItem('token');
+
+    try {
+      const userData = localStorage.getItem('user');
+      const usuario = userData ? JSON.parse(userData) : null;
+      this.esAdminGestion = !!usuario?.email && EMAILS_GESTION.includes(usuario.email);
+    } catch {
+      this.esAdminGestion = false;
+    }
   }
 
   cerrarSesion(): void {
@@ -39,7 +51,7 @@ export class NavbarComponent implements OnInit {
         () => {
           localStorage.clear();
           this.usuarioAutenticado = false; // Se actualiza el estado
-          alert('Deslogeado exitosamente');
+          this.notificacionService.exito('Deslogeado exitosamente');
           this.router.navigate(['/login']);
         },
         (error) => console.error('Error al cerrar sesión', error)

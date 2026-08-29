@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DiarioService } from '../../../../services/diario/diario.service';
 import { Router } from '@angular/router'; // Importar Router para la navegación
+import { NotificacionService } from '../../../../services/notificacion/notificacion.service';
 @Component({
   selector: 'app-crear-articulo',
   standalone: false,
@@ -10,11 +11,15 @@ import { Router } from '@angular/router'; // Importar Router para la navegación
 export class CrearArticuloComponent {
   nuevoArticulo: any = {};
 
-  constructor(private diarioService: DiarioService, private router: Router) {}
+  constructor(
+    private diarioService: DiarioService,
+    private router: Router,
+    private notificacionService: NotificacionService
+  ) {}
 
   crearArticulo(): void {
   if (!this.nuevoArticulo.titular || !this.nuevoArticulo.cuerpo) {
-    alert('Debe completar todos los campos');
+    this.notificacionService.error('Debe completar todos los campos');
     return;
   }
 
@@ -30,11 +35,11 @@ export class CrearArticuloComponent {
     },
     (error) => {
       if (error.status === 403 && error.error.message) {
-        alert(error.error.message);
+        this.notificacionService.error(error.error.message);
       } else if (error.status === 401) {
-        alert('No estás autenticado. Por favor, revisa tu correo electrónico para verificar tu cuenta.');
+        this.notificacionService.error('No estás autenticado. Por favor, revisa tu correo electrónico para verificar tu cuenta.');
       } else {
-        alert('Error inesperado al crear el artículo.');
+        this.notificacionService.error('Error inesperado al crear el artículo.');
       }
 
       console.error('Error al crear el artículo:', error);

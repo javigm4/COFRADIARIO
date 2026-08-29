@@ -1,57 +1,49 @@
 /* ── GRUPO POR DÍA ────────────────────── */
-.dia-grupo { margin-bottom: 40px; }
+.dia-grupo { margin-bottom: 32px; }
 
 .dia-header {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  gap: 14px;
   margin-bottom: 16px;
 }
-.dia-header-linea-izq {
-  width: 24px;
-  height: 1px;
+.dia-header-linea {
+  flex: 1;
+  max-width: 90px;
+  height: 3px;
   background: var(--dorado);
-  opacity: 0.5;
+  opacity: 0.7;
+}
+.dia-header-cruz {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--dorado);
   flex-shrink: 0;
 }
 .dia-header-texto {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--dorado-claro);
-  white-space: nowrap;
-}
-.dia-header-linea-der {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(191,140,10,0.4), transparent);
-}
-.dia-header-n {
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  color: rgba(217,168,42,0.4);
+  color: var(--marron);
   white-space: nowrap;
 }
 
-/* ── GRID ─────────────────────────────── */
+/* ── LISTA (filas completas, no tarjetas en grid) ─────────────────────────── */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── VACÍO ────────────────────────────── */
 .vacio {
   text-align: center;
   padding: 56px 24px;
-  color: rgba(232,201,106,0.4);
+  color: var(--texto-suave);
   font-family: var(--font-body);
   font-size: 18px;
   font-style: italic;
-}
-
-/* ── RESPONSIVE ───────────────────────── */
-@media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; gap: 12px; }
 }

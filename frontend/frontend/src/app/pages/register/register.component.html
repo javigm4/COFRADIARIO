@@ -1,29 +1,41 @@
 <div class="auth-page">
 <div class="login-container">
-  <!-- Imagen izquierda en PC -->
-  <article class="fotologin" id="ar1"></article>
+  <aside class="auth-side auth-side--izq">
+    <div class="auth-tagline-card">
+      <span class="auth-tagline-cruz">✠</span>
+      <p>Únete a Cofradiario y no te pierdas ningún acto de tu cofradía.</p>
+    </div>
+  </aside>
 
   <div class="form-container">
     <div class="card premium-card">
       <div class="card-body">
-        <h2 class="text-center">REGISTRO DE USUARIOS</h2>
+        <h2 class="text-center">CREAR CUENTA</h2>
         <p class="subtitle">¡Regístrate para poder añadir eventos a favoritos o crearlos si eres una
           cofradía!</p>
 
+        <div class="tipo-registro-switch">
+          <button type="button" class="trs-btn" [class.trs-btn--activo]="tipoRegistro === 'usuario'"
+            (click)="seleccionarTipo('usuario')">Usuario</button>
+          <button type="button" class="trs-btn" [class.trs-btn--activo]="tipoRegistro === 'cofradia'"
+            (click)="seleccionarTipo('cofradia')">Cofradía</button>
+        </div>
+
         <form (ngSubmit)="onSubmit()" class="premium-form">
+          <div class="form-group-custom">
+            <label for="name">{{ tipoRegistro === 'cofradia' ? 'Nombre' : 'Nombre de Usuario' }}</label>
+            <div class="input-wrapper">
+              <i class="bi bi-person"></i>
+              <input type="text" id="name" [(ngModel)]="name" name="name" required
+                [placeholder]="tipoRegistro === 'cofradia' ? 'Nombre de la Cofradía' : 'Tu nombre'" />
+            </div>
+          </div>
+
           <div class="form-group-custom">
             <label for="email">Email</label>
             <div class="input-wrapper">
               <i class="bi bi-envelope"></i>
               <input type="email" id="email" [(ngModel)]="email" name="email" required placeholder="tu&#64;email.com" />
-            </div>
-          </div>
-
-          <div class="form-group-custom">
-            <label for="name">Nombre de Usuario</label>
-            <div class="input-wrapper">
-              <i class="bi bi-person"></i>
-              <input type="text" id="name" [(ngModel)]="name" name="name" required placeholder="Tu nombre o Cofradía" />
             </div>
           </div>
 
@@ -50,6 +62,17 @@
             </div>
           </div>
 
+          @if (tipoRegistro === 'cofradia') {
+            <div class="form-group-custom">
+              <label for="localidad">Localidad</label>
+              <div class="input-wrapper">
+                <i class="bi bi-geo-alt"></i>
+                <input type="text" id="localidad" [(ngModel)]="localidad" name="localidad" required
+                  placeholder="Ej: Málaga" />
+              </div>
+            </div>
+          }
+
           <div class="privacy-container">
             <label class="custom-checkbox">
               <input type="checkbox" [(ngModel)]="aceptaPolitica" name="aceptaPolitica" required>
@@ -61,14 +84,16 @@
             <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" class="mini-logo">
           </div>
 
-          <div class="aviso-cofradia-section">
-            <button type="button" class="btn-aviso" (click)="toggleAvisoCofradia()">
-              <i class="bi bi-exclamation-diamond"></i> ¿ERES UNA COFRADÍA? LEE ESTO
-            </button>
-          </div>
+          @if (tipoRegistro === 'cofradia') {
+            <div class="aviso-cofradia-section">
+              <button type="button" class="btn-aviso" (click)="toggleAvisoCofradia()">
+                <i class="bi bi-exclamation-diamond"></i> INSTRUCCIONES PARA COFRADÍAS
+              </button>
+            </div>
+          }
 
           <button type="submit" class="btn-submit" [disabled]="!aceptaPolitica">
-            <span>REGISTRARSE</span>
+            <span>{{ tipoRegistro === 'cofradia' ? 'CREAR CUENTA DE COFRADÍA' : 'CREAR CUENTA' }}</span>
             <i class="bi bi-arrow-right-short"></i>
           </button>
 
@@ -82,8 +107,14 @@
     </div>
   </div>
 
-  <!-- Imagen derecha en PC -->
-  <article class="fotologin" id="ar2"></article>
+  <aside class="auth-side auth-side--der">
+    <div class="auth-anuncio">
+      <span class="auth-anuncio-cruz">✠</span>
+      <div class="auth-anuncio-label">Espacio Publicitario</div>
+      <p class="auth-anuncio-texto">Anuncia tu empresa aquí y llega a miles de cofrades de toda España.</p>
+      <a class="auth-anuncio-btn" href="mailto:cofradiariodemalaga@gmail.com?subject=Publicidad%20en%20Cofradiario">Contactar</a>
+    </div>
+  </aside>
 
   <!-- Modal Aviso Cofradía -->
   <div *ngIf="mostrarAvisoCofradia" class="modal-overlay" (click)="toggleAvisoCofradia()">

@@ -50,6 +50,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Favoritos (recomendado mantener protegidos)
     Route::post('/favoritos', [FavoritosController::class, 'store']);
     Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy']);
+
+    // Panel de gestión (listado completo de usuarios)
+    Route::get('/usuarios', [AuthController::class, 'listarUsuarios']);
 });
 
 // --------- RUTAS PÚBLICAS DE ACTUALIZAR Y ELIMINAR (usuarios ya autenticados por lógica de negocio) ---------

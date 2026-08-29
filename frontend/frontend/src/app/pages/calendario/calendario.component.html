@@ -1,28 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <!-- Overlay oscuro -->
-    <div id="overlay" style="display:none;"></div>
-
-    <!-- Modal de detalles -->
-    <div id="detalleEvento">
-        <h3 id="detalleTitulo"></h3>
-        <p id="detalleLugar"></p>
-        <p id="detalleHora"></p>
-        <p id="detalleDescripcion"></p>
-        <button id="cerrarDetalle">Cerrar</button>
+<div class="calendario-page">
+  <div class="cal-hero">
+    <div class="cal-hero-l">
+      <span class="cal-hero-orn">✠</span>
+      <div>
+        <div class="cal-hero-title">Calendario Cofrade</div>
+        <div class="cal-hero-sub">Consulta los actos por fecha</div>
+      </div>
     </div>
+  </div>
 
+  <div class="cal-body">
+    <div class="cal-layout">
+      <aside class="cal-anuncio-lateral">
+        <span class="cal-anuncio-cruz">✠</span>
+        <div class="cal-anuncio-label">Espacio<br>Publicitario</div>
+        <p class="cal-anuncio-texto">Tu empresa aquí, visible para miles de cofrades cada mes.</p>
+        <a class="cal-anuncio-btn" href="mailto:cofradiariodemalaga@gmail.com?subject=Publicidad%20en%20Cofradiario">Anunciarse</a>
+      </aside>
 
-    <full-calendar [options]="calendarOptions"></full-calendar>
+      <div class="cal-mes-col">
+        <div class="cal-nav">
+          <button class="cal-nav-btn" (click)="mesAnterior()" aria-label="Mes anterior">
+            <i class="bi bi-chevron-left"></i>
+          </button>
 
-</body>
+          <div class="cal-nav-center">
+            <span class="cal-mes-titulo">{{ tituloMes }}</span>
+            <button class="cal-hoy-btn" (click)="irAHoy()">Hoy</button>
+          </div>
 
-</html>
+          <button class="cal-nav-btn" (click)="mesSiguiente()" aria-label="Mes siguiente">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="cal-weekdays">
+          @for (d of diasSemana; track d) {
+            <span>{{ d }}</span>
+          }
+        </div>
+
+        <div class="cal-grid">
+          @for (celda of celdas; track celda.fecha.getTime()) {
+            <div class="cal-day"
+                 [class.cal-day--fuera]="!celda.enMes"
+                 [class.cal-day--hoy]="celda.esHoy"
+                 [class.cal-day--con-eventos]="celda.eventos.length > 0"
+                 (click)="abrirDia(celda)">
+              <span class="cal-day-num">{{ celda.numero }}</span>
+
+              @if (celda.eventos.length > 0) {
+                <div class="cal-day-dots">
+                  @for (e of celda.eventos.slice(0, 3); track e.id) {
+                    <span class="cal-dot"></span>
+                  }
+                </div>
+
+                <div class="cal-day-preview">
+                  @for (e of celda.eventos.slice(0, 2); track e.id) {
+                    <span class="cal-preview-chip">{{ e.nombre }}</span>
+                  }
+                  @if (celda.eventos.length > 2) {
+                    <span class="cal-preview-mas">+{{ celda.eventos.length - 2 }} más</span>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <aside class="cal-anuncio-lateral">
+        <span class="cal-anuncio-cruz">✠</span>
+        <div class="cal-anuncio-label">Espacio<br>Publicitario</div>
+        <p class="cal-anuncio-texto">Anuncia tu cofradía, banda o negocio en esta sección.</p>
+        <a class="cal-anuncio-btn" href="mailto:cofradiariodemalaga@gmail.com?subject=Publicidad%20en%20Cofradiario">Anunciarse</a>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="auth-footer">
+    <span>-- 2025 Cofradiario de Málaga --</span>
+  </footer>
+</div>
+
+<!-- Modal del día -->
+@if (modalVisible) {
+  <div class="modal-telon" (click)="cerrarModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-franja"></div>
+      <div class="modal-interior">
+        <button class="modal-btn-cerrar-aspa" (click)="cerrarModal()">&times;</button>
+        <div class="modal-titulo">{{ tituloDiaSeleccionado }}</div>
+
+        @if (eventosDelDia.length > 0) {
+          <div class="cal-modal-lista">
+            @for (evento of eventosDelDia; track evento.id) {
+              <div class="cal-modal-item" (click)="irAEvento(evento)">
+                <div class="cmi-hora">{{ horaEvento(evento.fecha) }}<span>h</span></div>
+                <div class="cmi-body">
+                  <span class="cmi-badge">Acto Cofrade</span>
+                  <div class="cmi-titulo">{{ evento.nombre }}</div>
+                  <div class="cmi-banda">{{ nombreCofradia(evento.cofradia) }}</div>
+                  @if (evento.lugar) {
+                    <div class="cmi-lugar"><i class="bi bi-geo-alt"></i> {{ evento.lugar }}</div>
+                  }
+                </div>
+                <i class="bi bi-chevron-right cmi-ir"></i>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="cal-modal-vacio">
+            <i class="bi bi-calendar-x"></i>
+            <p>No hay actos programados este día.</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

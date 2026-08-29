@@ -1,7 +1,14 @@
-import { Component } from '@angular/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventosService } from '../../services/eventos/eventos.service';
-import esLocale from '@fullcalendar/core/locales/es';
+
+interface CeldaCalendario {
+  fecha: Date;
+  numero: number;
+  enMes: boolean;
+  esHoy: boolean;
+  eventos: any[];
+}
 
 @Component({
   selector: 'app-calendario',
@@ -9,136 +16,139 @@ import esLocale from '@fullcalendar/core/locales/es';
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
-export class CalendarioComponent {
-  calendarOptions = {
-    plugins: [dayGridPlugin],
-    initialView: 'dayGridMonth',
-    locale: esLocale,
-    editable: false,
-    selectable: false,
-    events: [],
+export class CalendarioComponent implements OnInit {
+  eventos: any[] = [];
+  cofradias: any[] = [];
+  private eventosPorDia = new Map<string, any[]>();
 
-    // Contenido de cada celda del calendario
-    dayCellContent: function (arg: any) {
-      const date = arg.date;
-      if (window.innerWidth <= 768) {
-        const options = { weekday: 'short' };
-        const dayStr = date.toLocaleDateString('es-ES', options); // "Lun", "Mar", etc.
-        const dayNum = arg.dayNumberText; // número del día
-        return {
-          html: `<div style="
-      font-weight: bold;
-      font-size: 1rem;
-      text-align: center;
-      color: #ff4500;
-      background: linear-gradient(135deg, #fff8dc, #ffe4b5);
-      padding: 6px 0;
-      border-radius: 8px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-      text-decoration: none;
-      font-family: 'Arial', sans-serif;
-    ">${dayStr} ${dayNum}</div>` // ← CONCATENAR nombre y número
-        };
+  mesActual: Date = new Date();
+  private hoy: Date = new Date();
+  celdas: CeldaCalendario[] = [];
 
+  diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  nombresMeses = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
+  private nombresDias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
-      } else {
-        // Para escritorio, solo número del día
-        return {
-          html: `<div style="
-            font-weight: bold;
-            font-size: 1rem;
-            text-align: center;
-            color: #333;
-            font-family: 'Arial', sans-serif;
-          ">${arg.dayNumberText}</div>`
-        };
+  diaSeleccionado: Date | null = null;
+  eventosDelDia: any[] = [];
+  modalVisible = false;
+
+  constructor(
+    private eventosService: EventosService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.eventosService.getEventos().subscribe({
+      next: (res) => {
+        this.eventos = res.eventos ?? [];
+        this.cofradias = res.cofradias ?? [];
+        this.indexarEventos();
+        this.generarMes();
+      },
+      error: (error) => {
+        console.error('Error al obtener eventos:', error);
+        this.generarMes();
       }
-    },
-
-    // Contenido de los eventos
-    eventContent: function (arg: any) {
-      return {
-        html: `<div>${arg.event.title}</div>
-               <small style="color:#666;">${arg.event.extendedProps.cofradia}</small>`
-      };
-    },
-
-    // Click en eventos
-    eventClick: function (arg: any) {
-      const titulo = arg.event.title;
-      const lugar = arg.event.extendedProps.lugar;
-      const detalles = arg.event.extendedProps.detalles;
-      const hora = arg.event.extendedProps.hora;
-
-      const overlay = document.getElementById('overlay') as HTMLElement;
-      const div = document.getElementById('detalleEvento') as HTMLElement;
-      const tituloEl = document.getElementById('detalleTitulo') as HTMLElement;
-      const lugarEl = document.getElementById('detalleLugar') as HTMLElement;
-      const horaEl = document.getElementById('detalleHora') as HTMLElement;
-      const detallesEl = document.getElementById('detalleDescripcion') as HTMLElement;
-      const cerrarBtn = document.getElementById('cerrarDetalle') as HTMLElement;
-
-      if (div && tituloEl && lugarEl && horaEl && detallesEl && overlay && cerrarBtn) {
-        tituloEl.textContent = titulo;
-        lugarEl.innerHTML = `<strong>Lugar:</strong> ${lugar}`;
-        horaEl.innerHTML = `<strong>Hora:</strong> ${hora}`;
-        detallesEl.innerHTML = `<strong>Detalles:</strong> ${detalles}`;
-
-        overlay.classList.add('show');
-        div.classList.add('show');
-
-        const cerrar = () => {
-          overlay.classList.remove('show');
-          overlay.classList.add('hide');
-
-          div.classList.remove('show');
-          div.classList.add('hide');
-
-          setTimeout(() => {
-            overlay.classList.remove('hide');
-            div.classList.remove('hide');
-          }, 300);
-        };
-
-        cerrarBtn.onclick = cerrar;
-        overlay.onclick = cerrar;
-      }
-    },
-
-    // Scroll interno solo en móviles con muchos eventos
-    datesSet: function () {
-      if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          const dayCells = document.querySelectorAll('.fc-daygrid-day');
-          dayCells.forEach(cell => {
-            const container = cell.querySelector('.fc-daygrid-day-events') as HTMLElement;
-            if (!container) return;
-          });
-        }, 0);
-      }
-    }
-  };
-
-  constructor(private eventosService: EventosService) { }
-
-  ngOnInit() {
-    this.eventosService.getEventos().subscribe(res => {
-      const cofradiasMap: any = {};
-      res.cofradias.forEach((c: any) => {
-        cofradiasMap[c.id] = c.nombre;
-      });
-
-      this.calendarOptions.events = res.eventos.map((e: any) => ({
-        title: e.nombre,
-        start: e.fecha.replace(" ", "T"), // formato ISO
-        extendedProps: {
-          id: e.id,
-          lugar: e.lugar,
-          detalles: e.detalles,
-          cofradia: cofradiasMap[e.cofradia] || 'Sin cofradía',
-          hora: e.fecha.split(" ")[1].slice(0, 5) // extrae HH:MM
-        }
-      }));
     });
+  }
+
+  private claveFecha(d: Date): string {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const dia = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${dia}`;
+  }
+
+  private indexarEventos(): void {
+    this.eventosPorDia.clear();
+    this.eventos.forEach(e => {
+      const fecha = new Date(e.fecha);
+      if (isNaN(fecha.getTime())) return;
+      const clave = this.claveFecha(fecha);
+      if (!this.eventosPorDia.has(clave)) this.eventosPorDia.set(clave, []);
+      this.eventosPorDia.get(clave)!.push(e);
+    });
+  }
+
+  nombreCofradia(id: number): string {
+    return this.cofradias.find(c => c.id === id)?.nombre || 'Cofradiario';
+  }
+
+  generarMes(): void {
+    const año = this.mesActual.getFullYear();
+    const mes = this.mesActual.getMonth();
+    const primerDiaMes = new Date(año, mes, 1);
+
+    // Lunes = 0 ... Domingo = 6 (semana española)
+    const offset = (primerDiaMes.getDay() + 6) % 7;
+    const inicioGrid = new Date(año, mes, 1 - offset);
+
+    const claveHoy = this.claveFecha(this.hoy);
+    const celdas: CeldaCalendario[] = [];
+
+    for (let i = 0; i < 42; i++) {
+      const fecha = new Date(inicioGrid);
+      fecha.setDate(inicioGrid.getDate() + i);
+      const clave = this.claveFecha(fecha);
+      celdas.push({
+        fecha,
+        numero: fecha.getDate(),
+        enMes: fecha.getMonth() === mes,
+        esHoy: clave === claveHoy,
+        eventos: this.eventosPorDia.get(clave) || []
+      });
+    }
+    this.celdas = celdas;
+  }
+
+  get tituloMes(): string {
+    return `${this.nombresMeses[this.mesActual.getMonth()]} ${this.mesActual.getFullYear()}`;
+  }
+
+  mesAnterior(): void {
+    this.mesActual = new Date(this.mesActual.getFullYear(), this.mesActual.getMonth() - 1, 1);
+    this.generarMes();
+  }
+
+  mesSiguiente(): void {
+    this.mesActual = new Date(this.mesActual.getFullYear(), this.mesActual.getMonth() + 1, 1);
+    this.generarMes();
+  }
+
+  irAHoy(): void {
+    this.mesActual = new Date();
+    this.generarMes();
+  }
+
+  abrirDia(celda: CeldaCalendario): void {
+    if (!celda.enMes) return;
+    this.diaSeleccionado = celda.fecha;
+    this.eventosDelDia = celda.eventos;
+    this.modalVisible = true;
+  }
+
+  cerrarModal(): void {
+    this.modalVisible = false;
+  }
+
+  get tituloDiaSeleccionado(): string {
+    if (!this.diaSeleccionado) return '';
+    const d = this.diaSeleccionado;
+    return `${this.nombresDias[d.getDay()]}, ${d.getDate()} de ${this.nombresMeses[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+
+  horaEvento(fecha: string): string {
+    const d = new Date(fecha);
+    if (isNaN(d.getTime())) return '';
+    return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  }
+
+  irAEvento(evento: any): void {
+    this.modalVisible = false;
+    this.router.navigate(['/agenda'], { queryParams: { evento: evento.id } });
   }
 }

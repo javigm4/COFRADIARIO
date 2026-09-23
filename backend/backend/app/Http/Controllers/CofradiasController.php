@@ -12,7 +12,11 @@ class CofradiasController extends Controller
 
     public function index()
     {
-        $cofradias = Cofradia::withCount('eventos')->get();
+        $cofradias = Cofradia::withCount('eventos')
+            ->whereDoesntHave('user', function ($q) {
+                $q->where('is_admin', true);
+            })
+            ->get();
 
         return response()->json($cofradias);
     }
@@ -20,7 +24,11 @@ class CofradiasController extends Controller
     /** Ficha pública de una cofradía: datos + próximos eventos */
     public function perfil($id)
     {
-        $cofradia = Cofradia::withCount('eventos')->find($id);
+        $cofradia = Cofradia::withCount('eventos')
+            ->whereDoesntHave('user', function ($q) {
+                $q->where('is_admin', true);
+            })
+            ->find($id);
 
         if (!$cofradia) {
             return response()->json(['message' => 'Cofradía no encontrada'], 404);

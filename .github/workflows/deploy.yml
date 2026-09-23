@@ -19,6 +19,6 @@ jobs:
             cd /var/www/html/COFRADIARIO
             git fetch origin main
             git reset --hard origin/main
-            docker compose build frontend
-            docker compose up -d --no-deps frontend
-            docker compose restart backend
+            docker compose build frontend backend
+            docker compose up -d --no-deps frontend backend
+            docker exec cofradiario-backend-1 php artisan migrate --force

@@ -93,7 +93,7 @@
               </div>
               <div class="cof-grid">
                 @for (c of grupo.cofradias; track c.id) {
-                  <a class="cof-card" [routerLink]="['/cofradias', c.id]">
+                  <a class="cof-card" [routerLink]="['/cofradias', c.id]" (click)="registrarClick(c.id)">
                     <div class="cof-card-escudo">
                       @if (c.escudo_url) {
                         <img [src]="c.escudo_url" [alt]="c.nombre">

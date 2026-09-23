@@ -25,6 +25,10 @@ export class CofradiasComponent implements OnInit {
 
   constructor(private cofradiasService: CofradiasService) { }
 
+  registrarClick(id: number): void {
+    this.cofradiasService.registrarClick(id).subscribe({ error: () => { } });
+  }
+
   ngOnInit(): void {
     this.cofradiasService.getCofradias().subscribe({
       next: (res) => {

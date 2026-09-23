@@ -35,6 +35,10 @@ export class CofradiasService {
     return this.http.post<any>(`${this.apiUrl}/${id}/contacto`, datos);
   }
 
+  registrarClick(id: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${id}/click`, {});
+  }
+
   private authHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({ Authorization: `Bearer ${token}` });

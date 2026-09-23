@@ -35,6 +35,7 @@ Route::get('/cofradias', [CofradiasController::class, 'index']);
 Route::get('/cofradias/{nombre}', [CofradiasController::class, 'mostrar']);
 Route::get('/cofradias/{id}/perfil', [CofradiasController::class, 'perfil'])->whereNumber('id');
 Route::post('/cofradias/{id}/contacto', [CofradiasController::class, 'contacto'])->whereNumber('id');
+Route::post('/cofradias/{id}/click', [CofradiasController::class, 'registrarClick'])->whereNumber('id');
 
 Route::post('/eventos', [EventosController::class, 'store'])->withoutMiddleware([\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class]);
 

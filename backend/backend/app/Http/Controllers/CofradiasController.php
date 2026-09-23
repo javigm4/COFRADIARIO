@@ -34,6 +34,8 @@ class CofradiasController extends Controller
             return response()->json(['message' => 'Cofradía no encontrada'], 404);
         }
 
+        $cofradia->increment('visualizaciones');
+
         $proximosEventos = Evento::where('cofradia', $cofradia->id)
             ->where('fecha', '>=', now())
             ->orderBy('fecha')
@@ -43,6 +45,19 @@ class CofradiasController extends Controller
             'cofradia' => $cofradia,
             'proximos_eventos' => $proximosEventos,
         ]);
+    }
+
+    /** Registra un click desde la tarjeta del directorio hacia la ficha de la cofradía */
+    public function registrarClick($id)
+    {
+        $cofradia = Cofradia::find($id);
+        if (!$cofradia) {
+            return response()->json(['message' => 'Cofradía no encontrada'], 404);
+        }
+
+        $cofradia->increment('clicks');
+
+        return response()->json(['ok' => true]);
     }
 
     /** Formulario de contacto de la ficha de una cofradía */

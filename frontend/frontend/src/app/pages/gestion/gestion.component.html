@@ -68,7 +68,7 @@
         <div class="gs-tabla-wrap">
           <table class="gs-tabla">
             <thead>
-              <tr><th>Nombre</th><th>Localidad</th><th>Provincia</th><th>Usuario</th><th>Eventos</th><th>Acciones</th></tr>
+              <tr><th>Nombre</th><th>Localidad</th><th>Provincia</th><th>Usuario</th><th>Eventos</th><th>Visualizaciones</th><th>Clicks</th><th>Acciones</th></tr>
             </thead>
             <tbody>
               @for (c of cofradiasFiltradas; track c.id) {
@@ -80,6 +80,8 @@
                     @if (c.user) { {{ c.user.name }} } @else { <span class="td-vacio">Sin vincular</span> }
                   </td>
                   <td class="td-num">{{ c.eventos_count || 0 }}</td>
+                  <td class="td-num">{{ c.visualizaciones || 0 }}</td>
+                  <td class="td-num">{{ c.clicks || 0 }}</td>
                   <td class="td-acciones">
                     <button type="button" class="btn-icono" title="Editar" (click)="abrirModalEditarCofradia(c)"><i class="bi bi-pencil"></i></button>
                     @if (c.user) {
@@ -91,7 +93,7 @@
                   </td>
                 </tr>
               } @empty {
-                <tr><td colspan="6" class="td-vacio-fila">No hay cofradías que coincidan con la búsqueda.</td></tr>
+                <tr><td colspan="8" class="td-vacio-fila">No hay cofradías que coincidan con la búsqueda.</td></tr>
               }
             </tbody>
           </table>

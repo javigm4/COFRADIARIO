@@ -567,4 +567,24 @@
   .cof-card {
     padding: 16px 10px;
   }
+
+  .btn-sb-toggle {
+    top: 120px;
+    padding: 8px 6px 8px 5px;
+    gap: 3px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .btn-sb-toggle--abierto {
+    left: min(280px, 84vw);
+  }
+
+  .bst-arrow {
+    font-size: 11px;
+  }
+
+  .bst-label {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
 }

@@ -267,12 +267,6 @@
 
 
 
-  @if (!esCofradia) {
-  <div class="favoritos-container" [class.visible]="mostrarBotonFavoritosScroll">
-    <button id="favoritos-btn" (click)="toggleFavoritos()">⭐ FAVORITOS</button>
-  </div>
-  }
-
   <!-- Cajón de filtros deslizante (igual que diariodelasbandas.es) -->
   <button class="btn-sb-toggle" [class.btn-sb-toggle--abierto]="filtrosAbiertos" (click)="toggleFiltros()">
     <i class="bi bi-chevron-right bst-arrow"></i>
@@ -308,37 +302,20 @@
 
   <div class="contenedor-principal">
     <!-- Lista de Eventos -->
-    <div class="contenedor-eventos" (scroll)="onDivScroll($event)">
+    <div class="contenedor-eventos">
 
       <div class="main-bar">
         <span class="mb-title">Próximos Eventos</span>
       </div>
 
-      <app-lista-eventos [eventos]="eventos" [cofradias]="cofradias" [favoritos]="favoritos"
-        [eventoDestacado]="eventoDestacado" (favoritoAnadido)="cargarDatos()"
+      <app-lista-eventos [eventos]="eventos" [cofradias]="cofradias"
+        [eventoDestacado]="eventoDestacado"
         (editarEvento)="abrirModalEditar($event)"></app-lista-eventos>
     </div>
 
-    <!-- Columna derecha: Favoritos + Publicidad -->
+    <!-- Columna derecha: Publicidad -->
     @if (!esCofradia) {
     <div class="col-derecha">
-      <div class="contenedor-favoritos">
-        @if (esUsuario) {
-          <app-listafavoritos [favoritos]="favoritos" [eventos]="eventos" [cofradias]="cofradias" [usuario]="usuario"
-            (eliminarFavorito)="onEliminar($event)">
-          </app-listafavoritos>
-        } @else {
-          <div class="fav-header">
-            <i class="bi bi-bookmark-star"></i>
-            <span>Mis Favoritos</span>
-          </div>
-          <div class="fav-vacio-ext">
-            <p>¡Inicia sesión para añadir eventos a tus favoritos!</p>
-            <a class="btn-login-fav" routerLink="/login">Iniciar Sesión</a>
-          </div>
-        }
-      </div>
-
       <div class="anuncio-box">
         <span class="anuncio-cruz">✠</span>
         <div class="anuncio-label">Espacio Publicitario</div>
@@ -352,6 +329,6 @@
 </div>
 
 <footer class="auth-footer">
-  <span>-- 2025 Cofradiario de Málaga --</span>
+  <span>-- 2025 Cofradiario --</span>
 </footer>
 </div>

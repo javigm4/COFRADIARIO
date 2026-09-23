@@ -11,8 +11,7 @@
     <div class="card premium-card">
       <div class="card-body">
         <h2 class="text-center">INICIAR SESIÓN</h2>
-        <p class="subtitle">¡Inicia sesión para poder añadir a favoritos los eventos y poder compartir tus opiniones en
-          el diario!</p>
+        <p class="subtitle">¡Inicia sesión para gestionar tu cofradía y estar al día de toda la agenda cofrade!</p>
 
         <form (ngSubmit)="onSubmit()" class="premium-form">
           <div class="form-group-custom">
@@ -38,28 +37,18 @@
             </div>
           </div>
 
-          <div class="special-options">
-            <label class="custom-checkbox">
-              <input type="checkbox" id="esCofradia" [(ngModel)]="esCofradia" name="esCofradia" />
-              <span class="checkmark"></span>
-              <span class="privacy-text">¿Eres una cofradía?</span>
-            </label>
-          </div>
-
-          <div class="form-group-custom extra-field" *ngIf="esCofradia">
-            <label for="codigo">Código</label>
-            <div class="input-wrapper">
-              <i class="bi bi-key"></i>
-              <input type="text" id="codigo" [(ngModel)]="codigo" name="codigo" placeholder="Introduce tu código" />
-            </div>
-          </div>
-
           <button type="submit" class="btn-submit">
             <span>INICIAR SESIÓN</span>
             <i class="bi bi-box-arrow-in-right"></i>
           </button>
 
           <p *ngIf="error" class="error-msg"><i class="bi bi-exclamation-circle"></i> {{ error }}</p>
+
+          @if (pendienteVerificar) {
+            <button type="button" class="btn-reset" [disabled]="reenviando" (click)="reenviarVerificacion()">
+              {{ reenviando ? 'Enviando...' : 'Reenviar correo de verificación' }}
+            </button>
+          }
         </form>
 
         <div *ngIf="mostrarReset" class="recuperar-password-container">
@@ -88,6 +77,6 @@
 </div>
 
 <footer class="auth-footer">
-  <span>-- 2025 Cofradiario de Málaga --</span>
+  <span>-- 2025 Cofradiario --</span>
 </footer>
 </div>

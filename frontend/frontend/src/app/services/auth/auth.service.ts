@@ -70,4 +70,13 @@ export class AuthService {
       password_confirmation
     });
   }
-} 
+
+  // Verificación de correo
+  confirmarVerificacion(id: number, token: string): Observable<any> {
+    return this.http.post<any>(`${this.apiAuth}/email/confirmar`, { id, token });
+  }
+
+  reenviarVerificacion(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiAuth}/email/reenviar`, { email });
+  }
+}

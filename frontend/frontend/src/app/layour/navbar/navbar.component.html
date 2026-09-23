@@ -23,13 +23,41 @@
     <span class="nav-sep">✦</span>
     <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()">Contacto</a>
     <span class="nav-sep">✦</span>
-    <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()">Sugerencias</a>
-    <span class="nav-sep">✦</span>
+
     <a class="nav-item" href="https://www.diariodelasbandas.es" target="_blank" rel="noopener noreferrer" (click)="cerrarMenu()">DIARIO DE LAS BANDAS</a>
+    <ng-container *ngIf="esAdminGestion">
+      <span class="nav-sep">✦</span>
+      <a class="nav-item" routerLink="/gestion" routerLinkActive="activo" (click)="cerrarMenu()">Gestión</a>
+    </ng-container>
     <a *ngIf="!usuarioAutenticado" class="btn-acc" routerLink="/login" (click)="cerrarMenu()">
       Acceder
     </a>
-    <button *ngIf="usuarioAutenticado" class="nav-item logout" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión
+
+    <ng-container *ngIf="usuarioAutenticado && esCofradia">
+      <div class="perfil-dropdown">
+        <button type="button" class="nav-item perfil-toggle" (click)="togglePerfil()">
+          <i class="bi bi-person-circle"></i> Mi Perfil
+          <i class="bi" [ngClass]="perfilAbierto ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </button>
+        <div class="perfil-menu" *ngIf="perfilAbierto">
+          <a class="perfil-menu-item" routerLink="/mi-cofradia" (click)="cerrarMenu()">
+            <i class="bi bi-shield"></i> Mi Cofradía
+          </a>
+          <button type="button" class="perfil-menu-item perfil-menu-item--salir" (click)="cerrarSesion(); cerrarMenu()">
+            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <button *ngIf="usuarioAutenticado && !esCofradia" class="nav-item logout" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión
     </button>
   </div>
 </nav>
+
+<div class="alerta-perfil" *ngIf="mostrarAlertaPerfil">
+  <i class="bi bi-megaphone"></i>
+  <span><strong>NUEVO APARTADO "MI COFRADÍA":</strong> rellena tus datos para llegar a más gente.</span>
+  <a routerLink="/mi-cofradia" class="alerta-perfil-btn" (click)="cerrarAlertaPerfil()">Rellenar ahora</a>
+  <button type="button" class="alerta-perfil-cerrar" (click)="cerrarAlertaPerfil()" title="Cerrar">&times;</button>
+</div>

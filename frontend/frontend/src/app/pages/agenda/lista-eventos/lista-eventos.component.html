@@ -15,10 +15,8 @@
             <app-evento
               [evento]="evento"
               [cofradias]="cofradias"
-              [favoritos]="favoritos"
               [eventoDestacado]="eventoDestacado"
               [style.animation-delay]="(gi * 40 + i * 65) + 'ms'"
-              (favoritoAnadido)="favoritoAnadido.emit()"
               (editarSolicitado)="editarEvento.emit($event)">
             </app-evento>
           }

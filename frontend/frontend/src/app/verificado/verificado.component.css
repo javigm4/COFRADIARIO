@@ -1,0 +1,158 @@
+.auth-page {
+  height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  background: linear-gradient(160deg, #1a0c04, #0c0804 55%, #0a0604);
+  overflow: hidden;
+}
+
+.auth-footer {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #1a0c04, #0c0804);
+  border-top: 2px solid #b8860b;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.auth-footer span {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #d4a017;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 40px;
+}
+
+.premium-card {
+  background: #fefcf6;
+  border-radius: 6px;
+  border: 1px solid rgba(184, 134, 11, 0.4);
+  border-top: 4px solid #b8860b;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+
+.card-body {
+  padding: 40px 50px;
+}
+
+.verificado-body {
+  text-align: center;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  color: #0c0804;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: #6b4c30;
+  font-size: 0.95rem;
+  margin-bottom: 22px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.verificacion-icono {
+  display: block;
+  font-size: 2.8rem;
+  color: #b8860b;
+  margin-bottom: 16px;
+}
+
+.verificacion-icono--ok {
+  color: #2e7d32;
+}
+
+.verificacion-icono--error {
+  color: #9b0000;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  font-family: var(--font-heading);
+  background: linear-gradient(135deg, #6b0000, #4a0000);
+  border: 1px solid #4a0000;
+  border-radius: 3px;
+  color: #fdf5dc;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #8b1a1a, #6b0000);
+  transform: translateY(-1px);
+}
+
+.footer-links {
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-style: italic;
+  color: #6b4c30;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.footer-links a {
+  font-family: var(--font-heading);
+  font-style: normal;
+  color: #b8860b;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #d4a017;
+}
+
+@media (max-width: 768px) {
+  .auth-page {
+    height: auto;
+    overflow: visible;
+  }
+
+  .login-container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .card-body {
+    padding: 32px 28px;
+  }
+}

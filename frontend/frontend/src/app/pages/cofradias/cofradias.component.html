@@ -1,0 +1,127 @@
+<div class="cofradias-page">
+  <div class="cofradias-hero">
+    <div class="cofradias-hero-l">
+      <span class="cofradias-hero-orn">✠</span>
+      <div>
+        <div class="cofradias-hero-title">Directorio de Cofradías</div>
+        <div class="cofradias-hero-sub">Encuentra tu hermandad</div>
+      </div>
+    </div>
+    <div class="cofradias-hero-stats">
+      <div class="chs">
+        <span class="chs-n">{{ cofradias.length }}</span>
+        <span class="chs-l">Cofradías</span>
+      </div>
+      <div class="chs">
+        <span class="chs-n">{{ provinciasConteo.length }}</span>
+        <span class="chs-l">Provincias</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cofradias-body">
+    <button class="btn-sb-toggle" [class.btn-sb-toggle--abierto]="filtrosAbiertos" (click)="filtrosAbiertos = !filtrosAbiertos">
+      <i class="bi bi-chevron-right bst-arrow"></i>
+      <span class="bst-label">Filtros</span>
+    </button>
+
+    <div class="sb-overlay" *ngIf="filtrosAbiertos" (click)="filtrosAbiertos = false"></div>
+
+    <div class="sb" [class.sb--abierta]="filtrosAbiertos">
+      <div class="sb-sec">
+        <div class="sb-hd">Búsqueda</div>
+        <div class="srch">
+          <i class="bi bi-search srch-ico"></i>
+          <input class="srch-inp" type="text" placeholder="Nombre, localidad o provincia..."
+            [(ngModel)]="busqueda" (input)="aplicarFiltros()">
+        </div>
+      </div>
+
+      <div class="sb-sec">
+        <div class="sb-hd">Provincia</div>
+        <div class="prov-lista">
+          @for (p of provinciasConteo; track p.nombre) {
+            <button type="button" class="prov-item" [class.prov-item--activo]="provinciasSeleccionadas.has(p.nombre)"
+              (click)="toggleProvincia(p.nombre)">
+              <span>{{ p.nombre }}</span>
+              <span class="prov-count">{{ p.total }}</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      @if (hayFiltrosActivos()) {
+        <div class="sb-sec">
+          <button type="button" class="btn-limpiar" (click)="limpiarFiltros()">
+            <i class="bi bi-x-circle"></i> Limpiar filtros
+          </button>
+        </div>
+      }
+
+      <div class="sb-sec sb-sec--anuncio">
+        <div class="anuncio-lateral">
+          <span class="anuncio-cruz">✠</span>
+          <div class="anuncio-label">Espacio Publicitario</div>
+          <p class="anuncio-texto">Anuncia tu empresa aquí y llega a miles de cofrades de toda España.</p>
+          <a class="anuncio-btn" href="mailto:cofradiariodemalaga@gmail.com?subject=Publicidad%20en%20Cofradiario">Contactar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cofradias-layout">
+      <aside class="anuncio-lateral anuncio-lateral--columna">
+        <span class="anuncio-cruz">✠</span>
+        <div class="anuncio-label">Espacio Publicitario</div>
+        <p class="anuncio-texto">Anuncia tu empresa aquí y llega a miles de cofrades de toda España.</p>
+        <a class="anuncio-btn" href="mailto:cofradiariodemalaga@gmail.com?subject=Publicidad%20en%20Cofradiario">Contactar</a>
+      </aside>
+
+      <div class="cofradias-contenido">
+        @if (cargando) {
+          <div class="cof-vacio">Cargando cofradías...</div>
+        } @else if (grupos.length === 0) {
+          <div class="cof-vacio">No se han encontrado cofradías con estos filtros.</div>
+        } @else {
+          @for (grupo of grupos; track grupo.provincia) {
+            <div class="loc-grupo">
+              <div class="loc-header">
+                <div class="loc-header-linea"></div>
+                <span class="loc-header-cruz">✠</span>
+                <div class="loc-header-texto">{{ grupo.provincia }}</div>
+                <span class="loc-header-cruz">✠</span>
+                <div class="loc-header-linea"></div>
+              </div>
+              <div class="cof-grid">
+                @for (c of grupo.cofradias; track c.id) {
+                  <a class="cof-card" [routerLink]="['/cofradias', c.id]">
+                    <div class="cof-card-escudo">
+                      @if (c.escudo_url) {
+                        <img [src]="c.escudo_url" [alt]="c.nombre">
+                      } @else {
+                        <i class="bi bi-shield"></i>
+                      }
+                    </div>
+                    <div class="cof-card-nombre">{{ c.nombre }}</div>
+                    <div class="cof-card-provincia">{{ c.localidad || 'Sin localidad' }}</div>
+                    <div class="cof-card-eventos">{{ c.eventos_count || 0 }} evento{{ c.eventos_count === 1 ? '' : 's' }}</div>
+                  </a>
+                }
+              </div>
+            </div>
+          }
+        }
+      </div>
+
+      <aside class="anuncio-lateral anuncio-lateral--columna">
+        <span class="anuncio-cruz">✠</span>
+        <div class="anuncio-label">Espacio Publicitario</div>
+        <p class="anuncio-texto">Anuncia tu empresa aquí y llega a miles de cofrades de toda España.</p>
+        <a class="anuncio-btn" href="mailto:cofradiariodemalaga@gmail.com?subject=Publicidad%20en%20Cofradiario">Contactar</a>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="auth-footer">
+    <span>-- 2025 Cofradiario --</span>
+  </footer>
+</div>

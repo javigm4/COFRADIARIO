@@ -10,26 +10,69 @@
   <div class="form-container">
     <div class="card premium-card">
       <div class="card-body">
+      @if (registroCompletado) {
+        <div class="verificacion-pendiente">
+          <i class="bi bi-envelope-check verificacion-icono"></i>
+          <h2 class="text-center">REVISA TU CORREO</h2>
+          <p class="subtitle">Hemos enviado un enlace de verificación a <strong>{{ correoRegistrado }}</strong>.
+            Confírmalo para poder iniciar sesión.</p>
+          <div class="footer-links">
+            <span><a [routerLink]="['/login']">Volver a inicio de sesión</a></span>
+          </div>
+        </div>
+      } @else {
         <h2 class="text-center">CREAR CUENTA</h2>
-        <p class="subtitle">¡Regístrate para poder añadir eventos a favoritos o crearlos si eres una
-          cofradía!</p>
+        <p class="subtitle">¡Regístrate para no perderte ningún acto de tu cofradía favorita, o da de alta tu
+          propia hermandad!</p>
 
         <div class="tipo-registro-switch">
           <button type="button" class="trs-btn" [class.trs-btn--activo]="tipoRegistro === 'usuario'"
-            (click)="seleccionarTipo('usuario')">Usuario</button>
+            (click)="seleccionarTipo('usuario')">
+            <i class="bi bi-person"></i> Usuario
+          </button>
           <button type="button" class="trs-btn" [class.trs-btn--activo]="tipoRegistro === 'cofradia'"
-            (click)="seleccionarTipo('cofradia')">Cofradía</button>
+            (click)="seleccionarTipo('cofradia')">
+            <i class="bi bi-shield"></i> Cofradía
+          </button>
         </div>
 
         <form (ngSubmit)="onSubmit()" class="premium-form">
           <div class="form-group-custom">
-            <label for="name">{{ tipoRegistro === 'cofradia' ? 'Nombre' : 'Nombre de Usuario' }}</label>
+            <label for="name">{{ tipoRegistro === 'cofradia' ? 'Nombre de la Cofradía' : 'Nombre de Usuario' }}</label>
             <div class="input-wrapper">
               <i class="bi bi-person"></i>
               <input type="text" id="name" [(ngModel)]="name" name="name" required
-                [placeholder]="tipoRegistro === 'cofradia' ? 'Nombre de la Cofradía' : 'Tu nombre'" />
+                [placeholder]="tipoRegistro === 'cofradia' ? 'Ej: Cofradía del Cautivo' : 'Tu nombre'" />
             </div>
           </div>
+
+          @if (tipoRegistro === 'cofradia') {
+            <div class="form-group-custom">
+              <label for="provincia">Provincia</label>
+              <div class="input-wrapper">
+                <i class="bi bi-map"></i>
+                <select id="provincia" [(ngModel)]="provincia" name="provincia" required (ngModelChange)="onProvinciaChange()">
+                  <option value="" disabled selected>Selecciona una provincia...</option>
+                  @for (p of provincias; track p) {
+                    <option [value]="p">{{ p }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group-custom">
+              <label for="localidad">Localidad</label>
+              <div class="input-wrapper">
+                <i class="bi bi-geo-alt"></i>
+                <select id="localidad" [(ngModel)]="localidad" name="localidad" required [disabled]="!provincia">
+                  <option value="" disabled selected>{{ provincia ? 'Selecciona una localidad...' : 'Elige antes la provincia' }}</option>
+                  @for (m of municipios; track m) {
+                    <option [value]="m">{{ m }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+          }
 
           <div class="form-group-custom">
             <label for="email">Email</label>
@@ -62,17 +105,6 @@
             </div>
           </div>
 
-          @if (tipoRegistro === 'cofradia') {
-            <div class="form-group-custom">
-              <label for="localidad">Localidad</label>
-              <div class="input-wrapper">
-                <i class="bi bi-geo-alt"></i>
-                <input type="text" id="localidad" [(ngModel)]="localidad" name="localidad" required
-                  placeholder="Ej: Málaga" />
-              </div>
-            </div>
-          }
-
           <div class="privacy-container">
             <label class="custom-checkbox">
               <input type="checkbox" [(ngModel)]="aceptaPolitica" name="aceptaPolitica" required>
@@ -81,19 +113,10 @@
                   target="_blank">Política de
                   Privacidad</a></span>
             </label>
-            <img src="../../../../public/images/imagenes/logoWCsinFondo.png" alt="Logo" class="mini-logo">
           </div>
 
-          @if (tipoRegistro === 'cofradia') {
-            <div class="aviso-cofradia-section">
-              <button type="button" class="btn-aviso" (click)="toggleAvisoCofradia()">
-                <i class="bi bi-exclamation-diamond"></i> INSTRUCCIONES PARA COFRADÍAS
-              </button>
-            </div>
-          }
-
           <button type="submit" class="btn-submit" [disabled]="!aceptaPolitica">
-            <span>{{ tipoRegistro === 'cofradia' ? 'CREAR CUENTA DE COFRADÍA' : 'CREAR CUENTA' }}</span>
+            <span>CREAR CUENTA</span>
             <i class="bi bi-arrow-right-short"></i>
           </button>
 
@@ -103,6 +126,7 @@
         <div class="footer-links">
           <span>¿Ya tienes cuenta? <a [routerLink]="['/login']">Inicia sesión</a></span>
         </div>
+      }
       </div>
     </div>
   </div>
@@ -115,49 +139,9 @@
       <a class="auth-anuncio-btn" href="mailto:cofradiariodemalaga@gmail.com?subject=Publicidad%20en%20Cofradiario">Contactar</a>
     </div>
   </aside>
-
-  <!-- Modal Aviso Cofradía -->
-  <div *ngIf="mostrarAvisoCofradia" class="modal-overlay" (click)="toggleAvisoCofradia()">
-    <div class="modal-notis" (click)="$event.stopPropagation()">
-      <div class="modal-notis-header">
-        <i class="bi bi-exclamation-diamond-fill"></i>
-        <h3>INSTRUCCIONES PARA COFRADÍAS</h3>
-      </div>
-      <div class="modal-notis-body">
-        <ul>
-          <li>
-            <i class="bi bi-pencil-square"></i>
-            <span>Para registrar vuestra cofradía, el nombre de usuario debe ser: <strong>"Nombre Cofradía -
-                Localidad"</strong>. Recordad escribirlo SIN TILDES ni "Ñ" para que el sistema os reconozca.</span>
-          </li>
-          <li>
-            <i class="bi bi-person-check"></i>
-            <span>Una vez registrados, contactad con el administrador para que os proporcione vuestro <strong>código de
-                verificación único</strong>. Podréis contactarle vía:
-              <div class="social-contact">
-                <a href="https://www.instagram.com/cofradiariomlg" target="_blank" class="contact-link"><i
-                    class="bi bi-instagram"></i> &#64;cofradiariomlg</a>
-                <a href="mailto:cofradiariodemalaga@gmail.com" class="contact-link"><i class="bi bi-envelope"></i>
-                  cofradiariodemalaga&#64;gmail.com</a>
-              </div>
-            </span>
-          </li>
-          <li>
-            <i class="bi bi-key"></i>
-            <span>Hacerlo es indispensable para poder subir eventos a la <strong>AGENDA</strong>.</span>
-          </li>
-          <li>
-            <i class="bi bi-check-circle"></i>
-            <span>¡Gracias por formar parte de Cofradiario!</span>
-          </li>
-        </ul>
-      </div>
-      <button class="btn btn-modal-close" (click)="toggleAvisoCofradia()">¡ENTENDIDO!</button>
-    </div>
-  </div>
 </div>
 
 <footer class="auth-footer">
-  <span>-- 2025 Cofradiario de Málaga --</span>
+  <span>-- 2025 Cofradiario --</span>
 </footer>
 </div>

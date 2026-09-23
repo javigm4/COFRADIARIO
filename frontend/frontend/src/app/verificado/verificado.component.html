@@ -1,4 +1,54 @@
-<div class="alert alert-success mt-4 text-center">
-  <h2>¡Email verificado con éxito!</h2>
-    <a routerLink="/" class="btn btn-primary mt-3">Volver al inicio</a>
+<div class="auth-page">
+<div class="login-container">
+  <div class="form-container">
+    <div class="card premium-card">
+      <div class="card-body verificado-body">
+
+        @if (estado === 'confirmar') {
+          <i class="bi bi-envelope-check verificacion-icono"></i>
+          <h2 class="text-center">CONFIRMA TU CUENTA</h2>
+          <p class="subtitle">Pulsa el botón para terminar de verificar tu correo y entrar en Cofradiario.</p>
+          <button type="button" class="btn-submit" (click)="confirmar()">
+            <span>CONFIRMAR MI CUENTA</span>
+            <i class="bi bi-check-lg"></i>
+          </button>
+        }
+
+        @if (estado === 'verificando') {
+          <i class="bi bi-hourglass-split verificacion-icono"></i>
+          <h2 class="text-center">VERIFICANDO...</h2>
+        }
+
+        @if (estado === 'exito') {
+          <i class="bi bi-patch-check-fill verificacion-icono verificacion-icono--ok"></i>
+          <h2 class="text-center">¡CUENTA VERIFICADA!</h2>
+          <p class="subtitle">Te estamos llevando a Cofradiario...</p>
+        }
+
+        @if (estado === 'ya_verificado') {
+          <i class="bi bi-patch-check-fill verificacion-icono verificacion-icono--ok"></i>
+          <h2 class="text-center">YA ESTABA VERIFICADA</h2>
+          <p class="subtitle">Tu cuenta ya estaba confirmada. Puedes iniciar sesión con normalidad.</p>
+          <div class="footer-links">
+            <span><a [routerLink]="['/login']">Ir a iniciar sesión</a></span>
+          </div>
+        }
+
+        @if (estado === 'error') {
+          <i class="bi bi-exclamation-triangle verificacion-icono verificacion-icono--error"></i>
+          <h2 class="text-center">ENLACE NO VÁLIDO</h2>
+          <p class="subtitle">El enlace de verificación no es válido o ha expirado. Vuelve a intentar iniciar sesión para pedir uno nuevo.</p>
+          <div class="footer-links">
+            <span><a [routerLink]="['/login']">Ir a iniciar sesión</a></span>
+          </div>
+        }
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="auth-footer">
+  <span>-- 2025 Cofradiario --</span>
+</footer>
 </div>

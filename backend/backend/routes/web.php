@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\ArticulosController;
 use App\Http\Controllers\CofradiasController;
 use App\Models\User;
@@ -42,10 +41,6 @@ Route::delete('/eventos/{id}', [EventosController::class, 'destroy'])->name('eli
 Route::post('/eventos/create', [EventosController::class, 'store'])->name('crearEvento');
 Route::get('/evento/{id}/edit', [EventosController::class, 'edit'])->name('actualizarEvento');
 Route::put('/evento/{id}', [EventosController::class, 'update'])->name('editarEvento');
-
-// ---- FAVORITOS ----
-Route::post('/favoritos', [FavoritosController::class, 'store'])->name('agregarFavorito');
-Route::delete('/favoritos/{id}', [FavoritosController::class, 'destroy'])->name('eliminarFavorito');
 
 // ---- COFRADÍAS ----
 Route::get('/seleccionCofradia', [CofradiasController::class, 'index'])->name('seleccionCofradia');

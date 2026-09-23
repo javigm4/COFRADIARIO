@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Cofradia;
 use App\Models\Evento;
-use App\Models\Favorito;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +23,9 @@ class EventosController extends Controller
     {
         $eventos = Evento::orderBy('fecha', 'asc')->get();
         $cofradias = Cofradia::all();
-        $favoritos = Favorito::all();
         $usuario = Auth::user();
 
-       
-        return response()->json(['status' => 200, 'eventos' => $eventos, 'favoritos' => $favoritos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
+        return response()->json(['status' => 200, 'eventos' => $eventos, 'cofradias' => $cofradias, 'usuario' => $usuario]);
     }
 
 

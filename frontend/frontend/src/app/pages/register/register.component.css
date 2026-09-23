@@ -181,42 +181,6 @@ h2 {
   text-align: center;
 }
 
-/* --- SWITCH USUARIO / COFRADÍA --- */
-.tipo-registro-switch {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  margin: 0 auto 18px;
-  max-width: 320px;
-  border: 1px solid rgba(184, 134, 11, 0.5);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.trs-btn {
-  flex: 1;
-  background: #faf4e8;
-  color: #6b4c30;
-  border: none;
-  padding: 11px 10px;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.trs-btn:first-child {
-  border-right: 1px solid rgba(184, 134, 11, 0.4);
-}
-
-.trs-btn--activo {
-  background: #6b0000;
-  color: #fdf5dc;
-}
-
 /* --- FORM GROUPS (Restoring Premium Styles) --- */
 .premium-form {
   display: flex;
@@ -274,6 +238,69 @@ h2 {
   background: #fefcf6;
   box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
   transform: none;
+}
+
+.input-wrapper select {
+  width: 100%;
+  padding: 10px 45px 10px 50px;
+  background: #faf4e8;
+  border: 1px solid rgba(184, 134, 11, 0.35);
+  border-radius: 3px;
+  color: #0c0804;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  appearance: none;
+}
+
+.input-wrapper select:focus {
+  outline: none;
+  border-color: #b8860b;
+  background: #fefcf6;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
+}
+
+.input-wrapper select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* --- TOGGLE USUARIO / COFRADÍA --- */
+.tipo-registro-switch {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.trs-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px;
+  background: #faf4e8;
+  border: 1px solid rgba(184, 134, 11, 0.35);
+  border-radius: 3px;
+  color: #6b4c30;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trs-btn:hover {
+  border-color: #b8860b;
+}
+
+.trs-btn--activo {
+  background: linear-gradient(135deg, #6b0000, #4a0000);
+  border-color: #4a0000;
+  color: #fdf5dc;
 }
 
 .toggle-password {
@@ -646,4 +673,27 @@ h2 {
 
 .photo-credit {
   display: none;
+}
+
+/* --- PANTALLA "REVISA TU CORREO" --- */
+.verificacion-pendiente {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.verificacion-icono {
+  display: block;
+  font-size: 2.6rem;
+  color: #b8860b;
+  margin-bottom: 14px;
+}
+
+.verificacion-pendiente .subtitle {
+  color: #3a2210;
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.verificacion-pendiente .footer-links {
+  margin-top: 20px;
 }

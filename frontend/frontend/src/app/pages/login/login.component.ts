@@ -11,10 +11,10 @@ import { NotificacionService } from '../../services/notificacion/notificacion.se
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  codigo: string = '';
-  esCofradia: boolean = false;
   showPassword: boolean = false;
   error: string = '';
+  pendienteVerificar: boolean = false;
+  reenviando: boolean = false;
 
   // Para reset de contraseña
   mostrarReset: boolean = false;
@@ -25,22 +25,13 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router, private notificacionService: NotificacionService) { }
 
   onSubmit(): void {
+    this.pendienteVerificar = false;
     const formData = new FormData();
     formData.append('email', this.email);
     formData.append('password', this.password);
-    formData.append('codigo', this.codigo);
 
     this.authService.login(formData).subscribe(
       (response) => {
-        console.log('Respuesta del servidor:', response);
-
-        // Si el backend devuelve { error: "..." }, mostramos el mensaje y detenemos todo
-        if (response.error) {
-          this.error = response.error;
-          console.log('Error mostrado:', this.error);
-          return;
-        }
-
         // Si no hay token o estructura inesperada
         if (!response.data || !response.data.accessToken) {
           this.error = 'Error inesperado en la respuesta del servidor';
@@ -58,14 +49,30 @@ export class LoginComponent {
         console.error('Error HTTP:', error);
         if (error.status === 401) {
           this.error = error.error?.error || 'Credenciales inválidas';
-        } else if (error.status === 403) {
-          this.error = error.error?.error || 'Código incorrecto';
+        } else if (error.status === 403 && error.error?.pendiente_verificar) {
+          this.error = error.error?.error || 'Debes verificar tu correo antes de iniciar sesión.';
+          this.pendienteVerificar = true;
         } else {
           this.error = 'Error de conexión con el servidor';
         }
       }
 
     );
+  }
+
+  reenviarVerificacion(): void {
+    if (!this.email) return;
+    this.reenviando = true;
+    this.authService.reenviarVerificacion(this.email).subscribe({
+      next: () => {
+        this.reenviando = false;
+        this.notificacionService.exito('Si el correo existe y aún no está verificado, recibirás un nuevo enlace en breve.');
+      },
+      error: () => {
+        this.reenviando = false;
+        this.notificacionService.error('No se pudo reenviar el correo. Inténtalo de nuevo.');
+      }
+    });
   }
 
 

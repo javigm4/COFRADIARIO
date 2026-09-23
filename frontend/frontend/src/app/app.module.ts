@@ -15,8 +15,6 @@ import { ArticuloComponent } from './pages/diario/articulo/articulo.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { FavoritoComponent } from './pages/agenda/favoritos/favorito/favorito.component';
-import { ListafavoritosComponent } from './pages/agenda/favoritos/listafavoritos/listafavoritos.component';
 import { EditarEventoComponent } from './pages/agenda/evento/editar-evento/editar-evento.component';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -35,6 +33,10 @@ import { FooterComponent } from './layour/footer/footer.component';
 import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad.component';
 import { AvisoLegalComponent } from './pages/aviso-legal/aviso-legal.component';
 import { TerminosUsoComponent } from './pages/terminos-uso/terminos-uso.component';
+import { CofradiasComponent } from './pages/cofradias/cofradias.component';
+import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
+import { GestionComponent } from './pages/gestion/gestion.component';
+import { MiCofradiaComponent } from './pages/mi-cofradia/mi-cofradia.component';
 
 registerLocaleData(localeEs);
 
@@ -52,8 +54,6 @@ registerLocaleData(localeEs);
     InicioComponent,
     LoginComponent,
     RegisterComponent,
-    FavoritoComponent,
-    ListafavoritosComponent,
     EditarEventoComponent,
     EditarArticuloComponent,
     CrearArticuloComponent,
@@ -66,7 +66,11 @@ registerLocaleData(localeEs);
     TerminosUsoComponent,
     FooterComponent,
     CookieBannerComponent,
-    NotificacionesComponent
+    NotificacionesComponent,
+    CofradiasComponent,
+    CofradiaComponent,
+    GestionComponent,
+    MiCofradiaComponent
   ],
   imports: [
     BrowserModule,

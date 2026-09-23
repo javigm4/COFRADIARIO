@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CofradiasService } from '../../../services/cofradias/cofradias.service';
+import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 
 @Component({
   selector: 'app-cofradia',
@@ -8,46 +10,92 @@ import { CofradiasService } from '../../../services/cofradias/cofradias.service'
   templateUrl: './cofradia.component.html',
   styleUrl: './cofradia.component.css',
 })
-export class CofradiaComponent {
-  cofradia: any;
-  titulares: any[] = [];
+export class CofradiaComponent implements OnInit {
+  cargando = true;
+  noEncontrada = false;
+
+  cofradia: any = null;
+  proximosEventos: any[] = [];
+  titulares: string[] = [];
+
+  historiaAbierta = false;
+  videoEmbedUrl: SafeResourceUrl | null = null;
+
+  contactoNombre = '';
+  contactoEmail = '';
+  contactoMensaje = '';
+  contactoEnviando = false;
+  contactoEnviado = false;
 
   constructor(
     private route: ActivatedRoute,
-    private cofradiasService: CofradiasService
-  ) {}
+    private router: Router,
+    private cofradiasService: CofradiasService,
+    private notificacionService: NotificacionService,
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit(): void {
-    const nombreCofradiaUrl = this.route.snapshot.paramMap.get('nombre') || '';
-    const nombreCofradia = nombreCofradiaUrl.replace(/-/g, ' ');
-    this.obtenerCofradia(nombreCofradia);
-  }
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (!id) {
+      this.noEncontrada = true;
+      this.cargando = false;
+      return;
+    }
 
-  obtenerCofradia(nombre: string): void {
-    this.cofradiasService.obtenerCofradia(nombre).subscribe(
-      (data) => {
-        this.cofradia = data;
-        console.log('Datos recibidos:', this.cofradia); // Verifica si `cofradia` tiene datos
-        this.titulares = this.cofradia.titulares || [];
-        console.log('Titulares:', this.titulares); // Verifica si `titulares` tiene datos
+    this.cofradiasService.obtenerPerfil(id).subscribe({
+      next: (res) => {
+        this.cofradia = res.cofradia;
+        this.proximosEventos = res.proximos_eventos || [];
+        this.titulares = (this.cofradia.titulares || []).filter((t: string | null) => !!t);
+        this.videoEmbedUrl = this.construirEmbedYoutube(this.cofradia.video_url);
+        this.cargando = false;
       },
-      (error) => {
-        console.error('Error al obtener información de la cofradía:', error);
+      error: () => {
+        this.noEncontrada = true;
+        this.cargando = false;
       }
-    );
+    });
   }
 
-  // En tu componente .ts
-  get textoConSaltos() {
-    return (this.cofradia?.texto || '').replace(/\n/g, '<br>');
+  private construirEmbedYoutube(url: string | null): SafeResourceUrl | null {
+    if (!url) return null;
+    const match = url.match(/(?:youtu\.be\/|v=|\/embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
+    if (!match) return null;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${match[1]}`);
   }
 
-  getRutaCristo(): string {
-  if (!this.cofradia?.cofradia?.nombre) return '';
-  return 'public/cofradiasDatos/' + this.cofradia.cofradia.nombre.toUpperCase().replace(/ /g, '-') + '/cristo.jpg';
-}
-  getRutaVirgen(): string {
-    if (!this.cofradia?.cofradia?.nombre) return '';
-    return 'public/cofradiasDatos/' + this.cofradia.cofradia.nombre.toUpperCase().replace(/ /g, '-') + '/virgen.jpg';
+  horaEvento(fecha: string): string {
+    const d = new Date(fecha);
+    if (isNaN(d.getTime())) return '';
+    return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  }
+
+  irAAgenda(eventoId: number): void {
+    this.router.navigate(['/agenda'], { queryParams: { evento: eventoId } });
+  }
+
+  enviarContacto(): void {
+    if (!this.cofradia?.id || !this.contactoNombre || !this.contactoEmail || !this.contactoMensaje) {
+      this.notificacionService.error('Rellena todos los campos del formulario de contacto.');
+      return;
+    }
+
+    this.contactoEnviando = true;
+    this.cofradiasService.enviarContacto(this.cofradia.id, {
+      nombre: this.contactoNombre,
+      email: this.contactoEmail,
+      mensaje: this.contactoMensaje,
+    }).subscribe({
+      next: () => {
+        this.contactoEnviando = false;
+        this.contactoEnviado = true;
+        this.notificacionService.exito('Mensaje enviado correctamente.');
+      },
+      error: (err) => {
+        this.contactoEnviando = false;
+        this.notificacionService.error(err.error?.message || 'No se pudo enviar el mensaje.');
+      }
+    });
   }
 }

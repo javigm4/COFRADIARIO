@@ -15,11 +15,20 @@ import { CalendarioComponent } from './pages/calendario/calendario.component';
 import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad.component';
 import { AvisoLegalComponent } from './pages/aviso-legal/aviso-legal.component';
 import { TerminosUsoComponent } from './pages/terminos-uso/terminos-uso.component';
+import { CofradiasComponent } from './pages/cofradias/cofradias.component';
+import { CofradiaComponent } from './pages/cofradias/cofradia/cofradia.component';
+import { GestionComponent } from './pages/gestion/gestion.component';
+import { MiCofradiaComponent } from './pages/mi-cofradia/mi-cofradia.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
     { path: 'agenda', component: AgendaComponent },
     { path: 'calendario', component: CalendarioComponent },
+    { path: 'cofradias', component: CofradiasComponent },
+    { path: 'cofradias/:id', component: CofradiaComponent },
+    { path: 'mi-cofradia', component: MiCofradiaComponent },
+    { path: 'gestion', component: GestionComponent, canActivate: [AdminGuard] },
     { path: 'aviso-legal', component: AvisoLegalComponent },
     { path: 'terminos-uso', component: TerminosUsoComponent },
     { path: 'politica-privacidad', component: PoliticaPrivacidadComponent },

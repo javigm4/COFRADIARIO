@@ -1,0 +1,570 @@
+:host {
+  --marron:        #6B0000;
+  --marron-oscuro: #4A0000;
+  --marron-claro:  #8B1A1A;
+  --dorado:        #B8860B;
+  --dorado-claro:  #D4A017;
+  --dorado-suave:  #F0D060;
+  --crema:         #FEFCF6;
+  --crema-media:   #FAF4E8;
+  --crema-borde:   #E8DCBA;
+  --azul:          #0C0804;
+  --texto:         #0C0804;
+  --texto-medio:   #6B4C30;
+  --texto-suave:   #9A7A58;
+}
+
+/* ── PÁGINA ───────────────────────────── */
+.cofradias-page {
+  height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── HERO ─────────────────────────────── */
+.cofradias-hero {
+  flex-shrink: 0;
+  background: var(--marron);
+  border-bottom: 2px solid var(--dorado);
+  padding: 10px 2.2rem;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cofradias-hero-l {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cofradias-hero-orn {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: var(--dorado);
+  letter-spacing: 5px;
+}
+
+.cofradias-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(12px, 1.2vw, 15px);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--crema);
+}
+
+.cofradias-hero-sub {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(11px, 1.1vw, 14px);
+  color: rgba(253, 245, 220, 0.55);
+}
+
+.cofradias-hero-stats {
+  display: flex;
+  align-items: center;
+}
+
+.chs {
+  text-align: center;
+  padding: 5px 20px;
+  border-right: 1px solid rgba(184, 134, 11, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.chs:last-child {
+  border-right: none;
+}
+
+.chs-n {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(15px, 1.6vw, 20px);
+  color: var(--dorado-claro);
+  line-height: 1;
+}
+
+.chs-l {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: rgba(240, 208, 96, 0.75);
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+@media (max-width: 700px) {
+  .cofradias-hero-sub { display: none; }
+  .cofradias-hero { padding: 8px 1rem; }
+}
+
+/* ── CUERPO ───────────────────────────── */
+.cofradias-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--crema-media);
+  padding: 24px clamp(16px, 4vw, 48px) 48px;
+  position: relative;
+}
+
+.cof-vacio {
+  text-align: center;
+  padding: 56px 24px;
+  color: var(--texto-suave);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-style: italic;
+}
+
+/* ── CAJÓN DE FILTROS (mismo patrón que la agenda) ── */
+.btn-sb-toggle {
+  position: fixed;
+  top: 140px;
+  left: 0;
+  z-index: 501;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 12px 16px 10px;
+  background: var(--marron);
+  border: 2px solid var(--dorado);
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+  cursor: pointer;
+  transition: left 0.28s ease, background 0.15s;
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.5);
+}
+
+.btn-sb-toggle:hover {
+  background: var(--marron-claro);
+}
+
+.btn-sb-toggle--abierto {
+  left: min(300px, 84vw);
+}
+
+.bst-arrow {
+  font-size: 16px;
+  color: var(--dorado-claro);
+  transition: transform 0.2s;
+}
+
+.btn-sb-toggle--abierto .bst-arrow {
+  transform: rotate(180deg);
+}
+
+.bst-label {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--crema);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.sb-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 499;
+}
+
+.sb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(300px, 84vw);
+  z-index: 500;
+  background: var(--crema);
+  border-right: 2px solid var(--dorado);
+  overflow-y: auto;
+  padding-top: 90px;
+  transform: translateX(-100%);
+  transition: transform 0.28s ease;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35);
+}
+
+.sb--abierta {
+  transform: translateX(0);
+}
+
+.sb-sec {
+  padding: 1.1rem 1.3rem;
+  border-bottom: 1px solid rgba(184, 134, 11, 0.22);
+}
+
+.sb-hd {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--texto-medio);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sb-hd:after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(184, 134, 11, 0.22);
+}
+
+.srch {
+  position: relative;
+}
+
+.srch-ico {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dorado);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.srch-inp {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 16px;
+  padding: 10px 12px 10px 34px;
+  border: 1px solid rgba(184, 134, 11, 0.35);
+  background: var(--crema-media);
+  color: var(--texto);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.srch-inp:focus {
+  border-color: var(--dorado);
+}
+
+.prov-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.prov-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: none;
+  border: 1px solid transparent;
+  padding: 8px 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--texto-medio);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.prov-item:hover {
+  background: rgba(184, 134, 11, 0.08);
+}
+
+.prov-item--activo {
+  background: var(--marron);
+  border-color: var(--marron);
+  color: var(--crema);
+}
+
+.prov-count {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.btn-limpiar {
+  width: 100%;
+  background: transparent;
+  border: 1px dashed rgba(107, 0, 0, 0.5);
+  color: var(--marron);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-limpiar:hover {
+  background: rgba(107, 0, 0, 0.06);
+}
+
+/* ── ESPACIOS PUBLICITARIOS ────────────── */
+.anuncio-lateral {
+  background: var(--crema);
+  border: 1px solid var(--crema-borde);
+  border-top: 3px solid var(--dorado);
+  padding: 26px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.anuncio-cruz {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: var(--dorado);
+}
+
+.anuncio-label {
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--marron);
+}
+
+.anuncio-texto {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--texto-medio);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.anuncio-btn {
+  display: inline-block;
+  background: var(--marron);
+  color: var(--crema);
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 9px 18px;
+  margin-top: 4px;
+  transition: background 0.2s;
+}
+
+.anuncio-btn:hover {
+  background: var(--marron-oscuro);
+}
+
+/* Anuncio dentro del cajón de filtros: solo visible en el propio cajón móvil */
+.sb-sec--anuncio {
+  display: none;
+  border-bottom: none;
+}
+
+/* Anuncios en columna a los lados del listado: solo con espacio suficiente */
+.anuncio-lateral--columna {
+  display: none;
+}
+
+/* ── LAYOUT: anuncio + listado + anuncio ── */
+.cofradias-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  max-width: 1760px;
+  margin: 0 auto;
+}
+
+.cofradias-contenido {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 1400px) {
+  .anuncio-lateral--columna {
+    display: flex;
+    flex: 0 0 190px;
+    position: sticky;
+    top: 24px;
+  }
+}
+
+@media (max-width: 1399px) {
+  .sb-sec--anuncio {
+    display: block;
+  }
+}
+
+/* ── GRUPOS POR LOCALIDAD ─────────────── */
+.loc-grupo {
+  margin: 0 0 36px;
+}
+
+.loc-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.loc-header-linea {
+  flex: 1;
+  max-width: 120px;
+  height: 2px;
+  background: var(--dorado);
+  opacity: 0.6;
+}
+
+.loc-header-cruz {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--dorado);
+  flex-shrink: 0;
+}
+
+.loc-header-texto {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--marron);
+  white-space: nowrap;
+}
+
+/* ── TARJETAS DE COFRADÍA ─────────────── */
+.cof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.cof-card {
+  background: var(--crema);
+  border: 1px solid var(--crema-borde);
+  border-top: 3px solid var(--dorado);
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.cof-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  border-top-color: var(--marron);
+}
+
+.cof-card-escudo {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--crema-media);
+  border: 1px solid var(--crema-borde);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.cof-card-escudo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cof-card-escudo i {
+  font-size: 26px;
+  color: var(--dorado);
+  opacity: 0.6;
+}
+
+.cof-card-nombre {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--texto);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.cof-card-provincia {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--texto-medio);
+  margin-bottom: 10px;
+}
+
+.cof-card-eventos {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--marron);
+  border: 1px solid rgba(107, 0, 0, 0.3);
+  background: rgba(107, 0, 0, 0.05);
+  padding: 3px 9px;
+}
+
+/* ── FOOTER COMPACTO ──────────────────── */
+.auth-footer {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #1a0c04, #0c0804);
+  border-top: 2px solid #b8860b;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.auth-footer span {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #d4a017;
+}
+
+/* ── MÓVIL ─────────────────────────────── */
+@media (max-width: 768px) {
+  .cofradias-page {
+    height: auto;
+    overflow: visible;
+  }
+
+  .cofradias-body {
+    padding: 18px 12px 32px;
+  }
+
+  .cof-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .cof-card {
+    padding: 16px 10px;
+  }
+}

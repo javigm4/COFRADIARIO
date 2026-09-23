@@ -1,0 +1,296 @@
+<div class="gestion-page">
+  <button class="gestion-menu-toggle" (click)="toggleSidebar()"><i class="bi bi-list"></i> Menú</button>
+  <div class="gestion-overlay" *ngIf="sidebarAbierto" (click)="cerrarSidebar()"></div>
+
+  <aside class="gestion-sidebar" [class.gestion-sidebar--abierta]="sidebarAbierto">
+    <div class="gs-titulo"><span class="gs-cruz">✠</span> GESTIÓN</div>
+    <nav class="gs-nav">
+      <button type="button" [class.activo]="seccionActiva === 'estadisticas'" (click)="navegarA('estadisticas')">
+        <i class="bi bi-bar-chart"></i> Estadísticas
+      </button>
+      <button type="button" [class.activo]="seccionActiva === 'cofradias'" (click)="navegarA('cofradias')">
+        <i class="bi bi-shield"></i> Cofradías
+      </button>
+      <button type="button" [class.activo]="seccionActiva === 'usuarios'" (click)="navegarA('usuarios')">
+        <i class="bi bi-people"></i> Usuarios
+      </button>
+      <button type="button" [class.activo]="seccionActiva === 'eventos'" (click)="navegarA('eventos')">
+        <i class="bi bi-calendar-event"></i> Eventos
+      </button>
+    </nav>
+  </aside>
+
+  <main class="gestion-main">
+
+    @if (seccionActiva === 'estadisticas') {
+      <div class="gs-seccion">
+        <h1 class="gs-h1">Estadísticas</h1>
+        @if (estadisticas) {
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.cofradias.total }}</div><div class="stat-l">Cofradías</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.usuarios.total }}</div><div class="stat-l">Usuarios</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.usuarios.con_cofradia }}</div><div class="stat-l">Con cofradía</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.usuarios.aficionados }}</div><div class="stat-l">Aficionados</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.eventos.total }}</div><div class="stat-l">Eventos</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.usuarios.nuevos_mes }}</div><div class="stat-l">Nuevos este mes</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.usuarios.nuevos_semana }}</div><div class="stat-l">Nuevos esta semana</div></div>
+          </div>
+
+          @if (estadisticas.provincias.length > 0) {
+            <div class="gs-subtitulo">Cofradías por provincia</div>
+            <div class="gs-tabla-wrap">
+              <table class="gs-tabla">
+                <tbody>
+                  @for (p of estadisticas.provincias; track p.nombre) {
+                    <tr><td>{{ p.nombre }}</td><td class="td-num">{{ p.total }}</td></tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        } @else {
+          <p class="gs-cargando">Cargando estadísticas...</p>
+        }
+      </div>
+    }
+
+    @if (seccionActiva === 'cofradias') {
+      <div class="gs-seccion">
+        <div class="gs-header-row">
+          <h1 class="gs-h1">Cofradías</h1>
+          <button type="button" class="btn-gs-primary" (click)="abrirModalCrearCofradia()">
+            <i class="bi bi-plus-lg"></i> Nueva cofradía
+          </button>
+        </div>
+        <input class="gs-buscador" type="text" placeholder="Buscar por nombre, localidad o provincia..."
+          [(ngModel)]="busquedaCofradias">
+
+        <div class="gs-tabla-wrap">
+          <table class="gs-tabla">
+            <thead>
+              <tr><th>Nombre</th><th>Localidad</th><th>Provincia</th><th>Usuario</th><th>Eventos</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              @for (c of cofradiasFiltradas; track c.id) {
+                <tr>
+                  <td>{{ c.nombre }}</td>
+                  <td>{{ c.localidad || '—' }}</td>
+                  <td>{{ c.provincia || '—' }}</td>
+                  <td>
+                    @if (c.user) { {{ c.user.name }} } @else { <span class="td-vacio">Sin vincular</span> }
+                  </td>
+                  <td class="td-num">{{ c.eventos_count || 0 }}</td>
+                  <td class="td-acciones">
+                    <button type="button" class="btn-icono" title="Editar" (click)="abrirModalEditarCofradia(c)"><i class="bi bi-pencil"></i></button>
+                    @if (c.user) {
+                      <button type="button" class="btn-icono" title="Desvincular usuario" (click)="desvincularUsuario(c)"><i class="bi bi-person-dash"></i></button>
+                    } @else {
+                      <button type="button" class="btn-icono" title="Vincular usuario" (click)="abrirModalVincular(c)"><i class="bi bi-person-plus"></i></button>
+                    }
+                    <button type="button" class="btn-icono btn-icono--peligro" title="Eliminar" (click)="eliminarCofradia(c)"><i class="bi bi-trash"></i></button>
+                  </td>
+                </tr>
+              } @empty {
+                <tr><td colspan="6" class="td-vacio-fila">No hay cofradías que coincidan con la búsqueda.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+
+    @if (seccionActiva === 'usuarios') {
+      <div class="gs-seccion">
+        <h1 class="gs-h1">Usuarios</h1>
+        <input class="gs-buscador" type="text" placeholder="Buscar por nombre o correo..."
+          [(ngModel)]="busquedaUsuarios">
+
+        <div class="gs-tabla-wrap">
+          <table class="gs-tabla">
+            <thead>
+              <tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Cofradía</th><th>Verificado</th><th>Admin</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              @for (u of usuariosFiltrados; track u.id) {
+                <tr>
+                  <td>{{ u.name }}</td>
+                  <td>{{ u.email }}</td>
+                  <td><span class="badge-rol" [class.badge-rol--cofradia]="u.role === 'cofradia'">{{ u.role }}</span></td>
+                  <td>{{ u.cofradia?.nombre || '—' }}</td>
+                  <td>
+                    @if (u.email_verified_at) {
+                      <i class="bi bi-check-circle-fill td-icono-ok"></i>
+                    } @else {
+                      <i class="bi bi-x-circle td-icono-no"></i>
+                    }
+                  </td>
+                  <td>
+                    @if (u.is_admin) { <i class="bi bi-star-fill td-icono-ok"></i> }
+                  </td>
+                  <td class="td-acciones">
+                    @if (!u.email_verified_at) {
+                      <button type="button" class="btn-icono" title="Verificar manualmente" (click)="verificarUsuario(u)"><i class="bi bi-patch-check"></i></button>
+                    }
+                    <button type="button" class="btn-icono" [title]="u.role === 'cofradia' ? 'Quitar rol de cofradía' : 'Convertir en cofradía'" (click)="toggleCofradia(u)"><i class="bi bi-shield"></i></button>
+                    <button type="button" class="btn-icono" title="Dar/quitar admin" (click)="toggleAdmin(u)"><i class="bi bi-star"></i></button>
+                    <button type="button" class="btn-icono btn-icono--peligro" title="Eliminar" (click)="eliminarUsuario(u)"><i class="bi bi-trash"></i></button>
+                  </td>
+                </tr>
+              } @empty {
+                <tr><td colspan="7" class="td-vacio-fila">No hay usuarios que coincidan con la búsqueda.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+
+    @if (seccionActiva === 'eventos') {
+      <div class="gs-seccion">
+        <h1 class="gs-h1">Eventos</h1>
+        <input class="gs-buscador" type="text" placeholder="Buscar por nombre, cofradía o lugar..."
+          [(ngModel)]="busquedaEventos">
+
+        <div class="gs-tabla-wrap">
+          <table class="gs-tabla">
+            <thead><tr><th>Nombre</th><th>Cofradía</th><th>Fecha</th><th>Lugar</th><th>Acciones</th></tr></thead>
+            <tbody>
+              @for (e of eventosFiltrados; track e.id) {
+                <tr>
+                  <td>{{ e.nombre }}</td>
+                  <td>{{ e.cofradiaNombre }}</td>
+                  <td>{{ e.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+                  <td>{{ e.lugar || '—' }}</td>
+                  <td class="td-acciones">
+                    <button type="button" class="btn-icono" title="Ver / editar en la agenda" (click)="editarEventoEnAgenda(e)"><i class="bi bi-box-arrow-up-right"></i></button>
+                  </td>
+                </tr>
+              } @empty {
+                <tr><td colspan="5" class="td-vacio-fila">No hay eventos que coincidan con la búsqueda.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+
+  </main>
+</div>
+
+<!-- Modal crear/editar cofradía -->
+@if (modalCofradia) {
+  <div class="gs-modal-telon" (click)="cerrarModalCofradia()">
+    <div class="gs-modal" (click)="$event.stopPropagation()">
+      <button type="button" class="gs-modal-cerrar" (click)="cerrarModalCofradia()">&times;</button>
+      <h2 class="gs-modal-titulo">{{ cofradiaEditando ? 'Editar Cofradía' : 'Nueva Cofradía' }}</h2>
+
+      <div class="gs-form-grid">
+        <div class="gs-campo gs-campo--full">
+          <label>Nombre</label>
+          <input type="text" [(ngModel)]="formCofradia.nombre" placeholder="Nombre de la cofradía">
+        </div>
+        <div class="gs-campo">
+          <label>Provincia</label>
+          <select [(ngModel)]="formCofradia.provincia" (ngModelChange)="onProvinciaFormChange()">
+            <option value="" disabled>Selecciona una provincia...</option>
+            @for (p of provincias; track p) {
+              <option [value]="p">{{ p }}</option>
+            }
+          </select>
+        </div>
+        <div class="gs-campo">
+          <label>Localidad</label>
+          <select [(ngModel)]="formCofradia.localidad" [disabled]="!formCofradia.provincia">
+            <option value="" disabled>{{ formCofradia.provincia ? 'Selecciona una localidad...' : 'Elige antes la provincia' }}</option>
+            @for (m of municipios; track m) {
+              <option [value]="m">{{ m }}</option>
+            }
+          </select>
+        </div>
+        <div class="gs-campo">
+          <label>Escudo (URL)</label>
+          <input type="text" [(ngModel)]="formCofradia.escudo_url" placeholder="https://...">
+        </div>
+        <div class="gs-campo">
+          <label>Teléfono</label>
+          <input type="text" [(ngModel)]="formCofradia.telefono">
+        </div>
+        <div class="gs-campo">
+          <label>Email de contacto</label>
+          <input type="email" [(ngModel)]="formCofradia.email_contacto">
+        </div>
+        <div class="gs-campo">
+          <label>Parroquia</label>
+          <input type="text" [(ngModel)]="formCofradia.parroquia">
+        </div>
+        <div class="gs-campo">
+          <label>Dirección</label>
+          <input type="text" [(ngModel)]="formCofradia.direccion">
+        </div>
+        <div class="gs-campo gs-campo--full">
+          <label>Titulares</label>
+          <div class="gs-titulares">
+            @for (t of formCofradia.titulares; track $index) {
+              <div class="gs-titular-fila">
+                <input type="text" [(ngModel)]="formCofradia.titulares[$index]" placeholder="Ej: Nuestro Padre Jesús...">
+                <button type="button" class="btn-icono btn-icono--peligro" (click)="quitarTitularForm($index)" title="Quitar titular">&times;</button>
+              </div>
+            }
+            <button type="button" class="gs-btn-add-titular" (click)="agregarTitularForm()">+ Añadir titular</button>
+          </div>
+        </div>
+        <div class="gs-campo">
+          <label>Vídeo (URL de YouTube)</label>
+          <input type="text" [(ngModel)]="formCofradia.video_url">
+        </div>
+        <div class="gs-campo">
+          <label>Instagram</label>
+          <input type="text" [(ngModel)]="formCofradia.instagram" placeholder="https://instagram.com/...">
+        </div>
+        <div class="gs-campo">
+          <label>Facebook</label>
+          <input type="text" [(ngModel)]="formCofradia.facebook" placeholder="https://facebook.com/...">
+        </div>
+        <div class="gs-campo">
+          <label>YouTube</label>
+          <input type="text" [(ngModel)]="formCofradia.youtube" placeholder="https://youtube.com/...">
+        </div>
+        <div class="gs-campo gs-campo--full">
+          <label>Historia</label>
+          <textarea rows="4" [(ngModel)]="formCofradia.historia"></textarea>
+        </div>
+      </div>
+
+      <button type="button" class="btn-gs-primary btn-gs-full" [disabled]="guardandoCofradia" (click)="guardarCofradia()">
+        {{ guardandoCofradia ? 'Guardando...' : (cofradiaEditando ? 'Guardar Cambios' : 'Crear Cofradía') }}
+      </button>
+    </div>
+  </div>
+}
+
+<!-- Modal vincular usuario -->
+@if (modalVincular) {
+  <div class="gs-modal-telon" (click)="cerrarModalVincular()">
+    <div class="gs-modal gs-modal--pequeno" (click)="$event.stopPropagation()">
+      <button type="button" class="gs-modal-cerrar" (click)="cerrarModalVincular()">&times;</button>
+      <h2 class="gs-modal-titulo">Vincular usuario a "{{ cofradiaVinculando?.nombre }}"</h2>
+
+      @if (usuariosSinCofradia.length === 0) {
+        <p class="gs-cargando">No hay usuarios sin cofradía disponibles para vincular.</p>
+      } @else {
+        <div class="gs-campo gs-campo--full">
+          <label>Usuario</label>
+          <select [(ngModel)]="idUserSeleccionado">
+            <option [value]="null" disabled selected>Selecciona un usuario</option>
+            @for (u of usuariosSinCofradia; track u.id) {
+              <option [value]="u.id">{{ u.name }} ({{ u.email }})</option>
+            }
+          </select>
+        </div>
+        <button type="button" class="btn-gs-primary btn-gs-full" [disabled]="!idUserSeleccionado" (click)="confirmarVincular()">
+          Vincular
+        </button>
+      }
+    </div>
+  </div>
+}

@@ -1,33 +1,156 @@
-<div class="cofradia-container">
-  <div class="imagenes-superiores">
-    <div class="imagen-centro">
-      <img [src]="getRutaCristo()" alt="Cristo" />
+<div class="perfil-page">
+
+  @if (cargando) {
+    <div class="perfil-estado">Cargando ficha de la cofradía...</div>
+  } @else if (noEncontrada) {
+    <div class="perfil-estado">
+      <i class="bi bi-emoji-frown"></i>
+      <p>No se ha encontrado esta cofradía.</p>
+      <a routerLink="/cofradias" class="btn-volver">Volver al directorio</a>
     </div>
-    <div class="imagen-centro">
-      <img [src]="getRutaVirgen()" alt="Virgen" />
+  } @else {
+
+    <div class="perfil-hero">
+      <a routerLink="/cofradias" class="perfil-volver"><i class="bi bi-arrow-left"></i> Directorio</a>
+      <div class="perfil-escudo">
+        @if (cofradia.escudo_url) {
+          <img [src]="cofradia.escudo_url" [alt]="cofradia.nombre">
+        } @else {
+          <i class="bi bi-shield"></i>
+        }
+      </div>
+      <div class="perfil-hero-nombre">{{ cofradia.nombre }}</div>
+      <div class="perfil-hero-sub">
+        <i class="bi bi-geo-alt"></i> {{ cofradia.localidad || 'Localidad no indicada' }}
+        @if (cofradia.provincia) { · {{ cofradia.provincia }} }
+      </div>
     </div>
-  </div>
 
-  <div class="imagen-lateral izquierda">
-    <img [src]="getRutaCristo()" alt="Cristo" />
-  </div>
+    <div class="perfil-cuerpo">
+      <div class="perfil-col perfil-col--principal">
 
-  <div class="contenido-central">
-    <h1>{{ cofradia?.cofradia?.nombre }}</h1>
+        @if (cofradia.historia) {
+          <section class="perfil-sec">
+            <h2 class="perfil-sec-titulo"><i class="bi bi-book"></i> Historia</h2>
+            <p class="perfil-historia" [class.perfil-historia--abierta]="historiaAbierta">{{ cofradia.historia }}</p>
+            @if (cofradia.historia.length > 400) {
+              <button type="button" class="btn-expandir" (click)="historiaAbierta = !historiaAbierta">
+                {{ historiaAbierta ? 'Leer menos' : 'Leer más' }}
+              </button>
+            }
+          </section>
+        }
 
-    <div class="info-secundaria">
-      <p><strong>Titular 1:</strong> {{ cofradia?.cofradia?.titular1 }}</p>
-      <p><strong>Titular 2:</strong> {{ cofradia?.cofradia?.titular2 }}</p>
-      <p><strong>Parroquia:</strong> {{ cofradia?.cofradia?.parroquia }}</p>
-      <p><strong>Dirección:</strong> {{ cofradia?.cofradia?.direccion }}</p>
+        @if (titulares.length > 0) {
+          <section class="perfil-sec">
+            <h2 class="perfil-sec-titulo"><i class="bi bi-stars"></i> Titulares</h2>
+            <ul class="perfil-titulares">
+              @for (t of titulares; track t) {
+                <li>{{ t }}</li>
+              }
+            </ul>
+          </section>
+        }
+
+        @if (videoEmbedUrl) {
+          <section class="perfil-sec">
+            <h2 class="perfil-sec-titulo"><i class="bi bi-camera-reels"></i> Estación de Penitencia</h2>
+            <div class="perfil-video">
+              <iframe [src]="videoEmbedUrl" title="Vídeo de la cofradía" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </section>
+        }
+
+        <section class="perfil-sec">
+          <h2 class="perfil-sec-titulo"><i class="bi bi-calendar-event"></i> Próximos Eventos</h2>
+          @if (proximosEventos.length === 0) {
+            <p class="perfil-sin-eventos">Esta cofradía no tiene eventos próximos publicados.</p>
+          } @else {
+            <div class="perfil-eventos-lista">
+              @for (e of proximosEventos; track e.id) {
+                <div class="pe-fila" (click)="irAAgenda(e.id)">
+                  <div class="pe-fecha">
+                    <span class="pe-dia">{{ e.fecha | date:'dd' }}</span>
+                    <span class="pe-mes">{{ e.fecha | date:'MMM' }}</span>
+                  </div>
+                  <div class="pe-cuerpo">
+                    <div class="pe-nombre">{{ e.nombre }}</div>
+                    @if (e.lugar) { <div class="pe-lugar"><i class="bi bi-geo-alt"></i> {{ e.lugar }}</div> }
+                  </div>
+                  <div class="pe-hora">{{ horaEvento(e.fecha) }} h</div>
+                </div>
+              }
+            </div>
+          }
+        </section>
+
+      </div>
+
+      <div class="perfil-col perfil-col--lateral">
+
+        <div class="perfil-ficha">
+          <div class="perfil-ficha-titulo">Ficha Técnica</div>
+          @if (cofradia.localidad) {
+            <div class="ficha-linea"><i class="bi bi-geo-alt"></i> {{ cofradia.localidad }}</div>
+          }
+          @if (cofradia.provincia) {
+            <div class="ficha-linea"><i class="bi bi-map"></i> {{ cofradia.provincia }}</div>
+          }
+          @if (cofradia.telefono) {
+            <div class="ficha-linea"><i class="bi bi-telephone"></i> {{ cofradia.telefono }}</div>
+          }
+          @if (cofradia.email_contacto) {
+            <div class="ficha-linea"><i class="bi bi-envelope"></i> {{ cofradia.email_contacto }}</div>
+          }
+          @if (cofradia.parroquia) {
+            <div class="ficha-linea"><i class="bi bi-building"></i> {{ cofradia.parroquia }}</div>
+          }
+          @if (cofradia.direccion) {
+            <div class="ficha-linea"><i class="bi bi-signpost"></i> {{ cofradia.direccion }}</div>
+          }
+
+          @if (cofradia.instagram || cofradia.facebook || cofradia.youtube) {
+            <div class="ficha-redes">
+              @if (cofradia.instagram) {
+                <a [href]="cofradia.instagram" target="_blank" class="red-btn red-btn--ig"><i class="bi bi-instagram"></i></a>
+              }
+              @if (cofradia.facebook) {
+                <a [href]="cofradia.facebook" target="_blank" class="red-btn red-btn--fb"><i class="bi bi-facebook"></i></a>
+              }
+              @if (cofradia.youtube) {
+                <a [href]="cofradia.youtube" target="_blank" class="red-btn red-btn--yt"><i class="bi bi-youtube"></i></a>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="perfil-contacto">
+          <div class="perfil-ficha-titulo">Contactar</div>
+          @if (contactoEnviado) {
+            <p class="contacto-enviado"><i class="bi bi-check-circle"></i> Mensaje enviado correctamente.</p>
+          } @else {
+            <div class="contacto-campo">
+              <input type="text" placeholder="Tu nombre" [(ngModel)]="contactoNombre">
+            </div>
+            <div class="contacto-campo">
+              <input type="email" placeholder="Correo de respuesta" [(ngModel)]="contactoEmail">
+            </div>
+            <div class="contacto-campo">
+              <textarea rows="4" placeholder="Tu mensaje..." [(ngModel)]="contactoMensaje"></textarea>
+            </div>
+            <button type="button" class="btn-contacto" [disabled]="contactoEnviando" (click)="enviarContacto()">
+              {{ contactoEnviando ? 'Enviando...' : 'Enviar mensaje' }}
+            </button>
+          }
+        </div>
+
+      </div>
     </div>
 
-    <div class="info-hermandad">
-      <p [innerHTML]="textoConSaltos || 'Información no disponible.'"></p>
-    </div>
-  </div>
-
-  <div class="imagen-lateral derecha">
-    <img [src]="getRutaVirgen()" alt="Cristo" />
-  </div>
+    <footer class="auth-footer">
+      <span>-- 2025 Cofradiario --</span>
+    </footer>
+  }
 </div>

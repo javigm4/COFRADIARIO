@@ -1,16 +1,13 @@
 <div class="fila-evento" (click)="abrirModal()">
-  <div class="fila-ribbon">
-    <span>Acto Cofrade</span>
-  </div>
+  <div class="fila-ribbon"></div>
 
   <div class="fila-cuerpo">
-    <span class="fila-badge">Acto Cofrade</span>
     <div class="fila-titulo">{{ evento.nombre }}</div>
     @if (cofradiaNombre) {
       <div class="fila-banda">{{ cofradiaNombre }}</div>
     }
-    @if (evento.lugar) {
-      <div class="fila-nota">{{ evento.lugar }}</div>
+    @if (evento.detalles) {
+      <div class="fila-desc">{{ evento.detalles }}</div>
     }
   </div>
 
@@ -20,28 +17,28 @@
       <span class="fila-mes">{{ evento.fecha | date:'MMM' }}</span>
     </div>
     <div class="fila-fecha-datos">
-      @if (evento.lugar) {
-        <span class="fila-lugar">{{ evento.lugar }}</span>
+      @if (lugarCompleto()) {
+        <span class="fila-lugar">{{ lugarCompleto() }}</span>
       }
       <span class="fila-hora">{{ evento.fecha | date:'HH:mm' }} h</span>
     </div>
   </div>
 
-  <div class="fila-acciones">
-    @if (role !== 'cofradia') {
-      <button class="fila-btn-fav" [class.activo]="estaEnFavoritos()" (click)="handleFavorito($event)" title="Guardar en favoritos">
-        <i class="bi" [class.bi-heart-fill]="estaEnFavoritos()" [class.bi-heart]="!estaEnFavoritos()"></i>
-      </button>
-    }
+  <div class="fila-acciones" (click)="$event.stopPropagation()">
     @if (role === 'cofradia' && nombreUsuario === cofradiaNombre) {
-      <div class="fila-admin-btns" (click)="$event.stopPropagation()">
-        <button class="btn-accion btn-delete" (click)="eliminarEvento(evento.id)" title="Eliminar">
-          <i class="bi bi-trash"></i>
-        </button>
+      <div class="fila-admin-btns">
         <button class="btn-accion btn-edit" (click)="editarEvento()" title="Editar">
           <i class="bi bi-pencil"></i>
         </button>
+        <button class="btn-accion btn-delete" (click)="eliminarEvento(evento.id)" title="Eliminar">
+          <i class="bi bi-trash"></i>
+        </button>
       </div>
+    } @else {
+      <button class="btn-accion btn-calendario" (click)="agregarACalendario($event)" title="Añadir al calendario">
+        <i class="bi bi-calendar-plus"></i>
+        <span class="btn-calendario-texto">Añadir al calendario</span>
+      </button>
     }
   </div>
 </div>
@@ -59,8 +56,8 @@
           @if (cofradiaNombre) {
             <div class="meta-linea"><i class="bi bi-people"></i><span><b>Cofradía:</b> {{ cofradiaNombre }}</span></div>
           }
-          @if (evento.lugar) {
-            <div class="meta-linea"><i class="bi bi-geo-alt"></i><span><b>Lugar:</b> {{ evento.lugar }}</span></div>
+          @if (lugarCompleto()) {
+            <div class="meta-linea"><i class="bi bi-geo-alt"></i><span><b>Lugar:</b> {{ lugarCompleto() }}</span></div>
           }
           <div class="meta-linea"><i class="bi bi-calendar-check"></i><span><b>Fecha:</b> {{ formatFecha(evento.fecha).split(' - ')[0] }} · {{ formatFecha(evento.fecha).split(' - ')[1] }} h</span></div>
         </div>
@@ -69,19 +66,12 @@
           {{ evento.detalles || 'Sin información adicional.' }}
         </div>
 
+        <button class="modal-btn-calendario" (click)="agregarACalendario($event)">
+          <i class="bi bi-calendar-plus"></i> Añadir al calendario
+        </button>
+
         <button class="modal-cerrar" (click)="modalVisible = false">Cerrar</button>
       </div>
-    </div>
-  </div>
-}
-
-<!-- Popup Registro -->
-@if (mostrarPopupRegistro) {
-  <div class="popup-registro" (click)="$event.stopPropagation()">
-    <p>Regístrate para añadir a favoritos y recibir un recordatorio el día antes del evento.</p>
-    <div class="btns">
-      <a routerLink="/register" class="btn-registro">Registrarse</a>
-      <button class="btn-cerrar-popup" (click)="mostrarPopupRegistro = false">Cerrar</button>
     </div>
   </div>
 }

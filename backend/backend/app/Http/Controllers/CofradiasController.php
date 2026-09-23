@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cofradia;
+use App\Models\Evento;
+use App\Services\ZohoMailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; // Importar la clase Log para registrar información
 class CofradiasController extends Controller
@@ -10,10 +12,60 @@ class CofradiasController extends Controller
 
     public function index()
     {
-        $cofradias = Cofradia::all();
-
+        $cofradias = Cofradia::withCount('eventos')->get();
 
         return response()->json($cofradias);
+    }
+
+    /** Ficha pública de una cofradía: datos + próximos eventos */
+    public function perfil($id)
+    {
+        $cofradia = Cofradia::withCount('eventos')->find($id);
+
+        if (!$cofradia) {
+            return response()->json(['message' => 'Cofradía no encontrada'], 404);
+        }
+
+        $proximosEventos = Evento::where('cofradia', $cofradia->id)
+            ->where('fecha', '>=', now())
+            ->orderBy('fecha')
+            ->get();
+
+        return response()->json([
+            'cofradia' => $cofradia,
+            'proximos_eventos' => $proximosEventos,
+        ]);
+    }
+
+    /** Formulario de contacto de la ficha de una cofradía */
+    public function contacto($id, Request $request, ZohoMailer $mailer)
+    {
+        $cofradia = Cofradia::find($id);
+        if (!$cofradia) {
+            return response()->json(['message' => 'Cofradía no encontrada'], 404);
+        }
+
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|email',
+            'mensaje' => 'required|string|max:2000',
+        ]);
+
+        $destino = $cofradia->email_contacto ?: $cofradia->user?->email;
+        if (!$destino) {
+            return response()->json(['message' => 'Esta cofradía no tiene un correo de contacto configurado.'], 422);
+        }
+
+        $html = "
+        <h1>Nuevo mensaje desde tu ficha en Cofradiario</h1>
+        <p><strong>Nombre:</strong> {$request->nombre}</p>
+        <p><strong>Email de respuesta:</strong> {$request->email}</p>
+        <p><strong>Mensaje:</strong> {$request->mensaje}</p>
+        ";
+
+        $mailer->sendEmail($destino, $cofradia->nombre, "Mensaje de contacto — {$cofradia->nombre}", $html);
+
+        return response()->json(['message' => 'Mensaje enviado correctamente']);
     }
 
 

@@ -52,31 +52,41 @@
 
 <div id="fondo">
     <section id="estadisticas" #estadisticas>
+        <div class="stats-scrim"></div>
         <div class="stat-container">
-            <div class="stat-card">
+            <a class="stat-card" routerLink="/cofradias">
+                <i class="bi bi-shield stat-icon"></i>
                 <div class="stat-value">+{{displayTotalCofradias}}</div>
                 <div class="stat-label">Cofradías registradas</div>
-            </div>
-            <div class="stat-card">
+                <span class="stat-link">Ver directorio <i class="bi bi-arrow-right"></i></span>
+            </a>
+            <span class="stat-divider"></span>
+            <a class="stat-card" routerLink="/agenda">
+                <i class="bi bi-calendar-event stat-icon"></i>
                 <div class="stat-value">+{{displayTotalEventos}}</div>
                 <div class="stat-label">Eventos activos</div>
-            </div>
+                <span class="stat-link">Ver agenda <i class="bi bi-arrow-right"></i></span>
+            </a>
         </div>
     </section>
 
     <section id="eventos">
-        <div class="eventos-container">
-            <div class="eventos-list">
-                <div class="sec-head centered">
+        <div class="split-photo split-photo--eventos"></div>
+        <div class="split-panel">
+            <div class="sec-head-row">
+                <div class="sec-head">
                     <span class="sec-rule"></span>
                     <span class="sec-label">Agenda</span>
                     <h2 class="sec-title">Próximos Eventos</h2>
                 </div>
+                <a routerLink="/agenda" class="sec-head-link">Ver todos <i class="bi bi-arrow-right"></i></a>
+            </div>
 
-                @if (eventosProximos.length === 0) {
-                <h3>No hay eventos próximos</h3>
-                }
+            @if (eventosProximos.length === 0) {
+            <div class="eventos-vacio">No hay eventos próximos.</div>
+            }
 
+            <div class="eventos-listado">
                 @for (evento of eventosProximos; track evento.id) {
                 <a href="/agenda" class="post-link">
                     <div class="evento-card">
@@ -94,95 +104,37 @@
                     </div>
                 </a>
                 }
-                <small>¡No olvides iniciar sesión para añadir eventos a favoritos y recibir un recordatorio el día antes
-                    por email!
-                </small>
             </div>
-            <div class="evento-foto">
-                <img src="./../../../../public/images/imagenes/fotoTriniIglesia.jpg" alt="Foto de eventos" />
+
+            <div class="eventos-aviso">
+                <i class="bi bi-calendar-plus"></i>
+                <span>Añade cualquier acto a tu Google Calendar o Apple Calendar con un solo clic desde la
+                    agenda.</span>
             </div>
+
+            <a routerLink="/agenda" class="split-cta">
+                <i class="bi bi-calendar-week"></i> Ver agenda completa
+            </a>
         </div>
     </section>
 
-
-    <section id="redSocial">
-        <div>
-            <div class="sec-head centered">
-                <span class="sec-rule"></span>
-                <span class="sec-label">Comunidad</span>
-                <h2 class="sec-title">Únete a nuestra red social interna</h2>
-            </div>
-        </div>
-        <p>Publica tus propios articulos sobre el mundo cofrade y lee los de otros usuarios.
-        </p>
-        <div>
-
-            @for (art of ultimosArticulos; track art.id) {
-            <div class="articulo">
-                <a href="/diario" class="post-link">
-                    <h3>{{ art.titular }}</h3>
-                    <h5>
-                        {{ art.cuerpo.length > 150 ? (art.cuerpo | slice:0:150) + '...' : art.cuerpo }}
-                    </h5>
-                </a>
-            </div>
-            }
-        </div>
-        <button id="btnAcceder" [routerLink]="['/diario']">ACCEDER</button>
-    </section>
     <section id="calendario">
-        <div class="calendario-container">
-            <div class="calendario-foto">
-                <img src="../../../../public/images/imagenes/calendarioInicio.png" alt="Calendario">
-            </div>
-            <div class="calendario-contenido">
-                <span class="sec-rule"></span>
-                <span class="sec-label">Calendario</span>
-                <h2 class="sec-title">Entra en nuestro calendario de eventos</h2>
-                <p>Consulta los eventos de forma general y con un solo click.
-                    Resuelve todas tus dudas y no te pierdas ni uno.
-                    Todo aquí, en el calendario de COFRADIARIO.
-                </p>
-                <button id="btnAcceder" [routerLink]="['/calendario']">CALENDARIO</button>
-            </div>
-        </div>
-    </section>
-    <section id="quienesomos">
-        <div>
+        <div class="split-panel">
             <span class="sec-rule"></span>
-            <span class="sec-label">Cofradiario</span>
-            <h2 class="sec-title">¿Quiénes somos?</h2>
-            <small>Soy Javier Guerrero: Desarrollador Web, hermano de la Congregación de Mena y músico de la banda de
-                cornetas y tambores Nuestra Señora del Rosario de Arriate. Creé esta web a modo de TFG en un inicio,
-                pero al ver la necesidad real en el mundo cofrade de tener una buena agenda donde consultar todos los
-                datos necesarios de los distintos actos de las hermandades de Málaga, no pude evitar hacer evolucionar
-                este trabajo de fin de grado y convertirlo en la solución a nuestros problemas. Esta web, hecha con el
-                mayor cariño del mundo y solo por mí, permitirá a los usuarios consultar y añadir eventos a favoritos,
-                lo cual facilitará encontrarlos entre tantos actos y hará posible la llegada de un recordatorio el día
-                de antes (que yo por lo menos, soy muy olvidadizo). En esta web, las propias cofradías podrán crear,
-                editar y borrar sus propios eventos con total libertad. También tenemos una propia red social en fase
-                "beta", donde los usuarios podrán escribir sus propios artículos sobre este maravilloso mundo que, poco
-                a poco, va "in crescendo". Bueno, dejo de dar tanto "por saco" y me callo. Disfruten de esta web y ¡que
-                viva la Soledad de Mena!</small>
-
-            <div class="contact-section">
-                <h3 class="contact-title">Cualquier duda, mis redes sociales:</h3>
-                <div class="social-icons">
-                    <a href="https://instagram.com/cofradiariomlg" target="_blank" class="social-link">
-                        <i class="fa-brands fa-instagram"></i> &#64;cofradiariomlg
-                    </a>
-                    <a href="https://github.com/javigm4" target="_blank" class="social-link">
-                        <i class="fa-brands fa-github"></i> javigm4
-                    </a>
-                    <a href="mailto:javierguerreromontero1@gmail.com" class="social-link">
-                        <i class="fa-regular fa-envelope"></i> javierguerreromontero1&#64;gmail.com
-                    </a>
-                </div>
+            <span class="sec-label">Calendario</span>
+            <h2 class="sec-title">Entra en nuestro calendario de eventos</h2>
+            <p>Consulta los eventos de forma general y con un solo click. Resuelve todas tus dudas y no te pierdas
+                ni uno. Todo aquí, en el calendario de COFRADIARIO.</p>
+            <a class="btn-calendario" [routerLink]="['/calendario']">
+                <i class="bi bi-calendar3"></i> Ir al calendario
+            </a>
+        </div>
+        <div class="split-photo split-photo--calendario">
+            <div class="calendario-shot">
+                <img src="../../../../public/images/imagenes/calendarioScreenshot.png" alt="Calendario de Cofradiario">
             </div>
         </div>
-        <div id="fotoQuienesSomos">
-            <img src="../../../../public/images/imagenes/yo2.png" alt="Javier Guerrero">
-        </div>
     </section>
+
     <app-footer></app-footer>
 </div>

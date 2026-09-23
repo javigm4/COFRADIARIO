@@ -6,7 +6,8 @@
     font-size: 0.85rem;
     font-family: var(--font-body);
     border-top: 1px solid rgba(184, 134, 11, 0.25);
-    margin-top: 50px;
+    position: relative;
+    z-index: 1;
 }
 
 .footer-container {

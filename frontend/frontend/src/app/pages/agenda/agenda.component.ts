@@ -1,6 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventosService } from '../../services/eventos/eventos.service';
-import { FavoritosService } from '../../services/favoritos/favoritos.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CofradiasService } from '../../services/cofradias/cofradias.service';
@@ -16,8 +15,6 @@ import { NotificacionService } from '../../services/notificacion/notificacion.se
 export class AgendaComponent implements OnInit {
   eventos: any[] = [];
   cofradias: any[] = [];
-  favoritos: any[] = [];
-  esUsuario: boolean = false;
   esCofradia: boolean = false;
   usuario: any;
   minFechaHoy: string = new Date().toISOString().split('T')[0]; // Establece la fecha mínima al día de hoy
@@ -32,7 +29,6 @@ export class AgendaComponent implements OnInit {
   cofradiaId: number = 0;
   listaCofradiasFiltrada: any[] = []; // lista filtrada de cofradías
   listaEventosFiltrada: any[] = []; // lista filtrada
-  mostrarBotonFavoritosScroll: boolean = false; // 🔹 Controla si el botón de favs flota
   filtrosAbiertos: boolean = false; // 🔹 Controla el cajón de filtros deslizante
   eventoDestacado: number | null = null; // 🔹 Evento a abrir/resaltar al llegar desde el calendario
   mostrarModalCrearEvento: boolean = false; // 🔹 Controla el pop up de "Crear Nuevo Evento"
@@ -77,7 +73,6 @@ export class AgendaComponent implements OnInit {
   constructor(
     private eventosService: EventosService,
     private authService: AuthService,
-    private favoritosService: FavoritosService,
     private cofradiasService: CofradiasService,
     private route: ActivatedRoute,
     private notificacionService: NotificacionService
@@ -88,7 +83,6 @@ export class AgendaComponent implements OnInit {
 
     if (usuario) {
       this.usuario = usuario;
-      this.esUsuario = usuario.role === 'usuario';
       this.esCofradia = usuario.role === 'cofradia';
     }
 
@@ -110,7 +104,6 @@ export class AgendaComponent implements OnInit {
         this.cofradiasAdmin = this.cofradias.filter((cofradia) =>
           this.eventos.some((evento) => evento.cofradia === cofradia.id)
         );
-        this.favoritos = response.favoritos ?? [];
         this.listaEventosFiltrada = [...this.eventos]; // <-- inicializamos aquí correctamente
         this.listaCofradiasFiltrada = [...this.cofradias];
         this.todoslosEventos = [...this.eventos]; // copia los eventos originales (con esto copiamos el contenido del array, no la referencia al array , que ocurre si hacemos this.todoslosEventos = this.eventos)
@@ -270,52 +263,9 @@ export class AgendaComponent implements OnInit {
   }
 
 
-  // ----- E L I M I N A R   F A V O R I TO -----
-  onEliminar(favoritoId: number): void {
-    console.log('Eliminar favorito con ID:', favoritoId);
-    this.favoritosService.eliminarFavorito(favoritoId).subscribe(
-      () => {
-        console.log('Favorito eliminado correctamente');
-        this.favoritos = this.favoritos.filter((f) => f.id !== favoritoId);
-      },
-      (error) => {
-        console.error('Error al eliminar el favorito:', error);
-      }
-    );
-  }
-
   // ----- C A J Ó N   D E   F I L T R O S -----
   toggleFiltros(): void {
     this.filtrosAbiertos = !this.filtrosAbiertos;
-  }
-
-  // ----- M O S T R A R / O C U L T A R   F A V O R I T O S -----
-  toggleFavoritos(): void {
-    const favoritosContainer = document.querySelector('.contenedor-favoritos');
-
-    if (favoritosContainer) {
-      favoritosContainer.classList.toggle('activo');
-    }
-  }
-
-  // ----- S C R O L L   T R A C K I N G -----
-  
-  // Para móviles (scroll en window)
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const scrollOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.checkScroll(scrollOffset);
-  }
-
-  // Para PC (scroll en el div .contenedor-eventos)
-  onDivScroll(event: any) {
-    const scrollOffset = event.target.scrollTop;
-    this.checkScroll(scrollOffset);
-  }
-
-  private checkScroll(offset: number) {
-    // Si pasamos de 180px (lo que ocupan los filtros aprox), mostramos el botón
-    this.mostrarBotonFavoritosScroll = offset > 180;
   }
 
   // ----- F I L T R A R   E V E N T O S   P O R   C O F R A D Í A -----

@@ -20,20 +20,35 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'codigo',
+        'role',
+        'verification_token',
+        'is_admin',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'verification_token',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
 
     public function sendPasswordResetNotification($token)
     {
         $mailer = new ZohoMailer();
         $this->notify(new ResetPasswordNotifications($token, $mailer)); // plural
+    }
+
+    public function estaVerificado(): bool
+    {
+        return $this->email_verified_at !== null;
+    }
+
+    public function cofradia()
+    {
+        return $this->hasOne(Cofradia::class, 'id_user');
     }
 }

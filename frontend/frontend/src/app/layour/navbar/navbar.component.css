@@ -213,6 +213,91 @@
   cursor: not-allowed;
 }
 
+/* Mi Perfil (cofradías) */
+.perfil-dropdown {
+  position: relative;
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.perfil-toggle {
+  font-family: var(--font-heading);
+  font-size: clamp(11px, 1.05vw, 13px);
+  font-weight: 600;
+  color: #f0c040;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(240, 192, 64, .35);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: 0 0 0 1.2rem;
+  cursor: pointer;
+}
+
+.perfil-toggle:hover {
+  color: #d4a017;
+}
+
+.perfil-toggle i:first-child {
+  font-size: 15px;
+}
+
+.perfil-toggle i:last-child {
+  font-size: 10px;
+}
+
+.perfil-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 190px;
+  background: #1e1208;
+  border: 1px solid #b8860b;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+  z-index: 2100;
+  display: flex;
+  flex-direction: column;
+}
+
+.perfil-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #f0d890;
+  background: none;
+  border: none;
+  text-decoration: none;
+  padding: 12px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+}
+
+.perfil-menu-item:hover {
+  background: rgba(184, 134, 11, 0.12);
+  color: #d4a017;
+}
+
+.perfil-menu-item--salir {
+  color: #c0392b;
+  border-top: 1px solid rgba(240, 192, 64, .2);
+}
+
+.perfil-menu-item--salir:hover {
+  color: #ff6b5b;
+}
+
 /* Tablets / móvil: colapsa a menú desplegable */
 @media (max-width: 768px) {
   .navbar-brand {
@@ -291,6 +376,34 @@
     font-size: 9px;
     letter-spacing: .2em;
   }
+
+  .perfil-dropdown {
+    margin-left: 0;
+    margin-top: 0.75rem;
+    height: auto;
+    display: block;
+  }
+
+  .perfil-toggle {
+    height: auto;
+    border-left: none;
+    border-top: 1px solid rgba(240, 192, 64, .35);
+    padding: 0.75rem 0 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .perfil-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    margin-top: 4px;
+  }
+
+  .perfil-menu-item {
+    padding: 0.6rem 0.75rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -330,5 +443,88 @@
 @media (min-width: 1119px) {
   .menu-toggle {
     display: none;
+  }
+}
+
+/* ── ALERTA "MI COFRADÍA" (perfil sin rellenar) ── */
+.alerta-perfil {
+  position: sticky;
+  top: 72px;
+  z-index: 1900;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #6b0000, #4a0000);
+  border-bottom: 2px solid #b8860b;
+  padding: 10px 1.4rem;
+  color: #fdf5dc;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+.alerta-perfil i.bi-megaphone {
+  color: #d4a017;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.alerta-perfil span {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.alerta-perfil strong {
+  font-family: var(--font-heading);
+  letter-spacing: .03em;
+}
+
+.alerta-perfil-btn {
+  flex-shrink: 0;
+  background: #d4a017;
+  color: #1e1208;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.alerta-perfil-btn:hover {
+  background: #e8b52a;
+}
+
+.alerta-perfil-cerrar {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: rgba(253, 245, 220, 0.7);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.alerta-perfil-cerrar:hover {
+  color: #fdf5dc;
+}
+
+@media (max-width: 700px) {
+  .alerta-perfil {
+    flex-wrap: wrap;
+    top: 0;
+  }
+
+  .alerta-perfil span {
+    flex: 1 1 100%;
+    order: 1;
+  }
+
+  .alerta-perfil-btn {
+    order: 2;
   }
 }

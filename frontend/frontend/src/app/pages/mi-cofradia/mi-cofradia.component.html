@@ -1,0 +1,108 @@
+<div class="mc-page">
+
+  @if (cargando) {
+    <div class="mc-estado">Cargando tu perfil...</div>
+  } @else if (noEncontrada) {
+    <div class="mc-estado">
+      <i class="bi bi-shield-exclamation"></i>
+      <p>Tu cuenta todavía no tiene una cofradía vinculada. Escríbenos a
+        <a href="mailto:cofradiariodemalaga@gmail.com">cofradiariodemalaga&#64;gmail.com</a> para activarla.</p>
+    </div>
+  } @else {
+
+    <div class="mc-hero">
+      <span class="mc-hero-orn">✠</span>
+      <div>
+        <div class="mc-hero-title">Mi Cofradía</div>
+        <div class="mc-hero-sub">Edita los datos públicos de tu ficha</div>
+      </div>
+    </div>
+
+    <div class="mc-body">
+      <div class="mc-form-grid">
+        <div class="mc-campo mc-campo--full">
+          <label>Nombre</label>
+          <input type="text" [(ngModel)]="cofradia.nombre">
+        </div>
+        <div class="mc-campo">
+          <label>Provincia</label>
+          <select [(ngModel)]="cofradia.provincia" (ngModelChange)="onProvinciaChange()">
+            <option value="" disabled>Selecciona una provincia...</option>
+            @for (p of provincias; track p) {
+              <option [value]="p">{{ p }}</option>
+            }
+          </select>
+        </div>
+        <div class="mc-campo">
+          <label>Localidad</label>
+          <select [(ngModel)]="cofradia.localidad" [disabled]="!cofradia.provincia">
+            <option value="" disabled>{{ cofradia.provincia ? 'Selecciona una localidad...' : 'Elige antes la provincia' }}</option>
+            @for (m of municipios; track m) {
+              <option [value]="m">{{ m }}</option>
+            }
+          </select>
+        </div>
+        <div class="mc-campo">
+          <label>Escudo (URL de imagen)</label>
+          <input type="text" [(ngModel)]="cofradia.escudo_url" placeholder="https://...">
+        </div>
+        <div class="mc-campo">
+          <label>Teléfono</label>
+          <input type="text" [(ngModel)]="cofradia.telefono">
+        </div>
+        <div class="mc-campo">
+          <label>Email de contacto</label>
+          <input type="email" [(ngModel)]="cofradia.email_contacto">
+        </div>
+        <div class="mc-campo">
+          <label>Parroquia</label>
+          <input type="text" [(ngModel)]="cofradia.parroquia">
+        </div>
+        <div class="mc-campo">
+          <label>Dirección</label>
+          <input type="text" [(ngModel)]="cofradia.direccion">
+        </div>
+        <div class="mc-campo mc-campo--full">
+          <label>Titulares</label>
+          <div class="mc-titulares">
+            @for (t of cofradia.titulares; track $index) {
+              <div class="mc-titular-fila">
+                <input type="text" [(ngModel)]="cofradia.titulares[$index]" placeholder="Ej: Nuestro Padre Jesús...">
+                <button type="button" class="mc-btn-quitar-titular" (click)="quitarTitular($index)" title="Quitar titular">&times;</button>
+              </div>
+            }
+            <button type="button" class="mc-btn-add-titular" (click)="agregarTitular()">+ Añadir titular</button>
+          </div>
+        </div>
+        <div class="mc-campo">
+          <label>Vídeo (URL de YouTube)</label>
+          <input type="text" [(ngModel)]="cofradia.video_url" placeholder="Estación de penitencia...">
+        </div>
+        <div class="mc-campo">
+          <label>Instagram</label>
+          <input type="text" [(ngModel)]="cofradia.instagram" placeholder="https://instagram.com/...">
+        </div>
+        <div class="mc-campo">
+          <label>Facebook</label>
+          <input type="text" [(ngModel)]="cofradia.facebook" placeholder="https://facebook.com/...">
+        </div>
+        <div class="mc-campo">
+          <label>YouTube</label>
+          <input type="text" [(ngModel)]="cofradia.youtube" placeholder="https://youtube.com/...">
+        </div>
+        <div class="mc-campo mc-campo--full">
+          <label>Historia</label>
+          <textarea rows="6" [(ngModel)]="cofradia.historia" placeholder="Cuenta la historia de tu cofradía..."></textarea>
+        </div>
+      </div>
+
+      <button type="button" class="mc-btn-guardar" [disabled]="guardando" (click)="guardar()">
+        {{ guardando ? 'Guardando...' : 'Guardar Cambios' }}
+      </button>
+    </div>
+  }
+
+  <footer class="auth-footer">
+    <span>-- 2025 Cofradiario --</span>
+  </footer>
+</div>

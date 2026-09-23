@@ -49,6 +49,18 @@ class Handler extends ExceptionHandler
             ], 422);
         }
 
+        if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+            return response()->json([
+                'message' => $exception->getMessage() ?: 'No autenticado.',
+            ], 401);
+        }
+
+        if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
+            return response()->json([
+                'message' => $exception->getMessage() ?: 'No autorizado.',
+            ], 403);
+        }
+
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
             return response()->json([
                 'message' => $exception->getMessage() ?: 'Error HTTP',

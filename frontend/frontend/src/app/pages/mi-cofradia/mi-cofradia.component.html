@@ -67,7 +67,8 @@
           <div class="mc-titulares">
             @for (t of cofradia.titulares; track $index) {
               <div class="mc-titular-fila">
-                <input type="text" [(ngModel)]="cofradia.titulares[$index]" placeholder="Ej: Nuestro Padre Jesús...">
+                <input type="text" [(ngModel)]="cofradia.titulares[$index].nombre" placeholder="Ej: Nuestro Padre Jesús...">
+                <input type="text" [(ngModel)]="cofradia.titulares[$index].foto_url" placeholder="URL de la foto (opcional)">
                 <button type="button" class="mc-btn-quitar-titular" (click)="quitarTitular($index)" title="Quitar titular">&times;</button>
               </div>
             }

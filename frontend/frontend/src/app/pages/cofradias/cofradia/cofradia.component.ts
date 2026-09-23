@@ -16,7 +16,7 @@ export class CofradiaComponent implements OnInit {
 
   cofradia: any = null;
   proximosEventos: any[] = [];
-  titulares: string[] = [];
+  titulares: { nombre: string; foto_url: string }[] = [];
 
   historiaAbierta = false;
   videoEmbedUrl: SafeResourceUrl | null = null;
@@ -47,7 +47,9 @@ export class CofradiaComponent implements OnInit {
       next: (res) => {
         this.cofradia = res.cofradia;
         this.proximosEventos = res.proximos_eventos || [];
-        this.titulares = (this.cofradia.titulares || []).filter((t: string | null) => !!t);
+        this.titulares = (this.cofradia.titulares || [])
+          .map((t: any) => (typeof t === 'string' ? { nombre: t, foto_url: '' } : { nombre: t?.nombre || '', foto_url: t?.foto_url || '' }))
+          .filter((t: { nombre: string; foto_url: string }) => !!t.nombre);
         this.videoEmbedUrl = this.construirEmbedYoutube(this.cofradia.video_url);
         this.cargando = false;
       },

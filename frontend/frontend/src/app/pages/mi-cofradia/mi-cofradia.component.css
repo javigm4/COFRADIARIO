@@ -251,4 +251,12 @@
   .mc-campo--full {
     grid-column: span 1;
   }
+
+  .mc-titular-fila {
+    flex-wrap: wrap;
+  }
+
+  .mc-titular-fila input {
+    flex-basis: 100%;
+  }
 }

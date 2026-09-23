@@ -498,6 +498,14 @@
     flex-direction: column;
   }
 
+  .gs-titular-fila {
+    flex-wrap: wrap;
+  }
+
+  .gs-titular-fila input {
+    flex-basis: 100%;
+  }
+
   .gestion-menu-toggle {
     display: flex;
     align-items: center;

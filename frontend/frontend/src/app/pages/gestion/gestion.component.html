@@ -232,7 +232,8 @@
           <div class="gs-titulares">
             @for (t of formCofradia.titulares; track $index) {
               <div class="gs-titular-fila">
-                <input type="text" [(ngModel)]="formCofradia.titulares[$index]" placeholder="Ej: Nuestro Padre Jesús...">
+                <input type="text" [(ngModel)]="formCofradia.titulares[$index].nombre" placeholder="Ej: Nuestro Padre Jesús...">
+                <input type="text" [(ngModel)]="formCofradia.titulares[$index].foto_url" placeholder="URL de la foto (opcional)">
                 <button type="button" class="btn-icono btn-icono--peligro" (click)="quitarTitularForm($index)" title="Quitar titular">&times;</button>
               </div>
             }

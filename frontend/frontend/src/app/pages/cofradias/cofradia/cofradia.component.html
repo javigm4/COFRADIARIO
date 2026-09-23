@@ -31,7 +31,7 @@
 
         @if (cofradia.historia) {
           <section class="perfil-sec">
-            <h2 class="perfil-sec-titulo"><i class="bi bi-book"></i> Historia</h2>
+            <h2 class="perfil-sec-titulo">Historia</h2>
             <p class="perfil-historia" [class.perfil-historia--abierta]="historiaAbierta">{{ cofradia.historia }}</p>
             @if (cofradia.historia.length > 400) {
               <button type="button" class="btn-expandir" (click)="historiaAbierta = !historiaAbierta">
@@ -43,12 +43,19 @@
 
         @if (titulares.length > 0) {
           <section class="perfil-sec">
-            <h2 class="perfil-sec-titulo"><i class="bi bi-stars"></i> Titulares</h2>
-            <ul class="perfil-titulares">
+            <h2 class="perfil-sec-titulo">Titulares</h2>
+            <div class="perfil-titulares">
               @for (t of titulares; track t) {
-                <li>{{ t }}</li>
+                <div class="titular-tarjeta">
+                  @if (t.foto_url) {
+                    <img [src]="t.foto_url" [alt]="t.nombre" class="titular-foto">
+                  } @else {
+                    <div class="titular-foto titular-foto--vacia"><i class="bi bi-image"></i></div>
+                  }
+                  <span class="titular-nombre">{{ t.nombre }}</span>
+                </div>
               }
-            </ul>
+            </div>
           </section>
         }
 

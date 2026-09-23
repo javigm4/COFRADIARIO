@@ -32,9 +32,7 @@ export class MiCofradiaComponent implements OnInit {
     this.cofradiasService.obtenerMiCofradia().subscribe({
       next: (res) => {
         this.cofradia = res;
-        if (!this.cofradia.titulares || this.cofradia.titulares.length === 0) {
-          this.cofradia.titulares = [''];
-        }
+        this.cofradia.titulares = this.normalizarTitulares(this.cofradia.titulares);
         if (this.cofradia.provincia) {
           this.ubicacionesService.obtenerMunicipios(this.cofradia.provincia).subscribe(municipios => {
             this.municipios = municipios;
@@ -59,14 +57,23 @@ export class MiCofradiaComponent implements OnInit {
   }
 
   agregarTitular(): void {
-    this.cofradia.titulares.push('');
+    this.cofradia.titulares.push({ nombre: '', foto_url: '' });
   }
 
   quitarTitular(index: number): void {
     this.cofradia.titulares.splice(index, 1);
     if (this.cofradia.titulares.length === 0) {
-      this.cofradia.titulares.push('');
+      this.cofradia.titulares.push({ nombre: '', foto_url: '' });
     }
+  }
+
+  private normalizarTitulares(titulares: any[]): { nombre: string; foto_url: string }[] {
+    const lista = (titulares || []).map((t: any) =>
+      typeof t === 'string'
+        ? { nombre: t, foto_url: '' }
+        : { nombre: t?.nombre || '', foto_url: t?.foto_url || '' }
+    );
+    return lista.length > 0 ? lista : [{ nombre: '', foto_url: '' }];
   }
 
   guardar(): void {
@@ -78,14 +85,14 @@ export class MiCofradiaComponent implements OnInit {
     this.guardando = true;
     const datos = {
       ...this.cofradia,
-      titulares: (this.cofradia.titulares || []).map((t: string) => t.trim()).filter((t: string) => t.length > 0),
+      titulares: (this.cofradia.titulares || [])
+        .map((t: any) => ({ nombre: (t.nombre || '').trim(), foto_url: (t.foto_url || '').trim() }))
+        .filter((t: any) => t.nombre.length > 0),
     };
     this.cofradiasService.actualizarMiCofradia(datos).subscribe({
       next: (res) => {
         this.cofradia = res;
-        if (!this.cofradia.titulares || this.cofradia.titulares.length === 0) {
-          this.cofradia.titulares = [''];
-        }
+        this.cofradia.titulares = this.normalizarTitulares(this.cofradia.titulares);
         this.guardando = false;
         this.notificacionService.exito('Perfil actualizado correctamente.');
       },

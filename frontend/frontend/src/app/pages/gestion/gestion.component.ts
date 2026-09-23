@@ -136,7 +136,7 @@ export class GestionComponent implements OnInit {
   // ----- COFRADÍAS -----
   abrirModalCrearCofradia(): void {
     this.cofradiaEditando = null;
-    this.formCofradia = { titulares: [''] };
+    this.formCofradia = { titulares: [{ nombre: '', foto_url: '' }] };
     this.municipios = [];
     this.modalCofradia = true;
   }
@@ -144,9 +144,7 @@ export class GestionComponent implements OnInit {
   abrirModalEditarCofradia(c: any): void {
     this.cofradiaEditando = c;
     this.formCofradia = { ...c };
-    if (!this.formCofradia.titulares || this.formCofradia.titulares.length === 0) {
-      this.formCofradia.titulares = [''];
-    }
+    this.formCofradia.titulares = this.normalizarTitularesForm(this.formCofradia.titulares);
     this.municipios = [];
     if (this.formCofradia.provincia) {
       this.ubicacionesService.obtenerMunicipios(this.formCofradia.provincia).subscribe(municipios => {
@@ -161,14 +159,23 @@ export class GestionComponent implements OnInit {
   }
 
   agregarTitularForm(): void {
-    this.formCofradia.titulares.push('');
+    this.formCofradia.titulares.push({ nombre: '', foto_url: '' });
   }
 
   quitarTitularForm(index: number): void {
     this.formCofradia.titulares.splice(index, 1);
     if (this.formCofradia.titulares.length === 0) {
-      this.formCofradia.titulares.push('');
+      this.formCofradia.titulares.push({ nombre: '', foto_url: '' });
     }
+  }
+
+  private normalizarTitularesForm(titulares: any[]): { nombre: string; foto_url: string }[] {
+    const lista = (titulares || []).map((t: any) =>
+      typeof t === 'string'
+        ? { nombre: t, foto_url: '' }
+        : { nombre: t?.nombre || '', foto_url: t?.foto_url || '' }
+    );
+    return lista.length > 0 ? lista : [{ nombre: '', foto_url: '' }];
   }
 
   guardarCofradia(): void {
@@ -178,8 +185,8 @@ export class GestionComponent implements OnInit {
     }
 
     this.formCofradia.titulares = (this.formCofradia.titulares || [])
-      .map((t: string) => t.trim())
-      .filter((t: string) => t.length > 0);
+      .map((t: any) => ({ nombre: (t.nombre || '').trim(), foto_url: (t.foto_url || '').trim() }))
+      .filter((t: any) => t.nombre.length > 0);
 
     this.guardandoCofradia = true;
     const obs = this.cofradiaEditando

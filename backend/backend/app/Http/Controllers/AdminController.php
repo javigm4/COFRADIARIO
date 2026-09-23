@@ -69,7 +69,8 @@ class AdminController extends Controller
             'historia' => 'nullable|string',
             'escudo_url' => 'nullable|string|max:500',
             'titulares' => 'nullable|array',
-            'titulares.*' => 'nullable|string|max:255',
+            'titulares.*.nombre' => 'nullable|string|max:255',
+            'titulares.*.foto_url' => 'nullable|string|max:500',
             'direccion' => 'nullable|string|max:255',
             'parroquia' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
@@ -94,7 +95,8 @@ class AdminController extends Controller
             'historia' => 'nullable|string',
             'escudo_url' => 'nullable|string|max:500',
             'titulares' => 'nullable|array',
-            'titulares.*' => 'nullable|string|max:255',
+            'titulares.*.nombre' => 'nullable|string|max:255',
+            'titulares.*.foto_url' => 'nullable|string|max:500',
             'direccion' => 'nullable|string|max:255',
             'parroquia' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
@@ -186,10 +188,19 @@ class AdminController extends Controller
         }
 
         $usuario->update(['role' => 'cofradia']);
-        $cofradia = Cofradia::firstOrCreate(
-            ['id_user' => $usuario->id],
-            ['nombre' => $usuario->name, 'activa' => true]
-        );
+
+        // Si ya existe una ficha sin vincular con el mismo nombre (dato heredado
+        // de antes de este sistema de cuentas), la reutilizamos en vez de crear
+        // una ficha duplicada y perder sus eventos/datos ya cargados.
+        $cofradia = Cofradia::whereNull('id_user')->where('nombre', $usuario->name)->first();
+        if ($cofradia) {
+            $cofradia->update(['id_user' => $usuario->id]);
+        } else {
+            $cofradia = Cofradia::firstOrCreate(
+                ['id_user' => $usuario->id],
+                ['nombre' => $usuario->name, 'activa' => true]
+            );
+        }
 
         return response()->json(['usuario' => $usuario, 'cofradia' => $cofradia]);
     }
@@ -221,7 +232,8 @@ class AdminController extends Controller
             'historia' => 'nullable|string',
             'escudo_url' => 'nullable|string|max:500',
             'titulares' => 'nullable|array',
-            'titulares.*' => 'nullable|string|max:255',
+            'titulares.*.nombre' => 'nullable|string|max:255',
+            'titulares.*.foto_url' => 'nullable|string|max:500',
             'direccion' => 'nullable|string|max:255',
             'parroquia' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',

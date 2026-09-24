@@ -3,7 +3,6 @@ import { AdminService } from '../../services/admin/admin.service';
 import { EventosService } from '../../services/eventos/eventos.service';
 import { NotificacionService } from '../../services/notificacion/notificacion.service';
 import { UbicacionesService } from '../../services/ubicaciones/ubicaciones.service';
-import { Router } from '@angular/router';
 
 type Seccion = 'estadisticas' | 'cofradias' | 'usuarios' | 'eventos';
 
@@ -37,6 +36,11 @@ export class GestionComponent implements OnInit {
   usuariosSinCofradia: any[] = [];
   idUserSeleccionado: number | null = null;
 
+  modalEvento = false;
+  eventoEditando: any = null;
+  formEvento: any = {};
+  guardandoEvento = false;
+
   provincias: string[] = [];
   municipios: string[] = [];
 
@@ -44,8 +48,7 @@ export class GestionComponent implements OnInit {
     private adminService: AdminService,
     private eventosService: EventosService,
     private notificacionService: NotificacionService,
-    private ubicacionesService: UbicacionesService,
-    private router: Router
+    private ubicacionesService: UbicacionesService
   ) { }
 
   ngOnInit(): void {
@@ -303,7 +306,73 @@ export class GestionComponent implements OnInit {
   }
 
   // ----- EVENTOS -----
-  editarEventoEnAgenda(e: any): void {
-    this.router.navigate(['/agenda'], { queryParams: { evento: e.id } });
+  abrirModalCrearEvento(): void {
+    this.eventoEditando = null;
+    this.formEvento = { nombre: '', cofradia: null, fecha: '', hora: '', lugar: '', detalles: '' };
+    this.modalEvento = true;
+  }
+
+  abrirModalEditarEvento(e: any): void {
+    const fecha = new Date(e.fecha);
+    this.eventoEditando = e;
+    this.formEvento = {
+      nombre: e.nombre,
+      cofradia: e.cofradia,
+      fecha: this.aFechaInput(fecha),
+      hora: this.aHoraInput(fecha),
+      lugar: e.lugar || '',
+      detalles: e.detalles || ''
+    };
+    this.modalEvento = true;
+  }
+
+  cerrarModalEvento(): void {
+    this.modalEvento = false;
+    this.eventoEditando = null;
+  }
+
+  private aFechaInput(fecha: Date): string {
+    return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}-${String(fecha.getDate()).padStart(2, '0')}`;
+  }
+
+  private aHoraInput(fecha: Date): string {
+    return `${String(fecha.getHours()).padStart(2, '0')}:${String(fecha.getMinutes()).padStart(2, '0')}`;
+  }
+
+  guardarEvento(): void {
+    const { nombre, cofradia, fecha, hora, lugar, detalles } = this.formEvento;
+    if (!nombre || !cofradia || !fecha || !hora || !lugar) {
+      this.notificacionService.error('Rellena todos los campos obligatorios.');
+      return;
+    }
+
+    this.guardandoEvento = true;
+    const obs = this.eventoEditando
+      ? this.eventosService.editarEvento(this.eventoEditando.id, { nombre, cofradia, fecha: `${fecha} ${hora}:00`, hora, lugar, detalles })
+      : this.eventosService.crearEvento({ nombre, cofradia, fecha, hora, lugar, detalles });
+
+    obs.subscribe({
+      next: () => {
+        this.guardandoEvento = false;
+        this.notificacionService.exito(this.eventoEditando ? 'Evento actualizado.' : 'Evento creado.');
+        this.cerrarModalEvento();
+        this.cargarEventos();
+      },
+      error: (err) => {
+        this.guardandoEvento = false;
+        this.notificacionService.error(err.error?.message || 'No se pudo guardar el evento.');
+      }
+    });
+  }
+
+  eliminarEvento(e: any): void {
+    if (!confirm(`¿Eliminar el evento "${e.nombre}"?`)) return;
+    this.eventosService.eliminarEvento(e.id).subscribe({
+      next: () => {
+        this.notificacionService.exito('Evento eliminado.');
+        this.cargarEventos();
+      },
+      error: (err) => this.notificacionService.error(err.error?.message || 'No se pudo eliminar el evento.')
+    });
   }
 }

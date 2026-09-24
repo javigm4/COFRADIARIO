@@ -149,7 +149,12 @@
 
     @if (seccionActiva === 'eventos') {
       <div class="gs-seccion">
-        <h1 class="gs-h1">Eventos</h1>
+        <div class="gs-header-row">
+          <h1 class="gs-h1">Eventos</h1>
+          <button type="button" class="btn-gs-primary" (click)="abrirModalCrearEvento()">
+            <i class="bi bi-plus-lg"></i> Nuevo Evento
+          </button>
+        </div>
         <input class="gs-buscador" type="text" placeholder="Buscar por nombre, cofradía o lugar..."
           [(ngModel)]="busquedaEventos">
 
@@ -164,7 +169,8 @@
                   <td>{{ e.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
                   <td>{{ e.lugar || '—' }}</td>
                   <td class="td-acciones">
-                    <button type="button" class="btn-icono" title="Ver / editar en la agenda" (click)="editarEventoEnAgenda(e)"><i class="bi bi-box-arrow-up-right"></i></button>
+                    <button type="button" class="btn-icono" title="Editar" (click)="abrirModalEditarEvento(e)"><i class="bi bi-pencil"></i></button>
+                    <button type="button" class="btn-icono btn-icono--peligro" title="Eliminar" (click)="eliminarEvento(e)"><i class="bi bi-trash"></i></button>
                   </td>
                 </tr>
               } @empty {
@@ -212,6 +218,14 @@
         <div class="gs-campo">
           <label>Escudo (URL)</label>
           <input type="text" [(ngModel)]="formCofradia.escudo_url" placeholder="https://...">
+        </div>
+        <div class="gs-campo">
+          <label>Banner para la web (URL)</label>
+          <input type="text" [(ngModel)]="formCofradia.banner_url" placeholder="https://...">
+        </div>
+        <div class="gs-campo">
+          <label>Página web</label>
+          <input type="text" [(ngModel)]="formCofradia.web_url" placeholder="https://...">
         </div>
         <div class="gs-campo">
           <label>Teléfono</label>
@@ -294,6 +308,52 @@
           Vincular
         </button>
       }
+    </div>
+  </div>
+}
+
+<!-- Modal crear/editar evento -->
+@if (modalEvento) {
+  <div class="gs-modal-telon" (click)="cerrarModalEvento()">
+    <div class="gs-modal" (click)="$event.stopPropagation()">
+      <button type="button" class="gs-modal-cerrar" (click)="cerrarModalEvento()">&times;</button>
+      <h2 class="gs-modal-titulo">{{ eventoEditando ? 'Editar Evento' : 'Nuevo Evento' }}</h2>
+
+      <div class="gs-form-grid">
+        <div class="gs-campo gs-campo--full">
+          <label>Nombre del evento</label>
+          <input type="text" [(ngModel)]="formEvento.nombre" placeholder="Ej: Procesión del Silencio">
+        </div>
+        <div class="gs-campo gs-campo--full">
+          <label>Cofradía</label>
+          <select [(ngModel)]="formEvento.cofradia">
+            <option [value]="null" disabled>Selecciona una cofradía...</option>
+            @for (c of cofradias; track c.id) {
+              <option [value]="c.id">{{ c.nombre }}</option>
+            }
+          </select>
+        </div>
+        <div class="gs-campo">
+          <label>Fecha</label>
+          <input type="date" [(ngModel)]="formEvento.fecha">
+        </div>
+        <div class="gs-campo">
+          <label>Hora</label>
+          <input type="time" [(ngModel)]="formEvento.hora">
+        </div>
+        <div class="gs-campo gs-campo--full">
+          <label>Lugar</label>
+          <input type="text" [(ngModel)]="formEvento.lugar" placeholder="Ej: Parroquia de la Victoria">
+        </div>
+        <div class="gs-campo gs-campo--full">
+          <label>Detalles</label>
+          <textarea rows="4" [(ngModel)]="formEvento.detalles"></textarea>
+        </div>
+      </div>
+
+      <button type="button" class="btn-gs-primary btn-gs-full" [disabled]="guardandoEvento" (click)="guardarEvento()">
+        {{ guardandoEvento ? 'Guardando...' : (eventoEditando ? 'Guardar Cambios' : 'Crear Evento') }}
+      </button>
     </div>
   </div>
 }

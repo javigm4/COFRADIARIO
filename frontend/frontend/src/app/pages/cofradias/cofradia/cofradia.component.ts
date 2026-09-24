@@ -20,6 +20,7 @@ export class CofradiaComponent implements OnInit {
 
   historiaAbierta = false;
   videoEmbedUrl: SafeResourceUrl | null = null;
+  fotoAmpliada: { nombre: string; foto_url: string } | null = null;
 
   contactoNombre = '';
   contactoEmail = '';
@@ -65,6 +66,15 @@ export class CofradiaComponent implements OnInit {
     const match = url.match(/(?:youtu\.be\/|v=|\/embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
     if (!match) return null;
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${match[1]}`);
+  }
+
+  ampliarFoto(t: { nombre: string; foto_url: string }): void {
+    if (!t.foto_url) return;
+    this.fotoAmpliada = t;
+  }
+
+  cerrarFotoAmpliada(): void {
+    this.fotoAmpliada = null;
   }
 
   horaEvento(fecha: string): string {

@@ -63,6 +63,13 @@
   text-align: center;
 }
 
+.perfil-hero--con-banner {
+  background-size: cover;
+  background-position: center;
+  padding-top: 72px;
+  padding-bottom: 48px;
+}
+
 .perfil-volver {
   position: absolute;
   top: 18px;
@@ -228,6 +235,65 @@
   justify-content: center;
   font-size: 28px;
   color: var(--texto-suave);
+}
+
+.titular-foto--clicable {
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.titular-foto--clicable:hover {
+  transform: scale(1.06);
+}
+
+.foto-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.foto-lightbox-contenido {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: min(90vw, 480px);
+}
+
+.foto-lightbox-contenido img {
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: 8px;
+  border: 3px solid var(--dorado);
+  object-fit: contain;
+  background: var(--crema-media);
+}
+
+.foto-lightbox-contenido figcaption {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--crema);
+  text-align: center;
+}
+
+.foto-lightbox-cerrar {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--crema);
+  font-size: 36px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .titular-nombre {

@@ -14,6 +14,8 @@ class Cofradia extends Model
         'localidad',
         'provincia',
         'escudo_url',
+        'banner_url',
+        'web_url',
         'historia',
         'titulares',
         'direccion',

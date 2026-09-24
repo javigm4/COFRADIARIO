@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventosService } from '../../services/eventos/eventos.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CofradiasService } from '../../services/cofradias/cofradias.service';
-import { enviroment } from '../../../enviroments/enviroment';
+import { ActivatedRoute } from '@angular/router';
 import { NotificacionService } from '../../services/notificacion/notificacion.service';
 
 @Component({
@@ -25,10 +23,6 @@ export class AgendaComponent implements OnInit {
   mesSeleccionado: number | null = null;
   fechaInicioFiltro: string | null = null;
   fechaFinFiltro: string | null = null;
-  nuevaCofradia: any;
-  cofradiaId: number = 0;
-  listaCofradiasFiltrada: any[] = []; // lista filtrada de cofradías
-  listaEventosFiltrada: any[] = []; // lista filtrada
   filtrosAbiertos: boolean = false; // 🔹 Controla el cajón de filtros deslizante
   eventoDestacado: number | null = null; // 🔹 Evento a abrir/resaltar al llegar desde el calendario
   mostrarModalCrearEvento: boolean = false; // 🔹 Controla el pop up de "Crear Nuevo Evento"
@@ -43,14 +37,6 @@ export class AgendaComponent implements OnInit {
     lugar: '',
     detalles: ''
   };
-
-  cofradiasAdmin: any[] = [];
-
-  mostrarPopup = false;
-  popupExito = false;
-  inputPassword = '';
-  showAdminPassword: boolean = false;
-  password = enviroment.contrasenaCrearCofradia;
 
   mesesAno = [
     { id: 0, nombre: 'Todos los meses' }, // Añadimos una opción para mostrar todos los eventos
@@ -73,7 +59,6 @@ export class AgendaComponent implements OnInit {
   constructor(
     private eventosService: EventosService,
     private authService: AuthService,
-    private cofradiasService: CofradiasService,
     private route: ActivatedRoute,
     private notificacionService: NotificacionService
   ) { }
@@ -101,11 +86,6 @@ export class AgendaComponent implements OnInit {
         this.cofradiasEventos = this.cofradias.filter((cofradia) =>
           this.eventos.some((evento) => evento.cofradia === cofradia.id)
         ); //filtramos las cofradías que tienen eventos para mostrarlas en el select
-        this.cofradiasAdmin = this.cofradias.filter((cofradia) =>
-          this.eventos.some((evento) => evento.cofradia === cofradia.id)
-        );
-        this.listaEventosFiltrada = [...this.eventos]; // <-- inicializamos aquí correctamente
-        this.listaCofradiasFiltrada = [...this.cofradias];
         this.todoslosEventos = [...this.eventos]; // copia los eventos originales (con esto copiamos el contenido del array, no la referencia al array , que ocurre si hacemos this.todoslosEventos = this.eventos)
       },
       (error) => {
@@ -322,212 +302,8 @@ export class AgendaComponent implements OnInit {
     });
   }
 
-  // ------ VALIDAR CONTRASEÑA Y CERRRAR POP UP-----
-
-  validarPassword() {
-    if (this.inputPassword === this.password) {
-      this.mostrarPopup = false;
-      this.popupExito = true;
-      // Asegurar que las listas del admin tengan todos los datos al abrir
-      this.listaEventosFiltrada = [...this.todoslosEventos];
-      this.listaCofradiasFiltrada = [...this.cofradias];
-    }
-  }
-
-
-  cerrarPopupExito() {
-    this.mostrarPopup = false;
-    this.popupExito = false;
-  }
-
-  // --- Crear o borrar cofradias ----
-
-  eliminarCofradia(id: number) {
-    if (!confirm('¿Estás seguro de que deseas eliminar esta cofradía?')) return;
-    this.cofradiasService.eliminarCofradia(id).subscribe({
-      next: (res) => {
-        this.cofradias = this.cofradias.filter(c => c.id !== id);
-        this.listaCofradiasFiltrada = [...this.cofradias]; // Sincronizar
-        this.notificacionService.exito('Cofradía eliminada');
-      },
-      error: (err) => {
-        console.error('Error al eliminar cofradía', err);
-        this.notificacionService.error('No se pudo eliminar la cofradía');
-      }
-    });
-  }
-
-
-  crearCofradia() {
-    const nombreInput = document.getElementById('nombreCofradia') as HTMLInputElement;
-    const nombre = nombreInput?.value.trim();
-
-    if (!nombre) {
-      this.notificacionService.error('Debes ingresar un nombre');
-      return;
-    }
-
-    const nueva: any = { nombre: nombre };
-
-    this.cofradiasService.crearCofradia(nueva).subscribe({
-      next: (res) => {
-        this.cofradias.push(res.cofradia);
-        this.listaCofradiasFiltrada = [...this.cofradias]; // Sincronizar
-        if (nombreInput) nombreInput.value = ''; // Limpiar input
-        this.notificacionService.exito('Cofradía creada correctamente');
-      },
-      error: (err) => {
-        console.error('Error al crear cofradía', err);
-        this.notificacionService.error('No se pudo crear la cofradía');
-      }
-    });
-  }
-
-  // ---- ELIMINAR EVENTO ----
-  eliminarEvento(id: number) {
-    if (!confirm('¿Estás seguro de que deseas eliminar este evento?')) return;
-    this.eventosService.eliminarEvento(id).subscribe({
-      next: (res) => {
-        this.eventos = this.eventos.filter(e => e.id !== id);
-        this.listaEventosFiltrada = [...this.eventos]; // Sincronizar
-        this.notificacionService.exito('Evento eliminado');
-      },
-      error: (err) => {
-        console.error('Error al eliminar evento', err);
-        this.notificacionService.error('No se pudo eliminar el evento');
-      }
-    });
-  }
-
-  filtrarEventos(event: any) {
-    const valor = event.target.value.toLowerCase();
-
-    this.listaEventosFiltrada = this.todoslosEventos.filter(evento => {
-      // Buscar el nombre de la cofradía correspondiente al evento
-      const nombreCofradia = this.cofradias.find(c => c.id === evento.cofradia)?.nombre.toLowerCase() || '';
-
-      // Filtrar por nombre del evento o por nombre de cofradía
-      return evento.nombre.toLowerCase().includes(valor) || nombreCofradia.includes(valor);
-    });
-  }
-
-
-  // Filtrar cofradías por texto
-  filtrarCofradias(event: Event) {
-    const valor = (event.target as HTMLInputElement).value.toLowerCase();
-    this.listaCofradiasFiltrada = this.cofradias.filter(c =>
-      c.nombre.toLowerCase().includes(valor) ||
-      c.id.toString().includes(valor)
-    );
-  }
-
-
-
-  crearEventoAdmin(event?: Event): void {
-    event?.preventDefault();
-
-    const nombre = (document.getElementById('nameAdmin') as HTMLInputElement)?.value;
-    const fechaInicio = (document.getElementById('fechaAdmin') as HTMLInputElement)?.value;
-    const hora = (document.getElementById('horaAdmin') as HTMLInputElement)?.value;
-    const lugar = (document.getElementById('lugarAdmin') as HTMLInputElement)?.value;
-    const detalles = (document.getElementById('detallesAdmin') as HTMLTextAreaElement)?.value;
-    const cofradiaSelect = (document.getElementById('cofradiaAdmin') as HTMLSelectElement)?.value;
-
-    if (!nombre || !fechaInicio || !hora || !lugar || !detalles || !cofradiaSelect) {
-      this.notificacionService.error('Falta un campo (todos los campos son obligatorios).');
-      return;
-    }
-
-    let fechas: string[] = [fechaInicio];
-
-    // Para el admin, podríamos necesitar un checkbox separado o reutilizar masDeUnDia
-    // Por simplicidad y consistencia, vamos a asumir que masDeUnDia aplica a ambos si el UI lo permite
-    // En el HTML actual, masDeUnDia es una propiedad del componente.
-
-    // Buscar si hay un fechaFinalAdmin (lo añadiré en el HTML)
-    const fechaFin = (document.getElementById('fechaFinalAdmin') as HTMLInputElement)?.value;
-    if (this.masDeUnDia && fechaFin && fechaFin !== fechaInicio) {
-      const start = new Date(fechaInicio);
-      const end = new Date(fechaFin);
-      const diffTime = end.getTime() - start.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-
-      if (diffDays <= 0) {
-        this.notificacionService.error('La fecha final debe ser posterior a la de inicio.');
-        return;
-      }
-
-      if (diffDays > 8) {
-        this.notificacionService.error('No se pueden crear rangos de más de 8 días.');
-        return;
-      }
-
-      fechas = this.obtenerRangoFechas(fechaInicio, fechaFin);
-    }
-
-    const observables = fechas.map(fecha => {
-      const eventoData = { nombre, fecha, hora, lugar, detalles, cofradia: Number(cofradiaSelect) };
-      return this.eventosService.crearEvento(eventoData);
-    });
-
-    let completados = 0;
-    observables.forEach(obs => {
-      obs.subscribe({
-        next: () => {
-          completados++;
-          if (completados === observables.length) {
-            this.notificacionService.exito(fechas.length > 1 ? `Se han creado ${fechas.length} eventos (Modo Admin).` : 'Evento creado correctamente.');
-            this.cargarDatos();
-          }
-        },
-        error: (error) => {
-          console.error('Error al crear el evento:', error);
-          this.notificacionService.error('Hubo un error al crear uno de los eventos.');
-        }
-      });
-    });
-
-    // Limpiar campos (aunque el reload lo hará, es buena práctica)
-    const fields = ['nameAdmin', 'fechaAdmin', 'horaAdmin', 'lugarAdmin', 'detallesAdmin', 'cofradiaAdmin', 'fechaFinalAdmin'];
-    fields.forEach(id => {
-      const el = document.getElementById(id) as any;
-      if (el) el.value = '';
-    });
-  }
-
-
-
   toggleMasDeUnDia() {
     this.masDeUnDia = !this.masDeUnDia;
-  }
-
-  // Edición de eventos (Admin)
-  editandoEvento: any = null;
-
-  iniciarEdicion(evento: any) {
-    this.editandoEvento = { ...evento };
-    // Rellenamos el formulario de creación con los datos del evento a editar
-    // Para simplificar, asumimos que se usa el mismo formulario o uno similar
-    // Si queremos ser pro, podemos abrir un modal diferente o cambiar el modo del actual
-    this.notificacionService.exito('Función de edición preparada para el evento: ' + evento.nombre);
-  }
-
-  guardarEdicion() {
-    if (!this.editandoEvento) return;
-    this.eventosService.editarEvento(this.editandoEvento.id, this.editandoEvento).subscribe({
-      next: () => {
-        this.notificacionService.exito('Evento actualizado correctamente');
-        this.cargarDatos();
-      },
-      error: (err: any) => {
-        console.error('Error al actualizar evento', err);
-        this.notificacionService.error('No se pudo actualizar el evento');
-      }
-    });
-  }
-
-  toggleAdminPopup() {
-    this.popupExito = false;
   }
 }
 

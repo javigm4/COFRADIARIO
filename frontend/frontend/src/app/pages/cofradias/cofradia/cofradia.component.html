@@ -10,7 +10,8 @@
     </div>
   } @else {
 
-    <div class="perfil-hero">
+    <div class="perfil-hero" [class.perfil-hero--con-banner]="cofradia.banner_url"
+      [style.background-image]="cofradia.banner_url ? 'linear-gradient(160deg, rgba(107,0,0,.82), rgba(74,0,0,.88)), url(' + cofradia.banner_url + ')' : null">
       <a routerLink="/cofradias" class="perfil-volver"><i class="bi bi-arrow-left"></i> Directorio</a>
       <div class="perfil-escudo">
         @if (cofradia.escudo_url) {
@@ -48,7 +49,7 @@
               @for (t of titulares; track t) {
                 <div class="titular-tarjeta">
                   @if (t.foto_url) {
-                    <img [src]="t.foto_url" [alt]="t.nombre" class="titular-foto">
+                    <img [src]="t.foto_url" [alt]="t.nombre" class="titular-foto titular-foto--clicable" (click)="ampliarFoto(t)">
                   } @else {
                     <div class="titular-foto titular-foto--vacia"><i class="bi bi-image"></i></div>
                   }
@@ -118,8 +119,11 @@
             <div class="ficha-linea"><i class="bi bi-signpost"></i> {{ cofradia.direccion }}</div>
           }
 
-          @if (cofradia.instagram || cofradia.facebook || cofradia.youtube) {
+          @if (cofradia.web_url || cofradia.instagram || cofradia.facebook || cofradia.youtube) {
             <div class="ficha-redes">
+              @if (cofradia.web_url) {
+                <a [href]="cofradia.web_url" target="_blank" class="red-btn red-btn--web" title="Página web"><i class="bi bi-globe2"></i></a>
+              }
               @if (cofradia.instagram) {
                 <a [href]="cofradia.instagram" target="_blank" class="red-btn red-btn--ig"><i class="bi bi-instagram"></i></a>
               }
@@ -159,5 +163,15 @@
     <footer class="auth-footer">
       <span>-- 2025 Cofradiario --</span>
     </footer>
+  }
+
+  @if (fotoAmpliada) {
+    <div class="foto-lightbox" (click)="cerrarFotoAmpliada()">
+      <button type="button" class="foto-lightbox-cerrar" (click)="cerrarFotoAmpliada()">&times;</button>
+      <figure class="foto-lightbox-contenido" (click)="$event.stopPropagation()">
+        <img [src]="fotoAmpliada.foto_url" [alt]="fotoAmpliada.nombre">
+        <figcaption>{{ fotoAmpliada.nombre }}</figcaption>
+      </figure>
+    </div>
   }
 </div>

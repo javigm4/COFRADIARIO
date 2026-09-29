@@ -443,6 +443,13 @@
   cursor: not-allowed;
 }
 
+.gs-hint {
+  align-self: flex-end;
+  color: var(--texto-suave);
+  font-style: italic;
+  font-size: 11.5px;
+}
+
 .gs-titulares {
   display: flex;
   flex-direction: column;

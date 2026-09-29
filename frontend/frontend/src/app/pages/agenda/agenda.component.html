@@ -82,7 +82,8 @@
           <i class="bi bi-info-circle"></i> Detalles adicionales (opcional)
         </label>
         <textarea id="detalles" [(ngModel)]="formEvento.detalles" placeholder="Describe brevemente el itinerario, puntos de interés..."
-          required></textarea>
+          maxlength="2000" required></textarea>
+        <small class="text-muted">{{ formEvento.detalles?.length || 0 }}/2000 caracteres</small>
       </div>
     </div>
 

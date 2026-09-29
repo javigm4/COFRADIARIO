@@ -57,7 +57,7 @@ class EventosController extends Controller
             'cofradia' => 'required|integer|exists:cofradias,id',
             'fecha' => 'required|date',
             'hora' => 'required|date_format:H:i', // Asegura que la hora esté en formato HH:MM
-            'detalles' => 'nullable|string|max:255',
+            'detalles' => 'nullable|string|max:2000',
             'lugar' => 'required|string|max:255',
         ]);
 
@@ -103,7 +103,7 @@ class EventosController extends Controller
             'nombre' => 'required|string|max:255',
             'cofradia' => 'required|integer|exists:cofradias,id',
             'fecha' => 'required|date',
-            'detalles' => 'nullable|string|max:255',
+            'detalles' => 'nullable|string|max:2000',
             'lugar' => 'required|string|max:255',
         ]);
 

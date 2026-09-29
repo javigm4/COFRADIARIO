@@ -347,7 +347,8 @@
         </div>
         <div class="gs-campo gs-campo--full">
           <label>Detalles</label>
-          <textarea rows="4" [(ngModel)]="formEvento.detalles"></textarea>
+          <textarea rows="4" [(ngModel)]="formEvento.detalles" maxlength="2000"></textarea>
+          <small class="gs-hint">{{ formEvento.detalles?.length || 0 }}/2000 caracteres</small>
         </div>
       </div>
 

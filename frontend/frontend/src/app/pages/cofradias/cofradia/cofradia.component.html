@@ -116,10 +116,10 @@
             <div class="ficha-linea"><i class="bi bi-building"></i> {{ cofradia.parroquia }}</div>
           }
           @if (cofradia.horario_templo) {
-            <div class="ficha-linea"><i class="bi bi-clock"></i> Templo: {{ cofradia.horario_templo }}</div>
+            <div class="ficha-linea"><i class="bi bi-clock"></i> <span>Templo:<br><span class="ficha-texto-multilinea">{{ cofradia.horario_templo }}</span></span></div>
           }
           @if (cofradia.horario_casa_hermandad) {
-            <div class="ficha-linea"><i class="bi bi-house-door"></i> Casa de hermandad: {{ cofradia.horario_casa_hermandad }}</div>
+            <div class="ficha-linea"><i class="bi bi-house-door"></i> <span>Casa de hermandad:<br><span class="ficha-texto-multilinea">{{ cofradia.horario_casa_hermandad }}</span></span></div>
           }
           @if (cofradia.direccion) {
             <div class="ficha-linea"><i class="bi bi-signpost"></i> {{ cofradia.direccion }}</div>

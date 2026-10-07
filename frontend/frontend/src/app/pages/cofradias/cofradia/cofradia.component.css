@@ -431,6 +431,11 @@
   flex-shrink: 0;
 }
 
+.ficha-texto-multilinea {
+  display: block;
+  white-space: pre-line;
+}
+
 .ficha-redes {
   display: flex;
   gap: 10px;

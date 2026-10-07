@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cofradia;
 use App\Models\Evento;
 use App\Models\User;
+use App\Models\Visita;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -42,6 +43,15 @@ class AdminController extends Controller
                 'aficionados' => $totalUsuarios - $conCofradia,
                 'nuevos_mes' => $nuevosMes,
                 'nuevos_semana' => $nuevosSemana,
+            ],
+            'visitas' => [
+                'total' => Visita::count(),
+                'mes' => Visita::where('created_at', '>=', $inicioMes)->count(),
+                'semana' => Visita::where('created_at', '>=', $inicioSemana)->count(),
+            ],
+            'clicks' => [
+                'total' => (int) Cofradia::sum('clicks'),
+                'visualizaciones_fichas' => (int) Cofradia::sum('visualizaciones'),
             ],
             'provincias' => $provincias,
             'fecha' => $ahora->format('d/m/Y'),

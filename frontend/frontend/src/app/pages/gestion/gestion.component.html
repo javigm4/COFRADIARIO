@@ -36,6 +36,15 @@
             <div class="stat-card"><div class="stat-n">{{ estadisticas.usuarios.nuevos_semana }}</div><div class="stat-l">Nuevos esta semana</div></div>
           </div>
 
+          <div class="gs-subtitulo">Tráfico de la web</div>
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.visitas.mes }}</div><div class="stat-l">Visitas este mes</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.visitas.semana }}</div><div class="stat-l">Visitas esta semana</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.visitas.total }}</div><div class="stat-l">Visitas totales</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.clicks.total }}</div><div class="stat-l">Clicks en cofradías</div></div>
+            <div class="stat-card"><div class="stat-n">{{ estadisticas.clicks.visualizaciones_fichas }}</div><div class="stat-l">Vistas de fichas</div></div>
+          </div>
+
           @if (estadisticas.provincias.length > 0) {
             <div class="gs-subtitulo">Cofradías por provincia</div>
             <div class="gs-tabla-wrap">

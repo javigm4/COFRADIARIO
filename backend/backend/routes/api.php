@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticulosController;
 use App\Http\Controllers\CofradiasController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VisitasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,9 @@ Route::post('/cofradias/{id}/click', [CofradiasController::class, 'registrarClic
 
 Route::post('/eventos', [EventosController::class, 'store'])->withoutMiddleware([\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class]);
 
-// ---------- RUTAS PÚBLICAS (CORREOS) --------- 
+Route::post('/visitas', [VisitasController::class, 'registrar']);
+
+// ---------- RUTAS PÚBLICAS (CORREOS) ---------
 Route::post('/enviar-mensaje-contacto', [AuthController::class, 'enviarMensajeContacto']);
 
 Route::post('/password/forgot', [AuthController::class, 'sendResetLinkEmail']);

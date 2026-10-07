@@ -115,6 +115,9 @@
           @if (cofradia.parroquia) {
             <div class="ficha-linea"><i class="bi bi-building"></i> {{ cofradia.parroquia }}</div>
           }
+          @if (cofradia.horario_templo) {
+            <div class="ficha-linea"><i class="bi bi-clock"></i> {{ cofradia.horario_templo }}</div>
+          }
           @if (cofradia.direccion) {
             <div class="ficha-linea"><i class="bi bi-signpost"></i> {{ cofradia.direccion }}</div>
           }

@@ -118,30 +118,16 @@ export class NavbarComponent implements OnInit {
 
   toggleMenu() {
     this.menuAbierto = !this.menuAbierto;
- 
-    const divNav = document.getElementById('divNav');
-    if (divNav) {
-      divNav.classList.toggle('show', this.menuAbierto);
-    }
-
-    const btn = document.querySelector('.menu-toggle');
-    if (btn) {
-      btn.classList.toggle('rotate', this.menuAbierto);
-    }
+    this.actualizarScrollBody();
   }
 
   cerrarMenu() {
     this.menuAbierto = false;
     this.perfilAbierto = false;
+    this.actualizarScrollBody();
+  }
 
-    const divNav = document.getElementById('divNav');
-    if (divNav) {
-      divNav.classList.remove('show');
-    } 
-
-    const btn = document.querySelector('.menu-toggle');
-    if (btn) {
-      btn.classList.remove('rotate');
-    }
+  private actualizarScrollBody(): void {
+    try { document.body.classList.toggle('menu-movil-abierto', this.menuAbierto); } catch { }
   }
 }

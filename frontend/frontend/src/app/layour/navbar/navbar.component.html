@@ -7,30 +7,35 @@
     </span>
   </a>
 
-  <button class="menu-toggle d-lg-none" (click)="toggleMenu()">
+  <button class="menu-toggle d-lg-none" [class.rotate]="menuAbierto" (click)="toggleMenu()">
     <span class="hamburger"></span>
   </button>
 
-  <div id="divNav" class="nav-links hidden-mobile">
+  <div class="nav-overlay" *ngIf="menuAbierto" (click)="cerrarMenu()"></div>
+
+  <div id="divNav" class="nav-links hidden-mobile" [class.show]="menuAbierto">
     <a routerLink="/inicio" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}" class="nav-item"
-      (click)="cerrarMenu()">INICIO</a>
+      (click)="cerrarMenu()"><i class="bi bi-house-door nav-icon"></i>INICIO</a>
     <span class="nav-sep">✦</span>
-    <a class="nav-item" routerLink="/agenda" routerLinkActive="activo" (click)="cerrarMenu()">Agenda</a>
+    <a class="nav-item" routerLink="/agenda" routerLinkActive="activo" (click)="cerrarMenu()"><i class="bi bi-calendar-event nav-icon"></i>Agenda</a>
     <span class="nav-sep">✦</span>
-    <a class="nav-item" routerLink="/calendario" routerLinkActive="activo" (click)="cerrarMenu()">Calendario</a>
+    <a class="nav-item" routerLink="/calendario" routerLinkActive="activo" (click)="cerrarMenu()"><i class="bi bi-calendar3 nav-icon"></i>Calendario</a>
     <span class="nav-sep">✦</span>
-    <a class="nav-item" routerLink="/cofradias" routerLinkActive="activo" (click)="cerrarMenu()">Cofradías</a>
+    <a class="nav-item" routerLink="/cofradias" routerLinkActive="activo" (click)="cerrarMenu()"><i class="bi bi-shield nav-icon"></i>Cofradías</a>
     <span class="nav-sep">✦</span>
-    <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()">Contacto</a>
+    <a class="nav-item" routerLink="/contacto" routerLinkActive="activo" (click)="cerrarMenu()"><i class="bi bi-envelope nav-icon"></i>Contacto</a>
     <span class="nav-sep">✦</span>
 
-    <a class="nav-item" href="https://www.diariodelasbandas.es" target="_blank" rel="noopener noreferrer" (click)="cerrarMenu()">DIARIO DE LAS BANDAS</a>
+    <a class="nav-item" href="https://www.diariodelasbandas.es" target="_blank" rel="noopener noreferrer" (click)="cerrarMenu()"><i class="bi bi-box-arrow-up-right nav-icon"></i>DIARIO DE LAS BANDAS</a>
     <ng-container *ngIf="esAdminGestion">
       <span class="nav-sep">✦</span>
-      <a class="nav-item" routerLink="/gestion" routerLinkActive="activo" (click)="cerrarMenu()">Gestión</a>
+      <a class="nav-item" routerLink="/gestion" routerLinkActive="activo" (click)="cerrarMenu()"><i class="bi bi-gear nav-icon"></i>Gestión</a>
     </ng-container>
+
+    <div class="nav-divider-movil"></div>
+
     <a *ngIf="!usuarioAutenticado" class="btn-acc" routerLink="/login" (click)="cerrarMenu()">
-      Acceder
+      <i class="bi bi-box-arrow-in-right"></i> Acceder
     </a>
 
     <ng-container *ngIf="usuarioAutenticado && esCofradia">
@@ -50,7 +55,8 @@
       </div>
     </ng-container>
 
-    <button *ngIf="usuarioAutenticado && !esCofradia" class="nav-item logout" (click)="cerrarSesion(); cerrarMenu()">Cerrar sesión
+    <button *ngIf="usuarioAutenticado && !esCofradia" class="nav-item logout" (click)="cerrarSesion(); cerrarMenu()">
+      <i class="bi bi-box-arrow-right nav-icon"></i>Cerrar sesión
     </button>
   </div>
 </nav>

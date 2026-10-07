@@ -32,3 +32,8 @@
 .golden-divider::after {
     bottom: -8px;
 }
+
+/* Bloquea el scroll del body mientras el menú móvil está abierto */
+body.menu-movil-abierto {
+    overflow: hidden;
+}

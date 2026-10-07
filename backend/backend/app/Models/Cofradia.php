@@ -21,6 +21,7 @@ class Cofradia extends Model
         'direccion',
         'parroquia',
         'horario_templo',
+        'horario_casa_hermandad',
         'instagram',
         'facebook',
         'youtube',

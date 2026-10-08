@@ -43,7 +43,7 @@
 }
 
 .brand-text {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: clamp(17px, 1.6vw, 20px);
   font-weight: 700;
   color: #d4a017;

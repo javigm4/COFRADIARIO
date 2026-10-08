@@ -39,6 +39,7 @@ export class EventoComponent implements OnInit, OnChanges {
   role: string = '';
   cofradiaNombre: string = '';
   cofradiaLocalidad: string = '';
+  cofradiaProvincia: string = '';
   nombreUsuario: string = '';
   modalVisible = false;
 
@@ -87,6 +88,7 @@ export class EventoComponent implements OnInit, OnChanges {
       );
       this.cofradiaNombre = cofradia ? cofradia.nombre : 'Desconocida';
       this.cofradiaLocalidad = cofradia?.localidad || '';
+      this.cofradiaProvincia = cofradia?.provincia || '';
     }
   }
 

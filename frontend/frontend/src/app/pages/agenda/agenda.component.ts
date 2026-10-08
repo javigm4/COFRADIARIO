@@ -23,6 +23,8 @@ export class AgendaComponent implements OnInit {
   mesSeleccionado: number | null = null;
   fechaInicioFiltro: string | null = null;
   fechaFinFiltro: string | null = null;
+  provinciasConteo: { nombre: string; total: number }[] = [];
+  provinciasSeleccionadas = new Set<string>();
   filtrosAbiertos: boolean = false; // 🔹 Controla el cajón de filtros deslizante
   eventoDestacado: number | null = null; // 🔹 Evento a abrir/resaltar al llegar desde el calendario
   mostrarModalCrearEvento: boolean = false; // 🔹 Controla el pop up de "Crear Nuevo Evento"
@@ -87,6 +89,7 @@ export class AgendaComponent implements OnInit {
           this.eventos.some((evento) => evento.cofradia === cofradia.id)
         ); //filtramos las cofradías que tienen eventos para mostrarlas en el select
         this.todoslosEventos = [...this.eventos]; // copia los eventos originales (con esto copiamos el contenido del array, no la referencia al array , que ocurre si hacemos this.todoslosEventos = this.eventos)
+        this.calcularProvincias();
       },
       (error) => {
         console.error('Error al obtener eventos:', error);
@@ -275,11 +278,29 @@ export class AgendaComponent implements OnInit {
     this.aplicarFiltros();
   }
 
+  private calcularProvincias(): void {
+    const mapa = new Map<string, number>();
+    this.cofradiasEventos.forEach(c => {
+      if (c.provincia) mapa.set(c.provincia, (mapa.get(c.provincia) || 0) + 1);
+    });
+    this.provinciasConteo = Array.from(mapa.entries())
+      .map(([nombre, total]) => ({ nombre, total }))
+      .sort((a, b) => b.total - a.total);
+  }
+
+  toggleProvincia(nombre: string): void {
+    if (this.provinciasSeleccionadas.has(nombre)) {
+      this.provinciasSeleccionadas.delete(nombre);
+    } else {
+      this.provinciasSeleccionadas.add(nombre);
+    }
+    this.aplicarFiltros();
+  }
 
   aplicarFiltros(): void {
     this.eventos = this.todoslosEventos.filter(evento => {
       const fechaEv = new Date(evento.fecha).getTime();
-      
+
       let coincideFecha = true;
       if (this.fechaInicioFiltro) {
         const init = new Date(this.fechaInicioFiltro).getTime();
@@ -293,12 +314,16 @@ export class AgendaComponent implements OnInit {
       }
 
       const coincideTitulo =
-        !this.palabraFiltro || 
-        evento.nombre.toLowerCase().includes(this.palabraFiltro) || 
+        !this.palabraFiltro ||
+        evento.nombre.toLowerCase().includes(this.palabraFiltro) ||
         (this.cofradias.find(c => c.id === evento.cofradia)?.nombre.toLowerCase().includes(this.palabraFiltro)) ||
         (evento.lugar && evento.lugar.toLowerCase().includes(this.palabraFiltro));
 
-      return coincideFecha && coincideTitulo;
+      const coincideProvincia =
+        this.provinciasSeleccionadas.size === 0 ||
+        this.provinciasSeleccionadas.has(this.cofradias.find(c => c.id === evento.cofradia)?.provincia);
+
+      return coincideFecha && coincideTitulo && coincideProvincia;
     });
   }
 

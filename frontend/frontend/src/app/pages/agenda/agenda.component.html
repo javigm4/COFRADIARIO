@@ -150,6 +150,21 @@
         </div>
       </div>
     </div>
+
+    @if (provinciasConteo.length > 0) {
+      <div class="sb-sec">
+        <div class="sb-hd">Provincia</div>
+        <div class="prov-lista">
+          @for (p of provinciasConteo; track p.nombre) {
+            <button type="button" class="prov-item" [class.prov-item--activo]="provinciasSeleccionadas.has(p.nombre)"
+              (click)="toggleProvincia(p.nombre)">
+              <span>{{ p.nombre }}</span>
+              <span class="prov-count">{{ p.total }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    }
   </div>
 
   <div class="contenedor-principal">

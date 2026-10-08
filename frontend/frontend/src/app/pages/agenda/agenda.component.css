@@ -893,18 +893,18 @@ input:checked+.slider:before {
 
 .rango-inputs {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .fecha-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex: 1;
 }
 
 .fecha-wrapper span {
+  width: 26px;
   font-size: 11px;
   color: var(--texto-medio);
   text-transform: uppercase;
@@ -915,6 +915,48 @@ input:checked+.slider:before {
 .fecha-wrapper .srch-inp {
   width: 100%;
   padding-left: 12px;
+}
+
+.prov-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.prov-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: none;
+  border: 1px solid transparent;
+  padding: 8px 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--texto-medio);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.prov-item:hover {
+  background: rgba(184, 134, 11, 0.08);
+}
+
+.prov-item--activo {
+  background: var(--marron);
+  border-color: var(--marron);
+  color: var(--crema);
+}
+
+.prov-count {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.75;
 }
 
 .srch-inp {
@@ -1081,59 +1123,3 @@ label {
   }
 }
 
-/* 🎨 Ajuste estético de filtros en móviles */
-@media (max-width: 900px) {
-  .barra-filtros {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    padding: 24px;
-    margin: 0 -16px 24px -16px;
-    border-radius: 0;
-  }
-
-  .filtro-izquierdo,
-  .filtro-rango {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .rango-inputs {
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .fecha-wrapper {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .fecha-wrapper input {
-    font-size: 11px !important;
-    padding: 8px 4px !important;
-    width: 100% !important;
-    min-width: 0;
-  }
-
-  .fecha-wrapper span {
-    width: auto;
-    font-size: 11px; /* Aumentado de 9px */
-    font-weight: 800; /* Letra más gorda */
-    color: var(--dorado-suave);
-    flex-shrink: 0;
-  }
-
-  .barra-filtros label {
-    margin-bottom: 4px; /* Un poco más de aire */
-    font-size: 11px; /* Aumentado de 9px */
-    font-weight: 800; /* Letra más gorda */
-  }
-
-  .linea-separadora {
-    display: none;
-  }
-}

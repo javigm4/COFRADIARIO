@@ -4,7 +4,12 @@
   <div class="fila-cuerpo">
     <div class="fila-titulo">{{ evento.nombre }}</div>
     @if (cofradiaNombre) {
-      <div class="fila-banda">{{ cofradiaNombre }}</div>
+      <div class="fila-banda">
+        @if (cofradiaProvincia) {
+          <span class="fila-banda-provincia">{{ cofradiaProvincia }} ·</span>
+        }
+        {{ cofradiaNombre }}
+      </div>
     }
     @if (evento.detalles) {
       <div class="fila-desc">{{ evento.detalles }}</div>
@@ -54,7 +59,7 @@
 
         <div class="modal-meta">
           @if (cofradiaNombre) {
-            <div class="meta-linea"><i class="bi bi-people"></i><span><b>Cofradía:</b> {{ cofradiaNombre }}</span></div>
+            <div class="meta-linea"><i class="bi bi-people"></i><span><b>Cofradía:</b> <a class="meta-link" [routerLink]="['/cofradias', evento.cofradia]" (click)="$event.stopPropagation()">{{ cofradiaNombre }}</a></span></div>
           }
           @if (lugarCompleto()) {
             <div class="meta-linea"><i class="bi bi-geo-alt"></i><span><b>Lugar:</b> {{ lugarCompleto() }}</span></div>

@@ -46,10 +46,7 @@
   font-family: var(--font-display);
   font-size: clamp(17px, 1.6vw, 20px);
   font-weight: 700;
-  background: linear-gradient(90deg, #d4a017, #f0d890);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #d4a017;
   letter-spacing: .05em;
   line-height: 1.2;
   white-space: nowrap;

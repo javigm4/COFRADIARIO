@@ -2,14 +2,14 @@
   <div class="fila-ribbon"></div>
 
   <div class="fila-cuerpo">
-    <div class="fila-titulo">{{ evento.nombre }}</div>
+    <div class="fila-titulo-fila">
+      <div class="fila-titulo">{{ evento.nombre }}</div>
+      @if (cofradiaProvincia) {
+        <span class="fila-provincia-badge">{{ cofradiaProvincia }}</span>
+      }
+    </div>
     @if (cofradiaNombre) {
-      <div class="fila-banda">
-        @if (cofradiaProvincia) {
-          <span class="fila-banda-provincia">{{ cofradiaProvincia }} ·</span>
-        }
-        {{ cofradiaNombre }}
-      </div>
+      <div class="fila-banda">{{ cofradiaNombre }}</div>
     }
     @if (evento.detalles) {
       <div class="fila-desc">{{ evento.detalles }}</div>

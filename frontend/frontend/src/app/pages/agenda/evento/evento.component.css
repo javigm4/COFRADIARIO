@@ -34,6 +34,13 @@
   justify-content: center;
 }
 
+.fila-titulo-fila {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .fila-titulo {
   font-family: var(--font-heading);
   font-size: 20px;
@@ -42,18 +49,27 @@
   line-height: 1.3;
 }
 
+.fila-provincia-badge {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--marron);
+  background: rgba(107, 0, 0, 0.08);
+  border: 1px solid rgba(107, 0, 0, 0.25);
+  padding: 4px 9px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
 .fila-banda {
   font-family: var(--font-body);
   font-style: italic;
   font-weight: 700;
   font-size: 18px;
   color: var(--marron);
-}
-
-.fila-banda-provincia {
-  font-weight: 600;
-  color: var(--texto-suave);
-  margin-right: 4px;
 }
 
 .fila-desc {
@@ -214,9 +230,17 @@
     display: contents;
   }
 
-  .fila-titulo {
+  .fila-titulo-fila {
     grid-area: titulo;
+  }
+
+  .fila-titulo {
     font-size: 17px;
+  }
+
+  .fila-provincia-badge {
+    font-size: 9px;
+    padding: 3px 7px;
   }
 
   .fila-banda {

@@ -32,10 +32,6 @@ export class InicioComponent implements OnInit {
         this.cargarDatos();
     }
 
-    formatCofradiaName(nombre: string): string {
-        return nombre.replace(/\s/g, '-');
-    }
-
     ngAfterViewInit(): void {
         this.setupIntersectionObserver();
     }

@@ -6,13 +6,13 @@
     <div class="ticker-viewport">
         <div class="ticker-track">
             @for (c of cofradias; track c.id) {
-            <a class="ticker-item" [routerLink]="'/cofradia/' + formatCofradiaName(c.nombre)">
+            <a class="ticker-item" [routerLink]="['/cofradias', c.id]">
                 {{ c.nombre }}
                 <span class="ticker-item-sep">✠</span>
             </a>
             }
             @for (c of cofradias; track c.id) {
-            <a class="ticker-item" [routerLink]="'/cofradia/' + formatCofradiaName(c.nombre)">
+            <a class="ticker-item" [routerLink]="['/cofradias', c.id]">
                 {{ c.nombre }}
                 <span class="ticker-item-sep">✠</span>
             </a>

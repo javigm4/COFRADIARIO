@@ -450,6 +450,12 @@
   font-size: 11.5px;
 }
 
+.gs-hint.contador-limite {
+  color: #c0392b;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .gs-titulares {
   display: flex;
   flex-direction: column;

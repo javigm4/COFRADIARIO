@@ -508,6 +508,12 @@ input:checked+.slider:before {
   color: var(--texto-suave);
 }
 
+.contador-limite {
+  color: #c0392b;
+  opacity: 1;
+  font-weight: 700;
+}
+
 .btn-crear-evento {
   display: flex;
   align-items: center;

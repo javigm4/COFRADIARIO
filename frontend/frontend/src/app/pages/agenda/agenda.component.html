@@ -83,7 +83,9 @@
         </label>
         <textarea id="detalles" [(ngModel)]="formEvento.detalles" placeholder="Describe brevemente el itinerario, puntos de interés..."
           maxlength="2000" required></textarea>
-        <small class="text-muted">{{ formEvento.detalles?.length || 0 }}/2000 caracteres</small>
+        <small class="text-muted" [class.contador-limite]="(2000 - (formEvento.detalles?.length || 0)) <= 100">
+          {{ 2000 - (formEvento.detalles?.length || 0) }} caracteres restantes
+        </small>
       </div>
     </div>
 

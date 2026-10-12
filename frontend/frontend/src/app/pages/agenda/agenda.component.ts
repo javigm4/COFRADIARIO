@@ -176,7 +176,7 @@ export class AgendaComponent implements OnInit {
       return;
     }
 
-    const cofradiaId = this.cofradias.find((c) => c.nombre === this.usuario.name)?.id || 0;
+    const cofradiaId = this.cofradias.find((c) => c.id_user === this.usuario.id)?.id || 0;
     const { nombre, fechaInicio, fechaFinal: fechaFin, hora, lugar, detalles } = this.formEvento;
 
     if (!nombre || !fechaInicio || !hora || !lugar) {

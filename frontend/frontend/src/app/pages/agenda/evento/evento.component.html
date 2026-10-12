@@ -30,7 +30,7 @@
   </div>
 
   <div class="fila-acciones" (click)="$event.stopPropagation()">
-    @if (role === 'cofradia' && nombreUsuario === cofradiaNombre) {
+    @if (esPropio) {
       <div class="fila-admin-btns">
         <button class="btn-accion btn-edit" (click)="editarEvento()" title="Editar">
           <i class="bi bi-pencil"></i>

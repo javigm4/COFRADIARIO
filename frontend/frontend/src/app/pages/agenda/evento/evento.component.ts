@@ -41,6 +41,8 @@ export class EventoComponent implements OnInit, OnChanges {
   cofradiaLocalidad: string = '';
   cofradiaProvincia: string = '';
   nombreUsuario: string = '';
+  idUsuario: number | null = null;
+  esPropio: boolean = false;
   modalVisible = false;
 
   constructor(
@@ -59,15 +61,17 @@ export class EventoComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.calculaCofradiaNombre();
     const usuario = this.authService.getUsuarioData();
     if (usuario) {
       this.role = usuario.role;
       this.nombreUsuario = usuario.name;
+      this.idUsuario = usuario.id;
     } else {
       this.role = '';
       this.nombreUsuario = '';
+      this.idUsuario = null;
     }
+    this.calculaCofradiaNombre();
 
     if (this.eventoDestacado != null && this.eventoDestacado === this.evento?.id) {
       this.elRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -89,6 +93,7 @@ export class EventoComponent implements OnInit, OnChanges {
       this.cofradiaNombre = cofradia ? cofradia.nombre : 'Desconocida';
       this.cofradiaLocalidad = cofradia?.localidad || '';
       this.cofradiaProvincia = cofradia?.provincia || '';
+      this.esPropio = this.idUsuario != null && cofradia?.id_user === this.idUsuario;
     }
   }
 
